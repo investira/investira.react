@@ -1,8 +1,8 @@
 {
-    "name": "investira.sdk",
+    "name": "investira.react",
     "version": "1.0.0",
     "author": "Investira",
-    "description": "Investira SDK",
+    "description": "Investira React",
     "main": "./lib/tests/app.js",
     "scripts": {
         "start": "nodemon ./lib/tests",
@@ -12,7 +12,9 @@
         "registry": "http://my-internal-registry.local"
     },
     "dependencies": {},
-    "devDependencies": {},
+    "devDependencies": {
+        "investira.sdk": "file:../investira.sdk"
+    },
     "jshintConfig": {
         "curly": true,
         "eqeqeq": true,
