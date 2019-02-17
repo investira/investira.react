@@ -1,0 +1,45 @@
+{
+    "name": "investira.sdk",
+    "version": "1.0.0",
+    "author": "Investira",
+    "description": "Investira SDK",
+    "main": "./lib/tests/app.js",
+    "scripts": {
+        "start": "nodemon ./lib/tests",
+        "test": "nodemon --inspect-brk ./lib/tests/index"
+    },
+    "publishConfig": {
+        "registry": "http://my-internal-registry.local"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "jshintConfig": {
+        "curly": true,
+        "eqeqeq": true,
+        "immed": true,
+        "latedef": false,
+        "newcap": false,
+        "noarg": true,
+        "sub": true,
+        "undef": true,
+        "boss": true,
+        "eqnull": true,
+        "strict": false,
+        "scripturl": true,
+        "evil": true,
+        "globals": {
+            "location": true,
+            "printStackTrace": false
+        },
+        "browser": true,
+        "node": true
+    },
+    "nodemonConfig": {
+        "ignore": [
+            ".git",
+            "node_modules/**/node_modules"
+        ],
+        "delay": "0"
+    },
+    "license": "SEE LICENSE IN license.txt"
+}
