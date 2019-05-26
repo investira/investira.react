@@ -22,6 +22,9 @@
         "type": "git",
         "url": "https://github.com/investira/investira.react.git"
     },
+    "bugs": {
+        "url": "https://github.com/investira/investira.react/sdk/issues"
+    },
     "scripts": {
         "deploy": "aws s3 sync build/ s3://app.investira.vc",
         "storybook": "start-storybook -p 9009 -s public",
@@ -101,9 +104,6 @@
         "delay": "0"
     },
     "license": "GPL-3.0-only",
-    "bugs": {
-        "url": "https://github.com/investira/investira.react/sdk/issues"
-    },
     "directories": {
         "lib": "lib"
     }
