@@ -42,9 +42,8 @@ const entryPoints = {
 /* Array com todas as refências necessárias para o build dos componentes
  * incluindo os próprios componentes
  * */
-const externals = []
-    .concat(Object.keys(packageInfo.dependencies))
-    .concat(componentExternals);
+const externals = [].concat(Object.keys(packageInfo.dependencies));
+//.concat(componentExternals);
 
 module.exports = (env, argv) => {
     const isDevelopment = argv.mode === 'development';
@@ -59,6 +58,9 @@ module.exports = (env, argv) => {
             libraryTarget: 'umd' //Permite que trabalhe com CommonJS, AMD e como variável global
         },
         resolve: {
+            // alias: {
+            //     react: path.resolve('./node_modules/react')
+            // },
             modules: ['node_modules', path.resolve(__dirname, 'ui/index')],
             extensions: [
                 '.scss',
@@ -73,7 +75,7 @@ module.exports = (env, argv) => {
         },
         externals,
         plugins: [
-            //new webpack.optimize.OccurrenceOrderPlugin(true),
+            new webpack.optimize.OccurrenceOrderPlugin(true),
             new MiniCssExtractPlugin({
                 filename: isDevelopment ? '[name].css' : '[name].css'
                 //chunkFilename: isDevelopment ? '[id].css' : '[id].css'
