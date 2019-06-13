@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import Style from './View.module.scss';
+import React from 'react';
 
-export class View extends Component {
-    render() {
-        const { children, ...attrs } = this.props;
-
-        return <div {...attrs}>{children}</div>;
-    }
-}
+const View = props => {
+    const { children, ...attrs } = props;
+    return <div {...attrs}>{children}</div>;
+};
 
 export default View;
