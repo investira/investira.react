@@ -9,18 +9,23 @@ class ScrollContainer extends Component {
     constructor(props) {
         super(props);
         this.containerRef = React.createRef();
+        this.momentum = null;
     }
 
     componentDidMount() {
-        this.momentumScroll = momentumScroll(this.containerRef.current, {
+        this.momentum = momentumScroll(this.containerRef.current, {
             speed: this.props.speed,
             duration: this.props.duration,
             directions: this.props.directions
-        }).mount();
+        });
+
+        this.momentum.mount();
     }
 
+    componentDidUpdate() {}
+
     componentWillUnmount() {
-        this.momentumScroll.unmount();
+        this.momentum.unmount();
     }
 
     render() {
