@@ -1,0 +1,9 @@
+/* 
+  * Funções 
+  * Apenas são utilizadas por mixins
+  */
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return #{$remSize}rem;
+}

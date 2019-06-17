@@ -1,0 +1,14 @@
+@import '_core.scss';
+/* Classes utilitárias */
+
+.u-clearfix {
+    @extend %clearfix;
+}
+
+.u-hidden {
+    display: none !important;
+}
+
+.u-readonly {
+    cursor: default !important;
+}
