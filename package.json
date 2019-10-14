@@ -25,7 +25,8 @@
         "url": "https://github.com/investira/investira.react/sdk/issues"
     },
     "scripts": {
-        "deploy": "aws s3 sync build/ s3://app.investira.vc"
+        "deploy": "aws s3 sync build/ s3://app.investira.vc",
+        "test": "nodemon ./lib/tests/index.js"
     },
     "peerDependencies": {},
     "dependencies": {
