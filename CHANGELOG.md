@@ -12,4 +12,4 @@
 -   [browsers] Novas funções: isSafari, isChrome, isWebView
 -   [charts] Novas função: createDataSerie
 -   [charts] Novas função: isGrowing
--   [displays] Novas função: formats, agencia, conta
+-   [displays] Novas função: formats, agencia, conta, cnpj
