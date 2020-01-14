@@ -1,7 +1,7 @@
-exports.charts = require("./lib/utils/charts");
-exports.displays = require("./lib/utils/displays");
-exports.renders = require("./lib/utils/renders");
-exports.localStorages = require("./lib/utils/localStorages");
-exports.browsers = require("./lib/utils/browsers");
-exports.currency = require("./lib/utils/currency");
-exports.bindStateToLocalStorage = require("./lib/middleware/bindStateToLocalStorage");
+exports.charts = require("./utils/charts");
+exports.displays = require("./utils/displays");
+exports.renders = require("./utils/renders");
+exports.localStorages = require("./utils/localStorages");
+exports.browsers = require("./utils/browsers");
+exports.currency = require("./utils/currency");
+exports.bindStateToLocalStorage = require("./middleware/bindStateToLocalStorage");
