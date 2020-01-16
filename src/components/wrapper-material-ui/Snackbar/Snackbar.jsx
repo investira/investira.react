@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { default as WSnackbar } from "@material-ui/core/Snackbar";
 import { default as wSlide } from "@material-ui/core/Slide";
 import { duration } from "@material-ui/core/styles/transitions";
-import { renders } from "../../lib";
+import { renders } from "../../../lib";
 
 class Snackbar extends Component {
   render() {

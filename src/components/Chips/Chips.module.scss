@@ -1,0 +1,102 @@
+.root {
+    position: relative;
+    margin-bottom: 8px;
+    width: inherit;
+    height: 32px;
+    overflow: hidden;
+}
+
+.withLabel {
+    height: 70px;
+}
+
+.horizontalScrollable {
+    position: relative;
+    width: 100%;
+    //height: 100%;
+    height: 48px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    //padding-bottom: 17px;
+    scroll-behavior: smooth;
+    //-webkit-overflow-scrolling: touch;
+    transform: translate3d(0, 0, 0);
+    -ms-overflow-style: none; // IE 10+
+    scrollbar-width: none; // Firefox
+
+    &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+}
+
+.chipsLabel {
+    padding: 8px 16px;
+}
+
+.chipsGroup {
+    position: relative;
+    white-space: nowrap;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.chipContainer {
+    position: relative;
+    padding: 0 4px;
+    display: inline-block;
+    height: 100%;
+    z-index: 10;
+
+    &:first-child {
+        padding-left: 16px;
+    }
+
+    &:last-child {
+        padding-right: 16px;
+    }
+}
+
+.groupInfo {
+    position: relative;
+}
+
+// .horizontalGrid {
+//     // display: block;
+//     // height: 100%;
+//     display: grid;
+//     height: 100%;
+//     grid-column-gap: 8px;
+//     grid-auto-flow: column;
+
+//     &>div {
+//         display: inline-block;
+//         transform: translate3d(0, 0, 0);
+//     }
+
+// }
+
+// .horizontalGrid {
+//     position: relative;
+//     height: 100%;
+
+//     &>div {
+//         padding: 0 4px;
+//     }
+
+//     &>div:first-child {
+//         padding-left: 16px;
+//     }
+
+//     &>div:last-child {
+//         padding-right: 16px;
+//     }
+// }

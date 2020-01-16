@@ -1,0 +1,72 @@
+.root {
+    user-select: none;
+    display: inline-block;
+    font-size: 24;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    flex-shrink: 0;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+.size16 {
+    width: 1rem;
+    height: 1rem;
+}
+
+.size21 {
+    width: 1.3125rem;
+    height: 1.3125rem;
+}
+
+.size24 {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.size28 {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.size32 {
+    width: 2rem;
+    height: 2rem;
+}
+
+.size40 {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.size50 {
+    width: 3.125rem;
+    height: 3.125rem;
+}
+
+.caption {
+    width: 0.76rem;
+    height: 0.76rem;
+}
+
+.h6 {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.colorPrimary {
+    stroke: var(--color-primary);
+    fill: var(--color-primary);
+}
+
+.colorSecondary {
+    stroke: var(--color-secondary);
+    fill: var(--color-secondary);
+}
+
+.colorSecondaryLight {
+    stroke: var(--color-secondary-lightness);
+    fill: var(--color-secondary-lightness);
+}
