@@ -1,5 +1,3 @@
-//const validators = require('investira.sdk').validators;
-
 import { validators } from 'investira.sdk';
 
 const displays = {

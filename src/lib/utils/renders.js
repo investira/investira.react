@@ -1,7 +1,3 @@
-//const React = require("react");
-//const classNames = require("classnames");
-//const objects = require("investira.sdk").objects;
-
 import classNames from 'classnames';
 import { objects } from 'investira.sdk';
 
@@ -116,4 +112,3 @@ const renders = {
 };
 
 export default renders;
-//module.exports = renders;
