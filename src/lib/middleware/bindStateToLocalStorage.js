@@ -1,4 +1,5 @@
-const objects = require('investira.sdk').objects;
+import { objects, validators } from 'investira.sdk';
+
 const localStorages = require('../utils/localStorages');
 
 const bindStateToLocalStorage = {
@@ -78,8 +79,12 @@ const bindStateToLocalStorage = {
      * @param {*} reducer
      */
     bind: reducer => (state, action) => {
+        //console.log(action, state);
+        //const { app, auth, message, server, ...investiraUser } = state;
         let xDefaultState = {};
         let xInit = action.type.match(/@@redux\/INIT/g) ? true : false;
+
+        // Separa dados pertecentes a app e dados do usuário
 
         if (
             action.type === '@@INIT' ||
@@ -103,7 +108,80 @@ const bindStateToLocalStorage = {
             localStorages.setItem('investiraState', xDefaultState);
         }
         return xDefaultState;
+    },
+
+    bindListener: reducer => (pState, pAction) => {
+        let xInvestiraApp = {};
+        let xInvestiraUser = {};
+        let xUserId = null;
+
+        if (!validators.isEmpty(pState)) {
+            const { app, auth, message, server, ...rest } = objects.deepCopy(
+                pState
+            );
+
+            xInvestiraApp = { app, auth, message, server };
+            xInvestiraUser = { ...rest };
+        }
+
+        let xDefaultState = {};
+        let xInit = pAction.type.match(/@@redux\/INIT/g) ? true : false;
+
+        if (
+            pAction.type === '@@INIT' ||
+            xInit ||
+            pAction.type === 'RESET_STATE'
+        ) {
+            console.log('INIT');
+            // Inicializa state a partir do reducer
+            xDefaultState = reducer({}, pAction);
+            // Recupera do local somente os dados referentes a app:
+            // app, auth, message, server
+            const xLocalStateApp = localStorages.getItem('investiraApp') || {};
+            let xNewState = objects.deepMerge(xDefaultState, xLocalStateApp);
+            xDefaultState = xNewState;
+        } else if (pAction.type === 'USER_LOADED') {
+            console.log('USER_LOADED');
+            xDefaultState = reducer(pState, pAction);
+            xUserId = xDefaultState.user.usuario_id;
+
+            const xLocalStateUser =
+                localStorages.getItem('investiraUser') || {};
+
+            const xLocalState = {
+                ...(xUserId && {
+                    ...xLocalStateUser[xUserId]
+                })
+            };
+
+            let xNewState = objects.deepMerge(xDefaultState, xLocalState);
+
+            xDefaultState = xNewState;
+        } else {
+            console.log('ANY');
+            //Processa o reducer
+            xUserId = pState.user.usuario_id;
+            xDefaultState = reducer(pState, pAction);
+
+            //Salva estado atual do localStorage
+            const xLocalStateUser =
+                localStorages.getItem('investiraUser') || {};
+
+            localStorages.setItem('investiraApp', xInvestiraApp);
+            localStorages.setItem('investiraUser', {
+                ...(xUserId
+                    ? {
+                          ...xLocalStateUser,
+                          [xUserId]: {
+                              ...xInvestiraUser
+                          }
+                      }
+                    : { ...xLocalStateUser })
+            });
+        }
+
+        return xDefaultState;
     }
 };
 
-module.exports = bindStateToLocalStorage.bind;
+export default bindStateToLocalStorage.bindListener;
