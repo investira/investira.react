@@ -111,8 +111,6 @@ const HorizontalList = props => {
                                     focused={childFocused}
                                     data={xData}
                                     onClick={handleClick(xData, xIndex)}
-
-                                    //chartType={props.childProps.chartType}
                                 />
                             </div>
                         );
@@ -123,8 +121,14 @@ const HorizontalList = props => {
 };
 
 HorizontalList.propTypes = {
-    id: PropTypes.string.isRequired
-    //child: PropTypes.element
+    id: PropTypes.string.isRequired,
+    child: PropTypes.element.isRequired,
+    childProps: PropTypes.object,
+    data: PropTypes.array
+};
+
+HorizontalList.defaultProps = {
+    data: []
 };
 
 export default React.memo(HorizontalList);
