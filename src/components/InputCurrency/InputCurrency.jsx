@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { currency } from 'investiraLib';
+import { currency } from '../../lib';
 import { validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
 

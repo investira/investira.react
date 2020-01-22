@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Style from './NavDots.module.scss';
-import { ButtonBase } from 'investiraComponents';
+import { ButtonBase } from '../wrapper-material-ui';
 
 class NavDots extends React.Component {
     constructor(props) {
