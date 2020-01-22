@@ -124,11 +124,12 @@ HorizontalList.propTypes = {
     id: PropTypes.string.isRequired,
     child: PropTypes.element.isRequired,
     childProps: PropTypes.object,
-    data: PropTypes.array
+    data: PropTypes.array.isRequired
 };
 
 HorizontalList.defaultProps = {
     data: []
 };
 
-export default React.memo(HorizontalList);
+export default HorizontalList;
+//export default React.memo(HorizontalList);
