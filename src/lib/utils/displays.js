@@ -1,4 +1,6 @@
-const validators = require('investira.sdk').validators;
+//const validators = require('investira.sdk').validators;
+
+import { validators } from 'investira.sdk';
 
 const displays = {
     format: (pMask, pValue) => {
@@ -53,4 +55,4 @@ const displays = {
     }
 };
 
-module.exports = displays;
+export default displays;

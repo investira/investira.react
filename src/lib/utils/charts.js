@@ -1,5 +1,8 @@
-const d3scaleLinear = require('d3-scale').scaleLinear;
-const dates = require('investira.sdk').dates;
+//const d3scaleLinear = require('d3-scale').scaleLinear;
+//const dates = require('investira.sdk').dates;
+
+import { scaleLinear as d3scaleLinear } from 'd3-scale';
+import { dates } from 'investira.sdk';
 
 const charts = {
     square: x => {
@@ -150,4 +153,4 @@ function Point(pIndex, pValue, pPeriodType, pRnd) {
     };
 }
 
-module.exports = charts;
+export default charts;

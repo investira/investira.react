@@ -1,5 +1,5 @@
 const browsers = {
-    getBrowseVersion: (pRegex, rGroup) => {
+    getBrowserVersion: (pRegex, rGroup) => {
         const xUserAgent = navigator.userAgent.match(pRegex);
 
         return xUserAgent ? xUserAgent[rGroup] : null;
@@ -15,10 +15,10 @@ const browsers = {
         //navigator.userAgent.match(/Chrom[e|ium]\/([0-9]+)\./)[2]
 
         let xUserAgent = {
-            chrome: browsers.getBrowseVersion(/Chrom[e|ium]\/([0-9]+)\./, 1),
-            firefox: browsers.getBrowseVersion(/Firefox\/([0-9]+)\./, 1),
+            chrome: browsers.getBrowserVersion(/Chrom[e|ium]\/([0-9]+)\./, 1),
+            firefox: browsers.getBrowserVersion(/Firefox\/([0-9]+)\./, 1),
             //edge: null,
-            safari: browsers.getBrowseVersion(/Safari\/([0-9]+)\./, 1)
+            safari: browsers.getBrowserVersion(/Safari\/([0-9]+)\./, 1)
         };
         console.log(xUserAgent);
         //return xAgentRaw ? parseInt(xAgentRaw[2], 10) : false;
@@ -132,4 +132,4 @@ const browsers = {
     }
 };
 
-module.exports = browsers;
+export default browsers;
