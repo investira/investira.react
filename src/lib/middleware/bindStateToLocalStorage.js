@@ -132,7 +132,6 @@ const bindStateToLocalStorage = {
             xInit ||
             pAction.type === 'RESET_STATE'
         ) {
-            console.log('INIT');
             // Inicializa state a partir do reducer
             xDefaultState = reducer({}, pAction);
             // Recupera do local somente os dados referentes a app:
@@ -141,7 +140,6 @@ const bindStateToLocalStorage = {
             let xNewState = objects.deepMerge(xDefaultState, xLocalStateApp);
             xDefaultState = xNewState;
         } else if (pAction.type === 'USER_LOADED') {
-            console.log('USER_LOADED');
             xDefaultState = reducer(pState, pAction);
             xUserId = xDefaultState.user.usuario_id;
 
@@ -158,7 +156,6 @@ const bindStateToLocalStorage = {
 
             xDefaultState = xNewState;
         } else {
-            console.log('ANY');
             //Processa o reducer
             xUserId = pState.user.usuario_id;
             xDefaultState = reducer(pState, pAction);
