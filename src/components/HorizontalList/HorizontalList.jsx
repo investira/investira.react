@@ -131,5 +131,5 @@ HorizontalList.defaultProps = {
     data: []
 };
 
-export default HorizontalList;
-//export default React.memo(HorizontalList);
+// export default HorizontalList;
+export default React.memo(HorizontalList);
