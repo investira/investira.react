@@ -56,7 +56,8 @@ Icon.propTypes = {
         'inherit',
         'primary',
         'secondary',
-        'secondaryLight'
+        'secondaryLight',
+        'primaryDarkness'
     ])
 };
 
