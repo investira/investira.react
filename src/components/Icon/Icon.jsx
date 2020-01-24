@@ -57,7 +57,10 @@ Icon.propTypes = {
         'primary',
         'secondary',
         'secondaryLight',
-        'primaryDarkness'
+        'primaryDarkness',
+        'info',
+        'white',
+        'danger'
     ])
 };
 
