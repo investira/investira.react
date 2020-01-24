@@ -116,12 +116,17 @@ const bindStateToLocalStorage = {
         let xUserId = null;
 
         if (!validators.isEmpty(pState)) {
-            const { app, auth, message, server, ...rest } = objects.deepCopy(
-                pState
-            );
+            const {
+                app,
+                auth,
+                message,
+                server,
+                user,
+                ...rest
+            } = objects.deepCopy(pState);
 
-            xInvestiraApp = { app, auth, message, server };
-            xInvestiraUser = { ...rest };
+            xInvestiraApp = { app, auth, message, server, user };
+            xInvestiraUser = { user, ...rest };
         }
 
         let xDefaultState = {};
