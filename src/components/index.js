@@ -1,5 +1,7 @@
 export * from './wrapper-material-ui/';
+export { default as Basic } from './Basic';
 export { default as Chips } from './Chips';
+export { default as ContainerFeedback } from './ContainerFeedback';
 export { default as Deck } from './Deck';
 export { default as HorizontalList } from './HorizontalList';
 export { default as Icon } from './Icon';
