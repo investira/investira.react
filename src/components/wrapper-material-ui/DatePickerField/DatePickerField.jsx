@@ -36,8 +36,6 @@ const DatePickerMode = ({
         fullWidth: true
     };
 
-    console.log(field);
-
     // const InputPropsLocked = locked
     //     ? { style: { color: 'var(--color-info)' } }
     //     : {};
