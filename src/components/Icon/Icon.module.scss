@@ -76,17 +76,7 @@
     fill: var(--color-primary-darkness);
 }
 
-.colorInfo {
-    stroke: var(--color-info);
-    fill: var(--color-info);
-}
-
-.colorWhite {
-    stroke: var(--color-white-90);
-    fill: var(--color-white-90);
-}
-
-.colorDanger {
-    stroke: var(--color-danger);
-    fill: var(--color-danger);
+.colorWarn {
+    stroke: var(--color-warning);
+    fill: var(--color-warning);
 }

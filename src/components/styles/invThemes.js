@@ -359,6 +359,62 @@ export const themePrimary = {
 export const themeSecondary = {
     mui: createMuiTheme({
         overrides: {
+            MuiTooltip: {
+                tooltip: {
+                    backgroundColor: base.colors.secondary.light,
+                    color: base.colors.secondary.dark,
+                    borderRadius: '8px',
+                    boxShadow: base.shadows[2]
+                }
+            },
+            MuiTableCell: {
+                head: {
+                    fontWeight: 600
+                }
+            },
+            MuiTableRow: {
+                root: {
+                    'hover:hover': {
+                        backgroundColor: 'red'
+                    }
+                }
+            },
+            MuiExpansionPanelDetails: {
+                root: {
+                    display: 'block',
+                    padding: '8px 16px 16px'
+                }
+            },
+            MuiExpansionPanelSummary: {
+                root: {
+                    padding: '0 16px'
+                }
+            },
+            MuiExpansionPanel: {
+                rounded: {
+                    '&:last-child': {
+                        borderBottomLeftRadius: '10px',
+                        borderBottomRightRadius: '10px'
+                    },
+                    '&:first-child': {
+                        borderTopLeftRadius: '10px',
+                        borderTopRightRadius: '10px'
+                    }
+                }
+            },
+            MuiPickersToolbar: {
+                toolbar: {
+                    borderTopLeftRadius: '10px',
+                    borderTopRightRadius: '10px',
+                    paddingLeft: '16px',
+                    paddingRight: '16px'
+                }
+            },
+            MuiPickersToolbarText: {
+                toolbarTxt: {
+                    color: base.colors.primary.main
+                }
+            },
             MuiSwitch: {
                 root: {
                     height: '48px'
@@ -437,10 +493,11 @@ export const themeSecondary = {
                 root: {
                     color: '#fff'
                 },
-                outlined: {
-                    borderTopLeftRadius: base.spacing.unit,
-                    borderBottomRightRadius: base.spacing.unit
-                },
+                // outlined: {
+                //     borderTopLeftRadius: base.spacing.unit,
+                //     borderBottomRightRadius: base.spacing.unit
+                // },
+                outlined: { borderRadius: base.spacing.unit * 4 },
                 containedPrimary: {
                     color: base.colors.primary.contrastText
                 }
@@ -453,7 +510,7 @@ export const themeSecondary = {
             },
             MuiAppBar: {
                 root: {
-                    backgroundColor: 'red',
+                    backgroundColor: base.colors.common.transparent,
                     boxShadow: 'none'
                 }
             },
@@ -462,8 +519,8 @@ export const themeSecondary = {
                     minHeight: 44
                 },
                 gutters: {
-                    paddingLeft: 4,
-                    paddingRight: 4
+                    paddingLeft: 0,
+                    paddingRight: 0
                 }
             },
             MuiFormLabel: {
@@ -552,6 +609,12 @@ export const themeSecondary = {
                 //     position: 'relative',
                 //     pointerEvents: 'none'
                 // },
+                thumb: {
+                    width: '16px',
+                    height: '16px',
+                    marginTop: '-7px',
+                    marginLeft: '-8px'
+                }
                 // thumb: {
                 //     pointerEvents: 'all',
                 //     width: base.spacing.unit * 5,
@@ -605,6 +668,7 @@ export const themeSecondary = {
                 // }
             }
         },
+        props: {},
         palette: {
             type: 'dark',
             common: {
@@ -612,8 +676,8 @@ export const themeSecondary = {
                 white: '#fff'
             },
             background: {
-                paper: 'rgba(38, 38, 59, 1)',
-                default: 'rgba(38, 38, 59, 1)'
+                paper: 'rgba(25, 27, 42, 1)',
+                default: 'rgba(2, 6, 16, 1)'
             },
             primary: {
                 light: '#64eeff',
@@ -622,27 +686,34 @@ export const themeSecondary = {
                 contrastText: 'rgba(0, 0, 0, 1)'
             },
             secondary: {
-                light: 'rgba(88, 87, 113, 1)',
-                main: 'rgba(46, 46, 70, 1)',
-                dark: 'rgba(7, 3, 31, 1)',
-                contrastText: '#fff'
+                light: '#585771',
+                main: '#2e2e46',
+                dark: '#07031f',
+                contrastText: 'rgba(255, 255, 255, .87)'
             },
             error: {
-                light: 'rgba(255, 121, 87, 1)',
-                main: 'rgba(237, 68, 44, 1)',
-                dark: 'rgba(179, 0, 0, 1)',
-                contrastText: 'rgba(0, 0, 0, 1)'
+                light: '#ff7957',
+                main: '#ed442c',
+                dark: '#b30000',
+                contrastText: 'rgba(255, 255, 255, .87)'
             },
             text: {
-                primary: 'rgba(148, 158, 216, 1)',
-                secondary: 'rgba(255, 255, 255, 1)',
-                disabled: 'rgba(0, 0, 0, 0.38)',
+                primary: 'rgba(255, 255, 255, .87)',
+                secondary: 'rgba(148, 158, 216, 1)',
+                disabled: 'rgba(122, 129, 171, 1)',
+                disabledInvert: 'rgba(255, 255, 255, 0.48)',
                 hint: 'rgba(155, 155, 155, 1)'
             }
         },
         typography: {
             useNextVariants: true,
-            fontFamily: ['Montserrat', 'sans-serif'].join(',')
+            fontFamily: ['Montserrat', 'sans-serif'].join(','),
+            fontSize: base.typo.fontSize
+        },
+        shape: {
+            borderRadius: 0,
+            borderRadiusTopLeft: 5,
+            borderRadiusBottomRight: 5
         }
     })
 };
