@@ -111,24 +111,7 @@ const bindStateToLocalStorage = {
     },
 
     bindListener: reducer => (pState, pAction) => {
-        let xInvestiraApp = {};
-        let xInvestiraUser = {};
         let xUserId = null;
-
-        if (!validators.isEmpty(pState)) {
-            const {
-                app,
-                auth,
-                message,
-                server,
-                user,
-                ...rest
-            } = objects.deepCopy(pState);
-
-            xInvestiraApp = { app, auth, message, server, user };
-            xInvestiraUser = { user, ...rest };
-        }
-
         let xDefaultState = {};
         let xInit = pAction.type.match(/@@redux\/INIT/g) ? true : false;
 
@@ -139,12 +122,17 @@ const bindStateToLocalStorage = {
         ) {
             // Inicializa state a partir do reducer
             xDefaultState = reducer({}, pAction);
+
             // Recupera do local somente os dados referentes a app:
             // app, auth, message, server
             const xLocalStateApp = localStorages.getItem('investiraApp') || {};
-            let xNewState = objects.deepMerge(xDefaultState, xLocalStateApp);
+
+            const xNewState = objects.deepMerge(xDefaultState, xLocalStateApp);
             xDefaultState = xNewState;
-        } else if (pAction.type === 'USER_LOADED') {
+        } else if (
+            pAction.type === 'USER_LOADED' ||
+            pAction.type === 'APP_CONNECTION_CHANGED'
+        ) {
             xDefaultState = reducer(pState, pAction);
             xUserId = xDefaultState.user.usuario_id;
 
@@ -162,14 +150,32 @@ const bindStateToLocalStorage = {
             xDefaultState = xNewState;
         } else {
             //Processa o reducer
-            xUserId = pState.user.usuario_id;
             xDefaultState = reducer(pState, pAction);
+            xUserId = xDefaultState.user.usuario_id;
+
+            let xInvestiraApp = {};
+            let xInvestiraUser = {};
+
+            if (!validators.isEmpty(xDefaultState)) {
+                const {
+                    app,
+                    auth,
+                    message,
+                    server,
+                    user,
+                    ...rest
+                } = objects.deepCopy(xDefaultState);
+
+                xInvestiraApp = { app, auth, message, server, user };
+                xInvestiraUser = { user, ...rest };
+            }
 
             //Salva estado atual do localStorage
             const xLocalStateUser =
                 localStorages.getItem('investiraUser') || {};
 
             localStorages.setItem('investiraApp', xInvestiraApp);
+
             localStorages.setItem('investiraUser', {
                 ...(xUserId
                     ? {
