@@ -2,16 +2,17 @@
     position: -webkit-sticky;
     position: sticky;
     top: -1px;
-    transition: .2s ease-out;
+    transition: 0.2s ease-out;
     z-index: 99;
-
     overflow: auto;
 }
 
-
-
 .isSticky {
-    //background-color: rgba(#191b2a, 0.87);
-    //background-color: rgba(25, 27, 42, 0.87);
-    background: linear-gradient(to bottom, rgba(25, 27, 42, 1) 0%, rgba(25, 27, 42, 1) 71%, rgba(25, 27, 42, 0.1) 100%);
+    position: relative;
+    background: linear-gradient(
+        to bottom,
+        rgba(25, 27, 42, 1) 0%,
+        rgba(25, 27, 42, 1) 71%,
+        rgba(25, 27, 42, 0.1) 100%
+    );
 }
