@@ -52,7 +52,7 @@ export const componentsTheme = {
         background: {
             light: '#7a81ab',
             main: '#2e2e46',
-            dark: '#191b2a',
+            dark: '#020610',
             contrastText: '#fff',
             paper: 'rgba(38, 38, 59, 1)',
             default: 'rgba(38, 38, 59, 1)'
