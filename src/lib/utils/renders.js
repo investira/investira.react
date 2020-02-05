@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { objects } from 'investira.sdk';
+import { objects, numbers } from 'investira.sdk';
 
 const renders = {
     /**
@@ -28,6 +28,13 @@ const renders = {
             return 0;
         }
         return (pTextLength / 2) * 200 + 1000;
+    },
+
+    randomColors: pColors => {
+        const xMin = 0;
+        const xMax = pColors.length;
+        const xIndex = Math.floor(Math.random() * (xMax - xMin)) + xMin;
+        return pColors[xIndex];
     },
 
     /**

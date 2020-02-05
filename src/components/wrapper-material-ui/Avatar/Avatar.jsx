@@ -7,7 +7,8 @@ import {
     yellow,
     lightGreen,
     lightBlue,
-    amber
+    amber,
+    pink
 } from '@material-ui/core/colors';
 import { classList } from '../../utils/helpers';
 
@@ -53,6 +54,10 @@ const useStyles = makeStyles(theme => ({
     purple: {
         color: theme.palette.getContrastText(purple[500]),
         backgroundColor: purple[500]
+    },
+    pink: {
+        color: theme.palette.getContrastText(pink[500]),
+        backgroundColor: pink[500]
     }
 }));
 
@@ -67,7 +72,8 @@ function Avatar(props) {
         [classes.yellow]: props.color === 'yellow',
         [classes.orange]: props.color === 'orange',
         [classes.green]: props.color === 'green',
-        [classes.purple]: props.color === 'purple'
+        [classes.purple]: props.color === 'purple',
+        [classes.pink]: props.color === 'pink'
     };
 
     return <WAvatar {...props} className={classList(xClassNames)} />;
