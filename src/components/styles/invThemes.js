@@ -476,7 +476,7 @@ export const themeSecondary = {
             MuiDrawer: {
                 paper: {
                     '-webkit-overflow-scrolling': 'auto',
-                    background: `linear-gradient(to bottom, ${base.colors.background.dark} 0%, ${base.colors.background.dark} 100%)`
+                    background: `linear-gradient(to bottom, ${base.colors.background_theme_secondary.dark} 0%, ${base.colors.background_theme_secondary.dark} 100%)`
                 }
             },
             MuiDialogTitle: {
