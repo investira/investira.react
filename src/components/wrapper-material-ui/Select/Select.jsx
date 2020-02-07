@@ -57,7 +57,7 @@ function Select(props) {
                 displayEmpty
                 name={props.id}
                 className={classes.selectEmpty}>
-                <MenuItem value="">{props.placeholder || props.label}</MenuItem>
+                <MenuItem value="">{props.placeholder}</MenuItem>
 
                 {props.options &&
                     props.options.map((xItem, xIndex) => {
