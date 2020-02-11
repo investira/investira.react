@@ -122,7 +122,11 @@ const HorizontalList = props => {
 
 HorizontalList.propTypes = {
     id: PropTypes.string.isRequired,
-    child: PropTypes.element.isRequired,
+    child: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.element,
+        PropTypes.node
+    ]).isRequired,
     childProps: PropTypes.object,
     data: PropTypes.array.isRequired
 };
