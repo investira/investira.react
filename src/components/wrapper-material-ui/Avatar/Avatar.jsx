@@ -15,21 +15,20 @@ import { classList } from '../../utils/helpers';
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        fontSize: 15,
         '& > *': {
             margin: theme.spacing(1)
         }
     },
     small: {
         width: theme.spacing(3),
-        height: theme.spacing(3)
+        height: theme.spacing(3),
+        fontSize: 10
     },
     large: {
         width: theme.spacing(7),
-        height: theme.spacing(7)
-    },
-    large: {
-        width: theme.spacing(7),
-        height: theme.spacing(7)
+        height: theme.spacing(7),
+        fontSize: 20
     },
     red: {
         color: theme.palette.getContrastText(red[500]),
@@ -65,6 +64,7 @@ function Avatar(props) {
     const classes = useStyles();
 
     const xClassNames = {
+        [classes.root]: true,
         [classes.small]: props.size === 'small',
         [classes.large]: props.size === 'large',
         [classes.red]: props.color === 'red',
