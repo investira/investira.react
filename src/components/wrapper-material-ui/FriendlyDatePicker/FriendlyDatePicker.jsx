@@ -15,11 +15,15 @@ const useStyles = makeStyles(
                 flexWrap: 'wrap'
             },
             monthYear: {
-                padding: '3px 0'
+                padding: '4px 0',
+                marginRight: '8px',
+                color: theme.palette.primary.main,
+                textAlign: 'right',
+                textTransform: 'uppercase'
             },
             day: {
-                marginRight: '8px',
-                color: theme.palette.primary.main
+                color: theme.palette.primary.main,
+                textTransform: 'uppercase'
             },
             label: {
                 width: '100%'
@@ -70,32 +74,36 @@ const FriendlyDatePicker = props => {
             </div>
             {xDate.today ? (
                 <div className={xClassDay}>
-                    <Typography
-                        color={'inherit'}
-                        variant={'h4'}
-                        style={{ lineHeight: '1.4' }}>
-                        Hoje
-                    </Typography>
+                    <div style={{ paddingTop: '19px' }}>
+                        <Typography color={'inherit'} variant={'h4'}>
+                            Hoje
+                        </Typography>
+                    </div>
                 </div>
             ) : (
                 <>
-                    <div className={xClassDay}>
-                        <Typography color={'inherit'} variant={'h3'}>
-                            {xDate.day}
-                        </Typography>
-                    </div>
-
-                    <div className={xClassMonthYear}>
+                    {/* <div className={xClassMonthYear}>
+                        <div className={classes.year}>
+                            <Typography color={'inherit'} variant={'body2'}>
+                                {xDate.day}
+                            </Typography>
+                        </div>
                         <div className={classes.month}>
-                            <Typography color={'inherit'} variant={'caption'}>
+                            <Typography color={'inherit'} variant={'body1'}>
                                 {xDate.month}
                             </Typography>
                         </div>
-                        <div className={classes.year}>
-                            <Typography color={'inherit'} variant={'body1'}>
-                                {xDate.year}
-                            </Typography>
-                        </div>
+                    </div> */}
+                    <div className={xClassDay}>
+                        <Typography color={'inherit'} variant={'body2'}>
+                            {xDate.day}{' '}
+                            <span style={{ fontWeight: 500 }}>
+                                {xDate.month}
+                            </span>
+                        </Typography>
+                        <Typography color={'inherit'} variant={'h4'}>
+                            {xDate.year}
+                        </Typography>
                     </div>
                 </>
             )}
