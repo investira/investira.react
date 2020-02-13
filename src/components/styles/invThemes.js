@@ -5,6 +5,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const themePrimary = {
     mui: createMuiTheme({
         overrides: {
+            MuiAvatar: {
+                colorDefault: {
+                    backgroundColor: base.colors.secondary.light,
+                    color: base.colors.secondary.contrastText
+                }
+            },
             MuiTooltip: {
                 tooltip: {
                     backgroundColor: base.colors.secondary.light,
@@ -359,6 +365,12 @@ export const themePrimary = {
 export const themeSecondary = {
     mui: createMuiTheme({
         overrides: {
+            MuiAvatar: {
+                colorDefault: {
+                    backgroundColor: base.colors.secondary.light,
+                    color: base.colors.secondary.contrastText
+                }
+            },
             MuiTooltip: {
                 tooltip: {
                     backgroundColor: base.colors.secondary.light,
