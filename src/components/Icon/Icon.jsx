@@ -58,7 +58,9 @@ Icon.propTypes = {
         'secondary',
         'secondaryLight',
         'primaryDarkness',
-        'warn'
+        'warn',
+        'textPrimary',
+        'textSecondary'
     ])
 };
 
@@ -66,7 +68,5 @@ Icon.defaultProps = {
     color: 'default',
     size: '24'
 };
-
-//export default React.memo(Icon);
 
 export default Icon;

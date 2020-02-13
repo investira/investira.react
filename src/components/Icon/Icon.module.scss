@@ -80,3 +80,13 @@
     stroke: var(--color-warning);
     fill: var(--color-warning);
 }
+
+.colorTextPrimary {
+    stroke: var(--color-white-90);
+    fill: var(--color-white-90);
+}
+
+.colorTextSecondary {
+    stroke: var(--color-secondary-lightness);
+    fill: var(--color-secondary-lightness);
+}
