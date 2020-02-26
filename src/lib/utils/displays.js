@@ -50,6 +50,21 @@ const displays = {
         };
 
         return displays.format(xMasks[pValue.length], pValue) || '';
+    },
+    initialsLetters: pStrings => {
+        if (!pStrings) {
+            return '';
+        }
+
+        const xArray = pStrings.split(' ');
+
+        return Object.values(xArray)
+            .map((xItem, xIndex) => {
+                if (xItem !== null && xIndex <= 1) {
+                    return xItem.charAt(0).toUpperCase();
+                }
+            })
+            .join('');
     }
 };
 
