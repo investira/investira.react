@@ -51,16 +51,18 @@ const displays = {
 
         return displays.format(xMasks[pValue.length], pValue) || '';
     },
-    initialsLetters: pStrings => {
+    initialsLetters: (pStrings, pSize = 1) => {
         if (!pStrings) {
             return '';
         }
 
+        const xSize = pSize <= 0 ? 1 : pSize;
+
         const xArray = pStrings.split(' ');
 
         return Object.values(xArray)
-            .map((xItem, xIndex) => {
-                if (xItem !== null && xIndex <= 1) {
+            .map((xString, xIndex) => {
+                if (xString !== null && xIndex <= xSize && xString !== null) {
                     return xItem.charAt(0).toUpperCase();
                 }
             })
