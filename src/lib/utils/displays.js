@@ -63,7 +63,7 @@ const displays = {
         return Object.values(xArray)
             .map((xString, xIndex) => {
                 if (xString !== null && xIndex <= xSize && xString !== null) {
-                    return xItem.charAt(0).toUpperCase();
+                    return xString.charAt(0).toUpperCase();
                 }
             })
             .join('');
