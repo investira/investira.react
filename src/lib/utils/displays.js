@@ -62,7 +62,6 @@ const displays = {
 
         return Object.values(xArray)
             .map((xString, xIndex) => {
-                console.log(xString);
                 if (xString !== null && xIndex <= xSize && xString !== 'null') {
                     return xString.charAt(0).toUpperCase();
                 }
