@@ -51,13 +51,12 @@ const displays = {
 
         return displays.format(xMasks[pValue.length], pValue) || '';
     },
-    initialsLetters: (pStrings, pSize = 1) => {
+    initialsLetters: (pStrings, pSize = 2) => {
         if (!pStrings) {
             return '';
         }
 
-        const xSize = pSize <= 0 ? 1 : pSize;
-
+        const xSize = pSize <= 0 ? 0 : pSize - 1;
         const xArray = pStrings.split(' ');
 
         return Object.values(xArray)
