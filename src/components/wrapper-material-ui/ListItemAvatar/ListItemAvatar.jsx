@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WListItemAvatar } from '@material-ui/core/ListItemAvatar';
 
-class ListItemAvatar extends Component {
-    render() {
-        return <WListItemAvatar {...this.props} />;
-    }
+function ListItemAvatar(props) {
+    return <WListItemAvatar {...props} />;
 }
 
 export default ListItemAvatar;

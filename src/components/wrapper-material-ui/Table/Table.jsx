@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTable } from '@material-ui/core/Table';
 
-class Table extends Component {
-    render() {
-        return <WTable {...this.props} />;
-    }
+function Table(props) {
+    return <WTable {...props} />;
 }
 
 export default Table;

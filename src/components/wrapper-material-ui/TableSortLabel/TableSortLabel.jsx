@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTableSortLabel } from '@material-ui/core/TableSortLabel';
 
-class TableSortLabel extends Component {
-    render() {
-        return <WTableSortLabel {...this.props} />;
-    }
+function TableSortLabel(props) {
+    return <WTableSortLabel {...props} />;
 }
 
 export default TableSortLabel;

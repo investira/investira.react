@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WExpansionPanelSummary } from '@material-ui/core/ExpansionPanelSummary';
 
-class ExpansionPanelSummary extends Component {
-    render() {
-        const { children, ...otherProps } = this.props;
-        return (
-            <WExpansionPanelSummary {...otherProps}>
-                {children}
-            </WExpansionPanelSummary>
-        );
-    }
+function ExpansionPanelSummary(props) {
+    const { children, ...otherProps } = props;
+    return (
+        <WExpansionPanelSummary {...otherProps}>
+            {children}
+        </WExpansionPanelSummary>
+    );
 }
 
 export default ExpansionPanelSummary;

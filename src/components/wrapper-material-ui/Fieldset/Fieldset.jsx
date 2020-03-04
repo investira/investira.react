@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -7,41 +7,33 @@ import { Typography } from '..';
 export const styles = {
     root: {
         border: 'none',
-        marginBottom: '24px',
+        marginBottom: '24px'
     },
     legend: {
-        marginBottom: '8px',
-    },
+        marginBottom: '8px'
+    }
 };
 
-class Fieldset extends Component {
-    render() {
-        const {
-            classes,
-            className,
-            legend,
-            children,
-            ...otherProps
-        } = this.props;
+function Fieldset(props) {
+    const { classes, className, legend, children, ...otherProps } = this.props;
 
-        let xClass = classNames(classes.root, className, {});
+    let xClass = classNames(classes.root, className, {});
 
-        return (
-            <fieldset className={xClass} {...otherProps}>
-                <legend className={classes.legend}>
-                    <Typography variant={'caption'}>
-                        <b>{legend}</b>
-                    </Typography>
-                </legend>
-                {children}
-            </fieldset>
-        );
-    }
+    return (
+        <fieldset className={xClass} {...otherProps}>
+            <legend className={classes.legend}>
+                <Typography variant={'caption'}>
+                    <b>{legend}</b>
+                </Typography>
+            </legend>
+            {children}
+        </fieldset>
+    );
 }
 
 Fieldset.protoTypes = {
     children: PropTypes.node,
-    legend: PropTypes.string,
+    legend: PropTypes.string
 };
 
 export default withStyles(styles, { name: 'MuiFieldset' })(Fieldset);

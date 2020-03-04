@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WInputBase } from '@material-ui/core/InputBase';
 
-class InputBase extends Component {
-    render() {
-        return <WInputBase {...this.props} />;
-    }
+function InputBase(props) {
+    return <WInputBase {...props} />;
 }
 
 export default InputBase;

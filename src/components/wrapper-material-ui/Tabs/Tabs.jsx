@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTabs } from '@material-ui/core/Tabs';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -8,16 +8,14 @@ const styles = theme => ({
     }
 });
 
-class Tabs extends Component {
-    render() {
-        const { classes } = this.props;
+function Tabs(props) {
+    const { classes } = props;
 
-        return (
-            <div className={classes.root}>
-                <WTabs {...this.props} classes={{ root: classes.tabsRoot }} />
-            </div>
-        );
-    }
+    return (
+        <div className={classes.root}>
+            <WTabs {...props} classes={{ root: classes.tabsRoot }} />
+        </div>
+    );
 }
 
 export default withStyles(styles)(Tabs);

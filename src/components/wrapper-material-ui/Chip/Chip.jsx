@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WChip } from '@material-ui/core/Chip';
 
-class Chip extends Component {
-    render() {
-        return <WChip {...this.props} />;
-    }
+function Chip(props) {
+    return <WChip {...props} />;
 }
 
 export default Chip;

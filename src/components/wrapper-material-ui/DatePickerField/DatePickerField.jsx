@@ -36,10 +36,6 @@ const DatePickerMode = ({
         fullWidth: true
     };
 
-    // const InputPropsLocked = locked
-    //     ? { style: { color: 'var(--color-info)' } }
-    //     : {};
-
     return (
         <div className={classes.root}>
             {mode === 'input' ? (
@@ -48,7 +44,6 @@ const DatePickerMode = ({
                     disabled={disabled || locked}
                     {...DatePickerProps}
                     {...otherProps}
-                    // InputProps={InputPropsLocked}
                     inputProps={{
                         pattern: '[0-9]*'
                     }}

@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-//import PropTypes from 'prop-types';
-
+import React from 'react';
 import { default as WDialogContentText } from '@material-ui/core/DialogContentText';
 
-class DialogContentText extends Component {
-    render() {
-        return <WDialogContentText {...this.props} />;
-    }
+function DialogContentText(props) {
+    return <WDialogContentText {...props} />;
 }
 
 export default DialogContentText;

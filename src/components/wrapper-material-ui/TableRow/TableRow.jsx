@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTableRow } from '@material-ui/core/TableRow';
 
-class TableRow extends Component {
-    render() {
-        return <WTableRow {...this.props} />;
-    }
+function TableRow(props) {
+    return <WTableRow {...props} />;
 }
 
 export default TableRow;

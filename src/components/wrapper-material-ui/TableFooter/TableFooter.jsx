@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTableFooter } from '@material-ui/core/TableFooter';
 
-class TableFooter extends Component {
-    render() {
-        return <WTableFooter {...this.props} />;
-    }
+function TableFooter(props) {
+    return <WTableFooter {...props} />;
 }
 
 export default TableFooter;

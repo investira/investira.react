@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WMenuItem } from '@material-ui/core/MenuItem';
 
-class MenuItem extends Component {
-    render() {
-        return <WMenuItem {...this.props} />;
-    }
+function MenuItem(props) {
+    return <WMenuItem {...props} />;
 }
 
 export default MenuItem;

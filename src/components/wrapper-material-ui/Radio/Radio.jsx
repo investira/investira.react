@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WRadio } from '@material-ui/core/Radio';
 
-class Radio extends Component {
-    render() {
-        return <WRadio {...this.props} />;
-    }
+function Radio(props) {
+    return <WRadio {...props} />;
 }
 
 export default Radio;

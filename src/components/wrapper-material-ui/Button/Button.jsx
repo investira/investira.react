@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WButton } from '@material-ui/core/Button';
 
-class Button extends Component {
-    render() {
-        return <WButton {...this.props} />;
-    }
+function Button(props) {
+    return <WButton {...props} />;
 }
 
 export default Button;

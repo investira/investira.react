@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WLink } from '@material-ui/core/Link';
 
-class Link extends Component {
-    render() {
-        return <WLink {...this.props} />;
-    }
+function Link(props) {
+    return <WLink {...props} />;
 }
 
 export default Link;

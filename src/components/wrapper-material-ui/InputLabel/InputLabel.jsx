@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WInputLabel } from '@material-ui/core/InputLabel';
 
-class InputLabel extends Component {
-    render() {
-        return <WInputLabel {...this.props} />;
-    }
+function InputLabel(props) {
+    return <WInputLabel {...props} />;
 }
 
 export default InputLabel;

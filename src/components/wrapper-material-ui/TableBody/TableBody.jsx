@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTableBody } from '@material-ui/core/TableBody';
 
-class TableBody extends Component {
-    render() {
-        return <WTableBody {...this.props} />;
-    }
+function TableBody(props) {
+    return <WTableBody {...props} />;
 }
 
 export default TableBody;

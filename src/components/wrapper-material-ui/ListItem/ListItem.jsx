@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WListItem } from '@material-ui/core/ListItem';
 
-class ListItem extends Component {
-    render() {
-        return <WListItem {...this.props} />;
-    }
+function ListItem(props) {
+    return <WListItem {...props} />;
 }
 
 export default ListItem;

@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WRadioGroup } from '@material-ui/core/RadioGroup';
 
-class RadioGroup extends Component {
-    render() {
-        return <WRadioGroup {...this.props} />;
-    }
+function RadioGroup(props) {
+    return <WRadioGroup {...props} />;
 }
 
 export default RadioGroup;

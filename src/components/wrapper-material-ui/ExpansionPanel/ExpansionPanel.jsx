@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WExpansionPanel } from '@material-ui/core/ExpansionPanel';
 
-class ExpansionPanel extends Component {
-    render() {
-        const { children, ...otherProps } = this.props;
-        return <WExpansionPanel {...otherProps}>{children}</WExpansionPanel>;
-    }
+function ExpansionPanel(props) {
+    const { children, ...otherProps } = props;
+    return <WExpansionPanel {...otherProps}>{children}</WExpansionPanel>;
 }
 
 export default ExpansionPanel;

@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WDivider } from '@material-ui/core/Divider';
 
-class Divider extends Component {
-    render() {
-        return <WDivider {...this.props} />;
-    }
+function Divider(props) {
+    return <WDivider {...props} />;
 }
 
 export default Divider;

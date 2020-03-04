@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WListItemIcon } from '@material-ui/core/ListItemIcon';
 
-class ListItemIcon extends Component {
-    render() {
-        return <WListItemIcon {...this.props} />;
-    }
+function ListItemIcon(props) {
+    return <WListItemIcon {...props} />;
 }
 
 export default ListItemIcon;

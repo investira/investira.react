@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { default as WSwitch } from '@material-ui/core/Switch';
 
-class Switch extends Component {
-    render() {
-        return <WSwitch {...this.props} />;
-    }
+function Switch(props) {
+    return <WSwitch {...props} />;
 }
 
 export default Switch;

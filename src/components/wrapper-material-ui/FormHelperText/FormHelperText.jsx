@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WFormHelperText } from '@material-ui/core/FormHelperText';
 
-class FormHelperText extends Component {
-    render() {
-        return <WFormHelperText {...this.props} />;
-    }
+function FormHelperText(props) {
+    return <WFormHelperText {...props} />;
 }
 
 export default FormHelperText;

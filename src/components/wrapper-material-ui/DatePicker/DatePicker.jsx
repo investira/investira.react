@@ -38,7 +38,6 @@ const DatePicker = props => {
 
     return (
         <MuiPickersUtilsProvider utils={MomentUtils} locale={props.locale}>
-            {/* <div className={classes.root}> */}
             {friendly && (
                 <FriendlyDatePicker
                     utils={MomentUtils}
@@ -57,7 +56,6 @@ const DatePicker = props => {
                 cancelLabel="fechar"
                 className={xClassPicker}
             />
-            {/* </div> */}
         </MuiPickersUtilsProvider>
     );
 };

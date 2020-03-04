@@ -13,7 +13,6 @@ const DatePickerMode = ({
     locked,
     ...otherProps
 }) => {
-    //const currentError = form.errors[field.name];
     const DatePickerProps = {
         id: id,
         name: name,
@@ -36,7 +35,6 @@ const DatePickerMode = ({
             InputProps={InputPropsLocked}
         />
     ) : (
-        //format={'ddd, LL'}
         <DatePicker
             format={'DD/MMM/YYYY'}
             disabled={disabled}

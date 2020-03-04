@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import React from 'react';
 import { default as WPopover } from '@material-ui/core/Popover';
 
-class Popover extends Component {
-    render() {
-        return <WPopover {...this.props} />;
-    }
+function Popover(props) {
+    return <WPopover {...props} />;
 }
 
 export default Popover;
