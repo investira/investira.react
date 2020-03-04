@@ -1,33 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as WTab } from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import { classList } from '../../utils/helpers';
 
-const styles = theme => ({
-    tabRoot: {
-        //background: 'red'
-    },
-    fullWidth: {
-        flexBasis: 'auto'
-    },
-    textColorPrimary: {
-        color: '#fff'
-    }
-});
+const useStyles = makeStyles(
+    theme => ({
+        horizontalRoot: {
+            '& $wrapper': {
+                display: 'flex',
+                flexDirection: 'row'
+            }
+        },
+        fullWidth: {
+            flexBasis: 'auto'
+        },
+        textColorPrimary: {
+            color: '#fff'
+        },
+        wrapper: {}
+    }),
+    { name: 'MuiTab' }
+);
 
-class Tab extends Component {
-    render() {
-        const { classes } = this.props;
-        return (
-            <WTab
-                {...this.props}
-                classes={{
-                    root: classes.tabRoot,
-                    fullWidth: classes.fullWidth,
-                    textColorPrimary: classes.textColorPrimary
-                }}
-            />
-        );
-    }
+function Tab(props) {
+    const classes = useStyles();
+    const xClassNames = {
+        [classes.horizontalRoot]: props.direction === 'row',
+        [classes.fullWidth]: true,
+        [classes.textColorPrimary]: true
+    };
+
+    return <WTab {...props} className={classList(xClassNames)} />;
 }
 
-export default withStyles(styles)(Tab);
+export default Tab;
