@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { default as WSlider } from '@material-ui/core/Slider';
 
-function Slider(props) {
-    return <WSlider {...props} />;
+class Slider extends Component {
+    render() {
+        return <WSlider {...this.props} />;
+    }
 }
 
 export default Slider;
