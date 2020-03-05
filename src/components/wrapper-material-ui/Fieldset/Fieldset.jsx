@@ -15,7 +15,7 @@ export const styles = {
 };
 
 function Fieldset(props) {
-    const { classes, className, legend, children, ...otherProps } = this.props;
+    const { classes, className, legend, children, ...otherProps } = props;
 
     let xClass = classNames(classes.root, className, {});
 
