@@ -44,6 +44,7 @@ Icon.propTypes = {
         '28',
         '32',
         '40',
+        '50',
         'caption',
         'h6',
         'default'
