@@ -145,6 +145,9 @@ export const themePrimary = {
                 root: {
                     color: '#fff'
                 },
+                contained: {
+                    borderRadius: base.spacing.unit * 4
+                },
                 // outlined: {
                 //     borderTopLeftRadius: base.spacing.unit,
                 //     borderBottomRightRadius: base.spacing.unit
