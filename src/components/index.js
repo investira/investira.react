@@ -10,6 +10,7 @@ export { default as HorizontalList } from './HorizontalList';
 export { default as Icon } from './Icon';
 export { default as InputCurrency } from './InputCurrency';
 export { default as SearchBox } from './SearchBox';
+export { default as Scroller } from './Scroller';
 export { default as SlideView } from './SlideView';
 export { default as Sticky } from './Sticky';
 export { default as TabContainer } from './TabContainer';
