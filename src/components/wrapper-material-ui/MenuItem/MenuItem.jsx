@@ -1,8 +1,14 @@
-import React from 'react';
-import { default as WMenuItem } from '@material-ui/core/MenuItem';
+import React, { PureComponent } from 'react';
+import MuiMenuItem from '@material-ui/core/MenuItem';
 
-function MenuItem(props) {
-    return <WMenuItem {...props} />;
+// function MenuItem(props) {
+//     return <WMenuItem {...props} />;
+// }
+
+class MenuItem extends PureComponent {
+    render() {
+        return <MuiMenuItem {...this.props} />;
+    }
 }
 
 export default MenuItem;
