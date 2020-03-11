@@ -1,0 +1,43 @@
+$height: 25px;
+
+.root {
+    position: relative;
+    height: $height;
+    background-color: var(--color-secondary-light);
+    margin: 8px 0 0 0;
+    border-radius: $height / 2;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 0;
+    color: var(--color-primary);
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    height: $height;
+    border: none;
+    border-radius: $height / 2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon {
+    padding-right: 8px;
+}
+
+.active {
+    background-color: var(--color-primary);
+    color: var(--color-black-90);
+}
