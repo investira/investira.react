@@ -12,6 +12,5 @@ export { default as InputCurrency } from './InputCurrency';
 export { default as SearchBox } from './SearchBox';
 export { default as SlideView } from './SlideView';
 export { default as Sticky } from './Sticky';
-export { default as ResponsiveImage } from './ResponsiveImage';
 export { default as TabContainer } from './TabContainer';
 export { default as Typedy } from './Typedy';
