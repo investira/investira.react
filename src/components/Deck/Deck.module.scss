@@ -28,6 +28,7 @@
 .viewPrev {
     transform: translate(-8vw);
     opacity: 0;
+    pointer-events: none;
 }
 
 .viewActive {
