@@ -42,6 +42,7 @@ export { default as ListItemText } from './ListItemText';
 export { default as KeyboardDatePicker } from './KeyboardDatePicker';
 export { default as Menu } from './Menu';
 export { default as MenuItem } from './MenuItem';
+export { default as MobileStepper } from './MobileStepper';
 export { default as Paper } from './Paper';
 export { default as Popover } from './Popover';
 export { default as Radio } from './Radio';

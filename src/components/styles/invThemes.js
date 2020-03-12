@@ -5,6 +5,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const themePrimary = {
     mui: createMuiTheme({
         overrides: {
+            MuiMobileStepper: {
+                root: {
+                    padding: '8px 0',
+                    background: 'none'
+                }
+            },
             MuiAvatar: {
                 colorDefault: {
                     backgroundColor: base.colors.secondary.light,
