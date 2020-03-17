@@ -8,6 +8,7 @@ export { default as FluidPaper } from './FluidPaper';
 export { default as FilterBar } from './FilterBar';
 export { default as HorizontalList } from './HorizontalList';
 export { default as Icon } from './Icon';
+export { default as InfiniteScroller } from './InfiniteScroller';
 export { default as InputCurrency } from './InputCurrency';
 export { default as SearchBox } from './SearchBox';
 export { default as Scroller } from './Scroller';

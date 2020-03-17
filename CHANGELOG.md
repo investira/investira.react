@@ -22,3 +22,4 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [lib] Adiciona novo bind do redux para o localstorage
 -   [components] Avatar. Agora possui as propriedades size e color
 -   [utils] Add função classList
+-   [components] Add InfiniteScroller
