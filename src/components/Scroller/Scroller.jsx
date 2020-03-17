@@ -9,6 +9,7 @@ export class Scroller extends PureComponent {
 
         this.scrollTimer = null;
         this.lastScrollY = null;
+        this.scrollRef = React.createRef();
     }
 
     // Teste contra freezing scroll no ios
@@ -47,6 +48,7 @@ export class Scroller extends PureComponent {
     render() {
         return (
             <section
+                ref={this.scrollRef}
                 className={Style.root}
                 onScroll={this.handleScroll}
                 onTouchStart={this.handleTouchStart}
