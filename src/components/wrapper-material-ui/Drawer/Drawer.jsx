@@ -27,14 +27,14 @@ class Drawer extends Component {
     render() {
         return (
             <WDrawer {...this.props}>
-                <div
+                {/* <div
                     id={'DrawerWarp'}
                     style={{
                         width: this.state.width,
                         height: this.state.height
-                    }}>
-                    {this.props.children}
-                </div>
+                    }}> */}
+                {this.props.children}
+                {/* </div> */}
             </WDrawer>
         );
     }
