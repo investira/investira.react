@@ -135,7 +135,7 @@ export const themePrimary = {
             MuiDrawer: {
                 paper: {
                     '-webkit-overflow-scrolling': 'auto',
-                    background: `linear-gradient(to bottom, ${base.colors.background.dark} 0%, ${base.colors.background.dark} 100%)`
+                    background: base.colors.background.dark
                 }
             },
             MuiDialogTitle: {
@@ -172,8 +172,12 @@ export const themePrimary = {
             },
             MuiAppBar: {
                 root: {
-                    backgroundColor: base.colors.common.transparent,
-                    boxShadow: 'none'
+                    backgroundColor: base.colors.background.dark
+                    //boxShadow: 'none'
+                },
+                colorPrimary: {
+                    backgroundColor: base.colors.background.dark,
+                    color: base.colors.common.white
                 }
             },
             MuiToolbar: {
@@ -532,6 +536,10 @@ export const themeSecondary = {
             },
             MuiAppBar: {
                 root: {
+                    backgroundColor: base.colors.common.transparent,
+                    boxShadow: 'none'
+                },
+                colorPrimary: {
                     backgroundColor: base.colors.common.transparent,
                     boxShadow: 'none'
                 }
