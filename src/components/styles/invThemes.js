@@ -240,8 +240,14 @@ export const themePrimary = {
                 }
             },
             MuiPaper: {
+                root: {
+                    //backgroundColor: '#1D1F33'
+                },
                 rounded: {
-                    borderRadius: '10px'
+                    borderRadius: '8px'
+                },
+                elevation1: {
+                    //boxShadow: '#11131F 4px 4px 8px, #2D304F -4px -4px 8px'
                 }
             },
             MuiTypography: {
@@ -605,7 +611,7 @@ export const themeSecondary = {
             },
             MuiPaper: {
                 rounded: {
-                    borderRadius: '10px'
+                    borderRadius: '8px'
                 }
             },
             MuiTypography: {

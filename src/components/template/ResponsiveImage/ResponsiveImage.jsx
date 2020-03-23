@@ -31,13 +31,15 @@ const ResponsiveImage = props => {
     filterImages(props.source);
 
     return hasError ? (
-        <img
-            className={props.className || Style.img}
-            srcSet={`${noImage} 1x, ${noImage2x} 2x, ${noImage3x} 3x`}
-            src={noImage}
-            alt={props.alt}
-            type={props.type}
-        />
+        <div className={Style.root}>
+            <img
+                className={props.className || Style.img}
+                srcSet={`${noImage} 1x, ${noImage2x} 2x, ${noImage3x} 3x`}
+                src={noImage}
+                alt={props.alt}
+                type={props.type}
+            />
+        </div>
     ) : (
         <div className={Style.root}>
             <picture className={Style.picture}>
