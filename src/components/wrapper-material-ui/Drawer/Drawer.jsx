@@ -16,13 +16,14 @@ const useStyles = makeStyles(
 );
 
 function Drawer(props) {
+    const { fullHeight, ...otherProps } = props;
     const classes = useStyles();
     const xClassNames = {
-        [classes.fullHeight]: props.fullHeight
+        [classes.fullHeight]: fullHeight
     };
 
     return (
-        <WDrawer {...props} className={classList(xClassNames)}>
+        <WDrawer {...otherProps} className={classList(xClassNames)}>
             {props.children}
         </WDrawer>
     );
