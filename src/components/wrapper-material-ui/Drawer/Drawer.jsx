@@ -1,43 +1,31 @@
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { default as WDrawer } from '@material-ui/core/Drawer';
+import { classList } from '../../utils/helpers';
 
-class Drawer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            width: '100vw',
-            height: '100vh'
-        };
-        this.updateWinArea = this.updateWinArea.bind(this);
-    }
+const useStyles = makeStyles(
+    theme => ({
+        fullHeight: {
+            '& $paper': {
+                height: '100vh'
+            }
+        },
+        paper: {}
+    }),
+    { name: 'MuiDrawer' }
+);
 
-    updateWinArea() {
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
-    }
+function Drawer(props) {
+    const classes = useStyles();
+    const xClassNames = {
+        [classes.fullHeight]: props.fullHeight
+    };
 
-    componentDidMount() {
-        this.updateWinArea();
-        window.addEventListener('resize', this.updateWinArea);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWinArea);
-    }
-
-    render() {
-        return (
-            <WDrawer {...this.props}>
-                {/* <div
-                    id={'DrawerWarp'}
-                    style={{
-                        width: this.state.width,
-                        height: this.state.height
-                    }}> */}
-                {this.props.children}
-                {/* </div> */}
-            </WDrawer>
-        );
-    }
+    return (
+        <WDrawer {...props} className={classList(xClassNames)}>
+            {props.children}
+        </WDrawer>
+    );
 }
 
 export default Drawer;

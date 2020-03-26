@@ -134,7 +134,6 @@ export const themePrimary = {
             },
             MuiDrawer: {
                 paper: {
-                    '-webkit-overflow-scrolling': 'auto',
                     background: base.colors.background.dark
                 }
             },
@@ -240,15 +239,18 @@ export const themePrimary = {
                 }
             },
             MuiPaper: {
-                root: {
-                    //backgroundColor: '#1D1F33'
-                },
+                // root: {
+                //     backgroundColor: '#191b2a',
+                //     background:
+                //         'linear-gradient(135deg, rgba(29,31,52,1) 0%, rgba(17,19,31,1) 100%)'
+                // },
                 rounded: {
                     borderRadius: '8px'
-                },
-                elevation1: {
-                    //boxShadow: '#11131F 4px 4px 8px, #2D304F -4px -4px 8px'
                 }
+                // elevation1: {
+                //     boxShadow:
+                //         '#191b2a 0px 0px 2px 2px, rgba(0,0,0,.8) 4px 4px 8px, #2D304F -4px -4px 8px'
+                // }
             },
             MuiTypography: {
                 h6: {
