@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { default as WInput } from '@material-ui/core/Input';
 
-function Input(props) {
-    return <WInput {...props} />;
+class Input extends Component {
+    render() {
+        return <WInput {...this.props} />;
+    }
 }
 
 export default Input;
