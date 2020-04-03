@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Scroller, Loading } from '../';
+import { Scroller, Loading, CenterInView } from '../';
 import Style from './LogReader.module.scss';
 
 class LogReader extends PureComponent {
@@ -20,6 +20,10 @@ class LogReader extends PureComponent {
             .then(rData => {
                 const dataFormated = this.formatText(rData);
                 pElem.innerHTML = `<span>${dataFormated}</span>`;
+            })
+            .catch(rErr => {
+                pElem.innerHTML = `<span>Falha ao tentar carregar: ${file}</span>`;
+                console.error(rErr);
             });
     };
 
@@ -47,7 +51,7 @@ class LogReader extends PureComponent {
 
     formatText = pData => {
         const xDataFormated = pData.replace(/\[([a-z]*)\]/gm, (match, p1) => {
-            return `<span class='log-label-${p1}'>${match}</span>`;
+            return `<span class='${Style[p1]}'>${match}</span>`;
         });
 
         return xDataFormated;
@@ -75,7 +79,7 @@ class LogReader extends PureComponent {
 
 LogReader.propTypes = {
     uri: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.oneOf(['txt', 'json', 'html'])
 };
 
 export default LogReader;
