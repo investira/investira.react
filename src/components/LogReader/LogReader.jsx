@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Scroller } from '../';
+import { Scroller, Loading } from '../';
 import Style from './LogReader.module.scss';
 
 class LogReader extends PureComponent {
@@ -17,8 +17,9 @@ class LogReader extends PureComponent {
             .then(rRes => {
                 return rRes.text();
             })
-            .then(data => {
-                pElem.innerHTML = data;
+            .then(rData => {
+                const dataFormated = this.formatText(rData);
+                pElem.innerHTML = `<span>${dataFormated}</span>`;
             });
     };
 
@@ -44,6 +45,14 @@ class LogReader extends PureComponent {
         reader[pType](pUri, pElem);
     };
 
+    formatText = pData => {
+        const xDataFormated = pData.replace(/\[([a-z]*)\]/gm, (match, p1) => {
+            return `<span class='log-label-${p1}'>${match}</span>`;
+        });
+
+        return xDataFormated;
+    };
+
     componentDidMount() {
         const { uri, type } = this.props;
         this.readFile(type, uri, this.log);
@@ -53,7 +62,11 @@ class LogReader extends PureComponent {
         return (
             <div className={Style.root}>
                 <Scroller>
-                    <pre id={'log'} className={Style.log} ref={this.log}></pre>
+                    <pre className={Style.log}>
+                        <code id={'log'} ref={this.log}>
+                            <Loading />
+                        </code>
+                    </pre>
                 </Scroller>
             </div>
         );

@@ -4,10 +4,39 @@
 }
 
 .log {
-    display: block;
-    color: white;
-    font-size: 12px;
+    font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+        'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+        'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
+        monospace;
     white-space: pre-wrap;
-    overflow-y: auto;
-    height: 100%;
+    color: white;
+    font-size: 0.8125rem;
+    tab-size: 2;
+    line-height: 1.4;
+}
+
+:global {
+    .log-label-warn {
+        color: #f1b40f;
+    }
+
+    .log-label-error {
+        color: #ed442c;
+    }
+
+    .log-label-debug {
+        color: #ffe650;
+    }
+
+    .log-label-emerg {
+        color: #ff7957;
+    }
+
+    .log-label-info {
+        color: #0ce4f1;
+    }
+
+    .log-label-note {
+        color: #3ce1a3;
+    }
 }
