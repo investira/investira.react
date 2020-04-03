@@ -1,0 +1,13 @@
+.root {
+    position: relative;
+    height: inherit;
+}
+
+.log {
+    display: block;
+    color: white;
+    font-size: 12px;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    height: 100%;
+}

@@ -15,4 +15,5 @@ export { default as Scroller } from './Scroller';
 export { default as SlideView } from './SlideView';
 export { default as Sticky } from './Sticky';
 export { default as TabContainer } from './TabContainer';
+export { default as LogReader } from './LogReader';
 export { default as Typedy } from './Typedy';
