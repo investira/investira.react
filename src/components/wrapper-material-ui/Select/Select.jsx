@@ -24,9 +24,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Select(props) {
+    //console.log(props);
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        [props.id]: ''
+        [props.id]: props.options[0].value
     });
 
     const handleChange = pEvent => {
@@ -35,13 +36,15 @@ function Select(props) {
             [pEvent.target.name]: pEvent.target.value
         }));
 
-        props.onChange && props.onChange(pEvent);
+        props.onChange && props.onChange(pEvent.target.value, pEvent);
     };
+
+    const { formControlProps, ...selectProps } = props;
 
     return (
         <FormControl
-            className={classes.formControl}
-            fullWidth={props.fullWidth}>
+            {...props.formControlProps}
+            className={classes.formControl}>
             {props.label && (
                 <InputLabel shrink htmlFor={props.id}>
                     {props.label}
@@ -49,20 +52,23 @@ function Select(props) {
             )}
             <WSelect
                 value={values[props.id]}
+                defaultValue={props.options[0].value}
+                {...selectProps}
                 onChange={handleChange}
                 inputProps={{
                     name: props.id,
                     id: props.id
                 }}
-                displayEmpty
                 name={props.id}
                 className={classes.selectEmpty}>
-                <MenuItem value="">{props.placeholder}</MenuItem>
+                {props.placeholder && (
+                    <MenuItem value="">{props.placeholder}</MenuItem>
+                )}
 
                 {props.options &&
                     props.options.map((xItem, xIndex) => {
                         return (
-                            <MenuItem key={xItem.id} value={xItem.id}>
+                            <MenuItem key={xItem.id} value={xItem.value}>
                                 {xItem.descricao}
                             </MenuItem>
                         );
@@ -81,7 +87,8 @@ Select.propTypes = {
     helperText: PropTypes.func,
     options: PropTypes.array,
     placeholder: PropTypes.string,
-    fullWidth: PropTypes.bool
+    fullWidth: PropTypes.bool,
+    formControlProps: PropTypes.object
 };
 
 export default Select;

@@ -5,6 +5,18 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const themePrimary = {
     mui: createMuiTheme({
         overrides: {
+            MuiSelect: {
+                select: {
+                    '&:focus': {
+                        borderRadius: '30px'
+                    }
+                }
+            },
+            MuiOutlinedInput: {
+                notchedOutline: {
+                    borderRadius: '30px'
+                }
+            },
             MuiMobileStepper: {
                 root: {
                     padding: '8px 0',
