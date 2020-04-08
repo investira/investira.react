@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from 'investiraComponents';
+import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
 
 import { validators } from 'investira.sdk';
 import Style from './SearchBox.module.scss';
@@ -8,7 +8,9 @@ import Style from './SearchBox.module.scss';
 const SearchBox = props => {
     const [clearBtn, setClearBtn] = useState(false);
     const [value, setValue] = useState(props.value || '');
-    const [querySplited, setQuerySplited] = useState(props.value ? props.value.split(' ') : []);
+    const [querySplited, setQuerySplited] = useState(
+        props.value ? props.value.split(' ') : []
+    );
 
     const searchRef = useRef();
 
@@ -133,7 +135,10 @@ const SearchBox = props => {
                 )}
 
                 {props.filter && (
-                    <IconButton color="primary" aria-label="filtro" onClick={handleFilter}>
+                    <IconButton
+                        color="primary"
+                        aria-label="filtro"
+                        onClick={handleFilter}>
                         <Icon iconName={'filter'} />
                     </IconButton>
                 )}

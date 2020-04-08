@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Style from './Loading.module.scss';
-import { CircularProgress } from 'investiraComponents';
+import { CircularProgress } from '../../';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 

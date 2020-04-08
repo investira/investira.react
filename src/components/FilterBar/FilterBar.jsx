@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from 'investiraComponents';
+import { Icon } from '../';
 import PropTypes from 'prop-types';
 import Style from './FilterBar.module.scss';
 
@@ -24,12 +24,18 @@ const FilterBar = props => {
                             data-value={xItem.value}
                             data-index={xIndex}
                             key={xIndex}
-                            className={`${Style.button} ${active === xIndex ? Style.active : null}`}
+                            className={`${Style.button} ${
+                                active === xIndex ? Style.active : null
+                            }`}
                             onClick={handleClick}>
                             <Icon
                                 className={Style.icon}
                                 iconName={xItem.iconName}
-                                color={active === xIndex ? xItem.default : xItem.color}
+                                color={
+                                    active === xIndex
+                                        ? xItem.default
+                                        : xItem.color
+                                }
                             />
                             {xItem.label}
                         </button>
