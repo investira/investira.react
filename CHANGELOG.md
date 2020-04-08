@@ -25,3 +25,5 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [components] Add InfiniteScroller
 
 # 2.1.0
+
+-   [components] Muda a versão da Material-ui para 4.9.9
