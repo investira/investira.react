@@ -23,3 +23,5 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [components] Avatar. Agora possui as propriedades size e color
 -   [utils] Add função classList
 -   [components] Add InfiniteScroller
+
+# 2.1.0
