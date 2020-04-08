@@ -74,5 +74,8 @@
         "@storybook/react": "^5.3.8",
         "babel-loader": "^8.0.6",
         "react-is": "^16.12.0"
+    },
+    "resolutions": {
+        "react-dev-utils": "10.1.0"
     }
 }
