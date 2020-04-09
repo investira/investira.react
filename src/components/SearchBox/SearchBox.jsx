@@ -47,7 +47,10 @@ const SearchBox = props => {
             setQuerySplited([]);
         }
 
-        props.onChange && props.onChange(pValue);
+        //TODO: trocar por whitespaceCleaner do investira.sdk/strings
+        const xValue = pValue && pValue.trim().replace(/\s+/g, ' ');
+
+        props.onChange && props.onChange(xValue);
     };
 
     const handleFilter = () => {
