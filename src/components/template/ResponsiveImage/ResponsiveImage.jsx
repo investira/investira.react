@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import noImage from './thumb_no_image.gif';
 import noImage2x from './thumb_no_image@2x.gif';
@@ -34,6 +34,7 @@ const ResponsiveImage = props => {
         <div className={Style.root}>
             <picture className={Style.picture}>
                 <img
+                    id={props.id}
                     className={props.className || Style.img}
                     srcSet={`${noImage} 1x, ${noImage2x} 2x, ${noImage3x} 3x`}
                     src={noImage}
@@ -58,6 +59,7 @@ const ResponsiveImage = props => {
 
                 {imagesSrcSet[0] ? (
                     <img
+                        id={props.id}
                         className={props.className || Style.img}
                         srcSet={imagesSrcSet[0].srcSet}
                         alt={props.alt}
