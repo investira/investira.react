@@ -14,6 +14,18 @@ const displays = {
         }
         return displays.format('##.###.###/####-##', pValue);
     },
+    cpf: pValue => {
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+        return displays.format('###.###.###-##', pValue);
+    },
+    cep: pValue => {
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+        return displays.format('#####-###', pValue);
+    },
     agencia: pValue => {
         if (validators.isNull(pValue)) {
             return '';
