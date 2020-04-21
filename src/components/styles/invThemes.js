@@ -159,6 +159,11 @@ export const themePrimary = {
                     padding: '0 16px 16px'
                 }
             },
+            MuiDialogActions: {
+                root: {
+                    padding: '0 16px 16px'
+                }
+            },
             MuiButton: {
                 root: {
                     color: '#fff'
