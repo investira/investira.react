@@ -2,7 +2,7 @@
     display: block;
     //overflow: hidden;
     height: 100%;
-    width: 100vw;
+    width: inherit; //100vw
     position: relative;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .view {
-    width: 100vw;
+    width: inherit; //100vw
     height: 100%; //overflow-y: auto;
     //-webkit-overflow-scrolling: touch;
     position: absolute;
@@ -21,12 +21,12 @@
 }
 
 .viewOffset {
-    transform: translate(100vw);
-    left: 100vw;
+    transform: translate(100%); //translate(100vw);
+    left: 100%; //100vw;
 }
 
 .viewPrev {
-    transform: translate(-8vw);
+    transform: translate(-8%); //translate(-8vw);
     opacity: 0;
     pointer-events: none;
 }
