@@ -10,6 +10,15 @@ class LogReader extends PureComponent {
         this.log = React.createRef();
     }
 
+    renderFormatedLog = (pElem, pData, pFormat = true) => {
+        if (pFormat) {
+            const xDataFormated = this.formatText(pData);
+            pElem.innerHTML = `<span>${xDataFormated}</span>`;
+        } else {
+            pElem.innerHTML = pData;
+        }
+    };
+
     readTextFile = (pUri, pElem) => {
         const file = `${pUri}.txt`;
 
@@ -18,35 +27,37 @@ class LogReader extends PureComponent {
                 return rRes.text();
             })
             .then(rData => {
-                const dataFormated = this.formatText(rData);
-                pElem.innerHTML = `<span>${dataFormated}</span>`;
+                this.renderFormatedLog(pElem, rData);
             })
             .catch(rErr => {
-                pElem.innerHTML = `<span>Falha ao tentar carregar: ${file}</span>`;
-                console.error(rErr);
+                const xErrorMessage = `<span>Falha ao tentar carregar: ${file}</span>`;
+                this.renderFormatedLog(pElem, xErrorMessage, false);
             });
     };
 
     readJsontFile = (pUri, pElem) => {
-        console.log(pUri);
         return pUri;
     };
 
-    readHtmltFile = (pUri, pElem) => {
-        console.log(pUri);
+    readHtmlFile = (pUri, pElem) => {
         return pUri;
     };
 
-    readFile = (pType, pUri, pRef) => {
+    readString = (pData, pElem) => {
+        this.renderFormatedLog(pElem, pData);
+    };
+
+    readData = (pType, pData, pRef) => {
         const reader = {
             txt: this.readTextFile,
             json: this.readJsontFile,
-            html: this.readHtmltFile
+            html: this.readHtmlFile,
+            string: this.readString
         };
 
         const pElem = pRef.current;
 
-        reader[pType](pUri, pElem);
+        reader[pType](pData, pElem);
     };
 
     formatText = pData => {
@@ -58,8 +69,9 @@ class LogReader extends PureComponent {
     };
 
     componentDidMount() {
-        const { uri, type } = this.props;
-        this.readFile(type, uri, this.log);
+        const { uri, data, type } = this.props;
+
+        this.readData(type, data || uri, this.log);
     }
 
     render() {
@@ -78,8 +90,9 @@ class LogReader extends PureComponent {
 }
 
 LogReader.propTypes = {
+    data: PropTypes.string,
     uri: PropTypes.string,
-    type: PropTypes.oneOf(['txt', 'json', 'html'])
+    type: PropTypes.oneOf(['txt', 'json', 'html', 'string'])
 };
 
 export default LogReader;
