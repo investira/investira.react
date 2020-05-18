@@ -23,8 +23,10 @@ const useStyles = makeStyles(theme => ({
     // }
 }));
 
+// TODO: Refazer este wrapper para retonar apenas o select quando retomar o investira.
+// TextField realiza o que este wrapper pretendia
+
 function Select(props) {
-    //console.log(props);
     const classes = useStyles();
     const [values, setValues] = React.useState({
         [props.id]: props.options[0].value
@@ -52,7 +54,6 @@ function Select(props) {
             )}
             <WSelect
                 value={values[props.id]}
-                defaultValue={props.options[0].value}
                 {...selectProps}
                 onChange={handleChange}
                 inputProps={{
@@ -62,7 +63,9 @@ function Select(props) {
                 name={props.id}
                 className={classes.selectEmpty}>
                 {props.placeholder && (
-                    <MenuItem value="">{props.placeholder}</MenuItem>
+                    <MenuItem disabled value="">
+                        {props.placeholder}
+                    </MenuItem>
                 )}
 
                 {props.options &&
