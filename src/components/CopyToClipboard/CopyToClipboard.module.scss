@@ -1,0 +1,16 @@
+.root {
+    display: inline-block;
+    position: relative;
+    pointer-events: all;
+    vertical-align: top;
+    border: 0;
+    height: 16px;
+    width: 16px;
+    margin: 0 4px;
+
+    & > svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

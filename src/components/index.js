@@ -3,6 +3,7 @@ export * from './template/';
 export { default as Basic } from './Basic';
 export { default as Chips } from './Chips';
 export { default as ContainerFeedback } from './ContainerFeedback';
+export { default as CopyToClipboard } from './CopyToClipboard';
 export { default as Deck } from './Deck';
 export { default as FluidPaper } from './FluidPaper';
 export { default as FilterBar } from './FilterBar';
