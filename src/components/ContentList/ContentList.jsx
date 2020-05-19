@@ -78,7 +78,9 @@ class ContentList extends PureComponent {
                                     timeout={500}
                                     classNames={Style}
                                     unmountOnExit
-                                    appear>
+                                    appear
+                                    onEnter={this.props.onEnter}
+                                    onExited={this.props.onExited}>
                                     <Component
                                         data={xItem}
                                         {...othersItemProps}
@@ -98,7 +100,9 @@ ContentList.propTypes = {
     emptyMessage: PropTypes.string,
     item: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     className: PropTypes.object,
-    itemProps: PropTypes.object
+    itemProps: PropTypes.object,
+    onEnter: PropTypes.func,
+    onExited: PropTypes.func
 };
 
 export default ContentList;
