@@ -111,8 +111,6 @@ const bindStateToLocalStorage = {
     },
 
     bindListener: (reducer, pLocalItemPrefix) => (pState, pAction) => {
-        console.log(pState, pAction);
-        console.log(pLocalItemPrefix);
         let xUserId = null;
         let xDefaultState = {};
         let xInit = pAction.type.match(/@@redux\/INIT/g) ? true : false;
