@@ -5,6 +5,8 @@ import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
 import { validators } from 'investira.sdk';
 import Style from './SearchBox.module.scss';
 
+let timeout = null;
+
 const SearchBox = props => {
     const [clearBtn, setClearBtn] = useState(false);
     const [value, setValue] = useState(props.value || '');
@@ -50,7 +52,15 @@ const SearchBox = props => {
         //TODO: trocar por whitespaceCleaner do investira.sdk/strings
         const xValue = pValue && pValue.trim().replace(/\s+/g, ' ');
 
-        props.onChange && props.onChange(xValue);
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+
+        timeout = setTimeout(
+            () => props.onChange && props.onChange(xValue),
+            200
+        );
+        // props.onChange && props.onChange(xValue);
     };
 
     const handleFilter = () => {
