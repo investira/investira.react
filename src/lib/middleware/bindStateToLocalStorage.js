@@ -110,10 +110,15 @@ const bindStateToLocalStorage = {
         return xDefaultState;
     },
 
-    bindListener: reducer => (pState, pAction) => {
+    bindListener: (reducer, pLocalItemPrefix) => (pState, pAction) => {
+        console.log(pState, pAction);
+        console.log(pLocalItemPrefix);
         let xUserId = null;
         let xDefaultState = {};
         let xInit = pAction.type.match(/@@redux\/INIT/g) ? true : false;
+
+        const localApp = pLocalItemPrefix + 'App';
+        const localUser = pLocalItemPrefix + 'User';
 
         if (
             pAction.type === '@@INIT' ||
@@ -125,7 +130,7 @@ const bindStateToLocalStorage = {
 
             // Recupera do local somente os dados referentes a app:
             // app, auth, message, server
-            const xLocalStateApp = localStorages.getItem('investiraApp') || {};
+            const xLocalStateApp = localStorages.getItem(localApp) || {};
 
             const xNewState = objects.deepMerge(xDefaultState, xLocalStateApp);
             xDefaultState = xNewState;
@@ -136,8 +141,7 @@ const bindStateToLocalStorage = {
             xDefaultState = reducer(pState, pAction);
             xUserId = xDefaultState.user.usuario_id;
 
-            const xLocalStateUser =
-                localStorages.getItem('investiraUser') || {};
+            const xLocalStateUser = localStorages.getItem(localUser) || {};
 
             const xLocalState = {
                 ...(xUserId && {
@@ -171,12 +175,11 @@ const bindStateToLocalStorage = {
             }
 
             //Salva estado atual do localStorage
-            const xLocalStateUser =
-                localStorages.getItem('investiraUser') || {};
+            const xLocalStateUser = localStorages.getItem(localUser) || {};
 
-            localStorages.setItem('investiraApp', xInvestiraApp);
+            localStorages.setItem(localApp, xInvestiraApp);
 
-            localStorages.setItem('investiraUser', {
+            localStorages.setItem(localUser, {
                 ...(xUserId
                     ? {
                           ...xLocalStateUser,
