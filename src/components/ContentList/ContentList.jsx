@@ -25,7 +25,9 @@ class ContentList extends PureComponent {
     };
 
     render() {
-        const xClassRoot = classNames(Style.root, this.props.className, {});
+        const xClassRoot = classNames(Style.root, this.props.className, {
+            [Style.emptyList]: this.hasListData(this.props.list)
+        });
         const Component = this.props.item;
 
         const { keyName, ...othersItemProps } = this.props.itemProps;
@@ -96,7 +98,7 @@ class ContentList extends PureComponent {
 }
 
 ContentList.propTypes = {
-    list: PropTypes.array.isRequired,
+    list: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     emptyMessage: PropTypes.string,
     item: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     className: PropTypes.object,

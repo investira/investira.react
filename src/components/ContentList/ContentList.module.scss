@@ -1,9 +1,14 @@
 .root {
     position: relative;
+    min-height: 100%;
 }
 
 .list {
     position: relative;
+}
+
+.emptyList {
+    height: 100%;
 }
 
 .animated {
