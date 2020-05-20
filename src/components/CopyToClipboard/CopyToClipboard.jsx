@@ -17,7 +17,8 @@ class CopyToClipboard extends PureComponent {
         this.timeout = null;
     }
 
-    copyToClipboard = pValue => {
+    copyToClipboard = (pValue, pEvent) => {
+        pEvent.stopPropagation();
         const tempInput = document.createElement('input');
         this.body.appendChild(tempInput);
         tempInput.setAttribute('value', pValue.toString());
@@ -55,8 +56,12 @@ class CopyToClipboard extends PureComponent {
             <Tooltip title={this.state.tooltip} placement="top">
                 <button
                     className={Style.root}
-                    onClick={() => this.copyToClipboard(this.props.value)}>
-                    <Icon iconName={this.state.iconName} size={'16'} color={'primary'} />
+                    onClick={e => this.copyToClipboard(this.props.value, e)}>
+                    <Icon
+                        iconName={this.state.iconName}
+                        size={'16'}
+                        color={'primary'}
+                    />
                 </button>
             </Tooltip>
         );
