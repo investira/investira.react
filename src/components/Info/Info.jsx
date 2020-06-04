@@ -39,7 +39,11 @@ Info.propTypes = {
     variant: PropTypes.string,
     variantValue: PropTypes.string,
     labelColor: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.string,
+        PropTypes.number
+    ])
 };
 
 export default Info;
