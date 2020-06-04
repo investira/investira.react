@@ -6,7 +6,7 @@ export { default as ContainerFeedback } from './ContainerFeedback';
 export { default as ContentList } from './ContentList';
 export { default as CopyToClipboard } from './CopyToClipboard';
 export { default as Deck } from './Deck';
-export { default as Divider } from './Divider';
+export { default as Divisor } from './Divisor';
 export { default as FilterBar } from './FilterBar';
 export { default as FluidPaper } from './FluidPaper';
 export { default as HorizontalList } from './HorizontalList';
