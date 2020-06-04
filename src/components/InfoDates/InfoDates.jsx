@@ -3,6 +3,7 @@ import { Typography } from 'investiraComponents';
 import { formats, validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
 
+formats.locale('pt-br');
 function InfoDates(props) {
     return (
         <div className={props.className}>
@@ -29,8 +30,10 @@ function InfoDates(props) {
                         formats.formatDateCustom(props.time, props.format)}
                     {props.variant === 'datetime' &&
                         formats.formatDateCustom(props.time, 'DD/MMM/YY HH:mm')}
-                    {props.variant === 'date' && formats.formatDateCustom(props.time, 'DD/MMM/YY')}
-                    {props.variant === 'duration' && formats.duration(props.time)}
+                    {props.variant === 'date' &&
+                        formats.formatDateCustom(props.time, 'DD/MMM/YY')}
+                    {props.variant === 'duration' &&
+                        formats.duration(props.time)}
                     {props.variant === 'fornow' && formats.fromNow(props.time)}
                 </Typography>
             )}
