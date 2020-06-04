@@ -17,6 +17,7 @@ class SSE extends PureComponent {
         this.isMount = false;
 
         this.eventSource = new EventSource(props.route);
+        console.log(this.eventSource);
     }
 
     updateResponseData = (pReponseData, pPrevData) => {
@@ -41,11 +42,18 @@ class SSE extends PureComponent {
 
     componentDidMount() {
         this.isMount = true;
+
+        this.eventSource.onopen = e => {
+            console.log(e.data);
+        };
+
         this.eventSource.onmessage = e => {
+            console.log(e.data);
             this.updateResponseData(e.data, this.state.data);
         };
 
-        this.eventSource.onerror = function(err) {
+        this.eventSource.onerror = e => {
+            console.log(e.data);
             this.updateError(true);
         };
     }
