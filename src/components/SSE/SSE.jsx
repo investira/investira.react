@@ -24,11 +24,11 @@ class SSE extends PureComponent {
         let xResponseData = null;
 
         if (validators.isArray(xResponseDataParsed)) {
-            const xDataSize = pPrevData.length;
-            if (xDataSize > pSize) {
-                pPrevData = pPrevData.slice(pSize * -1);
-            }
             xResponseData = [...pPrevData, ...xResponseDataParsed];
+
+            if (xResponseData.length > pSize) {
+                xResponseData.splice(0, xResponseData.length - pSize);
+            }
         } else {
             xResponseData = { ...pPrevData, ...xResponseDataParsed };
         }
@@ -54,7 +54,7 @@ class SSE extends PureComponent {
         // };
 
         this.eventSource.onmessage = e => {
-            this.updateResponseData(e.data, this.state.data);
+            this.updateResponseData(e.data, this.state.data, this.props.size);
         };
 
         this.eventSource.onerror = e => {
