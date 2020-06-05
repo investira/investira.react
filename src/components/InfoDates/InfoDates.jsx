@@ -47,7 +47,7 @@ InfoDates.propTypes = {
     date: PropTypes.string,
     variant: PropTypes.string,
     labelVariant: PropTypes.string,
-    time: PropTypes.string,
+    time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     timeVariant: PropTypes.string,
     format: PropTypes.string
 };
