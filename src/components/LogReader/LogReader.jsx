@@ -111,7 +111,6 @@ class LogReader extends PureComponent {
             this.props.responseData &&
             this.props.responseData !== prevProps.responseData
         ) {
-            console.log(this.props.responseData);
             const { uri, data, responseData, type } = this.props;
             this.readData(type, data || uri || responseData, this.log);
         }
