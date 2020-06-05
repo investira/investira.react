@@ -19,16 +19,12 @@ class SSE extends PureComponent {
         this.eventSource = new EventSource(props.route);
     }
 
-    updateResponseData = (pReponseData, pPrevData, pSize) => {
+    updateResponseData = (pReponseData, pPrevData) => {
         const xResponseDataParsed = JSON.parse(pReponseData);
         let xResponseData = null;
 
         if (validators.isArray(xResponseDataParsed)) {
             xResponseData = [...pPrevData, ...xResponseDataParsed];
-
-            if (xResponseData.length > pSize) {
-                xResponseData.splice(0, xResponseData.length - pSize);
-            }
         } else {
             xResponseData = { ...pPrevData, ...xResponseDataParsed };
         }
@@ -54,7 +50,7 @@ class SSE extends PureComponent {
         // };
 
         this.eventSource.onmessage = e => {
-            this.updateResponseData(e.data, this.state.data, this.props.size);
+            this.updateResponseData(e.data, this.state.data);
         };
 
         this.eventSource.onerror = e => {
@@ -91,13 +87,11 @@ class SSE extends PureComponent {
 SSE.propTypes = {
     children: PropTypes.element.isRequired,
     route: PropTypes.string.isRequired,
-    initialValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    size: PropTypes.number
+    initialValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
 SSE.defaultProps = {
-    initialValue: {},
-    size: 100
+    initialValue: {}
 };
 
 export default SSE;
