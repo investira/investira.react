@@ -11,6 +11,7 @@ class LogReader extends PureComponent {
         super(props);
 
         this.log = React.createRef();
+        this.scroller = React.createRef();
     }
 
     renderFormatedLog = (pElem, pData, pFormat = true) => {
@@ -20,6 +21,8 @@ class LogReader extends PureComponent {
         } else {
             pElem.innerHTML = pData;
         }
+
+        window.setTimeout(this.autoScroller, 300);
     };
 
     readTextFile = (pUri, pElem) => {
@@ -50,8 +53,7 @@ class LogReader extends PureComponent {
         this.renderFormatedLog(pElem, pData);
     };
 
-    readData = (pType, pData, pRef) => {
-        console.log(pType, pData, pRef);
+    readData = (pType, pData, pRef, pAutoScroller) => {
         const pElem = pRef.current;
         const reader = {
             txt: this.readTextFile,
@@ -73,6 +75,15 @@ class LogReader extends PureComponent {
         return xDataFormated;
     };
 
+    autoScroller = () => {
+        if (this.scroller.current) {
+            const xScroller = this.scroller.current.scrollRef.current;
+            xScroller.scrollTo(0, xScroller.scrollHeight);
+        } else {
+            console.info('Conmponente Scroller não encontrado');
+        }
+    };
+
     componentDidUpdate(prevProps) {
         if (
             this.props.responseData &&
@@ -92,7 +103,7 @@ class LogReader extends PureComponent {
     render() {
         return (
             <div className={Style.root}>
-                <Scroller>
+                <Scroller ref={this.scroller}>
                     <pre className={Style.log}>
                         <code id={'log'} ref={this.log}>
                             <Loading />
