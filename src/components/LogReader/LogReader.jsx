@@ -14,9 +14,9 @@ class LogReader extends PureComponent {
         this.scroller = React.createRef();
     }
 
-    renderFormatedLog = (pElem, pData, pFormat = true) => {
-        if (pFormat) {
-            const xDataFormated = this.formatText(pData);
+    renderFormatedLog = (pElem, pData, pFormater) => {
+        if (pFormater) {
+            const xDataFormated = pFormater(pData);
             pElem.innerHTML = `<span>${xDataFormated}</span>`;
         } else {
             pElem.innerHTML = pData;
@@ -33,16 +33,20 @@ class LogReader extends PureComponent {
                 return rRes.text();
             })
             .then(rData => {
-                this.renderFormatedLog(pElem, rData);
+                this.renderFormatedLog(pElem, rData, this.formatText);
             })
             .catch(rErr => {
                 const xErrorMessage = `<span>Falha ao tentar carregar: ${file}</span>`;
-                this.renderFormatedLog(pElem, xErrorMessage, false);
+                this.renderFormatedLog(pElem, xErrorMessage);
             });
     };
 
     readJsontFile = (pData, pElem) => {
-        this.renderFormatedLog(pElem, JSON.stringify(pData));
+        this.renderFormatedLog(
+            pElem,
+            JSON.stringify(pData, null, 2),
+            this.formatJson
+        );
     };
 
     readHtmlFile = (pUri, pElem) => {
@@ -50,7 +54,7 @@ class LogReader extends PureComponent {
     };
 
     readString = (pData, pElem) => {
-        this.renderFormatedLog(pElem, pData);
+        this.renderFormatedLog(pElem, pData, this.formatText);
     };
 
     readData = (pType, pData, pRef, pAutoScroller) => {
@@ -71,6 +75,24 @@ class LogReader extends PureComponent {
         const xDataFormated = pData.replace(/\[([a-z]*)\]/gm, (match, p1) => {
             return `<span class='${Style[p1]}'>${match}</span>`;
         });
+
+        return xDataFormated;
+    };
+
+    formatJson = pData => {
+        let xDataFormated = pData.replace(
+            /\"level":\s"(.*)",/gm,
+            (match, p1) => {
+                return `"level": <span class='${Style[p1]}'>"${p1}"</span>`;
+            }
+        );
+
+        xDataFormated = xDataFormated.replace(
+            /\"message":\s"(.*)",/gm,
+            (match, p1) => {
+                return `"message": <span class='${Style.message}'>"${p1}"</span>`;
+            }
+        );
 
         return xDataFormated;
     };
