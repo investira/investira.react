@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Scroller, Loading, CenterInView } from '../';
+
+import {} from 'investira.sdk';
+
 import Style from './LogReader.module.scss';
 
 class LogReader extends PureComponent {
@@ -35,8 +38,8 @@ class LogReader extends PureComponent {
             });
     };
 
-    readJsontFile = (pUri, pElem) => {
-        return pUri;
+    readJsontFile = (pData, pElem) => {
+        this.renderFormatedLog(pElem, JSON.stringify(pData));
     };
 
     readHtmlFile = (pUri, pElem) => {
@@ -48,6 +51,8 @@ class LogReader extends PureComponent {
     };
 
     readData = (pType, pData, pRef) => {
+        console.log(pType, pData, pRef);
+        const pElem = pRef.current;
         const reader = {
             txt: this.readTextFile,
             json: this.readJsontFile,
@@ -55,7 +60,7 @@ class LogReader extends PureComponent {
             string: this.readString
         };
 
-        const pElem = pRef.current;
+        let xData = pData;
 
         reader[pType](pData, pElem);
     };
@@ -68,10 +73,20 @@ class LogReader extends PureComponent {
         return xDataFormated;
     };
 
-    componentDidMount() {
-        const { uri, data, type } = this.props;
+    componentDidUpdate(prevProps) {
+        if (
+            this.props.responseData &&
+            this.props.responseData !== prevProps.responseData
+        ) {
+            const { uri, data, responseData, type } = this.props;
+            this.readData(type, data || uri || responseData, this.log);
+        }
+    }
 
-        this.readData(type, data || uri, this.log);
+    componentDidMount() {
+        const { uri, data, responseData, type } = this.props;
+
+        this.readData(type, data || uri || responseData, this.log);
     }
 
     render() {
@@ -91,8 +106,17 @@ class LogReader extends PureComponent {
 
 LogReader.propTypes = {
     data: PropTypes.string,
+    responseData: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array,
+        PropTypes.object
+    ]),
     uri: PropTypes.string,
     type: PropTypes.oneOf(['txt', 'json', 'html', 'string'])
+};
+
+LogReader.defaultProps = {
+    type: 'string'
 };
 
 export default LogReader;
