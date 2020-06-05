@@ -17,15 +17,21 @@ class SSE extends PureComponent {
         this.isMount = false;
 
         this.eventSource = new EventSource(props.route);
-        console.log(this.eventSource);
     }
 
-    updateResponseData = (pReponseData, pPrevData) => {
+    updateResponseData = (pReponseData, pPrevData, pSize) => {
         const xResponseDataParsed = JSON.parse(pReponseData);
+        let xResponseData = null;
 
-        const xResponseData = validators.isArray(xResponseDataParsed)
-            ? [...pPrevData, ...xResponseDataParsed]
-            : { ...pPrevData, ...xResponseDataParsed };
+        if (validators.isArray(xResponseDataParsed)) {
+            const xDataSize = pPrevData.length;
+            if (xDataSize > pSize) {
+                pPrevData = pPrevData.slice(pSize * -1);
+            }
+            xResponseData = [...pPrevData, ...xResponseDataParsed];
+        } else {
+            xResponseData = { ...pPrevData, ...xResponseDataParsed };
+        }
 
         this.isMount &&
             this.setState({
@@ -43,18 +49,16 @@ class SSE extends PureComponent {
     componentDidMount() {
         this.isMount = true;
 
-        this.eventSource.onopen = e => {
-            console.log(e.data);
-        };
+        // this.eventSource.onopen = e => {
+        //     console.log(e.data);
+        // };
 
         this.eventSource.onmessage = e => {
-            console.log(e.data);
             this.updateResponseData(e.data, this.state.data);
         };
 
         this.eventSource.onerror = e => {
-            console.log(e.data);
-            this.updateError(true);
+            !validators.isNull(e.data) && this.updateError(true);
         };
     }
 
@@ -87,11 +91,13 @@ class SSE extends PureComponent {
 SSE.propTypes = {
     children: PropTypes.element.isRequired,
     route: PropTypes.string.isRequired,
-    initialValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    initialValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    size: PropTypes.number
 };
 
 SSE.defaultProps = {
-    initialValue: {}
+    initialValue: {},
+    size: 100
 };
 
 export default SSE;
