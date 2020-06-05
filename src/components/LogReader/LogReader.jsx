@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Scroller, Loading, CenterInView } from '../';
+import { Scroller, Loading, Typography } from '../';
 
 import {} from 'investira.sdk';
 
@@ -102,7 +102,7 @@ class LogReader extends PureComponent {
             const xScroller = this.scroller.current.scrollRef.current;
             xScroller.scrollTo(0, xScroller.scrollHeight);
         } else {
-            console.info('Conmponente Scroller não encontrado');
+            console.info('Componente Scroller não encontrado');
         }
     };
 
@@ -111,6 +111,7 @@ class LogReader extends PureComponent {
             this.props.responseData &&
             this.props.responseData !== prevProps.responseData
         ) {
+            console.log(this.props.responseData);
             const { uri, data, responseData, type } = this.props;
             this.readData(type, data || uri || responseData, this.log);
         }
@@ -118,21 +119,32 @@ class LogReader extends PureComponent {
 
     componentDidMount() {
         const { uri, data, responseData, type } = this.props;
-
-        this.readData(type, data || uri || responseData, this.log);
+        if (data || uri || responseData) {
+            this.readData(type, data || uri || responseData, this.log);
+        }
     }
 
     render() {
         return (
-            <div className={Style.root}>
-                <Scroller ref={this.scroller}>
-                    <pre className={Style.log}>
-                        <code id={'log'} ref={this.log}>
-                            <Loading />
-                        </code>
-                    </pre>
-                </Scroller>
-            </div>
+            <>
+                {this.props.label && (
+                    <Typography
+                        variant={'body2'}
+                        color={'textSecondary'}
+                        gutterBottom>
+                        {this.props.label}
+                    </Typography>
+                )}
+                <div className={Style.root}>
+                    <Scroller ref={this.scroller}>
+                        <pre className={Style.log}>
+                            <code id={'log'} ref={this.log}>
+                                <Loading />
+                            </code>
+                        </pre>
+                    </Scroller>
+                </div>
+            </>
         );
     }
 }
@@ -145,7 +157,8 @@ LogReader.propTypes = {
         PropTypes.object
     ]),
     uri: PropTypes.string,
-    type: PropTypes.oneOf(['txt', 'json', 'html', 'string'])
+    type: PropTypes.oneOf(['txt', 'json', 'html', 'string']),
+    label: PropTypes.string
 };
 
 LogReader.defaultProps = {
