@@ -28,7 +28,7 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 
 -   [components] Muda a versão da Material-ui para 4.9.9
 
-# 2.2.0
+# 2.3.0
 
 -   [components] Add LogReader
 -   [adjustment] Corrige path dos import dos componentes
@@ -53,3 +53,5 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [hoc] Add withDialog, withRedux e infiniteScroller
 -   [store] Nova lib "store"
 -   [store] Add createStore e combineReducers
+
+# 2.4.0
