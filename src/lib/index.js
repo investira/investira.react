@@ -9,6 +9,10 @@ export { default as localStorages } from './utils/localStorages';
 // Middleware
 export { default as bindStateToLocalStorage } from './middleware/bindStateToLocalStorage';
 
+// Store
+export { default as createStore } from './store/createStore';
+export { default as combineReducers } from './store/combineReducers';
+
 // HOCs
 export { default as infiniteScroll } from './hoc/infiniteScroll';
 export { default as withDialog } from './hoc/withDialog';
