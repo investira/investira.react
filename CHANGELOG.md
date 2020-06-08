@@ -27,3 +27,29 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 # 2.1.0
 
 -   [components] Muda a versão da Material-ui para 4.9.9
+
+# 2.2.0
+
+-   [components] Add LogReader
+-   [adjustment] Corrige path dos import dos componentes
+-   [adjustment] Corrige um probelma de compatibilidade do react-dev-utils
+-   [components] SearchBox: Adiciona um trim apra remover os espaço em brando desnecessário
+-   [components] ResponsiveImage: Exibe corretamente a imagem quando quebrada
+-   [adjustment] Correções gerais no CSS
+-   [adjustment] Mais alguns componentes convertidos para funcional
+-   [lib] Add as funções cpf e cep a lib displays
+-   [components] Add CopyToClipboard
+-   [components] Select (deprecated). Será refatorado
+-   [components] Add ContentList
+-   [components] Add SSE
+-   [lib] bindStateToLocalStorage, agora permite definir a chave
+-   [components] Removido tamanho fixo de Icon
+-   [components] Add Autocomplete
+-   [components] Add Info, InfoBar, InfoDates
+-   [components] Add ProgressBar
+-   [components] Add IconDatePicker
+-   [components] Add Divisor
+-   [components] Atualiza o investira.sdk para 2.0.8
+-   [hoc] Add withDialog, withRedux e infiniteScroller
+-   [store] Nova lib "store"
+-   [store] Add createStore e combineReducers
