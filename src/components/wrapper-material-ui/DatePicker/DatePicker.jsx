@@ -38,24 +38,26 @@ const DatePicker = props => {
 
     return (
         <MuiPickersUtilsProvider utils={MomentUtils} locale={props.locale}>
-            {friendly && (
-                <FriendlyDatePicker
-                    utils={MomentUtils}
-                    locale={props.locale}
-                    locked={locked}
-                    disabled={disabled}
-                    {...otherProps}
-                />
-            )}
+            <>
+                {friendly && (
+                    <FriendlyDatePicker
+                        utils={MomentUtils}
+                        locale={props.locale}
+                        locked={locked}
+                        disabled={disabled}
+                        {...otherProps}
+                    />
+                )}
 
-            <WDatePicker
-                {...otherProps}
-                disabled={locked || disabled}
-                autoComplete={'off'}
-                refuse={/[^\d]+/gi}
-                cancelLabel="fechar"
-                className={xClassPicker}
-            />
+                <WDatePicker
+                    {...otherProps}
+                    disabled={locked || disabled}
+                    autoComplete={'off'}
+                    refuse={/[^\d]+/gi}
+                    cancelLabel="fechar"
+                    className={xClassPicker}
+                />
+            </>
         </MuiPickersUtilsProvider>
     );
 };
