@@ -2,20 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-let dispatchToProps = null;
-
-const withRedux = (Component, pStateToProps = null, pDispatchToProps = null) => {
-    dispatchToProps = pDispatchToProps;
-
+const withRedux = (
+    Component,
+    pStateToProps = null,
+    pDispatchToProps = null
+) => {
     function wrapComponent(props) {
         return <Component {...props} />;
     }
 
-    return connect(pStateToProps, mapDispatchToProps)(wrapComponent);
-};
-
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(dispatchToProps, dispatch);
+    return connect(pStateToProps, dispatch =>
+        bindActionCreators(pDispatchToProps, dispatch)
+    )(wrapComponent);
 };
 
 export default withRedux;
