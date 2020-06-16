@@ -15,10 +15,22 @@ export const Icon = props => {
         [Style[`color${capitalize(props.color)}`]]: props.color !== 'default'
     });
 
+    const isNumber = pSize => {
+        return validators.isNumber(pSize);
+    };
+
+    const isValidSize = pSize => {
+        if (isNumber(pSize)) {
+            return `${pSize}px`;
+        } else {
+            return '24px';
+        }
+    };
+
     return (
         <svg
-            width={`${props.size}px`}
-            height={`${props.size}px`}
+            width={isValidSize(props.size)}
+            height={isValidSize(props.size)}
             className={xClass}
             style={props.style}
             viewBox={'0 0 24 24'}>
@@ -28,7 +40,7 @@ export const Icon = props => {
 };
 
 Icon.propTypes = {
-    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    size: PropTypes.number,
     iconName: PropTypes.string,
     className: PropTypes.string,
     classes: PropTypes.object,
