@@ -1,95 +1,88 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { validators } from 'investira.sdk';
 import { capitalize } from '../utils/helpers';
 import Style from './Icon.module.scss';
 
-class Icon extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.xGradientTypes = {
-            greenLight: ['#0ae1a3', '#0bbbd0'],
-            orangeLight: ['#F38A1D', '#FC602D']
-        };
-    }
+const Icon = props => {
+    const xIconName = '-i_' + props.iconName;
 
-    isValidSize = pSize => {
-        if (validators.isNumber(pSize)) {
-            return `${pSize}px`;
-        } else {
-            return '24px';
-        }
+    const xGradientTypes = {
+        greenLight: ['#0ae1a3', '#0bbbd0'],
+        orangeLight: ['#F38A1D', '#FC602D']
     };
 
-    isGradient = pColorProp => {
-        return !validators.isEmpty(this.xGradientTypes[pColorProp]);
+    const isValidSize = pSize => {
+        return validators.isNumber(pSize) ? `${pSize}px` : '24px';
     };
 
-    getColorFromGradient = pColorProp => {
-        if (this.isGradient(pColorProp)) {
-            let i = 0;
-            for (const color of this.xGradientTypes[pColorProp]) {
-                if (i > 0) {
-                    this.secondColor = <stop offset={i} stopColor={color} />;
-                } else {
-                    this.firstColor = <stop offset={i} stopColor={color} />;
-                }
-                i++;
-            }
-        }
+    const xClass = classNames(Style.root, xIconName, props.className, {
+        [Style[`color${capitalize(props.color)}`]]: props.color !== 'default'
+    });
+
+    const isGradient = pColorProp => {
+        return Object.keys(xGradientTypes).includes(pColorProp);
     };
 
-    render() {
-        if (validators.isEmpty(this.props.iconName)) {
-            return null;
-        }
-        const xColors = this.getColorFromGradient(this.props.color);
-        const xIconName = '-i_' + this.props.iconName;
-        const xClass = classNames(Style.root, xIconName, this.props.className, {
-            [Style[`color${capitalize(this.props.color)}`]]:
-                this.props.color !== 'currentcolor' ||
-                this.props.color !== 'orangeLight' ||
-                this.props.color !== 'greenLight'
-        });
-        return this.isGradient(this.props.color) ? (
-            <svg
-                width={this.isValidSize(this.props.size)}
-                height={this.isValidSize(this.props.size)}
-                className={xClass}
-                style={this.props.style}
-                viewBox={'0 0 24 24'}>
+    const defs = (pGradientTypes, pColor) => {
+        if (isGradient(pColor)) {
+            return (
                 <defs>
                     <linearGradient
                         id="icon-component-gradient"
                         x2="1"
                         y2="1"
                         gradientUnits="objectBoundingBox">
-                        {this.firstColor}
-                        {this.secondColor}
+                        <stop
+                            offset={0}
+                            stopColor={pGradientTypes[pColor][0]}
+                        />
+                        <stop
+                            offset={1}
+                            stopColor={pGradientTypes[pColor][1]}
+                        />
                     </linearGradient>
                 </defs>
-                <use href={`#${xIconName}`} xlinkHref={`#${xIconName}`} />
-            </svg>
-        ) : (
+            );
+        }
+    };
+
+    if (validators.isEmpty(props.iconName)) {
+        return null;
+    } else {
+        return (
             <svg
-                width={this.isValidSize(this.props.size)}
-                height={this.isValidSize(this.props.size)}
+                width={isValidSize(props.size)}
+                height={isValidSize(props.size)}
                 className={xClass}
-                style={this.props.style}
+                style={props.style}
                 viewBox={'0 0 24 24'}>
+                {defs(xGradientTypes, props.color)}
                 <use href={`#${xIconName}`} xlinkHref={`#${xIconName}`} />
             </svg>
         );
     }
-}
+};
 
 Icon.propTypes = {
     size: PropTypes.number,
     iconName: PropTypes.string,
     className: PropTypes.string,
     classes: PropTypes.object,
-    color: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    color: PropTypes.oneOf([
+        'default',
+        'inherit',
+        'primary',
+        'secondary',
+        'secondaryLight',
+        'primaryDarkness',
+        'warn',
+        'textPrimary',
+        'textSecondary',
+        'greenLight',
+        'orangeLight'
+    ])
 };
 
 Icon.defaultProps = {

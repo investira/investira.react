@@ -6,7 +6,7 @@
     flex-shrink: 0;
     stroke-width: 0;
     stroke: currentColor;
-    fill: url(#icon-component-gradient) currentColor;
+    fill: currentColor;
 }
 
 .colorPrimary {
@@ -42,4 +42,9 @@
 .colorTextSecondary {
     stroke: var(--color-secondary-lightness);
     fill: var(--color-secondary-lightness);
+}
+
+.colorGreenLight,
+.colorOrangeLight {
+    fill: url(#icon-component-gradient);
 }
