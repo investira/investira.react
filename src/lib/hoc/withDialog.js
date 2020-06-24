@@ -11,7 +11,7 @@ import {
 } from 'investiraComponents';
 
 // Decorator
-const withDialog = (Component, pProps = { warpContent: true }) => {
+const withDialog = (Component, pProps = { wrapContent: true }) => {
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
     });
@@ -64,7 +64,7 @@ const withDialog = (Component, pProps = { warpContent: true }) => {
                         open={this.state.isOpen}
                         TransitionComponent={Transition}
                         onClose={this.handleCloseDialog}>
-                        {!validators.isNull(title) && (
+                        {!validators.isEmpty(title) && (
                             <DialogTitle
                                 {...(title.onclose === false
                                     ? {}
@@ -73,7 +73,7 @@ const withDialog = (Component, pProps = { warpContent: true }) => {
                             </DialogTitle>
                         )}
                         {!validators.isNull(content) &&
-                            (pProps.warpContent ? (
+                            (pProps.wrapContent ? (
                                 <DialogContent>{content}</DialogContent>
                             ) : (
                                 content

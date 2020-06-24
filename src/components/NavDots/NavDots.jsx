@@ -8,8 +8,8 @@ class NavDots extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            warpWidth: window.screen.width,
-            warpPosition: 0,
+            wrapWidth: window.screen.width,
+            wrapPosition: 0,
             actived: 0
         };
 
@@ -34,24 +34,24 @@ class NavDots extends React.Component {
         ) {
             const xNewPos = pDotWidth * xMultiply;
             this.setState({
-                warpPosition: xNewPos
+                wrapPosition: xNewPos
             });
         } else if (pIndex < xTotalVisible - xOffset) {
             const xStartPos = 0;
             this.setState({
-                warpPosition: xStartPos
+                wrapPosition: xStartPos
             });
         } else if (pIndex > xTotalDots - xOffset) {
             const xEndPos = (xTotalDots - xTotalVisible) * pDotWidth;
             this.setState({
-                warpPosition: xEndPos * -1
+                wrapPosition: xEndPos * -1
             });
         }
     };
 
     componentDidMount() {
         this.setState({
-            warpWidth:
+            wrapWidth:
                 this.props.size > 5
                     ? this.btnRef.current.offsetWidth * this.props.size
                     : '100%'
@@ -73,8 +73,8 @@ class NavDots extends React.Component {
     render() {
         const xChilds = [];
 
-        const xClassWarp = classNames(Style.warp, this.props.className, {
-            [Style.warpJustifyStart]: this.props.size > 5
+        const xClassWrap = classNames(Style.wrap, this.props.className, {
+            [Style.wrapJustifyStart]: this.props.size > 5
         });
 
         for (let xI = 0; xI < this.props.size; xI++) {
@@ -98,10 +98,10 @@ class NavDots extends React.Component {
         return (
             <div className={Style.root}>
                 <div
-                    className={xClassWarp}
+                    className={xClassWrap}
                     style={{
-                        width: this.state.warpWidth,
-                        transform: `translate(${this.state.warpPosition}px,0px)`
+                        width: this.state.wrapWidth,
+                        transform: `translate(${this.state.wrapPosition}px,0px)`
                     }}>
                     {xChilds}
                 </div>

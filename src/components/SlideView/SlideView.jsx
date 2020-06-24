@@ -12,8 +12,8 @@ export class SlideView extends Component {
         super(props);
 
         this.initialState = {
-            warpWidth: 0,
-            warpPosition: 0,
+            wrapWidth: 0,
+            wrapPosition: 0,
             slideWidth: 0,
             slideCount: 0,
             slideCurrent: 0,
@@ -29,7 +29,7 @@ export class SlideView extends Component {
         };
 
         this.slideRef = React.createRef();
-        this.slideWarpRef = React.createRef();
+        this.slideWrapRef = React.createRef();
         this.slideChildRef = React.createRef();
 
         this.nextSlide = this.nextSlide.bind(this);
@@ -120,17 +120,17 @@ export class SlideView extends Component {
             let xChildCount = React.Children.count(this.props.children);
             let xSlideWidth = this.slideRef.current.offsetWidth;
             let xSlideChildWidth = this.slideChildRef.current.offsetWidth;
-            let xWarpWidth = xSlideWidth;
+            let xWrapWidth = xSlideWidth;
 
             const xNewState = {
-                warpWidth: xWarpWidth,
+                wrapWidth: xWrapWidth,
                 slideWidth: xSlideWidth,
                 slideChildWidth: xSlideChildWidth,
                 slideCount: xChildCount
             };
 
             this.setState({
-                warpWidth: xWarpWidth,
+                wrapWidth: xWrapWidth,
                 slideWidth: xSlideWidth,
                 slideChildWidth: xSlideChildWidth,
                 slideCount: xChildCount
@@ -141,7 +141,7 @@ export class SlideView extends Component {
     onPan(e) {
         e.preventDefault();
         let xDelta = e.deltaX;
-        let xPercent = (100 / this.state.warpWidth) * xDelta;
+        let xPercent = (100 / this.state.wrapWidth) * xDelta;
 
         let xAnimate = false;
 
@@ -186,15 +186,15 @@ export class SlideView extends Component {
                 Math.min(pMoveIndex, this.state.slideCount - 1)
             );
             let xPercent = pPercent || 0;
-            let xClassName = this.slideWarpRef.current.className;
+            let xClassName = this.slideWrapRef.current.className;
 
             if (pAnimate) {
                 if (xClassName.indexOf(Style.swapped) === -1) {
-                    this.slideWarpRef.current.className += ` ${Style.swapped}`;
+                    this.slideWrapRef.current.className += ` ${Style.swapped}`;
                 }
             } else {
                 if (xClassName.indexOf(Style.swapped) !== -1) {
-                    this.slideWarpRef.current.className = xClassName
+                    this.slideWrapRef.current.className = xClassName
                         .replace(Style.swapped, '')
                         .trim();
                 }
@@ -209,14 +209,14 @@ export class SlideView extends Component {
             ) {
                 // fullWith
                 // xPos =
-                //     (this.state.warpWidth / 100) *
+                //     (this.state.wrapWidth / 100) *
                 //     ((xViewIndex - xMoveIndex) * 100 + xPercent);
 
                 // Exibe parte do próximo
 
                 if (this.props.fullWidth) {
                     xPos =
-                        (this.state.warpWidth / 100) *
+                        (this.state.wrapWidth / 100) *
                         ((xViewIndex - xMoveIndex) * 100 + xPercent);
                 } else {
                     xPos =
@@ -264,7 +264,7 @@ export class SlideView extends Component {
          */
 
         if (this.props.fullWidth) {
-            let views = this.slideWarpRef.current.querySelectorAll(
+            let views = this.slideWrapRef.current.querySelectorAll(
                 `div[id^="slideview-"]`
             );
 
@@ -279,11 +279,11 @@ export class SlideView extends Component {
         }
 
         /* --- */
-        let hammer = new Hammer(this.slideWarpRef.current, {
+        let hammer = new Hammer(this.slideWrapRef.current, {
             inputClass:
                 Hammer.TouchMouseInput /* Truque para permitir o pan horizontal e a rolagem */
         });
-        //let hammer = new Hammer.Manager(this.slideWarpRef.current);
+        //let hammer = new Hammer.Manager(this.slideWrapRef.current);
 
         //hammer.domEvents = true;
 
@@ -304,7 +304,7 @@ export class SlideView extends Component {
 
     mount = () => {
         this.views = Array.prototype.slice.call(
-            this.slideWarpRef.current.children,
+            this.slideWrapRef.current.children,
             0
         );
 
@@ -315,7 +315,7 @@ export class SlideView extends Component {
     componentDidMount() {
         this._isMounted = true;
         // this.views = Array.prototype.slice.call(
-        //     this.slideWarpRef.current.children,
+        //     this.slideWrapRef.current.children,
         //     0
         // );
 
@@ -359,7 +359,7 @@ export class SlideView extends Component {
 
         if (this.props.children !== prevProps.children) {
             this.views = Array.prototype.slice.call(
-                this.slideWarpRef.current.children,
+                this.slideWrapRef.current.children,
                 0
             );
             let xChildCount = React.Children.count(this.props.children);
@@ -407,10 +407,10 @@ export class SlideView extends Component {
         return (
             <div className={xRootClass} ref={this.slideRef}>
                 <div
-                    className={Style.warp}
-                    ref={this.slideWarpRef}
+                    className={Style.wrap}
+                    ref={this.slideWrapRef}
                     style={{
-                        transform: `translate(${this.state.warpPosition}px)`
+                        transform: `translate(${this.state.wrapPosition}px)`
                     }}>
                     {this.mapChildrens()}
                 </div>

@@ -13,7 +13,7 @@ export class Loading extends Component {
 
         return (
             <div className={xClass}>
-                <div className={Style.warp}>
+                <div className={Style.wrap}>
                     <CircularProgress size={this.props.size} />
                 </div>
             </div>
