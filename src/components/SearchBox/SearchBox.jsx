@@ -137,7 +137,7 @@ const SearchBox = props => {
                 </div>
                 {clearBtn && (
                     <IconButton aria-label="busca" onClick={handleClear}>
-                        <Icon iconName={'cancel'} size={'16'} />
+                        <Icon iconName={'cancel'} size={16} />
                     </IconButton>
                 )}
 
