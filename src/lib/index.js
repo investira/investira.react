@@ -10,8 +10,12 @@ export { default as localStorages } from './utils/localStorages';
 export { default as bindStateToLocalStorage } from './middleware/bindStateToLocalStorage';
 
 // Store
-export { default as createStore } from './store/createStore';
-export { default as combineReducers } from './store/combineReducers';
+export { default as createStore } from './redux/createStore';
+export { default as combineReducers } from './redux/combineReducers';
+export { default as persisterReducers } from './redux/persisterReducers';
+
+// Storage
+export { default as createStorage } from './storage/createStorage';
 
 // HOCs
 export { default as infiniteScroll } from './hoc/infiniteScroll';

@@ -55,3 +55,9 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [store] Add createStore e combineReducers
 
 # 2.4.0
+
+-   [lib] diretório store renomeado apra redux
+-   [storage] Add createStorage
+-   [redux] Antigo combineReducers renomeado para combineReducersLegacy
+-   [redux] Add novo combineReducers, createStore, persisterStore
+-   [dep] Add dependencias redux-persist e redux-persist-pouchdb
