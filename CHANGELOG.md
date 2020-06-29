@@ -61,3 +61,5 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [redux] Antigo combineReducers renomeado para combineReducersLegacy
 -   [redux] Add novo combineReducers, createStore, persisterStore
 -   [dep] Add dependencias redux-persist e redux-persist-pouchdb
+
+# 2.4.1
