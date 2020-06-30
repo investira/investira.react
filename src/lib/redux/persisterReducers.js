@@ -18,7 +18,6 @@ const persiterReducers = (pReducers, pPrefix, pStorage) => {
         ];
     });
 
-    console.log(xReducers);
     return Object.fromEntries(xReducers);
 };
 
