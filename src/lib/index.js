@@ -16,6 +16,7 @@ export { default as persisterReducers } from './redux/persisterReducers';
 
 // Storage
 export { default as createStorage } from './storage/createStorage';
+export { default as listenStorage } from './storage/listenStorage';
 
 // HOCs
 export { default as infiniteScroll } from './hoc/infiniteScroll';
