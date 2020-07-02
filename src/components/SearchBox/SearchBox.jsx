@@ -103,9 +103,11 @@ const SearchBox = props => {
     }, []);
 
     useEffect(() => {
-        if (props.value && props.value.length > 0) {
-            updateValue(props.value || '');
-        }
+        // console.log('udpate', props.value);
+        updateValue(props.value || '');
+        // if (props.value && props.value.length > 0) {
+        //updateValue(props.value || '');
+        // }
     }, [props.value]);
 
     return (
