@@ -70,8 +70,6 @@ class InfiniteScroller extends Component {
         }
     }
 
-    componentDidUpdate() {}
-
     componentWillUnmount() {
         this.observer.unobserve(this.target);
     }
