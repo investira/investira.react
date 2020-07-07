@@ -21,8 +21,7 @@ class LogReader extends PureComponent {
         } else {
             pElem.innerHTML = pData;
         }
-
-        window.setTimeout(this.autoScroller, 300);
+        this.props.autoScroller && window.setTimeout(this.autoScroller, 300);
     };
 
     readTextFile = (pUri, pElem) => {
@@ -157,11 +156,13 @@ LogReader.propTypes = {
     ]),
     uri: PropTypes.string,
     type: PropTypes.oneOf(['txt', 'json', 'html', 'string']),
-    label: PropTypes.string
+    label: PropTypes.string,
+    autoScroller: PropTypes.bool
 };
 
 LogReader.defaultProps = {
-    type: 'string'
+    type: 'string',
+    autoScroller: true
 };
 
 export default LogReader;
