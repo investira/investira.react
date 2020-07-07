@@ -1,8 +1,8 @@
 import { combineReducers as mergeReducers } from 'redux';
 import { bindStateToLocalStorage } from '..';
 
-const combineReducers = (pReducers = {}, pStoreName) => {
+const combineReducersLegacy = (pReducers = {}, pStoreName) => {
     return bindStateToLocalStorage(mergeReducers(pReducers), pStoreName);
 };
 
-export default combineReducers;
+export default combineReducersLegacy;
