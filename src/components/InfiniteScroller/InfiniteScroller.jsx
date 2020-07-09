@@ -102,7 +102,9 @@ class InfiniteScroller extends Component {
 InfiniteScroller.propTypes = {
     children: PropTypes.element.isRequired,
     nextPage: PropTypes.string,
-    onNextPage: PropTypes.func
+    onNextPage: PropTypes.func,
+    prevPage: PropTypes.string,
+    onPrevPage: PropTypes.func
 };
 
 export default InfiniteScroller;
