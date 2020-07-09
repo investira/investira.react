@@ -59,7 +59,7 @@ class CopyToClipboard extends PureComponent {
                     onClick={e => this.copyToClipboard(this.props.value, e)}>
                     <Icon
                         iconName={this.state.iconName}
-                        size={'16'}
+                        size={16}
                         color={'primary'}
                     />
                 </button>
