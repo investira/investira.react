@@ -34,9 +34,12 @@ class InfiniteScroller extends Component {
 
     handleNextPage = pProps => {
         const { onNextPage, nextPage } = pProps;
-        if (nextPage && onNextPage) {
+        const isNextPageEmpty = validators.isEmpty(nextPage);
+        if (nextPage && !isNextPageEmpty && onNextPage) {
             const xNextParams = this.queryParamsToObject(nextPage);
             onNextPage(xNextParams);
+        } else if (isNextPageEmpty) {
+            onNextPage();
         }
     };
 
