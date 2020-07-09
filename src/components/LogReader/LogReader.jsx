@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Scroller, Loading, Typography } from '../';
+import { Scroller, InfiniteScroller, Loading, Typography } from '../';
 
-import {} from 'investira.sdk';
+import { validators } from 'investira.sdk';
 
 import Style from './LogReader.module.scss';
 
@@ -12,7 +12,20 @@ class LogReader extends PureComponent {
 
         this.log = React.createRef();
         this.scroller = React.createRef();
+        this.timeout = null;
+
+        this.state = {
+            OnMountScrolled: false
+        };
     }
+
+    onMountScroll = (pScrolled, pScrollOnMount) => {
+        if (!pScrolled && pScrollOnMount) {
+            this.setState({ OnMountScrolled: true }, () =>
+                window.setTimeout(this.autoScroller, 300)
+            );
+        }
+    };
 
     renderFormatedLog = (pElem, pData, pFormater) => {
         if (pFormater) {
@@ -21,7 +34,15 @@ class LogReader extends PureComponent {
         } else {
             pElem.innerHTML = pData;
         }
-        this.props.autoScroller && window.setTimeout(this.autoScroller, 300);
+
+        this.onMountScroll(
+            this.state.OnMountScrolled,
+            this.props.scrollOnMount
+        );
+
+        this.timeout =
+            this.props.autoScroller &&
+            window.setTimeout(this.autoScroller, 300);
     };
 
     readTextFile = (pUri, pElem) => {
@@ -97,8 +118,13 @@ class LogReader extends PureComponent {
     };
 
     autoScroller = () => {
-        if (this.scroller.current) {
-            const xScroller = this.scroller.current.scrollRef.current;
+        if (this.scroller && this.scroller.current) {
+            const xCurrentScroller = this.scroller.current;
+            const xScroller = xCurrentScroller.scroller
+                ? xCurrentScroller.scroller.current.scrollRef.current
+                : this.scroller.current.scrollRef.current;
+            console.log(xScroller);
+            //const xScroller = this.scroller.current.scrollRef.current;
             xScroller.scrollTo(0, xScroller.scrollHeight);
         } else {
             console.info('Componente Scroller não encontrado');
@@ -122,7 +148,16 @@ class LogReader extends PureComponent {
         }
     }
 
+    componentWillUnmount() {
+        console.log('unmount');
+        clearTimeout(this.timeout);
+    }
+
     render() {
+        const Component = validators.isEmpty(this.props.scrollerProps)
+            ? Scroller
+            : InfiniteScroller;
+
         return (
             <>
                 {this.props.label && (
@@ -134,13 +169,15 @@ class LogReader extends PureComponent {
                     </Typography>
                 )}
                 <div className={Style.root}>
-                    <Scroller ref={this.scroller}>
+                    <Component
+                        ref={this.scroller}
+                        {...this.props.scrollerProps}>
                         <pre className={Style.log}>
                             <code id={'log'} ref={this.log}>
                                 <Loading />
                             </code>
                         </pre>
-                    </Scroller>
+                    </Component>
                 </div>
             </>
         );
@@ -157,12 +194,16 @@ LogReader.propTypes = {
     uri: PropTypes.string,
     type: PropTypes.oneOf(['txt', 'json', 'html', 'string']),
     label: PropTypes.string,
-    autoScroller: PropTypes.bool
+    autoScroller: PropTypes.bool,
+    scrollerProps: PropTypes.object,
+    scrollOnMount: PropTypes.bool
 };
 
 LogReader.defaultProps = {
     type: 'string',
-    autoScroller: true
+    autoScroller: true,
+    scrollerProps: {},
+    scrollOnMount: false
 };
 
 export default LogReader;
