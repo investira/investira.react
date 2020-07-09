@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { default as WDrawer } from '@material-ui/core/Drawer';
 import { classList } from '../../utils/helpers';
