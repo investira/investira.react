@@ -123,8 +123,6 @@ class LogReader extends PureComponent {
             const xScroller = xCurrentScroller.scroller
                 ? xCurrentScroller.scroller.current.scrollRef.current
                 : this.scroller.current.scrollRef.current;
-            console.log(xScroller);
-            //const xScroller = this.scroller.current.scrollRef.current;
             xScroller.scrollTo(0, xScroller.scrollHeight);
         } else {
             console.info('Componente Scroller não encontrado');
@@ -149,7 +147,6 @@ class LogReader extends PureComponent {
     }
 
     componentWillUnmount() {
-        console.log('unmount');
         clearTimeout(this.timeout);
     }
 
