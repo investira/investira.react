@@ -162,7 +162,17 @@ class InfiniteScroller extends Component {
     }
 
     componentDidUpdate() {
-        if (!validators.isNull(this.props.onPrevPage)) {
+        if (
+            validators.isNull(this.props.prevPage) &&
+            !validators.isNull(this.props.onPrevPage)
+        ) {
+            this.onMountScroll();
+        }
+
+        if (
+            !validators.isNull(this.props.onPrevPage) &&
+            !validators.isNull(this.props.prevPage)
+        ) {
             this.rightScroll();
         }
     }
