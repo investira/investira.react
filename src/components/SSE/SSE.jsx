@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
+//import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
 
 import { CenterInView } from '../template';
 import { Typography } from '../';
+
+let eventSource = null;
 
 class SSE extends PureComponent {
     constructor(props) {
@@ -15,12 +18,11 @@ class SSE extends PureComponent {
         };
 
         this.isMount = false;
-
-        this.eventSource = new EventSource(props.route);
     }
 
     updateResponseData = (pReponseData, pPrevData) => {
         const xResponseDataParsed = JSON.parse(pReponseData);
+
         let xResponseData = null;
 
         if (validators.isArray(xResponseDataParsed)) {
@@ -45,22 +47,20 @@ class SSE extends PureComponent {
     componentDidMount() {
         this.isMount = true;
 
-        // this.eventSource.onopen = e => {
-        //     console.log(e.data);
-        // };
+        eventSource = new EventSource(this.props.route);
 
-        this.eventSource.onmessage = e => {
+        eventSource.onmessage = e => {
             this.updateResponseData(e.data, this.state.data);
         };
 
-        this.eventSource.onerror = e => {
+        eventSource.onerror = e => {
             !validators.isNull(e.data) && this.updateError(true);
         };
     }
 
     componentWillUnmount() {
         this.isMount = false;
-        this.eventSource.close();
+        eventSource && eventSource.close();
     }
 
     render() {
