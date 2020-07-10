@@ -14,9 +14,12 @@ class InfiniteScroller extends Component {
 
         this.scroller = React.createRef();
         this.endListRef = React.createRef();
+        this.startListRef = React.createRef();
 
         this.target = null;
         this.observer = null;
+
+        this.tempScrollHeight = 0;
     }
 
     //TODO: Alterar pela do sdk quando for publicado
@@ -43,23 +46,22 @@ class InfiniteScroller extends Component {
         }
     };
 
-    componentDidMount() {
-        if (
-            this.scroller &&
-            this.scroller.current &&
-            this.scroller.current.scrollRef &&
-            this.scroller.current.scrollRef.current &&
-            this.endListRef &&
-            this.endListRef.current
-        ) {
-            const xScrollerElem = this.scroller.current.scrollRef.current;
-            this.target = this.endListRef.current;
+    handlePrevPage = pProps => {
+        const { onPrevPage, prevPage } = pProps;
+        const isPrevPageEmpty = validators.isEmpty(prevPage);
+        if (prevPage && !isPrevPageEmpty && onPrevPage) {
+            const xPrevParams = this.queryParamsToObject(prevPage);
+            onPrevPage(xPrevParams);
+        } else if (isPrevPageEmpty) {
+            onPrevPage();
+        }
+    };
 
-            const xScrollerRect = this.scroller.current.scrollRef.current.getBoundingClientRect();
-
+    nextPageObserver = (pTarget, pScrollElem, pScrollerRect) => {
+        if (pTarget) {
             const xOptions = {
-                root: xScrollerElem,
-                rootMargin: `0px 0px ${xScrollerRect.height * 0.66}px 0px`,
+                root: pScrollElem,
+                rootMargin: `0px 0px ${pScrollerRect.height * 0.66}px 0px`,
                 threshold: 0
             };
 
@@ -69,30 +71,134 @@ class InfiniteScroller extends Component {
                 }
             }, xOptions);
 
-            this.observer.observe(this.target);
+            this.observer.observe(pTarget);
+        } else {
+            console.info('Não há target');
+        }
+    };
+
+    prevPageObserver = (pTarget, pScrollElem, pScrollerRect) => {
+        if (pTarget) {
+            const xOptions = {
+                root: pScrollElem,
+                rootMargin: `0px 0px 0px 0px`,
+                //rootMargin: `${pScrollerRect.height * 0.66}px 0px 0px 0px`,
+                threshold: 0
+            };
+
+            this.observer = new IntersectionObserver((entries, observer) => {
+                if (entries[0].isIntersecting) {
+                    this.handlePrevPage(this.props);
+                }
+            }, xOptions);
+
+            this.observer.observe(pTarget);
+        } else {
+            console.info('Não há target');
+        }
+    };
+
+    onMountScroll = () => {
+        window.setTimeout(this.autoScroller, 300);
+    };
+
+    autoScroller = () => {
+        if (this.scroller && this.scroller.current) {
+            const xScroller = this.scroller.current.scrollRef.current;
+            xScroller.scrollTo(0, xScroller.scrollHeight);
+        } else {
+            console.info('Componente Scroller não encontrado');
+        }
+    };
+
+    rightScroll = () => {
+        if (this.scroller.current.scrollRef.current.scrollHeight) {
+            const xScroller = this.scroller.current.scrollRef.current;
+            const xCurrentScrollHeight = xScroller.scrollHeight;
+            const xDiffScrollHeight =
+                xCurrentScrollHeight - this.tempScrollHeight;
+
+            const xStartHeight = this.startListRef.current.getBoundingClientRect()
+                .height;
+
+            xScroller.scrollTo(0, xDiffScrollHeight - xStartHeight);
+            this.tempScrollHeight = xCurrentScrollHeight;
+        }
+    };
+
+    componentDidMount() {
+        if (
+            this.scroller &&
+            this.scroller.current &&
+            this.scroller.current.scrollRef &&
+            this.scroller.current.scrollRef.current &&
+            this.endListRef &&
+            this.endListRef.current &&
+            this.startListRef &&
+            this.startListRef.current
+        ) {
+            const xScrollerElem = this.scroller.current.scrollRef.current;
+            const xScrollerRect = this.scroller.current.scrollRef.current.getBoundingClientRect();
+
+            if (!validators.isNull(this.props.onNextPage)) {
+                this.target = this.endListRef.current;
+                this.nextPageObserver(
+                    this.target,
+                    xScrollerElem,
+                    xScrollerRect
+                );
+            }
+
+            if (!validators.isNull(this.props.onPrevPage)) {
+                this.onMountScroll();
+                this.target = this.startListRef.current;
+                this.prevPageObserver(
+                    this.target,
+                    xScrollerElem,
+                    xScrollerRect
+                );
+            }
+        }
+    }
+
+    componentDidUpdate() {
+        if (!validators.isNull(this.props.onPrevPage)) {
+            this.rightScroll();
         }
     }
 
     componentWillUnmount() {
-        this.observer.unobserve(this.target);
+        this.observer && this.observer.unobserve(this.target);
     }
 
     render() {
-        const { children, nextPage } = this.props;
+        const { children, nextPage, prevPage } = this.props;
         const xChild = React.Children.only(children);
 
-        const xLoadingAreaClass = classNames(Style.loadingArea, {
+        const xLoadingEndAreaClass = classNames(Style.loadingArea, {
             [Style.loadingHidden]: validators.isEmpty(nextPage)
+        });
+        const xLoadingStartAreaClass = classNames(Style.loadingArea, {
+            [Style.loadingHidden]: validators.isEmpty(prevPage)
         });
 
         return (
             <Scroller ref={this.scroller}>
+                <div
+                    id={'startList'}
+                    ref={this.startListRef}
+                    className={xLoadingStartAreaClass}>
+                    <CenterInView>
+                        <Loading />
+                    </CenterInView>
+                </div>
+
                 {React.cloneElement(xChild, {}, xChild)}
 
                 <div
                     id={'endlist'}
                     ref={this.endListRef}
-                    className={xLoadingAreaClass}>
+                    className={xLoadingEndAreaClass}>
                     <CenterInView>
                         <Loading />
                     </CenterInView>
