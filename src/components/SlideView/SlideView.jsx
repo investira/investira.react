@@ -433,7 +433,7 @@ export class SlideView extends Component {
                                         <Icon
                                             color={'primary'}
                                             iconName="arrow-previous"
-                                            size="24"
+                                            size={24}
                                         />
                                     </IconButton>
                                 ) : (
@@ -447,7 +447,7 @@ export class SlideView extends Component {
                                         <Icon
                                             color={'primary'}
                                             iconName="arrow-previous"
-                                            size="24"
+                                            size={24}
                                         />
                                     </IconButton>
                                 )}
@@ -461,7 +461,7 @@ export class SlideView extends Component {
                                         <Icon
                                             color={'primary'}
                                             iconName="ok"
-                                            size="24"
+                                            size={24}
                                         />
                                     </IconButton>
                                 ) : (
@@ -476,7 +476,7 @@ export class SlideView extends Component {
                                         <Icon
                                             color={'primary'}
                                             iconName="arrow-next"
-                                            size="24"
+                                            size={24}
                                         />
                                     </IconButton>
                                 )}
