@@ -1,6 +1,10 @@
 import React, { memo, useState } from 'react';
-import { Chip, Menu, MenuItem } from '../';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
+import { validators } from 'investira.sdk';
+
+import { Chip, Menu, MenuItem } from '../';
 import CrudContext from '../CrudContext';
 
 import Style from './ListFilter.module.scss';
@@ -9,17 +13,24 @@ const SearchFilters = memo(props => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelected] = React.useState([]);
     const [filters, setFilters] = useState([]);
-
+    const [count, setCount] = useState(0);
     const [params, setParams] = useState({});
 
     const valuesSelectedRef = React.useRef([]);
+
+    const verifyArray = pArray => {
+        const xIsEmpty = pArray.filter(xElem => {
+            return xElem != undefined;
+        });
+        return xIsEmpty.length > 0;
+    };
 
     const updateParams = (pParam, pValues, pAction) => {
         props.onResetData && props.onResetData({});
 
         const xParams = {
             ...params,
-            [pParam]: pValues.value
+            [pParam]: pValues ? pValues.value : undefined
         };
 
         setParams(xParams);
@@ -37,16 +48,6 @@ const SearchFilters = memo(props => {
 
     const handleClickChip = (pValue, pEvent) => {
         setAnchorEl(pEvent.currentTarget);
-    };
-
-    const handleMenuItemClick = pFilter => {
-        const xMenuSelectType = pFilter.type || 'single'; //Define single como default
-
-        if (xMenuSelectType === 'multiple') {
-            handleMultipleSelect(pFilter);
-        } else {
-            handleSelect(pFilter);
-        }
     };
 
     const handleSelect = pFilter => {
@@ -128,12 +129,19 @@ const SearchFilters = memo(props => {
                 value: valuesSelectedRef.current.toString()
             };
         } else {
-            xFilters[filterIndex] = {};
+            xFilters[filterIndex] = undefined;
         }
 
         setSelected(xSelected);
         setFilters(xFilters);
         updateParams(filterParam, xFilters[filterIndex], action);
+    };
+
+    const select = { multiple: handleMultipleSelect, single: handleSelect };
+
+    const handleMenuItemClick = pFilter => {
+        const xMenuSelectType = pFilter.type || 'single'; //Define single como default
+        select[xMenuSelectType](pFilter);
     };
 
     const handleRemove = pFilter => {
@@ -155,6 +163,10 @@ const SearchFilters = memo(props => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const xClassSelected = classNames(Style.selected, {
+        [Style.noFiltersSelected]: !verifyArray(filters)
+    });
 
     return (
         <CrudContext.Consumer>
@@ -178,7 +190,7 @@ const SearchFilters = memo(props => {
                                                 className={Style.item}
                                                 key={xIndex}>
                                                 <Chip
-                                                    key={xIndex}
+                                                    key={`chip-${xIndex}`}
                                                     id={xChipId}
                                                     onClick={e =>
                                                         handleClickChip(
@@ -191,6 +203,7 @@ const SearchFilters = memo(props => {
                                                     variant={'outlined'}
                                                 />
                                                 <Menu
+                                                    key={`chip-menu-${xIndex}`}
                                                     id={`chip-menu-${xIndex}`}
                                                     anchorEl={anchorEl}
                                                     anchorOrigin={{
@@ -253,32 +266,34 @@ const SearchFilters = memo(props => {
                             </div>
                         </div>
 
-                        <div className={Style.selected}>
-                            {filters &&
-                                filters.map((xFilter, xIndex) => {
-                                    if (xFilter) {
-                                        return (
-                                            <div
-                                                className={Style.filter}
-                                                key={`filter-${xIndex}`}>
-                                                <Chip
-                                                    variant={'outlined'}
-                                                    color={'primary'}
-                                                    label={xFilter.label}
-                                                    size={'small'}
-                                                    onDelete={() =>
-                                                        handleRemove({
-                                                            filterIndex: xIndex,
-                                                            filterParam:
-                                                                xFilter.param,
-                                                            action: onRead
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-                                        );
-                                    }
-                                })}
+                        <div className={xClassSelected}>
+                            <div className={Style.horizontalScrollable}>
+                                {filters &&
+                                    filters.map((xFilter, xIndex) => {
+                                        if (xFilter) {
+                                            return (
+                                                <div
+                                                    className={Style.item}
+                                                    key={`filter-${xIndex}`}>
+                                                    <Chip
+                                                        variant={'outlined'}
+                                                        color={'primary'}
+                                                        label={xFilter.label}
+                                                        size={'small'}
+                                                        onDelete={() =>
+                                                            handleRemove({
+                                                                filterIndex: xIndex,
+                                                                filterParam:
+                                                                    xFilter.param,
+                                                                action: onRead
+                                                            })
+                                                        }
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                    })}
+                            </div>
                         </div>
                     </div>
                 );
@@ -286,5 +301,28 @@ const SearchFilters = memo(props => {
         </CrudContext.Consumer>
     );
 });
+
+SearchFilters.propTypes = {
+    filters: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string,
+            param: PropTypes.string,
+            type: PropTypes.string,
+            options: PropTypes.arrayOf(
+                PropTypes.shape({
+                    label: PropTypes.string,
+                    value: PropTypes.any
+                })
+            ),
+            defaultValue: PropTypes.string
+        })
+    ),
+    onResetData: PropTypes.func,
+    onUpdateParams: PropTypes.func
+};
+
+SearchFilters.defaultProps = {
+    filters: {}
+};
 
 export default SearchFilters;

@@ -32,7 +32,8 @@
 
 .item {
     display: inline-block;
-    margin: 8px;
+    margin: 4px;
+
     &:first-child {
         margin-left: 0;
     }
@@ -40,4 +41,20 @@
     &:last-child {
         margin-right: 0;
     }
+}
+
+.selected {
+    height: 32px;
+    overflow: hidden;
+
+    .item {
+        &>div[role='button'] {
+            border: none;
+        }
+    }
+}
+
+.noFiltersSelected {
+    display: none;
+    height: 0;
 }
