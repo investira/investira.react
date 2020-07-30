@@ -65,3 +65,11 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 # 2.4.1
 
 -   [components] Add CrossTab
+-   [components] Add ContainerList
+-   [components] Add ListVirtual
+-   [components] Add CrudContext
+-   [components] Add CrudProvider
+-   [components] Add CrudConsumer
+-   [components] Add ListState
+-   [components] Add Search
+-   [components] Add ListFilter
