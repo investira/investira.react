@@ -39,6 +39,7 @@
         "react-dev-utils": "^10.0.0",
         "react-dom": "16.12.0",
         "react-scripts": "3.3.0",
+        "react-virtualized": "^9.21.2",
         "react-vis": "1.11.6",
         "redux-persist": "^6.0.0",
         "redux-persist-pouchdb": "^0.2.1",
