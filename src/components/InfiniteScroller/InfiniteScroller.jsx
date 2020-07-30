@@ -20,6 +20,10 @@ class InfiniteScroller extends Component {
         this.observer = null;
 
         this.tempScrollHeight = 0;
+
+        this.state = {
+            scrollAreaSize: null
+        };
     }
 
     //TODO: Alterar pela do sdk quando for publicado
@@ -58,7 +62,7 @@ class InfiniteScroller extends Component {
         if (pTarget) {
             const xOptions = {
                 root: pScrollElem,
-                rootMargin: `0px 0px ${pScrollerRect.height * 0.66}px 0px`,
+                rootMargin: `0px 0px ${pScrollerRect.height * 0.8}px 0px`,
                 threshold: 0
             };
 
@@ -180,7 +184,7 @@ class InfiniteScroller extends Component {
 
     render() {
         const { children, nextPage, prevPage } = this.props;
-        const xChild = React.Children.only(children);
+        //const xChild = React.Children.only(children);
 
         const xLoadingEndAreaClass = classNames(Style.loadingArea, {
             [Style.loadingHidden]: validators.isEmpty(nextPage)
@@ -200,7 +204,8 @@ class InfiniteScroller extends Component {
                     </CenterInView>
                 </div>
 
-                {React.cloneElement(xChild, {}, xChild)}
+                {/* {React.cloneElement(xChild, {}, xChild)} */}
+                {children}
 
                 <div
                     id={'endlist'}
