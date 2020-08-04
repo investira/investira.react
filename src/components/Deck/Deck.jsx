@@ -33,6 +33,7 @@ export class Deck extends Component {
     }
 
     isPrev(prevView, id) {
+        console.log(prevView, id);
         if (prevView.includes(id)) {
             return true;
         }
