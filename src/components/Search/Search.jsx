@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SearchBox } from '../';
 import { validators } from 'investira.sdk';
-import CrudContext from '../CrudContext';
+import CrudConsumer from '../CrudConsumer';
 
 const Search = memo(props => {
     const [params, setParams] = useState({});
@@ -31,7 +31,7 @@ const Search = memo(props => {
     }, [params]);
 
     return (
-        <CrudContext.Consumer>
+        <CrudConsumer>
             {({ onRead }) => {
                 handleRead = onRead;
                 return (
@@ -42,7 +42,7 @@ const Search = memo(props => {
                     />
                 );
             }}
-        </CrudContext.Consumer>
+        </CrudConsumer>
     );
 });
 
