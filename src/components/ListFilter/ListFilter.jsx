@@ -13,7 +13,7 @@ const SearchFilters = memo(props => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelected] = React.useState([]);
     const [filters, setFilters] = useState([]);
-    const [count, setCount] = useState(0);
+    //const [count, setCount] = useState(0);
     const [params, setParams] = useState({});
 
     const valuesSelectedRef = React.useRef([]);
@@ -228,9 +228,7 @@ const SearchFilters = memo(props => {
                                                         ) => {
                                                             return (
                                                                 <MenuItem
-                                                                    key={
-                                                                        xOption.value
-                                                                    }
+                                                                    key={`menu-item-${xOptionIndex}`}
                                                                     // disabled={index === 0}
                                                                     selected={isSelected(
                                                                         xIndex,
@@ -314,7 +312,10 @@ SearchFilters.propTypes = {
                     value: PropTypes.any
                 })
             ),
-            defaultValue: PropTypes.string
+            defaultValue: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ])
         })
     ),
     onResetData: PropTypes.func,
