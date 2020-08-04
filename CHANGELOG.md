@@ -73,3 +73,8 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [components] Add ListState
 -   [components] Add Search
 -   [components] Add ListFilter
+-   [components] Add DeckContext
+-   [components] Add DeckNavBar
+-   [components] Add DeckNavigator
+-   [components] Add DeckProvider
+-   [components] Add DeckView
