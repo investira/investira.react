@@ -34,9 +34,9 @@ const DeckNavBar = memo(props => {
 });
 
 DeckNavBar.propTypes = {
-    left: PropTypes.elementType,
-    right: PropTypes.elementType,
-    center: PropTypes.elementType
+    left: PropTypes.object,
+    right: PropTypes.object,
+    center: PropTypes.object
 };
 
 export default DeckNavBar;
