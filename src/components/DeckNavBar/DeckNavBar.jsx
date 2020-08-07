@@ -14,7 +14,7 @@ const DeckNavBar = memo(props => {
                             !validators.isEmpty(prevView) ? (
                                 <IconButton
                                     color={'primary'}
-                                    onClick={onPrevView}>
+                                    onClick={() => onPrevView()}>
                                     <Icon
                                         size={21}
                                         iconName={'arrow-previous'}
