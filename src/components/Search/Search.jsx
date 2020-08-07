@@ -1,8 +1,8 @@
 import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { SearchBox } from '../';
+import { SearchBox, CrudConsumer } from '../';
 import { validators } from 'investira.sdk';
-import CrudConsumer from '../CrudConsumer';
+// import CrudConsumer from '../CrudConsumer';
 
 const Search = memo(props => {
     const [params, setParams] = useState({});
