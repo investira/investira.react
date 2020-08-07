@@ -20,6 +20,7 @@ class ListVirtual extends PureComponent {
         this.cache = new CellMeasurerCache({
             fixedWidth: true,
             defaultHeight: 100
+            //keyMapper: index => this.props.list[index]
         });
     }
 
@@ -64,6 +65,26 @@ class ListVirtual extends PureComponent {
         );
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const newRows = this.props.list.filter(
+            value => prevProps.list.indexOf(value) < 0
+        );
+        const newRowsIndex = newRows.map(value =>
+            this.props.list.indexOf(value)
+        );
+        newRowsIndex.forEach(index => {
+            //console.log(index);
+            this.cache.clear(index);
+        });
+
+        //console.log([...newRowsIndex]);
+
+        //console.log(Math.min(...newRowsIndex));
+
+        newRowsIndex.length &&
+            this._list.recomputeRowHeights(Math.min(...newRowsIndex));
+    }
+
     render() {
         const xClassRoot = classNames(Style.root, this.props.className, {
             [Style.emptyList]: this.hasListData(this.props.list)
@@ -81,10 +102,13 @@ class ListVirtual extends PureComponent {
                         <AutoSizer>
                             {({ width, height }) => (
                                 <List
+                                    //ref={registerChild}
+                                    ref={element => {
+                                        this._list = element;
+                                    }}
                                     width={width}
                                     onRowsRendered={onRowsRendered}
                                     height={height}
-                                    ref={registerChild}
                                     deferredMeasurementCache={this.cache}
                                     rowHeight={this.cache.rowHeight}
                                     rowRenderer={this.renderRow}
