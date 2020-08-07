@@ -17,12 +17,14 @@ const DeckProvider = memo(props => {
         setPreview(xPrevView);
     };
 
-    const handlePrevView = () => {
+    const handlePrevView = pCallback => {
         let xPrevView = [...prevView];
         const xActive = xPrevView.pop();
 
         setActive(xActive);
         setPreview(xPrevView);
+
+        pCallback && pCallback();
     };
 
     useEffect(() => {
