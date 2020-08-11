@@ -7,6 +7,7 @@ export { default as ContainerList } from './ContainerList';
 export { default as ContentList } from './ContentList';
 export { default as CopyToClipboard } from './CopyToClipboard';
 export { default as CrossTab } from './CrossTab';
+export { default as Crud } from './Crud';
 export { default as CrudContext } from './CrudContext';
 export { default as CrudProvider } from './CrudProvider';
 export { default as CrudConsumer } from './CrudConsumer';
