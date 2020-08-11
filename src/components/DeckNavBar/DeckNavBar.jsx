@@ -25,7 +25,7 @@ const DeckNavBar = memo(props => {
                             )
                         }
                         center={props.center}
-                        right={props.right}
+                        right={validators.isEmpty(prevView) && props.right}
                     />
                 );
             }}
