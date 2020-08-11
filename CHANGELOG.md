@@ -62,7 +62,7 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [redux] Add novo combineReducers, createStore, persisterStore
 -   [dep] Add dependencias redux-persist e redux-persist-pouchdb
 
-# 2.4.1
+# 2.5
 
 -   [components] Add CrossTab
 -   [components] Add ContainerList
@@ -78,3 +78,7 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [components] Add DeckNavigator
 -   [components] Add DeckProvider
 -   [components] Add DeckView
+-   [components] Add Crud
+-   [dep] Add dependencia react-virtualized
+
+# 2.5.1
