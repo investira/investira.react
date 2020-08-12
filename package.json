@@ -1,6 +1,6 @@
 {
     "name": "investira.react",
-    "version": "2.5",
+    "version": "2.5.0",
     "author": "Investira",
     "description": "Biblioteca de assets para front-end da Investira",
     "private": true,
