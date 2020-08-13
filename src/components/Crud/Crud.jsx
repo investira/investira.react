@@ -1,25 +1,40 @@
 import React, { memo, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { validators } from 'investira.sdk';
 import {
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Slide,
     CrudContext,
     DeckContext,
-    IconButton,
     Icon,
     Button,
     Typography,
     DialogContentText,
     CenterInView
-} from 'investiraComponents';
-import { withDialog } from 'investiraLib';
-import { validators } from 'investira.sdk';
+} from '..';
 
 import Style from './Crud.module.scss';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Crud = memo(
     Object.assign(
         props => {
+            const initialStateDialog = {
+                isOpen: false,
+                title: null,
+                content: null,
+                actions: []
+            };
+
             const [deleted, setDeleted] = useState(false);
             const [editable, setEditable] = useState(false);
+            const [dialog, setDialog] = useState(initialStateDialog);
 
             const crudContext = useContext(CrudContext);
             const deckContext = useContext(DeckContext);
@@ -42,7 +57,10 @@ const Crud = memo(
                         () => console.log('delete error')
                     );
                 } else {
-                    onDelete(itemData, props.onCloseDialog, () => console.log('delete error'));
+                    onDelete(itemData, props.onCloseDialog, () => {
+                        props.onCloseDialog();
+                        setDeleted(true);
+                    });
                 }
             };
 
@@ -56,19 +74,39 @@ const Crud = memo(
             };
 
             const onConfirmUpdate = (pData, pActions) => {
-                console.log('onHandleUpdate');
-                crudContext.onUpdate(pData, { ...pActions, onNextView, onPrevView, prevView });
+                crudContext.onUpdate(pData, {
+                    ...pActions,
+                    onNextView,
+                    onPrevView,
+                    prevView
+                });
+            };
+
+            const handleOpenDialog = ({ title, content, actions }) => {
+                setDialog({
+                    isOpen: true,
+                    title,
+                    content,
+                    actions
+                });
+            };
+
+            const handleCloseDialog = () => {
+                setDialog({
+                    ...initialStateDialog
+                });
             };
 
             const handleDeleteDialog = () => {
-                props.onOpenDialog({
+                handleOpenDialog({
                     title: {
                         label: 'Está certo disto?',
                         onclose: true
                     },
                     content: (
                         <DialogContentText>
-                            {props.deleteMessage || 'Este item será excluído permanentemente.'}
+                            {props.deleteMessage ||
+                                'Este item será excluído permanentemente.'}
                         </DialogContentText>
                     ),
                     actions: [
@@ -84,21 +122,24 @@ const Crud = memo(
                 setEditable(!editable);
             };
 
-            const childrenWithProps = React.Children.map(props.children, child => {
-                if (React.isValidElement(child)) {
-                    const { children, ...otherProps } = props;
-                    const { itemData } = crudContext;
-                    return React.cloneElement(child, {
-                        itemData,
-                        onConfirmDelete,
-                        onConfirmCreate,
-                        onConfirmUpdate,
-                        ...otherProps
-                    });
+            const childrenWithProps = React.Children.map(
+                props.children,
+                child => {
+                    if (React.isValidElement(child)) {
+                        const { children, ...otherProps } = props;
+                        const { itemData } = crudContext;
+                        return React.cloneElement(child, {
+                            itemData,
+                            onConfirmDelete,
+                            onConfirmCreate,
+                            onConfirmUpdate,
+                            ...otherProps
+                        });
+                    }
+                    console.error('CRUD: Componente filho inválido');
+                    return null;
                 }
-                console.error('CRUD: Componente filho inválido');
-                return null;
-            });
+            );
 
             const editWithProps = () => {
                 const Component = props.editFormComponent;
@@ -124,63 +165,113 @@ const Crud = memo(
             }, [prevView]);
 
             return (
-                <div className={Style.root}>
-                    {deleted ? (
-                        <main className={Style.main}>
-                            <CenterInView>
-                                <Typography
-                                    align={'center'}
-                                    color={'textSecondary'}
-                                    component={'p'}
-                                    variant={'caption'}>
-                                    Excluído com sucesso
-                                </Typography>
-                            </CenterInView>
-                        </main>
-                    ) : (
-                        <>
+                <>
+                    <div className={Style.root}>
+                        {deleted ? (
                             <main className={Style.main}>
-                                {editable ? editWithProps() : childrenWithProps}
+                                <CenterInView>
+                                    <Typography
+                                        align={'center'}
+                                        color={'textSecondary'}
+                                        component={'p'}
+                                        variant={'caption'}>
+                                        Excluído com sucesso
+                                    </Typography>
+                                </CenterInView>
                             </main>
+                        ) : (
+                            <>
+                                <main className={Style.main}>
+                                    {editable
+                                        ? editWithProps()
+                                        : childrenWithProps}
+                                </main>
 
-                            {props.showActions && (
-                                <nav className={Style.nav}>
-                                    {crudContext.onDelete && !editable && (
-                                        <Button
-                                            onClick={handleDeleteDialog}
-                                            startIcon={
-                                                <Icon
-                                                    iconName={'delete'}
-                                                    color={'primary'}
-                                                    size={22}
-                                                />
-                                            }
-                                            color={'primary'}
-                                            variant={'text'}>
-                                            Excluir
-                                        </Button>
-                                    )}
+                                {props.showActions && (
+                                    <nav className={Style.nav}>
+                                        {crudContext.onDelete && !editable && (
+                                            <Button
+                                                onClick={handleDeleteDialog}
+                                                startIcon={
+                                                    <Icon
+                                                        iconName={'delete'}
+                                                        color={'primary'}
+                                                        size={22}
+                                                    />
+                                                }
+                                                color={'primary'}
+                                                variant={'text'}>
+                                                Excluir
+                                            </Button>
+                                        )}
 
-                                    {crudContext.onUpdate && !editable && (
-                                        <Button
-                                            onClick={handleEdit}
-                                            startIcon={
+                                        {crudContext.onUpdate && !editable && (
+                                            <Button
+                                                onClick={handleEdit}
+                                                startIcon={
+                                                    <Icon
+                                                        iconName={
+                                                            editable
+                                                                ? 'cancel'
+                                                                : 'edit'
+                                                        }
+                                                        color={'primary'}
+                                                        size={22}
+                                                    />
+                                                }
+                                                color={'primary'}
+                                                variant={'outlined'}>
+                                                {'Editar'}
+                                            </Button>
+                                        )}
+                                    </nav>
+                                )}
+                            </>
+                        )}
+                    </div>
+
+                    <Dialog
+                        fullWidth
+                        open={dialog.isOpen}
+                        TransitionComponent={Transition}
+                        onClose={handleCloseDialog}>
+                        {!validators.isEmpty(dialog.title) && (
+                            <DialogTitle
+                                {...(dialog.title.onclose === false
+                                    ? {}
+                                    : { onClose: handleCloseDialog })}>
+                                {dialog.title.label}
+                            </DialogTitle>
+                        )}
+                        {!validators.isNull(dialog.content) && (
+                            <DialogContent>{dialog.content}</DialogContent>
+                        )}
+
+                        {!validators.isEmpty(dialog.actions) && (
+                            <DialogActions>
+                                {dialog.actions.map((xAction, xIndex) => {
+                                    const xActionProps = {
+                                        onClick: xAction.onClick,
+                                        color: xAction.color || 'primary',
+                                        ...(xAction.startIcon && {
+                                            startIcon: (
                                                 <Icon
-                                                    iconName={editable ? 'cancel' : 'edit'}
-                                                    color={'primary'}
-                                                    size={22}
+                                                    iconName={xAction.startIcon}
                                                 />
-                                            }
-                                            color={'primary'}
-                                            variant={'outlined'}>
-                                            {'Editar'}
+                                            )
+                                        })
+                                    };
+
+                                    return (
+                                        <Button key={xIndex} {...xActionProps}>
+                                            {xAction.label}
                                         </Button>
-                                    )}
-                                </nav>
-                            )}
-                        </>
-                    )}
-                </div>
+                                    );
+                                })}
+                            </DialogActions>
+                        )}
+                    </Dialog>
+                </>
             );
         },
         { displayName: 'Crud' }
@@ -196,4 +287,4 @@ Crud.defaultProps = {
     showActions: true
 };
 
-export default withDialog(Crud);
+export default Crud;
