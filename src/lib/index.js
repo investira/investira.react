@@ -11,6 +11,7 @@ export { default as bindStateToLocalStorage } from './middleware/bindStateToLoca
 
 // Store
 export { default as createStore } from './redux/createStore';
+export { default as persistStore } from './redux/persistStore';
 export { default as combineReducers } from './redux/combineReducers';
 export { default as combineReducersLegacy } from './redux/combineReducersLegacy';
 export { default as persisterReducers } from './redux/persisterReducers';
@@ -18,8 +19,9 @@ export { default as persisterReducers } from './redux/persisterReducers';
 // Storage
 export { default as createStorage } from './storage/createStorage';
 export { default as listenStorage } from './storage/listenStorage';
+export { default as pouchStorage } from './storage/pouchStorage';
 
 // HOCs
-export { default as infiniteScroll } from './hoc/infiniteScroll';
 export { default as withDialog } from './hoc/withDialog';
 export { default as withRedux } from './hoc/withRedux';
+export { default as infiniteScroll } from './hoc/infiniteScroll';
