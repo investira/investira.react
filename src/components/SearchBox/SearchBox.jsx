@@ -15,6 +15,7 @@ const SearchBox = props => {
     );
 
     const searchRef = useRef();
+    const mount = useRef(false);
 
     const handleClear = pEvent => {
         setValue('');
@@ -60,7 +61,6 @@ const SearchBox = props => {
             () => props.onChange && props.onChange(xValue),
             200
         );
-        // props.onChange && props.onChange(xValue);
     };
 
     const handleFilter = () => {
@@ -94,21 +94,18 @@ const SearchBox = props => {
     };
 
     useEffect(() => {
-        props.fowardRef && props.fowardRef(searchRef);
+        mount.current && updateValue(props.value || '');
+    }, [props.value]);
+
+    useEffect(() => {
+        mount.current = true;
+        props.forwardRef && props.forwardRef(searchRef);
         closeKeyboard.mount();
 
         return () => {
             closeKeyboard.unmount();
         };
     }, []);
-
-    useEffect(() => {
-        // console.log('udpate', props.value);
-        updateValue(props.value || '');
-        // if (props.value && props.value.length > 0) {
-        //updateValue(props.value || '');
-        // }
-    }, [props.value]);
 
     return (
         <div className={Style.root}>
@@ -191,7 +188,8 @@ SearchBox.propTypes = {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     inputProps: PropTypes.object,
-    filter: PropTypes.bool
+    filter: PropTypes.bool,
+    forwardRef: PropTypes.func
 };
 
 SearchBox.defaultProps = {
