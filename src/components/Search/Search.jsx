@@ -1,11 +1,12 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SearchBox, CrudConsumer } from '../';
 import { validators } from 'investira.sdk';
-// import CrudConsumer from '../CrudConsumer';
+import Style from './Search.module.scss';
 
 const Search = memo(props => {
-    const [params, setParams] = useState({});
+    const [params, setParams] = useState();
+    const mount = useRef(false);
 
     let handleRead = null;
 
@@ -25,21 +26,29 @@ const Search = memo(props => {
     };
 
     useEffect(() => {
-        handleRead && handleRead(params);
-
-        props.onUpdateParams && props.onUpdateParams(params);
+        if (mount.current) {
+            handleRead && handleRead(params);
+            props.onUpdateParams && props.onUpdateParams(params);
+        }
     }, [params]);
+
+    useEffect(() => {
+        mount.current = true;
+    }, []);
 
     return (
         <CrudConsumer>
             {({ onRead }) => {
                 handleRead = onRead;
                 return (
-                    <SearchBox
-                        onChange={handleSearch}
-                        placeholder={props.placeholder}
-                        clearCallback={handleClear}
-                    />
+                    <div className={Style.padding}>
+                        <SearchBox
+                            forwardRef={props.forwardRef}
+                            onChange={handleSearch}
+                            placeholder={props.placeholder}
+                            clearCallback={handleClear}
+                        />
+                    </div>
                 );
             }}
         </CrudConsumer>
@@ -47,6 +56,9 @@ const Search = memo(props => {
 });
 
 Search.propTypes = {
+    onResetData: PropTypes.func,
+    forwardRef: PropTypes.func,
+    onUpdateParams: PropTypes.func,
     onResetData: PropTypes.func
 };
 
