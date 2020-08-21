@@ -58,8 +58,7 @@ const Search = memo(props => {
 Search.propTypes = {
     onResetData: PropTypes.func,
     forwardRef: PropTypes.func,
-    onUpdateParams: PropTypes.func,
-    onResetData: PropTypes.func
+    onUpdateParams: PropTypes.func
 };
 
 export default Search;
