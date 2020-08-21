@@ -25,7 +25,8 @@ const CrossTab = props => {
             <div className={Style.root}>
                 <CenterInView>
                     <Typography align={'center'} color={'textPrimary'}>
-                        Está aplicação está sendo executada em outra janela
+                        Esta aplicação está sendo executada <br />
+                        em outra janela
                     </Typography>
                 </CenterInView>
             </div>
