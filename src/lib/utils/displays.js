@@ -40,16 +40,15 @@ const displays = {
         const xMasks = { 4: '####', 5: '####-#', 6: '####-##' };
         return displays.format(xMasks[xValue.length], xValue) || '';
     },
-    conta: pValue => {
-        if (validators.isNull(pValue)) {
-            return '';
+    conta: (pValue = '') => {
+        let xValue = pValue;
+
+        if (xValue.length < 6) {
+            return xValue;
         }
 
-        if (pValue.length > 11 || pValue.length < 6) {
-            console.error(
-                'Conta deve ter no mínimo 6 dígitos e no máximo 11 dígitos'
-            );
-            return null;
+        if (xValue.length > 12) {
+            xValue = xValue.slice(0, 12);
         }
 
         const xMasks = {
@@ -58,10 +57,11 @@ const displays = {
             8: '#######-#',
             9: '########-#',
             10: '#########-#',
-            11: '###########-#'
+            11: '##########-#',
+            12: '###########-#'
         };
 
-        return displays.format(xMasks[pValue.length], pValue) || '';
+        return displays.format(xMasks[xValue.length], xValue) || '';
     },
     initialsLetters: (pStrings, pSize = 2) => {
         if (!pStrings) {
