@@ -34,6 +34,7 @@ export { default as ListVirtual } from './ListVirtual';
 export { default as ListState } from './ListState';
 export { default as ListFilter } from './ListFilter';
 export { default as NavBar } from './NavBar';
+export { default as MaskedTextField } from './MaskedTextField';
 export { default as PersistGate } from './PersistGate';
 export { default as ProgressBar } from './ProgressBar';
 export { default as Scroller } from './Scroller';
