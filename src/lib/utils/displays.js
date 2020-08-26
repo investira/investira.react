@@ -26,19 +26,19 @@ const displays = {
         }
         return displays.format('#####-###', pValue);
     },
-    agencia: pValue => {
-        if (validators.isNull(pValue)) {
-            return '';
+    agencia: (pValue = '') => {
+        let xValue = pValue;
+
+        if (xValue.length < 4) {
+            return xValue;
         }
-        if (pValue.length < 4 || pValue.length > 6) {
-            console.error(
-                'Agência deve ter no mínimo 4 dígitos e no máximo 6 dígitos'
-            );
-            return null;
+
+        if (xValue.length > 6) {
+            xValue = xValue.slice(0, 6);
         }
 
         const xMasks = { 4: '####', 5: '####-#', 6: '####-##' };
-        return displays.format(xMasks[pValue.length], pValue) || '';
+        return displays.format(xMasks[xValue.length], xValue) || '';
     },
     conta: pValue => {
         if (validators.isNull(pValue)) {
