@@ -87,3 +87,6 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [components] Add PersistGate
 
 # 2.5.2
+
+-   [components] Add MaskedTextField
+-   [lib] Refatora função agencia da lib displays
