@@ -125,7 +125,7 @@ class ListVirtual extends PureComponent {
 }
 
 ListVirtual.propTypes = {
-    list: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+    list: PropTypes.array.isRequired,
     emptyMessage: PropTypes.string,
     item: PropTypes.oneOfType([
         PropTypes.elementType,
