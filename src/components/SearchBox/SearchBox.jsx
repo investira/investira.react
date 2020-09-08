@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, forwardRef } from 'react';
+import React, {
+    useState,
+    useRef,
+    useEffect,
+    forwardRef,
+    useImperativeHandle
+} from 'react';
 import PropTypes from 'prop-types';
 import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
 
@@ -14,7 +20,7 @@ const SearchBox = forwardRef((props, ref) => {
         props.value ? props.value.split(' ') : []
     );
 
-    //const searchRef = useRef();
+    const searchRef = useRef();
     const mount = useRef(false);
 
     const handleClear = pEvent => {
@@ -76,6 +82,8 @@ const SearchBox = forwardRef((props, ref) => {
         updateValue(filtered.join(' '));
     };
 
+    const handleFocus = () => searchRef.current.focus();
+
     const closeKeyboard = {
         mount: () => {
             document.addEventListener('keydown', pEvent => {
@@ -93,8 +101,14 @@ const SearchBox = forwardRef((props, ref) => {
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        focus: handleFocus,
+        node: searchRef.current
+    }));
+
     useEffect(() => {
         mount.current && updateValue(props.value || '');
+        console.log(ref);
     }, [props.value]);
 
     useEffect(() => {
@@ -112,7 +126,7 @@ const SearchBox = forwardRef((props, ref) => {
                 <div className={Style.inputWrap}>
                     <FormControl fullWidth>
                         <InputBase
-                            inputRef={ref}
+                            inputRef={searchRef}
                             type="search"
                             id={props.id}
                             value={value}
