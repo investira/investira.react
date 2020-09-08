@@ -1,10 +1,10 @@
-import React, { memo, useState, useEffect, useRef } from 'react';
+import React, { memo, useState, useEffect, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { SearchBox, CrudConsumer } from '../';
 import { validators } from 'investira.sdk';
 import Style from './Search.module.scss';
 
-const Search = memo(props => {
+const Search = forwardRef((props, ref) => {
     const [params, setParams] = useState();
     const mount = useRef(false);
 
@@ -43,7 +43,7 @@ const Search = memo(props => {
                 return (
                     <div className={Style.padding}>
                         <SearchBox
-                            forwardRef={props.forwardRef}
+                            ref={ref}
                             onChange={handleSearch}
                             placeholder={props.placeholder}
                             clearCallback={handleClear}
@@ -61,4 +61,4 @@ Search.propTypes = {
     onUpdateParams: PropTypes.func
 };
 
-export default Search;
+export default memo(Search);

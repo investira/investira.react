@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
 
@@ -7,14 +7,14 @@ import Style from './SearchBox.module.scss';
 
 let timeout = null;
 
-const SearchBox = props => {
+const SearchBox = forwardRef((props, ref) => {
     const [clearBtn, setClearBtn] = useState(false);
     const [value, setValue] = useState(props.value || '');
     const [querySplited, setQuerySplited] = useState(
         props.value ? props.value.split(' ') : []
     );
 
-    const searchRef = useRef();
+    //const searchRef = useRef();
     const mount = useRef(false);
 
     const handleClear = pEvent => {
@@ -99,7 +99,6 @@ const SearchBox = props => {
 
     useEffect(() => {
         mount.current = true;
-        props.forwardRef && props.forwardRef(searchRef);
         closeKeyboard.mount();
 
         return () => {
@@ -113,7 +112,7 @@ const SearchBox = props => {
                 <div className={Style.inputWrap}>
                     <FormControl fullWidth>
                         <InputBase
-                            inputRef={searchRef}
+                            inputRef={ref}
                             type="search"
                             id={props.id}
                             value={value}
@@ -179,7 +178,7 @@ const SearchBox = props => {
             )}
         </div>
     );
-};
+});
 
 SearchBox.propTypes = {
     id: PropTypes.string,
