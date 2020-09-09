@@ -39,7 +39,7 @@ $heightLarge: 64px;
 
     .titleRegular,
     .centerRegular {
-        width: calc(100% - #{$heightRegular});
+        flex-grow: 1;
     }
 }
 
@@ -116,17 +116,20 @@ $heightLarge: 64px;
 
 .titleDense,
 .centerDense {
-    width: calc(100% - #{$heightDense} * 2);
+    //width: calc(100% - #{$heightDense} * 2);
+    flex-grow: 1;
 }
 
 .titleRegular,
 .centerRegular {
-    width: calc(100% - #{$heightRegular} * 2);
+    //width: calc(100% - #{$heightRegular} * 2);
+    flex-grow: 1;
 }
 
 .titleLarge,
 .centerLarge {
-    width: calc(100% - #{$heightLarge} * 2);
+    //width: calc(100% - #{$heightLarge} * 2);
+    flex-grow: 1;
 }
 
 // .titleArea {
@@ -156,6 +159,8 @@ $heightLarge: 64px;
 .rightAreaRegular,
 .rightAreaLarge {
     min-width: $sideAreas;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .centerArea {
