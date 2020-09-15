@@ -13,12 +13,13 @@ function NavBar(props) {
     });
 
     const xClassToolbar = classNames(Style.toolbar, {
-        [Style.toolbarTitleAndRight]:
-            !props.left && !props.center && props.title && props.right,
-        [Style.toolbarRightOnly]: !props.left && !props.center && !props.title,
+        // [Style.toolbarTitleAndRight]:
+        //     !props.left && !props.center && props.title && props.right,
+        //[Style.toolbarRightOnly]: !props.left && !props.center && !props.title,
         [Style.toolbarCenterOnly]: !props.left && !props.right,
-        [Style.toolbarLeft]: props.left && props.center && !props.right,
-        [Style.toolbarLeft]: props.left && props.title && !props.right
+
+        [Style.toolbarRight]: props.right && props.center && !props.left,
+        [Style.toolbarLeft]: props.left && props.center && !props.right
     });
 
     const xClassCentertArea = classNames(

@@ -30,15 +30,18 @@ $heightLarge: 64px;
     justify-content: space-between;
 }
 
-.toolbarTitleAndRight {
-    justify-content: space-between;
-
-    & h6 {
-        padding-left: 12px;
-    }
-
-    .titleRegular,
+.toolbarRight {
+    .centerArea,
     .centerRegular {
+        padding-left: 12px;
+        flex-grow: 1;
+    }
+}
+
+.toolbarLeft {
+    .centerArea,
+    .centerRegular {
+        padding-right: 12px;
         flex-grow: 1;
     }
 }
@@ -71,11 +74,9 @@ $heightLarge: 64px;
     height: $heightRegular;
 
     .leftArea {
-        //width: $heightRegular;
     }
 
     .rightArea {
-        //width: $heightRegular;
     }
 }
 
@@ -105,40 +106,22 @@ $heightLarge: 64px;
 
 .titleArea {
     display: flex;
-    //text-align: center;
-
-    // & > h6 {
-    //     overflow: hidden;
-    //     text-overflow: ellipsis;
-    //     white-space: nowrap;
-    // }
 }
 
 .titleDense,
 .centerDense {
-    //width: calc(100% - #{$heightDense} * 2);
     flex-grow: 1;
 }
 
 .titleRegular,
 .centerRegular {
-    //width: calc(100% - #{$heightRegular} * 2);
     flex-grow: 1;
 }
 
 .titleLarge,
 .centerLarge {
-    //width: calc(100% - #{$heightLarge} * 2);
     flex-grow: 1;
 }
-
-// .titleArea {
-//     text-align: center;
-// }
-
-// .titleAreaModal {
-//     text-align: left;
-// }
 
 .leftArea,
 .centerArea,
@@ -164,11 +147,9 @@ $heightLarge: 64px;
 }
 
 .centerArea {
-    //justify-content: center;
 }
 
 .centerGutters {
-    //padding: 0 12px;
 }
 
 .rightArea {
