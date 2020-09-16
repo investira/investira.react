@@ -40,6 +40,7 @@ export { default as ProgressBar } from './ProgressBar';
 export { default as Scroller } from './Scroller';
 export { default as SearchBox } from './SearchBox';
 export { default as SlideView } from './SlideView';
+export { default as StorageManager } from './StorageManager';
 export { default as SSE } from './SSE';
 export { default as Sticky } from './Sticky';
 export { default as TabContainer } from './TabContainer';
