@@ -11,7 +11,7 @@ const DeckNavBar = memo(props => {
                 const xBehaviors = {
                     default: validators.isEmpty(prevView),
                     inverted: !validators.isEmpty(prevView),
-                    visibled: true
+                    visible: true
                 };
                 const xRightBehavior = xBehaviors[props.rightBehavior];
                 // props.rightBehavior === 'default'
