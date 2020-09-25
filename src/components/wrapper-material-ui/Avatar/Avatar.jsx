@@ -35,6 +35,11 @@ const useStyles = makeStyles(theme => ({
         height: theme.spacing(9),
         fontSize: 24
     },
+    full: {
+        width: '100%',
+        height: '100%',
+        fontSize: 96
+    },
     red: {
         color: theme.palette.getContrastText(red[500]),
         backgroundColor: red[500]
@@ -73,6 +78,7 @@ function Avatar(props) {
         [classes.small]: props.size === 'small',
         [classes.large]: props.size === 'large',
         [classes.xlarge]: props.size === 'xlarge',
+        [classes.full]: props.size === 'full',
         [classes.red]: props.color === 'red',
         [classes.blue]: props.color === 'blue',
         [classes.yellow]: props.color === 'yellow',
