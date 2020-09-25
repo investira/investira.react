@@ -8,10 +8,15 @@ const DeckNavBar = memo(props => {
     return (
         <DeckContext.Consumer>
             {({ prevView, onPrevView }) => {
-                const xRightBehavior =
-                    props.rightBehavior === 'default'
-                        ? validators.isEmpty(prevView)
-                        : !validators.isEmpty(prevView);
+                const xBehaviors = {
+                    default: validators.isEmpty(prevView),
+                    inverted: !validators.isEmpty(prevView),
+                    visibled: true
+                };
+                const xRightBehavior = xBehaviors[props.rightBehavior];
+                // props.rightBehavior === 'default'
+                //     ? validators.isEmpty(prevView)
+                //     : !validators.isEmpty(prevView);
                 return (
                     <NavBar
                         left={
@@ -42,7 +47,7 @@ DeckNavBar.propTypes = {
     right: PropTypes.object,
     center: PropTypes.object,
     onBack: PropTypes.func,
-    rightBehavior: PropTypes.oneOf(['default', 'inverted'])
+    rightBehavior: PropTypes.oneOf(['default', 'inverted', 'visibled'])
 };
 
 DeckNavBar.defaultProps = {
