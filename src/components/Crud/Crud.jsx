@@ -127,9 +127,10 @@ const Crud = memo(
                 child => {
                     if (React.isValidElement(child)) {
                         const { children, ...otherProps } = props;
-                        const { itemData } = crudContext;
+                        const { itemData, onReadOne } = crudContext;
                         return React.cloneElement(child, {
                             itemData,
+                            onReadOne,
                             onConfirmDelete,
                             onConfirmCreate,
                             onConfirmUpdate,
@@ -143,9 +144,10 @@ const Crud = memo(
 
             const editWithProps = () => {
                 const Component = props.editFormComponent;
-                const { itemData } = crudContext;
+                const { itemData, onReadOne } = crudContext;
                 const xProps = {
                     initialValues: itemData,
+                    onReadOne,
                     onConfirmUpdate,
                     onCancelUpdate: handleEdit
                 };
