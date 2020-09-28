@@ -4,36 +4,36 @@ import CrudContext from '../CrudContext';
 const CrudProvider = memo(props => {
     const [itemData, setItemData] = useState({});
 
-    const state = { itemData };
+    const state = { ...props.state, itemData };
+
+    const onCreate = (pValues, pActions) => {
+        console.log(pValues);
+        props.actions.onCreate && props.actions.onCreate(pValues, pActions);
+    };
+
+    const onRead = pParams => {
+        props.actions.onRead && props.actions.onRead(pParams);
+    };
 
     const onReadOne = pData => {
         setItemData(pData);
     };
 
-    const onCreate = pValues => {
-        props.values.onCreate && props.values.onCreate(pValues);
+    const onUpdate = (pValues, pActions) => {
+        props.actions.onUpdate && props.actions.onUpdate(pValues, pActions);
     };
 
-    const onRead = pParams => {
-        props.values.onRead && props.values.onRead(pParams);
-    };
-
-    const onUpdate = pValues => {
-        props.values.onUpdate && props.values.onUpdate(pValues);
-    };
-
-    const onDelete = (pValues, pResolve, pReject) => {
-        props.values.onDelete &&
-            props.values.onDelete(pValues, pResolve, pReject);
+    const onDelete = (pValues, pActions) => {
+        props.actions.onDelete && props.actions.onDelete(pValues, pActions);
     };
 
     const actions = {
+        ...props.actions,
+        onCreate,
+        onRead,
         onReadOne,
-        ...props.actions
-        // onCreate,
-        // onRead,
-        // onUpdate,
-        // onDelete
+        onUpdate,
+        onDelete
     };
 
     return (
