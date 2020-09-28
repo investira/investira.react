@@ -1,4 +1,5 @@
 import React, { memo, useState, useEffect } from 'react';
+import { validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
 import { DeckContext } from '../';
 
@@ -18,11 +19,13 @@ const DeckProvider = memo(props => {
     };
 
     const handlePrevView = pCallback => {
-        let xPrevView = [...prevView];
-        const xActive = xPrevView.pop();
+        if (!validators.isEmpty(prevView)) {
+            let xPrevView = [...prevView];
+            const xActive = xPrevView.pop();
 
-        setActive(xActive);
-        setPreview(xPrevView);
+            setActive(xActive);
+            setPreview(xPrevView);
+        }
 
         pCallback && pCallback();
     };
@@ -35,6 +38,7 @@ const DeckProvider = memo(props => {
         <>
             <DeckContext.Provider
                 value={{
+                    ...props.value,
                     activeView,
                     prevView,
                     isActive: isActive,
@@ -51,6 +55,10 @@ DeckProvider.displayName = 'DeckProvider';
 
 DeckProvider.propTypes = {
     initialView: PropTypes.string.isRequired
+};
+
+DeckProvider.defaultProps = {
+    value: {}
 };
 
 export default DeckProvider;
