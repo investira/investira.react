@@ -65,6 +65,11 @@ class ListVirtual extends PureComponent {
         );
     }
 
+    componentDidMount() {
+        const xElement = document.querySelector('.ReactVirtualized__List');
+        xElement.removeAttribute('tabindex');
+    }
+
     componentDidUpdate(prevProps, prevState) {
         const newRows = this.props.list.filter(
             value => prevProps.list.indexOf(value) < 0
