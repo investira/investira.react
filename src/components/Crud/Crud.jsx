@@ -41,25 +41,37 @@ const Crud = memo(
 
             const { onNextView, onPrevView, prevView } = deckContext;
 
-            const onConfirmDelete = () => {
+            const onConfirmDelete = pData => {
                 const { itemData, onDelete } = crudContext;
+                const xData = pData || itemData;
+
+                console.log(deckContext);
 
                 if (deckContext) {
-                    onDelete(
-                        itemData,
-                        () => {
-                            props.onCloseDialog();
-                            setDeleted(true);
+                    console.log('Delete com Deck');
+                    onDelete(xData, {
+                        resolve: () => {
+                            handleCloseDialog();
+                            !validators.isEmpty(prevView) && setDeleted(true);
                             setTimeout(() => {
                                 onPrevView();
+                                crudContext.onReadOne({});
                             }, 300);
                         },
-                        () => console.log('delete error')
-                    );
+                        reject: () => {
+                            console.error('delete error');
+                            crudContext.onReadOne({});
+                        }
+                    });
                 } else {
-                    onDelete(itemData, props.onCloseDialog, () => {
-                        props.onCloseDialog();
-                        setDeleted(true);
+                    console.log('Delete sem Deck');
+                    onDelete(xData, {
+                        resolve: handleCloseDialog,
+                        reject: () => {
+                            handleCloseDialog();
+                            setDeleted(true);
+                            crudContext.onReadOne({});
+                        }
                     });
                 }
             };
@@ -92,12 +104,17 @@ const Crud = memo(
             };
 
             const handleCloseDialog = () => {
+                console.log('handleCloseDialog', {
+                    ...initialStateDialog
+                });
                 setDialog({
                     ...initialStateDialog
                 });
             };
 
-            const handleDeleteDialog = () => {
+            const handleDeleteDialog = (pProps = {}) => {
+                console.log(pProps);
+                const { message, data } = pProps;
                 handleOpenDialog({
                     title: {
                         label: 'Está certo disto?',
@@ -105,14 +122,15 @@ const Crud = memo(
                     },
                     content: (
                         <DialogContentText>
-                            {props.deleteMessage ||
+                            {message ||
+                                props.deleteMessage ||
                                 'Este item será excluído permanentemente.'}
                         </DialogContentText>
                     ),
                     actions: [
                         {
                             label: 'Confirmar',
-                            onClick: onConfirmDelete
+                            onClick: () => onConfirmDelete(data)
                         }
                     ]
                 });
@@ -129,12 +147,15 @@ const Crud = memo(
                         const { children, ...otherProps } = props;
                         const { itemData, onReadOne } = crudContext;
                         return React.cloneElement(child, {
+                            ...otherProps,
                             itemData,
                             onReadOne,
                             onConfirmDelete,
                             onConfirmCreate,
                             onConfirmUpdate,
-                            ...otherProps
+                            handleDeleteDialog,
+                            handleOpenDialog,
+                            handleCloseDialog
                         });
                     }
                     console.error('CRUD: Componente filho inválido');
