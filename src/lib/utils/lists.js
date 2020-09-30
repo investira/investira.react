@@ -1,5 +1,3 @@
-import { objects } from 'investira.sdk';
-
 const lists = {
     mergeList: (pList, pItem, pKey) => {
         const xKey = `_${pItem[pKey]}`;
