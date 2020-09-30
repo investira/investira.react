@@ -28,7 +28,7 @@ const CrudProvider = memo(props => {
     };
 
     const actions = {
-        ...props.actions,
+        customActions: props.customActions,
         onCreate,
         onRead,
         onReadOne,

@@ -145,9 +145,14 @@ const Crud = memo(
                 child => {
                     if (React.isValidElement(child)) {
                         const { children, ...otherProps } = props;
-                        const { itemData, onReadOne } = crudContext;
+                        const {
+                            itemData,
+                            onReadOne,
+                            customActions
+                        } = crudContext;
                         return React.cloneElement(child, {
                             ...otherProps,
+                            ...customActions,
                             itemData,
                             onReadOne,
                             onConfirmDelete,
