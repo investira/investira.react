@@ -5,6 +5,7 @@ export { default as currency } from './utils/currency';
 export { default as charts } from './utils/charts';
 export { default as browsers } from './utils/browsers';
 export { default as localStorages } from './utils/localStorages';
+export { default as lists } from './utils/lists';
 
 // Middleware
 export { default as bindStateToLocalStorage } from './middleware/bindStateToLocalStorage';
