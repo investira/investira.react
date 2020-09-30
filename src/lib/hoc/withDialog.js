@@ -6,6 +6,7 @@ import {
     DialogContent,
     DialogActions,
     Slide,
+    Success,
     Button,
     Icon
 } from 'investiraComponents';
@@ -21,7 +22,8 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             isOpen: false,
             title: null,
             content: null,
-            actions: []
+            actions: [],
+            success: false
         };
 
         state = {
@@ -43,10 +45,20 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             });
         };
 
+        handleSuccess = () => {
+            this.setState({ success: true }, () => {
+                setTimeout(() => {
+                    this.setState({ success: false });
+                    this.handleCloseDialog();
+                }, 2000);
+            });
+        };
+
         render() {
             const xProps = {
                 onOpenDialog: this.handleOpenDialog,
                 onCloseDialog: this.handleCloseDialog,
+                onSuccess: this.handleSuccess,
                 ...this.props
             };
 
@@ -74,7 +86,17 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                         )}
                         {!validators.isNull(content) &&
                             (pProps.wrapContent ? (
-                                <DialogContent>{content}</DialogContent>
+                                <DialogContent>
+                                    {success ? (
+                                        <Success
+                                            width={100}
+                                            height={100}
+                                            startAnimation
+                                        />
+                                    ) : (
+                                        content
+                                    )}
+                                </DialogContent>
                             ) : (
                                 content
                             ))}
