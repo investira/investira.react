@@ -6,6 +6,7 @@
 }
 
 .main {
+    display: flex; // resolve bug no safari
     flex-grow: 1;
 }
 
@@ -15,7 +16,7 @@
     padding: 16px 0;
     text-align: right;
 
-    &>button {
+    & > button {
         margin: 0 8px;
     }
 }

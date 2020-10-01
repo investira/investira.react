@@ -1,4 +1,5 @@
 .root {
-    height: 100%;
+    //height: 100%; // resolve bug no safari
+    width: 100%;
     padding: 0 16px;
 }
