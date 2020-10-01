@@ -32,6 +32,7 @@ const DeckProvider = memo(props => {
 
     useEffect(() => {
         setActive(props.initialView);
+        setPreview(props.initialPrev);
     }, []);
 
     return (
@@ -54,11 +55,13 @@ const DeckProvider = memo(props => {
 DeckProvider.displayName = 'DeckProvider';
 
 DeckProvider.propTypes = {
-    initialView: PropTypes.string.isRequired
+    initialView: PropTypes.string.isRequired,
+    initialPrev: PropTypes.array
 };
 
 DeckProvider.defaultProps = {
-    value: {}
+    value: {},
+    initialPrev: []
 };
 
 export default DeckProvider;
