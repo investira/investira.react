@@ -5,28 +5,33 @@
 }
 
 .circle {
-    margin: 16px;
-    position: relative;
+    fill: none;
+    stroke: #00dfa8;
+    stroke-width: 40;
+    stroke-miterlimit: 10;
 }
 
 .ok {
-    stroke-dasharray: 585 587;
-    stroke-dashoffset: 586;
+    fill: none;
+    stroke: #00dfa8;
+    stroke-width: 40;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
 }
 
 .start .ok {
-    animation: draw 690ms ease-in-out 100ms forwards,
-        fade 690ms ease-in-out 100ms forwards;
-}
-
-.circle {
-    stroke-dasharray: 151 153;
-    stroke-dashoffset: 152;
+    stroke-dasharray: 298 300;
+    stroke-dashoffset: 299;
+    animation: draw 690ms ease-in 100ms forwards,
+        fade 690ms ease-in 100ms forwards;
 }
 
 .start .circle {
-    animation: draw 690ms ease-in-out 110ms forwards,
-        fade 690ms ease-in-out 110ms forwards;
+    stroke-dasharray: 1473 1475;
+    stroke-dashoffset: 1474;
+    animation: draw 690ms ease-in 0ms forwards,
+        fade 690ms ease-in 100ms forwards;
 }
 
 @keyframes draw {
@@ -40,8 +45,8 @@
         stroke-opacity: 0;
     }
 
-    50% {
-        stroke-opacity: 1;
+    90.45346062052506% {
+        stroke-opacity: 0.9;
     }
 
     100% {
