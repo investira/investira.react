@@ -1,0 +1,77 @@
+.root {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.circle {
+    fill: none;
+    stroke: #ed4420;
+    stroke-width: 40;
+    stroke-miterlimit: 10;
+}
+
+.line,
+.line2 {
+    fill: none;
+    stroke: #ed4420;
+    stroke-width: 40;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+
+.start .circle {
+    stroke-dasharray: 1473 1475;
+    stroke-dashoffset: 1474;
+    animation: draw 690ms ease-in 100ms forwards,
+        fade 690ms ease-in 100ms forwards;
+}
+
+.start .line {
+    stroke-dasharray: 201 203;
+    stroke-dashoffset: 202;
+    animation: draw 490ms ease-in 300ms forwards,
+        fadeLine 490ms ease-in 300ms forwards;
+}
+
+.start .line2 {
+    stroke-dasharray: 201 203;
+    stroke-dashoffset: 202;
+    animation: draw 490ms ease-in 300ms forwards,
+        fadeLine 490ms ease-in 300ms forwards;
+}
+
+@keyframes draw {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fade {
+    0% {
+        stroke-opacity: 0;
+    }
+
+    93.54838709677419% {
+        stroke-opacity: 0.93;
+    }
+
+    100% {
+        stroke-opacity: 1;
+    }
+}
+
+@keyframes fadeLine {
+    0% {
+        stroke-opacity: 0;
+    }
+
+    43.54838709677419% {
+        stroke-opacity: 0.93;
+    }
+
+    50% {
+        stroke-opacity: 1;
+    }
+}
