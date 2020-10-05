@@ -7,9 +7,14 @@ import {
     DialogActions,
     Slide,
     Success,
+    Error,
     Button,
-    Icon
-} from 'investiraComponents';
+    Icon,
+    DialogContentText,
+    Typography,
+    Loading,
+    CenterInView
+} from '../../components';
 
 // Decorator
 const withDialog = (Component, pProps = { wrapContent: true }) => {
@@ -17,41 +22,257 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
         return <Slide direction="up" ref={ref} {...props} />;
     });
 
+    const styles = {
+        actions: {
+            flex: '0 0 auto',
+            display: 'flex',
+            padding: '8px',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        fetching: {
+            height: '120px'
+        }
+    };
+
     class wrapComponent extends React.Component {
         initialState = {
             isOpen: false,
-            title: null,
-            content: null,
-            actions: [],
-            success: false
+            status: null //success | error
         };
+
+        body = {};
 
         state = {
             ...this.initialState
         };
 
-        handleOpenDialog = ({ title, content, actions }) => {
+        /**
+         * Exibe o Dialog
+         *
+         * @param {object} pProps
+         * {
+         *   title: {
+         *       label: 'Teste'
+         *   },
+         *  content: <p>Apenas um conteúdo de teste</p>,
+         *   actions: [
+         *       {
+         *            label: 'Action',
+         *            onClick: handleAction
+         *        }
+         *    ],
+         *    messages: {
+         *        success: {
+         *            title: 'Sucesso!',
+         *            content:
+         *                'Contato foi bloqueado, a partir de agora nenhuma das suas infomações serão compartilhadas com José Silva.'
+         *        },
+         *        error: {
+         *           title: 'Falha ao bloquear',
+         *            content: 'Ocorreu um erro ao tentar bloquear o contato.'
+         *        }
+         *    },
+         *    retryAction: handleAction
+         * }
+         */
+
+        handleOpenDialog = pProps => {
             this.setState({
-                isOpen: true,
-                title,
-                content,
-                actions
+                isOpen: true
             });
+
+            this.body = { ...pProps };
         };
 
+        // Fechar Dialog
         handleCloseDialog = () => {
+            this.body = {};
             this.setState({
                 ...this.initialState
             });
         };
 
+        // Altera para Dialog de sucesso
         handleSuccess = () => {
-            this.setState({ success: true }, () => {
-                setTimeout(() => {
-                    this.setState({ success: false });
-                    this.handleCloseDialog();
-                }, 2000);
-            });
+            this.setState({ ...this.state, status: 'success' });
+        };
+
+        // Altera para Dialog de erro
+        handleError = () => {
+            this.setState({ ...this.state, status: 'error' });
+        };
+
+        // Altera para Dialog de loading
+        handleFetching = () => {
+            this.setState({ ...this.state, status: 'fetching' });
+        };
+
+        // Reinicia para Dialog default
+        handleResetStatus = () => {
+            this.setState({ ...this.state, status: 'null' });
+        };
+
+        // Ação de nova tentativa do Dialog de erro
+        handleRetry = () => {
+            const { retryAction } = this.body;
+            retryAction && retryAction();
+        };
+
+        // Renders
+        titleRender = pStatus => {
+            const { title } = this.body;
+            switch (pStatus) {
+                case 'success':
+                    return <DialogTitle onClose={this.handleCloseDialog} />;
+                case 'error':
+                    return <DialogTitle onClose={this.handleCloseDialog} />;
+                case 'fetching':
+                    return null;
+                default:
+                    return (
+                        <DialogTitle
+                            {...(title.onclose === false
+                                ? {}
+                                : { onClose: this.handleCloseDialog })}>
+                            {title.label}
+                        </DialogTitle>
+                    );
+            }
+        };
+
+        contentRender = pStatus => {
+            const { content, messages, retryAction } = this.body;
+            switch (pStatus) {
+                case 'success':
+                    return (
+                        <>
+                            <DialogContentText component={'div'}>
+                                <Success
+                                    width={100}
+                                    height={100}
+                                    startAnimation
+                                />
+                            </DialogContentText>
+                            <DialogContentText component={'div'}>
+                                <Typography
+                                    variant={'h5'}
+                                    color={'textPrimary'}
+                                    align={'center'}>
+                                    {messages && messages.success
+                                        ? messages.success.title
+                                        : 'Título de Sucesso'}
+                                </Typography>
+                                <Typography
+                                    variant={'body2'}
+                                    color={'textPrimary'}
+                                    align={'center'}>
+                                    {messages && messages.success
+                                        ? messages.success.content
+                                        : 'Conteúdo da mensagem de sucesso'}
+                                </Typography>
+                            </DialogContentText>
+
+                            <div style={styles.actions}>
+                                <Button
+                                    key={'success_ok'}
+                                    variant={'outlined'}
+                                    color={'primary'}
+                                    onClick={this.handleCloseDialog}>
+                                    OK
+                                </Button>
+                            </div>
+                        </>
+                    );
+                case 'error':
+                    return (
+                        <>
+                            <DialogContentText component={'div'}>
+                                <Error
+                                    width={100}
+                                    height={100}
+                                    startAnimation
+                                />
+                            </DialogContentText>
+                            <DialogContentText component={'div'}>
+                                <Typography
+                                    variant={'h5'}
+                                    color={'textPrimary'}
+                                    align={'center'}>
+                                    {messages && messages.error
+                                        ? messages.error.title
+                                        : 'Título de Error'}
+                                </Typography>
+                                <Typography
+                                    variant={'body2'}
+                                    color={'textPrimary'}
+                                    align={'center'}>
+                                    {messages && messages.error
+                                        ? messages.error.content
+                                        : 'Conteúdo da mensagem de erro'}
+                                </Typography>
+                            </DialogContentText>
+
+                            {retryAction && (
+                                <div style={styles.actions}>
+                                    <Button
+                                        key={'success_ok'}
+                                        variant={'outlined'}
+                                        color={'primary'}
+                                        onClick={this.handleRetry}>
+                                        Tentar Novamente
+                                    </Button>
+                                </div>
+                            )}
+                        </>
+                    );
+                case 'fetching':
+                    return (
+                        <div style={styles.fetching}>
+                            <CenterInView>
+                                <Loading />
+                            </CenterInView>
+                        </div>
+                    );
+                default:
+                    return content;
+            }
+        };
+
+        actionRender = pStatus => {
+            const { actions } = this.body;
+            switch (pStatus) {
+                case 'success':
+                    return null;
+                case 'error':
+                    return null;
+                case 'fetching':
+                    return null;
+                default:
+                    return (
+                        <DialogActions>
+                            {actions.map((xAction, xIndex) => {
+                                const xActionProps = {
+                                    onClick: xAction.onClick,
+                                    color: xAction.color || 'primary',
+                                    ...(xAction.startIcon && {
+                                        startIcon: (
+                                            <Icon
+                                                iconName={xAction.startIcon}
+                                            />
+                                        )
+                                    })
+                                };
+
+                                return (
+                                    <Button key={xIndex} {...xActionProps}>
+                                        {xAction.label}
+                                    </Button>
+                                );
+                            })}
+                        </DialogActions>
+                    );
+            }
         };
 
         render() {
@@ -59,10 +280,14 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 onOpenDialog: this.handleOpenDialog,
                 onCloseDialog: this.handleCloseDialog,
                 onSuccess: this.handleSuccess,
+                onError: this.handleError,
+                onFetching: this.handleFetching,
+                onResetStatus: this.handleResetStatus,
                 ...this.props
             };
 
-            const { title, content, actions } = this.state;
+            const { status } = this.state;
+            const { title, content, actions, messages } = this.body;
 
             if (!validators.isEmpty(actions) && actions.length > 3) {
                 console.error('Não adicione mais que 4 actions para o dialog');
@@ -76,54 +301,19 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                         open={this.state.isOpen}
                         TransitionComponent={Transition}
                         onClose={this.handleCloseDialog}>
-                        {!validators.isEmpty(title) && (
-                            <DialogTitle
-                                {...(title.onclose === false
-                                    ? {}
-                                    : { onClose: this.handleCloseDialog })}>
-                                {title.label}
-                            </DialogTitle>
-                        )}
+                        {!validators.isEmpty(title) && this.titleRender(status)}
+
                         {!validators.isNull(content) &&
                             (pProps.wrapContent ? (
                                 <DialogContent>
-                                    {success ? (
-                                        <Success
-                                            width={100}
-                                            height={100}
-                                            startAnimation
-                                        />
-                                    ) : (
-                                        content
-                                    )}
+                                    {this.contentRender(status)}
                                 </DialogContent>
                             ) : (
-                                content
+                                this.contentRender(status)
                             ))}
 
-                        {!validators.isEmpty(actions) && (
-                            <DialogActions>
-                                {actions.map((xAction, xIndex) => {
-                                    const xActionProps = {
-                                        onClick: xAction.onClick,
-                                        color: xAction.color || 'primary',
-                                        ...(xAction.startIcon && {
-                                            startIcon: (
-                                                <Icon
-                                                    iconName={xAction.startIcon}
-                                                />
-                                            )
-                                        })
-                                    };
-
-                                    return (
-                                        <Button key={xIndex} {...xActionProps}>
-                                            {xAction.label}
-                                        </Button>
-                                    );
-                                })}
-                            </DialogActions>
-                        )}
+                        {!validators.isEmpty(actions) &&
+                            this.actionRender(status)}
                     </Dialog>
                 </>
             );
