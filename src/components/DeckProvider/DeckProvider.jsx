@@ -30,6 +30,13 @@ const DeckProvider = memo(props => {
         pCallback && pCallback();
     };
 
+    const handleResetState = (pActive = null, pPreview = [], pCallback) => {
+        console.log('reset deck');
+        setActive(pActive);
+        setPreview(pPreview);
+        pCallback && pCallback();
+    };
+
     useEffect(() => {
         setActive(props.initialView);
         setPreview(props.initialPrev);
@@ -44,7 +51,8 @@ const DeckProvider = memo(props => {
                     prevView,
                     isActive: isActive,
                     onNextView: handleNextView,
-                    onPrevView: handlePrevView
+                    onPrevView: handlePrevView,
+                    onReset: handleResetState
                 }}>
                 {props.children}
             </DeckContext.Provider>
