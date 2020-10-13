@@ -1,11 +1,16 @@
 import React from 'react';
 import { Typography } from '../';
+import classNames from 'classnames';
 import { validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
+import Style from './Info.module.scss';
 
 function Info(props) {
+    const xClass = classNames(props.className, {
+        [Style.gutter]: props.gutter
+    });
     return (
-        <div className={props.className}>
+        <div className={xClass}>
             <Typography
                 variant={props.variant || 'caption'}
                 color={props.labelColor || 'textSecondary'}
@@ -33,6 +38,7 @@ function Info(props) {
 }
 
 Info.propTypes = {
+    gutter: PropTypes.bool,
     label: PropTypes.string,
     date: PropTypes.string,
     className: PropTypes.string,
