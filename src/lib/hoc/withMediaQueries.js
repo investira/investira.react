@@ -5,20 +5,19 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 const withMediaQuery = Component => {
     function wrapComponent(props) {
         const theme = useTheme();
-        const isXs = useMediaQuery(theme.breakpoints.up('xs'));
-        const isSm = useMediaQuery(theme.breakpoints.up('sm'));
-        const isMd = useMediaQuery(theme.breakpoints.up('md'));
-        const isLg = useMediaQuery(theme.breakpoints.up('lg'));
-        const isXl = useMediaQuery(theme.breakpoints.up('xl'));
+        const isXs = useMediaQuery(theme.breakpoints.down('xs'));
+        const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+        const isMd = useMediaQuery(theme.breakpoints.down('md'));
+        const isLg = useMediaQuery(theme.breakpoints.down('lg'));
+        const isXl = useMediaQuery(theme.breakpoints.down('xl'));
         const xProps = {
             ...props,
             mq:
-                (isXl && 'xl') ||
-                (isLg && 'lg') ||
-                (isMd && 'md') ||
-                (isSm && 'sm') ||
-                (isXs && 'xs') ||
-                'xs'
+                (isXs && { minWidth: 0, break: 'xs' }) ||
+                (isSm && { minWidth: 600, break: 'sm' }) ||
+                (isMd && { minWidth: 960, break: 'md' }) ||
+                (isLg && { minWidth: 1280, break: 'lg' }) ||
+                (isXl && { minWidth: 1920, break: 'xl' })
         };
 
         return <Component {...xProps} />;
