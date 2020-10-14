@@ -17,7 +17,8 @@ const withMediaQuery = Component => {
                 (isLg && 'lg') ||
                 (isMd && 'md') ||
                 (isSm && 'sm') ||
-                (isXs && 'xs')
+                (isXs && 'xs') ||
+                'xs'
         };
 
         return <Component {...xProps} />;
