@@ -6,9 +6,14 @@ import { DeckContext } from '../';
 const DeckProvider = memo(props => {
     const [activeView, setActive] = useState(null);
     const [prevView, setPreview] = useState([]);
+    const [beforeView, setBeforeView] = useState(null);
 
     const isActive = pId => {
         return pId === activeView;
+    };
+
+    const isBefore = pId => {
+        return pId === beforeView;
     };
 
     const handleNextView = pId => {
@@ -16,6 +21,7 @@ const DeckProvider = memo(props => {
 
         setActive(pId);
         setPreview(xPrevView);
+        setBeforeView(activeView);
     };
 
     const handlePrevView = pCallback => {
@@ -25,6 +31,7 @@ const DeckProvider = memo(props => {
 
             setActive(xActive);
             setPreview(xPrevView);
+            setBeforeView(activeView);
         }
 
         pCallback && pCallback();
@@ -49,7 +56,9 @@ const DeckProvider = memo(props => {
                     ...props.value,
                     activeView,
                     prevView,
-                    isActive: isActive,
+                    isActive,
+                    isBefore,
+                    beforeView,
                     onNextView: handleNextView,
                     onPrevView: handlePrevView,
                     onReset: handleResetState
