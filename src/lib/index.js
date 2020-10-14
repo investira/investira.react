@@ -26,3 +26,4 @@ export { default as pouchStorage } from './storage/pouchStorage';
 export { default as withDialog } from './hoc/withDialog';
 export { default as withRedux } from './hoc/withRedux';
 export { default as infiniteScroll } from './hoc/infiniteScroll';
+export { default as withMediaQuery } from './hoc/withMediaQuery';
