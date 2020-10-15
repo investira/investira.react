@@ -5,18 +5,15 @@ import Style from './Placeholder.module.scss';
 
 class Placeholder extends Component {
     render() {
-        const { width, height, words, lines } = this.props;
+        const { width, height, words, lines, radius } = this.props;
         const elems = [];
 
-        let placeholderStyle = { display: 'inline-block' };
-
-        if (width != null) {
-            placeholderStyle.width = width;
-        }
-
-        if (height != null) {
-            placeholderStyle.height = height;
-        }
+        let placeholderStyle = {
+            display: 'inline-block',
+            ...(width && { width }),
+            ...(height && { height }),
+            ...(radius && { borderRadius: radius })
+        };
 
         if (words) {
             for (let i = 0; i < words; i++) {
@@ -51,7 +48,8 @@ Placeholder.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     lines: PropTypes.number,
-    words: PropTypes.number
+    words: PropTypes.number,
+    radius: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 Placeholder.defaultProps = {
@@ -59,7 +57,8 @@ Placeholder.defaultProps = {
     height: '0.5rem',
     circle: false,
     lines: 1,
-    variant: 'p'
+    variant: 'p',
+    radius: '4px'
 };
 
 export default Placeholder;
