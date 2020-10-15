@@ -33,12 +33,14 @@ class ListVirtual extends PureComponent {
     };
 
     loadMoreRows = ({ startIndex, stopIndex }) => {
-        //console.log('loadMoreRows', { startIndex, stopIndex });
+        console.log('loadMoreRows', { startIndex, stopIndex });
         const { nextPage, onNextPage } = this.props;
+        console.log(nextPage);
         const xSize = this.props.list.length;
 
         if (startIndex > xSize / 2 && stopIndex <= xSize - 1 && nextPage) {
             const xParams = strings.querystringToObject(nextPage);
+            console.log(xParams);
             onNextPage && onNextPage(xParams);
         }
     };
@@ -102,6 +104,7 @@ class ListVirtual extends PureComponent {
                 <InfiniteLoader
                     isRowLoaded={this.isRowLoaded}
                     loadMoreRows={this.loadMoreRows}
+                    //isRowLoaded={pValue => console.log(pValue)}
                     rowCount={xRowCount}>
                     {({ onRowsRendered, registerChild }) => (
                         <AutoSizer>
@@ -118,7 +121,9 @@ class ListVirtual extends PureComponent {
                                     rowHeight={this.cache.rowHeight}
                                     rowRenderer={this.renderRow}
                                     rowCount={xRowCount}
-                                    overscanRowCount={10}
+                                    overscanRowCount={
+                                        this.props.overscanRowCount
+                                    }
                                 />
                             )}
                         </AutoSizer>
@@ -140,12 +145,14 @@ ListVirtual.propTypes = {
     className: PropTypes.object,
     itemProps: PropTypes.object,
     onEnter: PropTypes.func,
-    onExited: PropTypes.func
+    onExited: PropTypes.func,
+    overscanRowCount: PropTypes.number
 };
 
 ListVirtual.defaultProps = {
     itemProps: {},
-    list: []
+    list: [],
+    overscanRowCount: 10
 };
 
 export default ListVirtual;
