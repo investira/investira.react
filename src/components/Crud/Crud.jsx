@@ -45,10 +45,7 @@ const Crud = memo(
                 const { itemData, onDelete } = crudContext;
                 const xData = pData || itemData;
 
-                console.log(deckContext);
-
                 if (deckContext) {
-                    console.log('Delete com Deck');
                     onDelete(xData, {
                         resolve: () => {
                             handleCloseDialog();
@@ -64,7 +61,6 @@ const Crud = memo(
                         }
                     });
                 } else {
-                    console.log('Delete sem Deck');
                     onDelete(xData, {
                         resolve: handleCloseDialog,
                         reject: () => {
@@ -114,10 +110,10 @@ const Crud = memo(
 
             const handleDeleteDialog = (pProps = {}) => {
                 console.log(pProps);
-                const { message, data } = pProps;
+                const { message, data, title, labelButton } = pProps;
                 handleOpenDialog({
                     title: {
-                        label: 'Está certo disto?',
+                        label: title || 'Está certo disto?',
                         onclose: true
                     },
                     content: (
@@ -129,7 +125,7 @@ const Crud = memo(
                     ),
                     actions: [
                         {
-                            label: 'Confirmar',
+                            label: labelButton || 'Confirmar',
                             onClick: () => onConfirmDelete(data)
                         }
                     ]
