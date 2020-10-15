@@ -12,6 +12,9 @@ import { validators, strings } from 'investira.sdk';
 
 import Style from './ListVirtual.module.scss';
 
+const STATUS_LOADING = 1;
+const STATUS_LOADED = 2;
+
 class ListVirtual extends PureComponent {
     constructor() {
         super();
@@ -22,6 +25,14 @@ class ListVirtual extends PureComponent {
             defaultHeight: 100
             //keyMapper: index => this.props.list[index]
         });
+
+        this.timeoutIdMap = {};
+
+        this.state = {
+            loadedRowCount: 0,
+            loadedRowsMap: {},
+            loadingRowCount: 0
+        };
     }
 
     hasListData = pList => {
@@ -29,13 +40,45 @@ class ListVirtual extends PureComponent {
     };
 
     isRowLoaded = ({ index }) => {
+        const { loadedRowsMap } = this.state;
+        return !!loadedRowsMap[index];
         //console.log(index);
     };
 
     loadMoreRows = ({ startIndex, stopIndex }) => {
-        console.log('loadMoreRows', { startIndex, stopIndex });
         const { nextPage, onNextPage } = this.props;
-        console.log(nextPage);
+        const { loadedRowsMap, loadingRowCount } = this.state;
+
+        const xIncrement = stopIndex - startIndex + 1;
+
+        for (let xI = startIndex; xI <= stopIndex; xI++) {
+            loadedRowsMap[xI] = STATUS_LOADING;
+        }
+
+        this.setState({
+            loadingRowCount: loadingRowCount + xIncrement
+        });
+
+        const timeoutId = setTimeout(() => {
+            const { loadedRowCount, loadingRowCount } = this.state;
+
+            delete this.timeoutIdMap[timeoutId];
+
+            for (let xI = startIndex; xI <= stopIndex; xI++) {
+                loadedRowsMap[xI] = STATUS_LOADED;
+            }
+
+            this.setState({
+                loadingRowCount: loadingRowCount - xIncrement,
+                loadedRowCount: loadedRowCount + xIncrement
+            });
+
+            promiseResolver();
+        }, 1000);
+
+        let promiseResolver;
+
+        // Realiza request se tiver mais páginas
         const xSize = this.props.list.length;
 
         if (startIndex > xSize / 2 && stopIndex <= xSize - 1 && nextPage) {
@@ -43,11 +86,21 @@ class ListVirtual extends PureComponent {
             console.log(xParams);
             onNextPage && onNextPage(xParams);
         }
+
+        return new Promise(resolve => {
+            promiseResolver = resolve;
+        });
     };
 
     renderRow({ index, key, style, parent }) {
         const Component = this.props.item;
         const { keyName, ...othersItemProps } = this.props.itemProps;
+
+        const { list } = this.props;
+        const { loadedRowsMap } = this.state;
+
+        const isLoaded = loadedRowsMap[index] === STATUS_LOADED;
+
         return (
             <CellMeasurer
                 key={key}
@@ -57,9 +110,10 @@ class ListVirtual extends PureComponent {
                 rowIndex={index}>
                 <div key={key} style={style}>
                     <Component
+                        isLoaded={isLoaded}
                         key={`Item-${key}`}
                         index={index}
-                        data={this.props.list[index]}
+                        data={list[index]}
                         {...othersItemProps}
                     />
                 </div>
@@ -80,13 +134,8 @@ class ListVirtual extends PureComponent {
             this.props.list.indexOf(value)
         );
         newRowsIndex.forEach(index => {
-            //console.log(index);
             this.cache.clear(index);
         });
-
-        //console.log([...newRowsIndex]);
-
-        //console.log(Math.min(...newRowsIndex));
 
         newRowsIndex.length &&
             this._list.recomputeRowHeights(Math.min(...newRowsIndex));
@@ -104,7 +153,6 @@ class ListVirtual extends PureComponent {
                 <InfiniteLoader
                     isRowLoaded={this.isRowLoaded}
                     loadMoreRows={this.loadMoreRows}
-                    //isRowLoaded={pValue => console.log(pValue)}
                     rowCount={xRowCount}>
                     {({ onRowsRendered, registerChild }) => (
                         <AutoSizer>
@@ -113,6 +161,7 @@ class ListVirtual extends PureComponent {
                                     //ref={registerChild}
                                     ref={element => {
                                         this._list = element;
+                                        registerChild(element);
                                     }}
                                     width={width}
                                     onRowsRendered={onRowsRendered}
