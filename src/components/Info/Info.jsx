@@ -10,7 +10,7 @@ function Info(props) {
         [Style.gutter]: props.gutter
     });
     return (
-        <div className={xClass}>
+        <div onClick={props.onClick} className={xClass}>
             <Typography
                 variant={props.variant || 'caption'}
                 color={props.labelColor || 'textSecondary'}
@@ -21,14 +21,14 @@ function Info(props) {
             {validators.isEmpty(props.value) ? (
                 <Typography
                     variant={props.variantValue || 'caption'}
-                    color={'textPrimary'}
+                    color={props.valueColor || 'textPrimary'}
                     component="p">
                     --
                 </Typography>
             ) : (
                 <Typography
                     variant={props.variantValue || props.variant || 'caption'}
-                    color={'textPrimary'}
+                    color={props.valueColor || 'textPrimary'}
                     component="p">
                     {props.value}
                 </Typography>
@@ -38,6 +38,7 @@ function Info(props) {
 }
 
 Info.propTypes = {
+    onClick: PropTypes.func,
     gutter: PropTypes.bool,
     label: PropTypes.string,
     date: PropTypes.string,
@@ -45,6 +46,7 @@ Info.propTypes = {
     variant: PropTypes.string,
     variantValue: PropTypes.string,
     labelColor: PropTypes.string,
+    valueColor: PropTypes.string,
     value: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.string,
