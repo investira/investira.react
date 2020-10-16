@@ -113,7 +113,7 @@ class ListVirtual extends PureComponent {
                         isLoaded={isLoaded}
                         key={`Item-${key}`}
                         index={index}
-                        data={list[index]}
+                        data={list[index] || {}}
                         {...othersItemProps}
                     />
                 </div>
@@ -146,7 +146,8 @@ class ListVirtual extends PureComponent {
             [Style.emptyList]: this.hasListData(this.props.list)
         });
 
-        const xRowCount = this.props.list.length;
+        //const xRowCount = this.props.list.length;
+        const xRowCount = this.props.totalItens || this.props.list.length;
 
         return (
             <div className={xClassRoot}>
