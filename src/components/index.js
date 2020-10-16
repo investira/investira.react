@@ -27,6 +27,7 @@ export { default as IconDatePicker } from './IconDatePicker';
 export { default as InfiniteScroller } from './InfiniteScroller';
 export { default as Info } from './Info';
 export { default as InfoBar } from './InfoBar';
+export { default as InfoBool } from './InfoBool';
 export { default as InfoDates } from './InfoDates';
 export { default as InputCurrency } from './InputCurrency';
 export { default as LogReader } from './LogReader';
