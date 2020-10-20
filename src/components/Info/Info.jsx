@@ -7,28 +7,37 @@ import Style from './Info.module.scss';
 
 function Info(props) {
     const xClass = classNames(props.className, {
-        [Style.gutter]: props.gutter
+        [Style.gutter]: props.gutter,
+        [Style.horizontal]: props.direction === 'horizontal'
+    });
+    const xClassMargin = classNames({
+        [Style.margin]: props.direction === 'horizontal'
     });
     return (
         <div onClick={props.onClick} className={xClass}>
-            <Typography
-                variant={props.variant || 'caption'}
-                color={props.labelColor || 'textSecondary'}
-                component="p">
-                {props.label}
-            </Typography>
-
+            <div className={xClassMargin}>
+                <Typography
+                    variant={props.variant}
+                    color={props.labelColor}
+                    gutterBottom={props.gutterBottom}
+                    component="p">
+                    {props.label}
+                    {props.colon && ':'}
+                </Typography>
+            </div>
             {validators.isEmpty(props.value) ? (
                 <Typography
-                    variant={props.variantValue || 'caption'}
-                    color={props.valueColor || 'textPrimary'}
+                    variant={props.variantValue}
+                    color={props.valueColor}
+                    gutterBottom={props.gutterBottom}
                     component="p">
                     --
                 </Typography>
             ) : (
                 <Typography
-                    variant={props.variantValue || props.variant || 'caption'}
-                    color={props.valueColor || 'textPrimary'}
+                    variant={props.variantValue || props.variant}
+                    color={props.valueColor}
+                    gutterBottom={props.gutterBottom}
                     component="p">
                     {props.value}
                 </Typography>
@@ -37,9 +46,22 @@ function Info(props) {
     );
 }
 
+Info.defaultProps = {
+    variant: 'caption',
+    labelColor: 'textSecondary',
+    gutterBottom: true,
+    valueColor: 'textPrimary',
+    variantValue: 'caption',
+    direction: 'vertical',
+    colon: false
+};
+
 Info.propTypes = {
     onClick: PropTypes.func,
+    direction: PropTypes.oneOf(['vertical', 'horizontal']),
+    colon: PropTypes.bool,
     gutter: PropTypes.bool,
+    gutterBottom: PropTypes.bool,
     label: PropTypes.string,
     date: PropTypes.string,
     className: PropTypes.string,
