@@ -20,7 +20,8 @@ export const componentsTheme = {
         secondary: {
             light: '#7a81ab',
             main: '#2e2e46',
-            dark: '#191b2a',
+            dark: '#26263b',
+            darkness: '#191b2a',
             contrastText: 'rgba(255, 255, 255, .87)'
         },
         error: {
