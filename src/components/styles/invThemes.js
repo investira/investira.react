@@ -31,10 +31,10 @@ export const themePrimary = {
             },
             MuiTooltip: {
                 tooltip: {
-                    backgroundColor: base.colors.secondary.light,
-                    color: base.colors.secondary.dark,
+                    backgroundColor: base.colors.secondary.dark,
+                    color: base.colors.secondary.light,
                     borderRadius: '8px',
-                    boxShadow: base.shadows[2]
+                    boxShadow: base.shadows[3]
                 }
             },
             MuiTableCell: {
