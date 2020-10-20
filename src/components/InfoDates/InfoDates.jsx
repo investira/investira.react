@@ -8,7 +8,7 @@ function InfoDates(props) {
     return (
         <div className={props.className}>
             <Typography
-                variant={props.labelVariant || 'caption'}
+                variant={props.labelVariant}
                 color={'textSecondary'}
                 component="p">
                 {props.label}
@@ -16,14 +16,14 @@ function InfoDates(props) {
 
             {validators.isEmpty(props.time) ? (
                 <Typography
-                    variant={props.timeVariant || 'caption'}
+                    variant={props.timeVariant}
                     color={'textPrimary'}
                     component="p">
                     --
                 </Typography>
             ) : (
                 <Typography
-                    variant={props.timeVariant || 'caption'}
+                    variant={props.timeVariant}
                     color={'textPrimary'}
                     component="p">
                     {props.variant === 'custom' &&
@@ -40,6 +40,12 @@ function InfoDates(props) {
         </div>
     );
 }
+
+InfoDates.defaultProps = {
+    variant: 'caption',
+    labelVariant: 'caption',
+    timeVariant: 'caption'
+};
 
 InfoDates.propTypes = {
     className: PropTypes.string,

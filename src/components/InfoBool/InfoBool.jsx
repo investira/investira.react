@@ -11,15 +11,24 @@ function InfoBool(props) {
     return (
         <div className={xClass}>
             <Typography
-                variant={props.variant || 'caption'}
-                color={props.labelColor || 'textSecondary'}
+                variant={props.variant}
+                color={props.labelColor}
                 component="p">
                 {props.label}
             </Typography>
-            <Icon color={props.value ? "greenLight" : "danger"} iconName={props.value ? "check" : "cancel"}/>
+            <Icon
+                color={props.value ? 'greenLight' : 'danger'}
+                iconName={props.value ? 'check' : 'cancel'}
+                size={props.value ? 24 : 18}
+            />
         </div>
     );
 }
+
+InfoBool.defaultProps = {
+    variant: 'caption',
+    labelColor: 'textSecondary'
+};
 
 InfoBool.propTypes = {
     onClick: PropTypes.func,

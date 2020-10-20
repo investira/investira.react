@@ -10,8 +10,8 @@ function InfoBar(props) {
     return (
         <div className={props.className}>
             <Typography
-                variant={props.variant || 'caption'}
-                color={props.labelColor || 'textSecondary'}
+                variant={props.variant}
+                color={props.labelColor}
                 component="p">
                 {props.label}
             </Typography>
@@ -22,7 +22,7 @@ function InfoBar(props) {
 
             {!validators.isEmpty(props.caption) && (
                 <Typography
-                    variant={props.captionVariant || 'caption'}
+                    variant={props.captionVariant}
                     color={'textPrimary'}
                     component="p">
                     {props.caption}
@@ -31,6 +31,12 @@ function InfoBar(props) {
         </div>
     );
 }
+
+InfoBar.defaultProps = {
+    variant: 'caption',
+    labelColor: 'textSecondary',
+    captionVariant: 'caption'
+};
 
 InfoBar.propTypes = {
     label: PropTypes.string,
