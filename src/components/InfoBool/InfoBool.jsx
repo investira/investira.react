@@ -8,6 +8,9 @@ function InfoBool(props) {
     const xClass = classNames(props.className, Style.root, {
         [Style.gutter]: props.gutter
     });
+    const xClassIcon = classNames({
+        [Style.cancel]: !props.value
+    });
     return (
         <div className={xClass}>
             <Typography
@@ -16,11 +19,13 @@ function InfoBool(props) {
                 component="p">
                 {props.label}
             </Typography>
-            <Icon
-                color={props.value ? 'greenLight' : 'danger'}
-                iconName={props.value ? 'check' : 'cancel'}
-                size={props.value ? 24 : 18}
-            />
+            <div className={xClassIcon}>
+                <Icon
+                    color={props.value ? 'greenLight' : 'danger'}
+                    iconName={props.value ? 'check' : 'cancel'}
+                    size={props.value ? 24 : 16}
+                />
+            </div>
         </div>
     );
 }
