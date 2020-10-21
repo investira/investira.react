@@ -8,6 +8,7 @@ import Style from './Info.module.scss';
 function Info(props) {
     const xClass = classNames(props.className, {
         [Style.gutter]: props.gutter,
+        [Style.gutterLeft]: props.gutterLeft,
         [Style.horizontal]: props.direction === 'horizontal'
     });
     const xClassMargin = classNames({
