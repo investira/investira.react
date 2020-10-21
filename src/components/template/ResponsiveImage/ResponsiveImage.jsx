@@ -1,49 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
 import noImage from './thumb_no_image.gif';
 import noImage2x from './thumb_no_image@2x.gif';
 import noImage3x from './thumb_no_image@3x.gif';
+
 import Style from './ResponsiveImage.module.scss';
 
 const ResponsiveImage = props => {
-    const imagesSource = [];
-    const imagesSrcSet = [];
+    let imagesSource = [];
+    let imagesSrcSet = [];
+
+    const xErrorSet = [
+        { srcSet: `${noImage} 1x, ${noImage2x} 2x, ${noImage3x} 3x` }
+    ];
+    const xPlaceholderSet = props.placeholder;
 
     const [hasError, setHasError] = useState(false);
-
-    // Em caso de erro no carregamento da imagem
-    const handleError = pImage => {
-        setHasError(true);
-        props.error && props.error(false);
-    };
+    const [show, setShow] = useState(false);
 
     // Separara o que deve ser instanciado como source e srcset
     const filterImages = pSource => {
+        imagesSource = [];
+        imagesSrcSet = [];
         for (const xItem of pSource) {
             if (xItem.media || xItem.type) {
                 imagesSource.push(xItem);
             } else {
+                console.log(xItem);
                 imagesSrcSet.push(xItem);
             }
         }
     };
 
-    filterImages(props.source);
+    // Em caso de erro no carregamento da imagem
+    const handleError = _pImage => {
+        if (!hasError) {
+            setHasError(true);
+            props.error && props.error(true);
+        }
+    };
 
-    return hasError ? (
-        <div className={Style.root}>
-            <picture className={Style.picture}>
-                <img
-                    id={props.id}
-                    className={props.className || Style.img}
-                    srcSet={`${noImage} 1x, ${noImage2x} 2x, ${noImage3x} 3x`}
-                    src={noImage}
-                    alt={props.alt}
-                    type={props.type}
-                />
-            </picture>
-        </div>
-    ) : (
+    if (hasError) {
+        const xSet = xPlaceholderSet || xErrorSet;
+        filterImages(xSet);
+    } else {
+        filterImages(props.source);
+    }
+
+    const xClassImage = classNames(props.className, Style.img, {
+        [Style.show]: show
+    });
+
+    return (
         <div className={Style.root}>
             <picture className={Style.picture}>
                 {imagesSource.map((image, index) => {
@@ -60,10 +70,11 @@ const ResponsiveImage = props => {
                 {imagesSrcSet[0] ? (
                     <img
                         id={props.id}
-                        className={props.className || Style.img}
+                        className={xClassImage || Style.img}
                         srcSet={imagesSrcSet[0].srcSet}
                         alt={props.alt}
                         type={props.type}
+                        onLoad={() => setShow(true)}
                         onError={handleError}
                     />
                 ) : null}
