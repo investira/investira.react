@@ -7,8 +7,8 @@ import Style from './Info.module.scss';
 
 function Info(props) {
     const xClass = classNames(props.className, {
-        [Style.gutter]: props.gutter,
-        [Style.gutterLeft]: props.gutterLeft,
+        [Style.gutter]: props.gutter === 'full',
+        [Style.gutterLeft]: props.gutter === 'left',
         [Style.horizontal]: props.direction === 'horizontal'
     });
     const xClassMargin = classNames({
@@ -61,7 +61,7 @@ Info.propTypes = {
     onClick: PropTypes.func,
     direction: PropTypes.oneOf(['vertical', 'horizontal']),
     colon: PropTypes.bool,
-    gutter: PropTypes.bool,
+    gutter: PropTypes.oneOf(['left', 'full']),
     gutterBottom: PropTypes.bool,
     label: PropTypes.string,
     date: PropTypes.string,
