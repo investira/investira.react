@@ -270,12 +270,12 @@ export const themePrimary = {
                 // }
             },
             MuiTypography: {
-                h4: {
-                    fontWeight: 600
-                },
-                h6: {
-                    fontWeight: 600
-                }
+                // h4: {
+                //     fontWeight: 600
+                // },
+                // h6: {
+                //     fontWeight: 600
+                // }
             },
             MuiRadio: {
                 root: {
