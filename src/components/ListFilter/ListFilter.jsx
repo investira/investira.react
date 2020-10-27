@@ -173,7 +173,7 @@ const SearchFilters = memo(props => {
             {({ onRead }) => {
                 return (
                     <div className={Style.root}>
-                        <div className={Style.filtersWarp}>
+                        <div className={Style.filtersWrap}>
                             <div className={Style.horizontalScrollable}>
                                 {props.filters &&
                                     props.filters.map((xFilter, xIndex) => {

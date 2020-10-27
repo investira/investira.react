@@ -25,9 +25,10 @@
     }
 }
 
-.filtersWarp {
+.filtersWrap {
     height: 48px;
     overflow: hidden;
+    padding: 0 16px;
 }
 
 .item {
@@ -48,7 +49,7 @@
     overflow: hidden;
 
     .item {
-        &>div[role='button'] {
+        & > div[role='button'] {
             border: none;
         }
     }
