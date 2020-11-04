@@ -15,8 +15,9 @@ const CrudProvider = memo(props => {
         props.actions.onRead && props.actions.onRead(pParams);
     };
 
-    const onReadOne = pData => {
+    const onReadOne = (pData, pCallback) => {
         setItemData(pData);
+        pCallback && pCallback(pData);
     };
 
     const onUpdate = (pValues, pActions) => {
