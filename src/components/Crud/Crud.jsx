@@ -39,7 +39,7 @@ const Crud = memo(
             const crudContext = useContext(CrudContext);
             const deckContext = useContext(DeckContext);
 
-            const { onNextView, onPrevView, prevView } = deckContext;
+            const { onNextView, onPrevView, prevView, onReset } = deckContext;
 
             const onConfirmDelete = pData => {
                 const { itemData, onDelete } = crudContext;
@@ -77,6 +77,7 @@ const Crud = memo(
                     ...pActions,
                     onNextView,
                     onPrevView,
+                    onReset,
                     prevView
                 });
             };
@@ -86,6 +87,7 @@ const Crud = memo(
                     ...pActions,
                     onNextView,
                     onPrevView,
+                    onReset,
                     prevView
                 });
             };
