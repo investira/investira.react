@@ -10,6 +10,7 @@ import CrudContext from '../CrudContext';
 import Style from './ListFilter.module.scss';
 
 const SearchFilters = memo(props => {
+    console.log(props);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelected] = React.useState([]);
     const [filters, setFilters] = useState([]);
@@ -51,9 +52,11 @@ const SearchFilters = memo(props => {
     };
 
     const handleSelect = pFilter => {
+         console.log(pFilter)
         const {
             action,
             filterIndex,
+            filterLabel,
             filterOptions,
             filterParam,
             optionIndex
@@ -63,9 +66,13 @@ const SearchFilters = memo(props => {
 
         xFilters[filterIndex] = {
             ...filterOptions[optionIndex],
-            param: filterParam
+            param: filterParam,
+            field: filterLabel
         };
+
         xSelected[filterIndex] = [optionIndex];
+
+        console.log(xSelected);
 
         setSelected(xSelected);
         setFilters(xFilters);
@@ -77,6 +84,7 @@ const SearchFilters = memo(props => {
         const {
             action,
             filterIndex,
+            filterLabel,
             filterOptions,
             filterParam,
             optionIndex
@@ -126,6 +134,7 @@ const SearchFilters = memo(props => {
             xFilters[filterIndex] = {
                 label: xNewLabel,
                 param: filterParam,
+                field: filterLabel,
                 value: valuesSelectedRef.current.toString()
             };
         } else {
@@ -238,6 +247,7 @@ const SearchFilters = memo(props => {
                                                                     onClick={() =>
                                                                         handleMenuItemClick(
                                                                             {
+                                                                                filterLabel: xFilter.label,
                                                                                 type:
                                                                                     xFilter.type,
                                                                                 filterParam:
@@ -269,6 +279,7 @@ const SearchFilters = memo(props => {
                                 {filters &&
                                     filters.map((xFilter, xIndex) => {
                                         if (xFilter) {
+                                            console.log(xFilter);
                                             return (
                                                 <div
                                                     className={Style.item}
@@ -276,7 +287,7 @@ const SearchFilters = memo(props => {
                                                     <Chip
                                                         variant={'outlined'}
                                                         color={'primary'}
-                                                        label={xFilter.label}
+                                                        label={`${xFilter.field}: ${xFilter.label}`}
                                                         size={'small'}
                                                         onDelete={() =>
                                                             handleRemove({

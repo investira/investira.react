@@ -47,6 +47,7 @@
 .selected {
     height: 32px;
     overflow: hidden;
+    padding: 0 16px;
 
     .item {
         & > div[role='button'] {
