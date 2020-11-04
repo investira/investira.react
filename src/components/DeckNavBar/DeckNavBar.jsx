@@ -47,7 +47,7 @@ DeckNavBar.propTypes = {
     right: PropTypes.object,
     center: PropTypes.object,
     onBack: PropTypes.func,
-    rightBehavior: PropTypes.oneOf(['default', 'inverted', 'visibled'])
+    rightBehavior: PropTypes.oneOf(['default', 'inverted', 'visible'])
 };
 
 DeckNavBar.defaultProps = {
