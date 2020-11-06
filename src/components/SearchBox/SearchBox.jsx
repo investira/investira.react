@@ -14,7 +14,7 @@ import Style from './SearchBox.module.scss';
 let timeout = null;
 
 const SearchBox = forwardRef((props, ref) => {
-    const [clearBtn, setClearBtn] = useState(false);
+    const [clearBtn, setClearBtn] = useState(!validators.isNull(props.value));
     const [value, setValue] = useState(props.value || '');
     const [querySplited, setQuerySplited] = useState(
         props.value ? props.value.split(' ') : []

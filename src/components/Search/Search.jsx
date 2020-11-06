@@ -44,6 +44,7 @@ const Search = forwardRef((props, ref) => {
                     <div className={Style.padding}>
                         <SearchBox
                             ref={ref}
+                            value={props.value}
                             onChange={handleSearch}
                             placeholder={props.placeholder}
                             clearCallback={handleClear}
