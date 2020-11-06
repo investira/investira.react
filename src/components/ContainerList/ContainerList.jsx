@@ -2,10 +2,12 @@ import React, { memo } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import { Typography } from "../";
+
 import Style from './ContainerList.module.scss';
 
 const ContainerList = memo(props => {
-    const { search, filter } = props;
+    const { search, filter, bottomLabel } = props;
 
     const xClassRoot = classNames(Style.root, {
         [Style.withSearch]: search && !filter,
@@ -22,6 +24,7 @@ const ContainerList = memo(props => {
         <div className={xClassRoot}>
             {search && <div className={Style.searchArea}>{search}</div>}
             {filter && <div className={Style.filterArea}>{filter}</div>}
+            {bottomLabel && <div className={Style.bottomLabelArea}>{<Typography variant={'caption'} color={'textSecondary'}>{bottomLabel}</Typography>}</div>}
             <div className={Style.listArea}>{props.children}</div>
         </div>
     );
@@ -30,6 +33,7 @@ const ContainerList = memo(props => {
 ContainerList.propTypes = {
     search: PropTypes.node,
     filters: PropTypes.node,
+    bottomLabel: PropTypes.node,
     children: PropTypes.node.isRequired
 };
 
