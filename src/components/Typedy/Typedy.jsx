@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
 import Typed from 'typed.js';
 import PropTypes from 'prop-types';
-import Style from './Typedy.module.scss';
 
 class Typedy extends PureComponent {
-
     componentDidMount() {
         const {
             strings,
@@ -33,11 +31,10 @@ class Typedy extends PureComponent {
 
     render() {
         return (
-                    <span
-                        ref={xElem => {
-                            this.elem = xElem;
-                        }}
-                        ></span>
+            <span
+                ref={xElem => {
+                    this.elem = xElem;
+                }}></span>
         );
     }
 }

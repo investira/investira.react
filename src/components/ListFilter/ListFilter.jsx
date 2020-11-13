@@ -2,8 +2,6 @@ import React, { memo, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { validators } from 'investira.sdk';
-
 import { Chip, Menu, MenuItem } from '../';
 import CrudContext from '../CrudContext';
 
@@ -52,7 +50,6 @@ const SearchFilters = memo(props => {
     };
 
     const handleSelect = pFilter => {
-         console.log(pFilter)
         const {
             action,
             filterIndex,
@@ -247,7 +244,8 @@ const SearchFilters = memo(props => {
                                                                     onClick={() =>
                                                                         handleMenuItemClick(
                                                                             {
-                                                                                filterLabel: xFilter.label,
+                                                                                filterLabel:
+                                                                                    xFilter.label,
                                                                                 type:
                                                                                     xFilter.type,
                                                                                 filterParam:
@@ -279,7 +277,7 @@ const SearchFilters = memo(props => {
                                 {filters &&
                                     filters.map((xFilter, xIndex) => {
                                         if (xFilter) {
-                                            console.log(xFilter);
+                                            // console.log(xFilter);
                                             return (
                                                 <div
                                                     className={Style.item}
@@ -300,6 +298,8 @@ const SearchFilters = memo(props => {
                                                     />
                                                 </div>
                                             );
+                                        } else {
+                                            return null;
                                         }
                                     })}
                             </div>

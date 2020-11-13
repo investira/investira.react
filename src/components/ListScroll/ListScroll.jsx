@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InfiniteScroller from '../InfiniteScroller';
 import ContentList from '../ContentList';
 
-import Style from './ListScroll.module.scss';
+// import Style from './ListScroll.module.scss';
 
 const ListScroll = memo(props => {
     const { onNextPage, nextPage, list, item, emptyMessage, itemProps } = props;

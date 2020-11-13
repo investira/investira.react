@@ -86,7 +86,7 @@ class LogReader extends PureComponent {
             string: this.readString
         };
 
-        let xData = pData;
+        // let xData = pData;
 
         reader[pType](pData, pElem);
     };

@@ -75,6 +75,8 @@ const displays = {
             .map((xString, xIndex) => {
                 if (xString !== null && xIndex <= xSize && xString !== 'null') {
                     return xString.charAt(0).toUpperCase();
+                } else {
+                    return null;
                 }
             })
             .join('');

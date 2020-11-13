@@ -122,12 +122,12 @@ export class SlideView extends Component {
             let xSlideChildWidth = this.slideChildRef.current.offsetWidth;
             let xWrapWidth = xSlideWidth;
 
-            const xNewState = {
-                wrapWidth: xWrapWidth,
-                slideWidth: xSlideWidth,
-                slideChildWidth: xSlideChildWidth,
-                slideCount: xChildCount
-            };
+            // const xNewState = {
+            //     wrapWidth: xWrapWidth,
+            //     slideWidth: xSlideWidth,
+            //     slideChildWidth: xSlideChildWidth,
+            //     slideCount: xChildCount
+            // };
 
             this.setState({
                 wrapWidth: xWrapWidth,

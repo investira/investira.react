@@ -287,7 +287,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             };
 
             const { status } = this.state;
-            const { title, content, actions, messages } = this.body;
+            const { title, content, actions } = this.body;
 
             if (!validators.isEmpty(actions) && actions.length > 3) {
                 console.error('Não adicione mais que 4 actions para o dialog');

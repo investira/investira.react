@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { objects, numbers } from 'investira.sdk';
+import { objects } from 'investira.sdk';
 
 const renders = {
     /**

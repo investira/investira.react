@@ -60,10 +60,10 @@ const FriendlyDatePicker = props => {
         [classes.disabled]: props.disabled
     });
 
-    const xClassMonthYear = classNames(classes.monthYear, {
-        [classes.locked]: props.locked,
-        [classes.disabled]: props.disabled
-    });
+    // const xClassMonthYear = classNames(classes.monthYear, {
+    //     [classes.locked]: props.locked,
+    //     [classes.disabled]: props.disabled
+    // });
 
     return (
         <div className={classes.root}>
