@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'investiraComponents';
+import Typography from '../wrapper-material-ui/Typography';
 import { formats, validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
 

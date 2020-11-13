@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Tooltip } from 'investiraComponents';
+import Icon from '../Icon';
+import Tooltip from '../wrapper-material-ui/Tooltip';
 import Style from './CopyToClipboard.module.scss';
 
 class CopyToClipboard extends PureComponent {

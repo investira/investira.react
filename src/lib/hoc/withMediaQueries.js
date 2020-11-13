@@ -3,7 +3,7 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const withMediaQuery = Component => {
-    function wrapComponent(props) {
+    function WrapComponent(props) {
         const theme = useTheme();
         const isXs = useMediaQuery(theme.breakpoints.down('xs'));
         const isSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -23,7 +23,7 @@ const withMediaQuery = Component => {
         return <Component {...xProps} />;
     }
 
-    return wrapComponent;
+    return WrapComponent;
 };
 
 export default withMediaQuery;

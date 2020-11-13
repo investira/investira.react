@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { validators } from 'investira.sdk';
 
 import { CenterInView } from '../template';
-import { Typography } from 'investiraComponents';
+import Typography from '../wrapper-material-ui/Typography';
 
 import Style from './ContentList.module.scss';
 
