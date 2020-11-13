@@ -23,7 +23,7 @@ function Info(props) {
                     gutterBottom={props.gutterBottom}
                     component="p">
                     {props.label}
-                    {props.colon && ':'}
+                    {(props.colon || props.direction === 'horizontal') && ':'}
                 </Typography>
             </div>
             {validators.isEmpty(props.value) ? (
