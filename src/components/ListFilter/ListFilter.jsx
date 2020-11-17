@@ -241,6 +241,7 @@ const SearchFilters = memo(props => {
                                                                         selectedIndex,
                                                                         xOptionIndex
                                                                     )}
+                                                                    dense
                                                                     onClick={() =>
                                                                         handleMenuItemClick(
                                                                             {
