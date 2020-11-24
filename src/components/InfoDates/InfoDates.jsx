@@ -1,19 +1,29 @@
 import React from 'react';
 import Typography from '../wrapper-material-ui/Typography';
+import classNames from 'classnames';
 import { formats, validators } from 'investira.sdk';
 import PropTypes from 'prop-types';
+import Style from './InfoDates.module.scss';
 
 formats.locale('pt-br');
 function InfoDates(props) {
+    const xClass = classNames(props.className, {
+        [Style.horizontal]: props.direction === 'horizontal'
+    });
+    const xClassMargin = classNames({
+        [Style.margin]: props.direction === 'horizontal'
+    });
     return (
-        <div className={props.className}>
-            <Typography
-                variant={props.labelVariant}
-                color={'textSecondary'}
-                component="p">
-                {props.label}
-            </Typography>
-
+        <div className={xClass}>
+            <div className={xClassMargin}>
+                <Typography
+                    variant={props.labelVariant}
+                    color={'textSecondary'}
+                    component="p">
+                    {props.label}
+                    {(props.colon || props.direction === 'horizontal') && ':'}
+                </Typography>
+            </div>
             {validators.isEmpty(props.time) ? (
                 <Typography
                     variant={props.timeVariant}
@@ -34,7 +44,7 @@ function InfoDates(props) {
                         formats.formatDateCustom(props.time, 'DD/MMM/YY')}
                     {props.variant === 'duration' &&
                         formats.duration(props.time)}
-                    {props.variant === 'fornow' && formats.fromNow(props.time)}
+                    {props.variant === 'fromnow' && formats.fromNow(props.time)}
                 </Typography>
             )}
         </div>
@@ -44,7 +54,8 @@ function InfoDates(props) {
 InfoDates.defaultProps = {
     variant: 'caption',
     labelVariant: 'caption',
-    timeVariant: 'caption'
+    timeVariant: 'caption',
+    colon: false
 };
 
 InfoDates.propTypes = {
@@ -55,7 +66,8 @@ InfoDates.propTypes = {
     labelVariant: PropTypes.string,
     time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     timeVariant: PropTypes.string,
-    format: PropTypes.string
+    format: PropTypes.string,
+    colon: PropTypes.bool
 };
 
 export default InfoDates;
