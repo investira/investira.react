@@ -19,6 +19,7 @@ function InfoDates(props) {
                 <Typography
                     variant={props.labelVariant}
                     color={'textSecondary'}
+                    gutterBottom={props.gutterBottom}
                     component="p">
                     {props.label}
                     {(props.colon || props.direction === 'horizontal') && ':'}
@@ -28,6 +29,7 @@ function InfoDates(props) {
                 <Typography
                     variant={props.timeVariant}
                     color={'textPrimary'}
+                    gutterBottom={props.gutterBottom}
                     component="p">
                     --
                 </Typography>
@@ -35,6 +37,7 @@ function InfoDates(props) {
                 <Typography
                     variant={props.timeVariant}
                     color={'textPrimary'}
+                    gutterBottom={props.gutterBottom}
                     component="p">
                     {props.variant === 'custom' &&
                         formats.formatDateCustom(props.time, props.format)}
@@ -55,13 +58,15 @@ InfoDates.defaultProps = {
     variant: 'caption',
     labelVariant: 'caption',
     timeVariant: 'caption',
-    colon: false
+    colon: false,
+    gutterBottom: true
 };
 
 InfoDates.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
     date: PropTypes.string,
+    gutterBottom: PropTypes.bool,
     variant: PropTypes.string,
     labelVariant: PropTypes.string,
     time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
