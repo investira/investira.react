@@ -5,6 +5,10 @@ import { classList } from '../../utils/helpers';
 import { default as WChip } from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({
+    tiny: {
+        height: 14,
+        fontSize: theme.typography.pxToRem(11)
+    },
     danger: {
         color: theme.palette.getContrastText(red[500]),
         border: '1px solid #f44336',
@@ -37,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 function Chip(props) {
     const classes = useStyles();
     const xClassNames = {
+        [classes.tiny]: props.size === 'tiny',
         [classes.danger]:
             props.color === 'danger' && props.variant !== 'outlined',
         [classes.dangerOutlined]:
