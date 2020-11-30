@@ -30,6 +30,7 @@ export { default as InfoBar } from './InfoBar';
 export { default as InfoBool } from './InfoBool';
 export { default as InfoDates } from './InfoDates';
 export { default as InputCurrency } from './InputCurrency';
+export { default as JsonTextFormated } from './JsonTextFormated';
 export { default as LogReader } from './LogReader';
 export { default as ListVirtual } from './ListVirtual';
 export { default as ListState } from './ListState';
