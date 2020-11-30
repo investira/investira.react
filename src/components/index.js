@@ -46,5 +46,6 @@ export { default as StorageManager } from './StorageManager';
 export { default as SSE } from './SSE';
 export { default as Sticky } from './Sticky';
 export { default as TabContainer } from './TabContainer';
+export { default as Tips } from './Tips';
 export { default as Typedy } from './Typedy';
 export { default as Search } from './Search';

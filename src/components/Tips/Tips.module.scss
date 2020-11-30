@@ -1,0 +1,28 @@
+.root {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.btn {
+    border: none;
+    padding: 12px;
+    margin: 0;
+    display: inline-block;
+    
+}
+
+.desc {
+    overflow: hidden;
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.body {
+    padding: 12px 8px;
+}
+
+.show {
+    opacity: 1;
+    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
