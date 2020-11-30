@@ -2,7 +2,7 @@ import React, { memo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Icon, IconButton, Typography } from 'investiraComponents';
+import { Icon, IconButton, Typography, JsonTextFormated } from '../';
 
 import Style from './Tips.module.scss';
 
@@ -26,13 +26,21 @@ const Tips = memo(props => {
     return (
         <div className={Style.root}>
             <IconButton onClick={handleToogle}>
-                <Icon iconName={props.iconName} size={props.size} color={props.color} />
+                <Icon
+                    iconName={props.iconName}
+                    size={props.size}
+                    color={props.color}
+                />
             </IconButton>
             <div ref={descRef} className={xClassDesk} style={{ height: 0 }}>
                 <div ref={bodyRef} className={Style.body}>
-                    <Typography variant={'caption'} color={'textSecondary'}>
-                        {props.desc}
-                    </Typography>
+                    <JsonTextFormated
+                        text={props.desc}
+                        color={'textSecondary'}
+                        variant={'caption'}
+                        component={'p'}
+                        gutterBottom
+                    />
                 </div>
             </div>
         </div>
