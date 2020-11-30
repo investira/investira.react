@@ -79,6 +79,7 @@ Icon.propTypes = {
         'primaryDarkness',
         'warn',
         'danger',
+        'info',
         'textPrimary',
         'textSecondary',
         'greenLight',
