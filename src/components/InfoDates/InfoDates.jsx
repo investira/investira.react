@@ -33,6 +33,28 @@ function InfoDates(props) {
                     component="p">
                     --
                 </Typography>
+            ) : props.bold ? (
+                <Typography
+                    variant={props.timeVariant}
+                    color={'textPrimary'}
+                    gutterBottom={props.gutterBottom}
+                    component="p">
+                    <b>
+                        {props.variant === 'custom' &&
+                            formats.formatDateCustom(props.time, props.format)}
+                        {props.variant === 'datetime' &&
+                            formats.formatDateCustom(
+                                props.time,
+                                'DD/MMM/YY HH:mm'
+                            )}
+                        {props.variant === 'date' &&
+                            formats.formatDateCustom(props.time, 'DD/MMM/YY')}
+                        {props.variant === 'duration' &&
+                            formats.duration(props.time)}
+                        {props.variant === 'fromnow' &&
+                            formats.fromNow(props.time)}
+                    </b>
+                </Typography>
             ) : (
                 <Typography
                     variant={props.timeVariant}

@@ -35,6 +35,14 @@ function Info(props) {
                     component="p">
                     --
                 </Typography>
+            ) : props.bold ? (
+                <Typography
+                    variant={props.variantValue || props.variant}
+                    color={props.valueColor}
+                    gutterBottom={props.gutterBottom}
+                    component="p">
+                    <b> {props.value} </b>
+                </Typography>
             ) : (
                 <Typography
                     variant={props.variantValue || props.variant}
@@ -62,6 +70,7 @@ Info.propTypes = {
     onClick: PropTypes.func,
     direction: PropTypes.oneOf(['vertical', 'horizontal']),
     colon: PropTypes.bool,
+    bold: PropTypes.bool,
     gutter: PropTypes.oneOf(['left', 'full', 'right']),
     gutterBottom: PropTypes.bool,
     label: PropTypes.string,
