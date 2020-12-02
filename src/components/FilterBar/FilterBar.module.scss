@@ -4,8 +4,11 @@ $height: 25px;
     position: relative;
     height: $height;
     background-color: var(--color-secondary-light);
-    margin: 8px;
     border-radius: $height / 2;
+}
+
+.margin {
+    margin: 8px;
 }
 
 .nav {

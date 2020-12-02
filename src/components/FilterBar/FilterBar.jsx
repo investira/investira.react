@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Icon } from '../';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Style from './FilterBar.module.scss';
 
@@ -14,8 +15,12 @@ const FilterBar = props => {
 
     const xData = props.data || [];
 
+    const xClass = classNames(Style.root, {
+        [Style.margin]: props.margin
+    });
+
     return (
-        <div className={Style.root}>
+        <div className={xClass}>
             <nav className={Style.nav}>
                 {xData.map((xItem, xIndex) => {
                     return (
@@ -44,6 +49,10 @@ const FilterBar = props => {
             </nav>
         </div>
     );
+};
+
+FilterBar.defaultProps = {
+    margin: true
 };
 
 FilterBar.propTypes = {
