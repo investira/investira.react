@@ -7,16 +7,21 @@ import { NavBar, IconButton, Icon, DeckContext } from '../';
 const DeckNavBar = memo(props => {
     return (
         <DeckContext.Consumer>
-            {({ prevView, onPrevView }) => {
+            {({ prevView, onPrevView, activeView }) => {
                 const xBehaviors = {
                     default: validators.isEmpty(prevView),
                     inverted: !validators.isEmpty(prevView),
-                    visible: true
+                    visible: true,
+                    custom: true
                 };
+
                 const xActionBehavior = xBehaviors[props.actionBehavior];
-                // props.actionBehavior === 'default'
-                //     ? validators.isEmpty(prevView)
-                //     : !validators.isEmpty(prevView);
+
+                const xAction =
+                    props.actionBehavior === 'custom'
+                        ? props.right[activeView]
+                        : props.right;
+
                 return (
                     <NavBar
                         left={
@@ -34,7 +39,7 @@ const DeckNavBar = memo(props => {
                             )
                         }
                         center={props.center}
-                        right={xActionBehavior && props.right}
+                        right={xActionBehavior && xAction}
                     />
                 );
             }}
@@ -47,7 +52,12 @@ DeckNavBar.propTypes = {
     right: PropTypes.object,
     center: PropTypes.object,
     onBack: PropTypes.func,
-    actionBehavior: PropTypes.oneOf(['default', 'inverted', 'visible'])
+    actionBehavior: PropTypes.oneOf([
+        'default',
+        'inverted',
+        'visible',
+        'custom'
+    ])
 };
 
 DeckNavBar.defaultProps = {
