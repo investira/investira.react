@@ -21,7 +21,7 @@ const Search = forwardRef((props, ref) => {
         //props.onResetData && props.onResetData({});
 
         const xParams = {
-            pesquisa: validators.isEmpty(pValues) ? undefined : pValues
+            pesquisa: validators.isEmpty(pValues) ? null : pValues
         };
 
         setParams(xParams);
@@ -29,7 +29,9 @@ const Search = forwardRef((props, ref) => {
 
     const handleClear = pValue => {
         //props.onResetData && props.onResetData({});
-        setParams({ pesquisa: undefined });
+        setParams({ pesquisa: null });
+        // props.onUpdateParams &&
+        //     props.onUpdateParams({ ...params, pesquisa: undefined });
     };
 
     useEffect(() => {
