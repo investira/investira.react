@@ -1,14 +1,21 @@
-import React, { memo, useState, useEffect, useRef, forwardRef } from 'react';
+import React, {
+    memo,
+    useState,
+    useEffect,
+    useRef,
+    forwardRef,
+    useContext
+} from 'react';
 import PropTypes from 'prop-types';
-import { SearchBox, CrudConsumer } from '../';
 import { validators } from 'investira.sdk';
+import { SearchBox, CrudConsumer, CrudContext } from '../';
+
 import Style from './Search.module.scss';
 
 const Search = forwardRef((props, ref) => {
-    const [params, setParams] = useState();
+    const [params, setParams] = useState({});
     const mount = useRef(false);
-
-    let handleRead = null;
+    const { onRead } = useContext(CrudContext);
 
     const handleSearch = pValues => {
         props.onResetData && props.onResetData({});
@@ -27,32 +34,25 @@ const Search = forwardRef((props, ref) => {
 
     useEffect(() => {
         if (mount.current) {
-            handleRead && handleRead(params);
+            onRead && onRead(params);
             props.onUpdateParams && props.onUpdateParams(params);
         }
-    }, [params]);
+    }, [params.pesquisa]);
 
     useEffect(() => {
         mount.current = true;
     }, []);
 
     return (
-        <CrudConsumer>
-            {({ onRead }) => {
-                handleRead = onRead;
-                return (
-                    <div className={Style.padding}>
-                        <SearchBox
-                            ref={ref}
-                            value={props.value}
-                            onChange={handleSearch}
-                            placeholder={props.placeholder}
-                            clearCallback={handleClear}
-                        />
-                    </div>
-                );
-            }}
-        </CrudConsumer>
+        <div className={Style.padding}>
+            <SearchBox
+                ref={ref}
+                value={props.value}
+                onChange={handleSearch}
+                placeholder={props.placeholder}
+                clearCallback={handleClear}
+            />
+        </div>
     );
 });
 
