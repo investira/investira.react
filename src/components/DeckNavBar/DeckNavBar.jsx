@@ -13,8 +13,8 @@ const DeckNavBar = memo(props => {
                     inverted: !validators.isEmpty(prevView),
                     visible: true
                 };
-                const xRightBehavior = xBehaviors[props.rightBehavior];
-                // props.rightBehavior === 'default'
+                const xActionBehavior = xBehaviors[props.actionBehavior];
+                // props.actionBehavior === 'default'
                 //     ? validators.isEmpty(prevView)
                 //     : !validators.isEmpty(prevView);
                 return (
@@ -34,7 +34,7 @@ const DeckNavBar = memo(props => {
                             )
                         }
                         center={props.center}
-                        right={xRightBehavior && props.right}
+                        right={xActionBehavior && props.right}
                     />
                 );
             }}
@@ -47,11 +47,11 @@ DeckNavBar.propTypes = {
     right: PropTypes.object,
     center: PropTypes.object,
     onBack: PropTypes.func,
-    rightBehavior: PropTypes.oneOf(['default', 'inverted', 'visible'])
+    actionBehavior: PropTypes.oneOf(['default', 'inverted', 'visible'])
 };
 
 DeckNavBar.defaultProps = {
-    rightBehavior: 'default'
+    actionBehavior: 'default'
 };
 
 export default DeckNavBar;
