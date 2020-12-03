@@ -6,7 +6,6 @@ import Style from './ListState.module.scss';
 
 const ListMessage = memo(props => {
     if (props.isFetching && props.listSize <= 0) {
-        console.log('Entrei');
         return (
             <div className={Style.root}>
                 <CenterInView>

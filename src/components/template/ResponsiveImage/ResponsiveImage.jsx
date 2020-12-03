@@ -28,7 +28,6 @@ const ResponsiveImage = props => {
             if (xItem.media || xItem.type) {
                 imagesSource.push(xItem);
             } else {
-                console.log(xItem);
                 imagesSrcSet.push(xItem);
             }
         }
