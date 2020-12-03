@@ -18,7 +18,7 @@ const Search = forwardRef((props, ref) => {
     const { onRead } = useContext(CrudContext);
 
     const handleSearch = pValues => {
-        props.onResetData && props.onResetData({});
+        //props.onResetData && props.onResetData({});
 
         const xParams = {
             pesquisa: validators.isEmpty(pValues) ? undefined : pValues
@@ -28,12 +28,13 @@ const Search = forwardRef((props, ref) => {
     };
 
     const handleClear = pValue => {
-        props.onResetData && props.onResetData({});
+        //props.onResetData && props.onResetData({});
         setParams({ pesquisa: undefined });
     };
 
     useEffect(() => {
         if (mount.current) {
+            props.onResetData && props.onResetData({});
             onRead && onRead(params);
             props.onUpdateParams && props.onUpdateParams(params);
         }
