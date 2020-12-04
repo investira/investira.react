@@ -22,13 +22,17 @@ const DeckNavBar = memo(props => {
                         ? props.right[activeView]
                         : props.right;
 
+                const xOnBack =
+                    typeof props.onBack === 'function'
+                        ? props.onBack
+                        : props.onBack[prevView];
                 return (
                     <NavBar
                         left={
                             !validators.isEmpty(prevView) ? (
                                 <IconButton
                                     color={'primary'}
-                                    onClick={() => onPrevView(props.onBack)}>
+                                    onClick={() => onPrevView(xOnBack)}>
                                     <Icon
                                         size={21}
                                         iconName={'arrow-previous'}
@@ -51,7 +55,7 @@ DeckNavBar.propTypes = {
     left: PropTypes.object,
     right: PropTypes.object,
     center: PropTypes.object,
-    onBack: PropTypes.func,
+    onBack: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     actionBehavior: PropTypes.oneOf([
         'default',
         'inverted',
