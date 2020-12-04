@@ -1,18 +1,17 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Style from './FluidPaper.module.scss';
 
-class FluidPaper extends PureComponent {
-    render() {
-        const xClass = classNames(Style.root, Style.rounded, Style.elevation1, {
-            [Style.square]: this.props.square,
-            [Style.elevation0]: this.props.variant === 'elevation' && this.props.elevation === '0',
-            [Style.selected]: Boolean(this.props.selected)
-        });
+function FluidPaper(props) {
+    const xClass = classNames(Style.root, Style.rounded, Style.elevation1, {
+        [Style.square]: props.square,
+        [Style.elevation0]:
+            props.variant === 'elevation' && props.elevation === '0',
+        [Style.selected]: Boolean(props.selected)
+    });
 
-        return <div className={xClass}>{this.props.children}</div>;
-    }
+    return <div className={xClass}>{props.children}</div>;
 }
 
 FluidPaper.propTypes = {
