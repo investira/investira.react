@@ -34,7 +34,7 @@ const DeckProvider = memo(props => {
             setBeforeView(activeView);
         }
 
-        pCallback && pCallback();
+        pCallback && pCallback({ activeView, prevView, beforeView });
     };
 
     const handleResetState = (pActive = null, pPreview = [], pCallback) => {
