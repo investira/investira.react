@@ -20,10 +20,18 @@ const ContainerList = memo(props => {
         return null;
     }
 
+    const xClassFilter = classNames(Style.filterArea, {
+        [Style.filterAreaSticky]: props.sticky
+    });
+
+    const xClassList = classNames(Style.listArea, {
+        [Style.listAreaSticky]: props.sticky
+    });
+
     return (
         <div className={xClassRoot}>
             {search && <div className={Style.searchArea}>{search}</div>}
-            {filter && <div className={Style.filterArea}>{filter}</div>}
+            {filter && <div className={xClassFilter}>{filter}</div>}
             {bottomLabel && (
                 <div className={Style.bottomLabelArea}>
                     {
@@ -33,7 +41,7 @@ const ContainerList = memo(props => {
                     }
                 </div>
             )}
-            <div className={Style.listArea}>{props.children}</div>
+            <div className={xClassList}>{props.children}</div>
         </div>
     );
 });
@@ -42,7 +50,12 @@ ContainerList.propTypes = {
     search: PropTypes.node,
     filter: PropTypes.node,
     bottomLabel: PropTypes.node,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    sticky: PropTypes.bool
+};
+
+ContainerList.defaultProps = {
+    sticky: false
 };
 
 export default ContainerList;

@@ -46,3 +46,14 @@
     overflow: auto;
     flex-grow: 1;
 }
+
+.filterAreaSticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-secondary-darkness);
+}
+
+.listAreaSticky{
+    overflow: unset;
+}
