@@ -50,3 +50,4 @@ export { default as TabContainer } from './TabContainer';
 export { default as Tips } from './Tips';
 export { default as Typedy } from './Typedy';
 export { default as Search } from './Search';
+export { default as SwitchIconButton } from './SwitchIconButton';
