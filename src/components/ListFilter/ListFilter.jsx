@@ -174,11 +174,13 @@ const SearchFilters = memo(props => {
         [Style.noFiltersSelected]: !verifyArray(filters)
     });
 
+    const xClassRoot = classNames(Style.root, props.className, {});
+
     return (
         <CrudContext.Consumer>
             {({ onRead }) => {
                 return (
-                    <div className={Style.root}>
+                    <div className={xClassRoot}>
                         <div className={Style.filtersWrap}>
                             <div className={Style.horizontalScrollable}>
                                 {props.filters &&
