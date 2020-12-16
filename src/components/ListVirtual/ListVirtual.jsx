@@ -33,6 +33,8 @@ class ListVirtual extends PureComponent {
             loadedRowsMap: {},
             loadingRowCount: 0
         };
+
+        this.listRoot = React.createRef();
     }
 
     hasListData = pList => {
@@ -42,7 +44,6 @@ class ListVirtual extends PureComponent {
     isRowLoaded = ({ index }) => {
         const { loadedRowsMap } = this.state;
         return !!loadedRowsMap[index];
-        //console.log(index);
     };
 
     loadMoreRows = ({ startIndex, stopIndex }) => {
@@ -83,7 +84,7 @@ class ListVirtual extends PureComponent {
 
         if (startIndex > xSize / 2 && stopIndex <= xSize - 1 && nextPage) {
             const xParams = strings.querystringToObject(nextPage);
-            console.log(xParams);
+
             onNextPage && onNextPage(xParams);
         }
 
@@ -121,9 +122,18 @@ class ListVirtual extends PureComponent {
         );
     }
 
+    removeTabIndex = pListRootElem => {
+        if (pListRootElem?.current) {
+            const xReactVirtualizedElem = pListRootElem.current.querySelector(
+                '[aria-readonly="true"]'
+            );
+
+            xReactVirtualizedElem.removeAttribute('tabindex');
+        }
+    };
+
     componentDidMount() {
-        const xElement = document.querySelector('.ReactVirtualized__List');
-        xElement.removeAttribute('tabindex');
+        this.removeTabIndex(this.listRoot);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -150,7 +160,7 @@ class ListVirtual extends PureComponent {
         const xRowCount = this.props.totalItens || this.props.list.length;
 
         return (
-            <div className={xClassRoot}>
+            <div ref={this.listRoot} className={xClassRoot}>
                 <InfiniteLoader
                     isRowLoaded={this.isRowLoaded}
                     loadMoreRows={this.loadMoreRows}
