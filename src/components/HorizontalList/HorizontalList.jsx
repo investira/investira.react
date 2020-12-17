@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
 import Style from './HorizontalList.module.scss';
@@ -8,6 +8,8 @@ const HorizontalList = props => {
     let timeout = null;
     let isScrolling = false;
     let isClicked = false;
+
+    //const xPersistElemFocusIndex = useRef(0);
 
     const scrollableRef = React.useRef();
     const [initElemsRect, setInitElemsRect] = useState([]);
@@ -48,6 +50,7 @@ const HorizontalList = props => {
         window.clearTimeout(timeout);
         isClicked = true;
         setElemFocusIndex(pIndex);
+        //xPersistElemFocusIndex.current = pIndex;
         setChildFocused(props.id + pIndex);
         centerInScroll(pIndex);
         props.childProps.onClick && props.childProps.onClick(pData, pIndex);
@@ -65,6 +68,7 @@ const HorizontalList = props => {
     };
 
     useEffect(() => {
+        console.log('Mount');
         if (!validators.isEmpty(elementsRef)) {
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
@@ -85,12 +89,14 @@ const HorizontalList = props => {
     }, [props.data]);
 
     useEffect(() => {
+        console.log('initElementsRef', initElementsRef);
         window.clearTimeout(timeout);
-        if (!validators.isEmpty(initElementsRef)) {
-            setElemFocusIndex(0);
-            setChildFocused(props.id + 0);
-            centerInScroll(0);
-        }
+        //TODO: Revisar se é necessário em outro contexto
+        // if (!validators.isEmpty(initElementsRef)) {
+        //     setElemFocusIndex(0);
+        //     setChildFocused(props.id + 0);
+        //     centerInScroll(0);
+        // }
     }, [initElementsRef]);
 
     const Component = props.child;
