@@ -11,7 +11,11 @@ function FluidPaper(props) {
         [Style.selected]: Boolean(props.selected)
     });
 
-    return <div className={xClass}>{props.children}</div>;
+    return (
+        <div className={xClass} onClick={props.onClick}>
+            {props.children}
+        </div>
+    );
 }
 
 FluidPaper.propTypes = {
