@@ -35,7 +35,8 @@ export const themePrimary = {
                     color: base.colors.secondary.light,
                     borderRadius: '8px',
                     boxShadow: base.shadows[3]
-                }
+                },
+                arrow: { color: base.colors.secondary.dark }
             },
             MuiTableCell: {
                 head: {
