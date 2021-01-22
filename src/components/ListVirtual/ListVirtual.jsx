@@ -18,6 +18,9 @@ const STATUS_LOADED = 2;
 class ListVirtual extends PureComponent {
     constructor() {
         super();
+
+        this._onMount = false;
+
         this.renderRow = this.renderRow.bind(this);
 
         this.cache = new CellMeasurerCache({
@@ -56,9 +59,10 @@ class ListVirtual extends PureComponent {
             loadedRowsMap[xI] = STATUS_LOADING;
         }
 
-        this.setState({
-            loadingRowCount: loadingRowCount + xIncrement
-        });
+        this._onMount &&
+            this.setState({
+                loadingRowCount: loadingRowCount + xIncrement
+            });
 
         const timeoutId = setTimeout(() => {
             const { loadedRowCount, loadingRowCount } = this.state;
@@ -69,10 +73,11 @@ class ListVirtual extends PureComponent {
                 loadedRowsMap[xI] = STATUS_LOADED;
             }
 
-            this.setState({
-                loadingRowCount: loadingRowCount - xIncrement,
-                loadedRowCount: loadedRowCount + xIncrement
-            });
+            this._onMount &&
+                this.setState({
+                    loadingRowCount: loadingRowCount - xIncrement,
+                    loadedRowCount: loadedRowCount + xIncrement
+                });
 
             promiseResolver();
         }, 1000);
@@ -133,6 +138,7 @@ class ListVirtual extends PureComponent {
     };
 
     componentDidMount() {
+        this._onMount = true;
         this.removeTabIndex(this.listRoot);
     }
 
@@ -150,6 +156,8 @@ class ListVirtual extends PureComponent {
         newRowsIndex.length &&
             this._list.recomputeRowHeights(Math.min(...newRowsIndex));
     }
+
+    componentWillUnmount() {}
 
     render() {
         const xClassRoot = classNames(Style.root, this.props.className, {
