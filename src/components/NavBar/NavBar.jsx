@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Style from './NavBar.module.scss';
 
-function NavBar(props) {
+const NavBar = memo(props => {
     const xClass = classNames(Style.root, {
         [Style.dense]: props.variant === 'dense',
         [Style.regular]: props.variant === 'regular',
@@ -63,7 +63,7 @@ function NavBar(props) {
             </div>
         </>
     );
-}
+});
 
 NavBar.propTypes = {
     type: PropTypes.string,
