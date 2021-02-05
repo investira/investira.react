@@ -127,7 +127,7 @@ const Crud = memo(
                     ),
                     actions: [
                         {
-                            label: labelButton || 'Confirmar',
+                            label: labelButton || 'Excluir',
                             onClick: () => onConfirmDelete(data)
                         }
                     ]
