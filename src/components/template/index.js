@@ -1,8 +1,13 @@
+export { default as Body } from './Body';
 export { default as CenterInView } from './CenterInView';
+export { default as Error } from './Error';
+export { default as ErrorBody } from './ErrorBody';
+export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as ErrorData } from './ErrorData';
+export { default as ErrorFocus } from './ErrorFocus';
 export { default as Hiddenable } from './Hiddenable';
 export { default as Loading } from './Loading';
 export { default as Placeholder } from './Placeholder';
 export { default as ResponsiveImage } from './ResponsiveImage';
 export { default as Skeleton } from './Skeleton';
 export { default as Success } from './Success';
-export { default as Error } from './Error';
