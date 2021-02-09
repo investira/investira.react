@@ -68,7 +68,6 @@ const HorizontalList = props => {
     };
 
     useEffect(() => {
-        console.log('Mount');
         if (!validators.isEmpty(elementsRef)) {
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
@@ -89,7 +88,6 @@ const HorizontalList = props => {
     }, [props.data]);
 
     useEffect(() => {
-        console.log('initElementsRef', initElementsRef);
         window.clearTimeout(timeout);
         //TODO: Revisar se é necessário em outro contexto
         // if (!validators.isEmpty(initElementsRef)) {
@@ -128,11 +126,7 @@ const HorizontalList = props => {
 
 HorizontalList.propTypes = {
     id: PropTypes.string.isRequired,
-    child: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.element,
-        PropTypes.node
-    ]).isRequired,
+    child: PropTypes.elementType.isRequired,
     childProps: PropTypes.object,
     data: PropTypes.array.isRequired
 };

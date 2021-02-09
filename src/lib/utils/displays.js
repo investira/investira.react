@@ -1,3 +1,4 @@
+import React from 'react';
 import { validators } from 'investira.sdk';
 
 const displays = {
@@ -27,6 +28,10 @@ const displays = {
         return displays.format('#####-###', pValue);
     },
     agencia: (pValue = '') => {
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+
         let xValue = pValue;
 
         if (xValue.length < 4) {
@@ -41,6 +46,10 @@ const displays = {
         return displays.format(xMasks[xValue.length], xValue) || '';
     },
     conta: (pValue = '') => {
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+
         let xValue = pValue;
 
         if (xValue.length < 6) {
@@ -80,6 +89,42 @@ const displays = {
                 }
             })
             .join('');
+    },
+    highlightSearch: (pPesquisa, pText) => {
+        if (pPesquisa && pText) {
+            // Separa os termos da pesquisa
+            let xTerms = pPesquisa.split(new RegExp(/\s|\,|\;/, 'gi'));
+
+            xTerms = xTerms
+                .filter(xTerm => xTerm)
+                .map(xTerm => xTerm.toLowerCase()); //Remove vazios e normaliza para lowercase;
+
+            const xPesquisa = xTerms.join('|');
+            const xRegex = new RegExp(`(${xPesquisa})`, 'gi');
+            const xParts = pText.split(xRegex);
+
+            if (validators.isEmpty(xParts)) {
+                return pText;
+            }
+
+            return xParts.map((xPart, xIndex) => {
+                const isPesquisa = xTerms.includes(xPart.toLowerCase());
+
+                return (
+                    <span
+                        key={xIndex}
+                        style={
+                            isPesquisa
+                                ? { fontWeight: 'bold', color: '#64ffda' }
+                                : {}
+                        }>
+                        {xPart}
+                    </span>
+                );
+            });
+        }
+
+        return pText;
     }
 };
 

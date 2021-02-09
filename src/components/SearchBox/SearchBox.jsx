@@ -141,6 +141,7 @@ const SearchBox = forwardRef((props, ref) => {
                                         iconName={'find'}
                                         className={Style.adornement}
                                         color={'secondaryLight'}
+                                        size={18}
                                     />
                                 ) : null
                             }

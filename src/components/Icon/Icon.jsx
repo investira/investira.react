@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { validators } from 'investira.sdk';
 import { capitalize } from '../utils/helpers';
 import Style from './Icon.module.scss';
 
-const Icon = props => {
+const Icon = memo(props => {
     const xIconName = '-i_' + props.iconName;
 
     const xGradientTypes = {
@@ -63,7 +63,7 @@ const Icon = props => {
             </svg>
         );
     }
-};
+});
 
 Icon.propTypes = {
     size: PropTypes.number,
