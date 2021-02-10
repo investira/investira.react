@@ -56,7 +56,7 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 
 # 2.4.0
 
--   [lib] diretório store renomeado apra redux
+-   [lib] diretório store renomeado para redux
 -   [storage] Add createStorage
 -   [redux] Antigo combineReducers renomeado para combineReducersLegacy
 -   [redux] Add novo combineReducers, createStore, persisterStore
@@ -90,3 +90,9 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 
 -   [components] Add MaskedTextField
 -   [lib] Refatora função agencia da lib displays
+
+# 2.5.4
+
+-   [lib] Add vibrate aos utils
+-   [dep] Add dependencia idb
+-   [lib] Add engine para redux-persit, idbStorage
