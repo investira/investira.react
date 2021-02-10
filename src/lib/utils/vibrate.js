@@ -6,13 +6,13 @@ const vibrate = {
      * @param {number | Array} pPattern
      */
     startVibrate: (pPattern = 1) => {
-        browsers.isMobile() && window.navigator.vibrate(pPattern);
+        browsers.isAndroid() && window.navigator.vibrate(pPattern);
     },
     /**
      * Parar a vibração.
      */
     stopVibrate: () => {
-        browsers.isMobile() && window.navigator.vibrate(0);
+        browsers.isAndroid() && window.navigator.vibrate(0);
     }
 };
 
