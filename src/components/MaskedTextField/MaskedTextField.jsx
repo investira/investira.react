@@ -6,10 +6,10 @@ import { validators } from 'investira.sdk';
 import { TextField } from '../';
 
 const MaskedTextField = memo(props => {
-    const [value, setValue] = useState(props.value || '');
-    const formikContext = useFormikContext();
-
     const { maskIgnoreChars, maskFilterChar, mask, ...otherProps } = props;
+
+    const [value, setValue] = useState(mask(props.value) || '');
+    const formikContext = useFormikContext();
 
     let handleChange = null;
 
