@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
-import { SearchBox, CrudConsumer, CrudContext } from '../';
+import { SearchBox, CrudContext } from '../';
 
 import Style from './Search.module.scss';
 
@@ -18,7 +18,7 @@ const Search = forwardRef((props, ref) => {
     const { onRead } = useContext(CrudContext);
 
     const handleSearch = pValues => {
-        //props.onResetData && props.onResetData({});
+        props.onResetData && props.onResetData({});
 
         const xParams = {
             pesquisa: validators.isEmpty(pValues) ? null : pValues
@@ -27,11 +27,11 @@ const Search = forwardRef((props, ref) => {
         setParams(xParams);
     };
 
-    const handleClear = pValue => {
-        //props.onResetData && props.onResetData({});
+    const handleClear = () => {
+        props.onResetData && props.onResetData({});
         setParams({ pesquisa: null });
-        // props.onUpdateParams &&
-        //     props.onUpdateParams({ ...params, pesquisa: undefined });
+        props.onUpdateParams &&
+            props.onUpdateParams({ ...params, pesquisa: undefined });
     };
 
     useEffect(() => {
