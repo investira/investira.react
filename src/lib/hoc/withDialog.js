@@ -132,6 +132,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 default:
                     return (
                         <DialogTitle
+                            style={{ height: '64px' }}
                             {...(title.onclose === false
                                 ? {}
                                 : { onClose: this.handleCloseDialog })}>
