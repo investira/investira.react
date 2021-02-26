@@ -1,0 +1,22 @@
+.root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    display: flex; // resolve bug no safari
+    flex-grow: 1;
+}
+
+.nav {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 16px 0;
+    text-align: right;
+
+    & > button {
+        margin: 0 8px;
+    }
+}
