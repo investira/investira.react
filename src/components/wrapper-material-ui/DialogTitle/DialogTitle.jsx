@@ -7,13 +7,13 @@ import Icon from '../../Icon';
 
 const styles = theme => ({
     root: {
-        margin: 0,
-        padding: theme.spacing(2)
+        //margin: 0,
+        //padding: theme.spacing(2)
     },
     closeButton: {
         position: 'absolute',
         right: theme.spacing(1),
-        top: theme.spacing(1),
+        top: theme.spacing(1) + theme.spacing(0.5),
         color: theme.palette.primary.main
     }
 });
@@ -32,7 +32,7 @@ const DialogTitle = withStyles(styles)(props => {
                     aria-label="close"
                     className={classes.closeButton}
                     onClick={onClose}>
-                    <Icon iconName={'cancel'} />
+                    <Icon iconName={'cancel'} size={18} />
                 </IconButton>
             ) : null}
         </MuiDialogTitle>

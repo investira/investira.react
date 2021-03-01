@@ -7,9 +7,11 @@ export const themePrimary = {
         overrides: {
             MuiSelect: {
                 select: {
-                    '&:focus': {
-                        borderRadius: '30px'
-                    }
+                    paddingLeft: '12px'
+                },
+                selectMenu: {
+                    display: 'flex',
+                    alignItems: 'center'
                 }
             },
             MuiOutlinedInput: {
@@ -152,18 +154,18 @@ export const themePrimary = {
             },
             MuiDialogTitle: {
                 root: {
-                    padding: 16
+                    padding: '24px 16px'
                 }
             },
             MuiDialogContent: {
                 root: {
-                    padding: '0 16px 16px'
+                    padding: '8px 16px'
                 }
             },
             MuiDialogActions: {
-                root: {
-                    padding: '0 16px 16px'
-                }
+                // root: {
+                //     padding: '0 16px 16px'
+                // }
             },
             MuiButton: {
                 root: {
