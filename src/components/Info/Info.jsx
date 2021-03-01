@@ -12,11 +12,13 @@ function Info(props) {
         [Style.gutterRight]: props.gutter === 'right',
         [Style.horizontal]: props.direction === 'horizontal'
     });
+
     const xClassMargin = classNames({
         [Style.margin]: props.direction === 'horizontal'
     });
+
     return (
-        <div onClick={props.onClick} className={xClass}>
+        <div id={props.label} onClick={props.onClick} className={xClass}>
             <div className={xClassMargin}>
                 <Typography
                     variant={props.variant}
