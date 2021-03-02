@@ -2,13 +2,12 @@ import React, { memo, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { Chip, Menu, MenuItem } from '../';
+import { Chip, Menu, MenuItem, Icon, ListItemIcon, ListItemText } from '../';
 import CrudContext from '../CrudContext';
 
 import Style from './ListFilter.module.scss';
 
 const SearchFilters = memo(props => {
-    console.log(props);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelected] = React.useState([]);
     const [filters, setFilters] = useState([]);
@@ -261,9 +260,23 @@ const SearchFilters = memo(props => {
                                                                             }
                                                                         )
                                                                     }>
-                                                                    {
-                                                                        xOption.label
-                                                                    }
+                                                                    {xOption.icon && (
+                                                                        <ListItemIcon>
+                                                                            <Icon
+                                                                                iconName={
+                                                                                    xOption.icon
+                                                                                }
+                                                                                size={
+                                                                                    18
+                                                                                }
+                                                                            />
+                                                                        </ListItemIcon>
+                                                                    )}
+                                                                    <ListItemText>
+                                                                        {
+                                                                            xOption.label
+                                                                        }
+                                                                    </ListItemText>
                                                                 </MenuItem>
                                                             );
                                                         }
