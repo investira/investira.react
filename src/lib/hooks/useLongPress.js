@@ -35,13 +35,9 @@ const useLongPress = (
     const start = useCallback(
         pEvent => {
             if (shouldPreventDefault && pEvent.target) {
-                pEvent.target.addEventListener(
-                    'touchend',
-                    e => preventDefault(e, setIsScrolling),
-                    {
-                        passive: false
-                    }
-                );
+                pEvent.target.addEventListener('touchend', preventDefault, {
+                    passive: false
+                });
 
                 target.current = pEvent.target;
             }
@@ -62,9 +58,7 @@ const useLongPress = (
             setLongPressTriggered(false);
 
             if (shouldPreventDefault && target.current) {
-                target.current.removeEventListener('touchend', e =>
-                    preventDefault(e, setIsScrolling)
-                );
+                target.current.removeEventListener('touchend', preventDefault);
             }
         },
         [shouldPreventDefault, onClick, longPressTriggered]
