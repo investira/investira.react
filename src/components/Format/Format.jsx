@@ -11,13 +11,22 @@ function Format(props) {
                 typeof pValue === 'string'
                     ? pValue
                     : formats.friendlyNumber(pValue, pDecimais || 2, true),
+            currency_abs:
+                typeof pValue === 'string'
+                    ? pValue
+                    : formats.formatNumber(pValue, 2, true, true),
             number:
                 typeof pValue === 'string'
                     ? pValue
                     : formats.formatNumber(pValue, pDecimais || 0, true, false),
             date: formats.formatDate(pValue),
-            hour: typeof pValue === 'string' ? pValue : formats.formatDateCustom(pValue, 'HH:mm'),
-            rate: <Rate value={pValue} status={props.status} size={props.size} />,
+            hour:
+                typeof pValue === 'string'
+                    ? pValue
+                    : formats.formatDateCustom(pValue, 'HH:mm'),
+            rate: (
+                <Rate value={pValue} status={props.status} size={props.size} />
+            ),
             text: pValue,
             percentual: `${pValue}%`
         };
@@ -37,8 +46,21 @@ function Format(props) {
 }
 
 Format.propTypes = {
-    format: PropTypes.oneOf(['currency', 'number', 'percentual', 'rate', 'date', 'hour', 'text']),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+    format: PropTypes.oneOf([
+        'currency',
+        'currency_abs',
+        'number',
+        'percentual',
+        'rate',
+        'date',
+        'hour',
+        'text'
+    ]),
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.object
+    ]),
     size: PropTypes.number,
     variant: PropTypes.string,
     color: PropTypes.string,

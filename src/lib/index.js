@@ -29,3 +29,7 @@ export { default as withDialog } from './hoc/withDialog';
 export { default as withRedux } from './hoc/withRedux';
 export { default as infiniteScroll } from './hoc/infiniteScroll';
 export { default as withMediaQueries } from './hoc/withMediaQueries';
+
+// HOOKs
+
+export { default as useLongPress } from './hooks/useLongPress';

@@ -124,9 +124,19 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             const { title } = this.body;
             switch (pStatus) {
                 case 'success':
-                    return <DialogTitle onClose={this.handleCloseDialog} />;
+                    return (
+                        <DialogTitle
+                            style={{ height: '64px' }}
+                            onClose={this.handleCloseDialog}
+                        />
+                    );
                 case 'error':
-                    return <DialogTitle onClose={this.handleCloseDialog} />;
+                    return (
+                        <DialogTitle
+                            style={{ height: '64px' }}
+                            onClose={this.handleCloseDialog}
+                        />
+                    );
                 case 'fetching':
                     return null;
                 default:
@@ -166,7 +176,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                                 </Typography>
                                 <Typography
                                     variant={'body2'}
-                                    color={'textPrimary'}
+                                    color={'textSecondary'}
                                     align={'center'}>
                                     {messages && messages.success
                                         ? messages.success.content
@@ -206,7 +216,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                                 </Typography>
                                 <Typography
                                     variant={'body2'}
-                                    color={'textPrimary'}
+                                    color={'textSecondary'}
                                     align={'center'}>
                                     {messages && messages.error
                                         ? messages.error.content
@@ -291,7 +301,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             const { title, content, actions } = this.body;
 
             if (!validators.isEmpty(actions) && actions.length > 3) {
-                console.error('Não adicione mais que 4 actions para o dialog');
+                console.error('Não adicione mais que 3 actions para o dialog');
             }
 
             return (
