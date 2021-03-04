@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Style from './ListState.module.scss';
 
 const ListMessage = memo(props => {
-    const xClass = classNames(Style.root, {
+    const xClass = classNames(Style.root, props.className, {
         [Style.padding]: props.padding
     });
 
@@ -37,7 +37,8 @@ const ListMessage = memo(props => {
 
 ListMessage.defaultProps = {
     listSize: 0,
-    padding: true
+    padding: true,
+    className: {}
 };
 
 ListMessage.propTypes = {
