@@ -126,14 +126,14 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 case 'success':
                     return (
                         <DialogTitle
-                            style={{ height: '64px' }}
+                            style={{ height: '80px' }}
                             onClose={this.handleCloseDialog}
                         />
                     );
                 case 'error':
                     return (
                         <DialogTitle
-                            style={{ height: '64px' }}
+                            style={{ height: '80px' }}
                             onClose={this.handleCloseDialog}
                         />
                     );
@@ -142,7 +142,7 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 default:
                     return (
                         <DialogTitle
-                            style={{ height: '64px' }}
+                            style={{ height: '80px' }}
                             {...(title.onclose === false
                                 ? {}
                                 : { onClose: this.handleCloseDialog })}>
