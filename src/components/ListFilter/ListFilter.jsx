@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { validators } from 'investira.sdk';
 
 import { Chip, Menu, MenuItem, Icon, ListItemIcon, ListItemText } from '../';
 import CrudContext from '../CrudContext';
@@ -36,9 +37,27 @@ const SearchFilters = memo(props => {
         props.onUpdateParams && props.onUpdateParams(xParams);
     };
 
-    const isSelected = (pFilterIndex, pSelectedIndex, pOptionIndex) => {
-        if (pSelectedIndex[pFilterIndex]) {
-            return pSelectedIndex[pFilterIndex].includes(pOptionIndex);
+    const isSelected = (
+        pFilterIndex,
+        pSelectedIndex,
+        pOptionIndex,
+        pOptionValue,
+        pDefaultValue
+    ) => {
+        const xSelectIndexFiltered = pSelectedIndex.filter(xElem => {
+            return xElem != null;
+        });
+
+        if (
+            !validators.isEmpty(pDefaultValue) &&
+            pOptionValue === pDefaultValue &&
+            validators.isEmpty(xSelectIndexFiltered)
+        ) {
+            return true;
+        }
+
+        if (xSelectIndexFiltered[pFilterIndex]) {
+            return xSelectIndexFiltered[pFilterIndex].includes(pOptionIndex);
         }
 
         return false;
@@ -184,6 +203,7 @@ const SearchFilters = memo(props => {
                             <div className={Style.horizontalScrollable}>
                                 {props.filters &&
                                     props.filters.map((xFilter, xIndex) => {
+                                        console.log('xFilter', xFilter);
                                         const xChipProps = {
                                             icon: xFilter.icon,
                                             label: xFilter.label,
@@ -240,7 +260,9 @@ const SearchFilters = memo(props => {
                                                                     selected={isSelected(
                                                                         xIndex,
                                                                         selectedIndex,
-                                                                        xOptionIndex
+                                                                        xOptionIndex,
+                                                                        xOption.value,
+                                                                        xFilter.defaultValue
                                                                     )}
                                                                     dense
                                                                     onClick={() =>
