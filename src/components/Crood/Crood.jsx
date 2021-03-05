@@ -2,10 +2,6 @@ import React, { memo, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
 import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
     Slide,
     CrudContext,
     DeckContext,
@@ -25,13 +21,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Crood = memo(
     Object.assign(
         props => {
-            console.log(props);
-            // onCloseDialog
-            // onError
-            // onFetching
-            // onOpenDialog
-            // onResetStatus
-            // onSuccess
             // Verifica se há o HOC withDialog
             if (!props.onOpenDialog) {
                 console.error(
@@ -151,7 +140,7 @@ const Crood = memo(
                         onclose: true
                     },
                     content: (
-                        <DialogContentText>
+                        <DialogContentText variant={'body2'}>
                             {message ||
                                 props.deleteMessage ||
                                 'Este item será excluído permanentemente.'}
