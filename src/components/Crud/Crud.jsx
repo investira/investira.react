@@ -119,7 +119,7 @@ const Crud = memo(
                         onclose: true
                     },
                     content: (
-                        <DialogContentText>
+                        <DialogContentText variant={'body2'}>
                             {message ||
                                 props.deleteMessage ||
                                 'Este item será excluído permanentemente.'}
@@ -270,7 +270,9 @@ const Crud = memo(
                             </DialogTitle>
                         )}
                         {!validators.isNull(dialog.content) && (
-                            <DialogContent>{dialog.content}</DialogContent>
+                            <DialogContent variant={'body2'}>
+                                {dialog.content}
+                            </DialogContent>
                         )}
 
                         {!validators.isEmpty(dialog.actions) && (
