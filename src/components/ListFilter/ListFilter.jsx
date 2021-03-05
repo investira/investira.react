@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
@@ -89,9 +89,16 @@ const SearchFilters = memo(props => {
 
         console.log(xSelected);
 
-        setSelected(xSelected);
-        setFilters(xFilters);
-        updateParams(filterParam, xFilters[filterIndex], action);
+        // setSelected(xSelected);
+        // setFilters(xFilters);
+        // updateParams(filterParam, xFilters[filterIndex], action);
+
+        updateFilterValuesSelected(xSelected, xFilters, [
+            filterParam,
+            xFilters[filterIndex],
+            action
+        ]);
+
         setAnchorEl(null);
     };
 
@@ -156,9 +163,15 @@ const SearchFilters = memo(props => {
             xFilters[filterIndex] = undefined;
         }
 
-        setSelected(xSelected);
-        setFilters(xFilters);
-        updateParams(filterParam, xFilters[filterIndex], action);
+        // setSelected(xSelected);
+        // setFilters(xFilters);
+        // updateParams(filterParam, xFilters[filterIndex], action);
+
+        updateFilterValuesSelected(xSelected, xFilters, [
+            filterParam,
+            xFilters[filterIndex],
+            action
+        ]);
     };
 
     const select = { multiple: handleMultipleSelect, single: handleSelect };
@@ -178,14 +191,25 @@ const SearchFilters = memo(props => {
 
         valuesSelectedRef.current = [];
 
-        setSelected(xSelected);
-        setFilters(xFilters);
+        // setSelected(xSelected);
+        // setFilters(xFilters);
+        // updateParams(filterParam, {}, action);
 
-        updateParams(filterParam, {}, action);
+        updateFilterValuesSelected(xSelected, xFilters, [
+            filterParam,
+            {},
+            action
+        ]);
     };
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const updateFilterValuesSelected = (pSelected, pFilters, pParams) => {
+        setSelected(pSelected);
+        setFilters(pFilters);
+        updateParams(...pParams);
     };
 
     const xClassSelected = classNames(Style.selected, {
@@ -193,6 +217,12 @@ const SearchFilters = memo(props => {
     });
 
     const xClassRoot = classNames(Style.root, props.className, {});
+
+    useEffect(() => {
+        console.log('filters', filters);
+
+        console.log('props.filters', props.filters);
+    }, [filters]);
 
     return (
         <CrudContext.Consumer>
@@ -233,10 +263,10 @@ const SearchFilters = memo(props => {
                                                     key={`chip-menu-${xIndex}`}
                                                     id={`chip-menu-${xIndex}`}
                                                     anchorEl={anchorEl}
-                                                    anchorOrigin={{
-                                                        vertical: 'bottom',
-                                                        horizontal: 'center'
-                                                    }}
+                                                    // anchorOrigin={{
+                                                    //     vertical: 'bottom',
+                                                    //     horizontal: 'center'
+                                                    // }}
                                                     transformOrigin={{
                                                         vertical: 'top',
                                                         horizontal: 'center'
