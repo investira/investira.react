@@ -37,6 +37,12 @@ const SearchFilters = memo(props => {
         props.onUpdateParams && props.onUpdateParams(xParams);
     };
 
+    const removeNullElements = pArray => {
+        return pArray.filter(xElem => {
+            return xElem != null;
+        });
+    };
+
     const isSelected = (
         pFilterIndex,
         pSelectedIndex,
@@ -44,9 +50,7 @@ const SearchFilters = memo(props => {
         pOptionValue,
         pDefaultValue
     ) => {
-        const xSelectIndexFiltered = pSelectedIndex.filter(xElem => {
-            return xElem != null;
-        });
+        const xSelectIndexFiltered = removeNullElements(pSelectedIndex);
 
         if (
             !validators.isEmpty(pDefaultValue) &&
@@ -191,10 +195,6 @@ const SearchFilters = memo(props => {
 
         valuesSelectedRef.current = [];
 
-        // setSelected(xSelected);
-        // setFilters(xFilters);
-        // updateParams(filterParam, {}, action);
-
         updateFilterValuesSelected(xSelected, xFilters, [
             filterParam,
             {},
@@ -209,7 +209,93 @@ const SearchFilters = memo(props => {
     const updateFilterValuesSelected = (pSelected, pFilters, pParams) => {
         setSelected(pSelected);
         setFilters(pFilters);
-        updateParams(...pParams);
+        pParams && updateParams(...pParams);
+    };
+
+    const findWithAttr = (pArray, pAttr, pValue) => {
+        for (const [index, value] of pArray.entries()) {
+            if (value[pAttr] === pValue) {
+                return index;
+            }
+        }
+
+        return -1;
+    };
+
+    const initFilterDefaultSelected = (pPropFilters, pStateFilters) => {
+        //props
+        // [{
+        //     label: 'Período',
+        //     param: 'periodo',
+        //     type: 'single',
+        //     options: [
+        //         {
+        //             label: '7 Dias',
+        //             value: 7
+        //         },
+        //         {
+        //             label: '15 Dias',
+        //             value: 15
+        //         },
+        //         {
+        //             label: '30 Dias',
+        //             value: 30
+        //         },
+        //         {
+        //             label: '60 Dias',
+        //             value: 60
+        //         },
+        //         {
+        //             label: '90 Dias',
+        //             value: 90
+        //         }
+        //     ],
+        //     defaultValue: 30
+        // }]
+
+        //console.log('pPropFilters', pPropFilters);
+        //console.log('pStateFilters', pStateFilters);
+
+        const defaultSelectedValues = pPropFilters.map(xFilter => {
+            if (!validators.isEmpty(xFilter.defaultValue)) {
+                const xIndex = findWithAttr(
+                    xFilter.options,
+                    'value',
+                    xFilter.defaultValue
+                );
+                return [xIndex];
+            }
+
+            return [undefined];
+        });
+
+        const defaultSelectedFilters = defaultSelectedValues.map(
+            (xSelected, xIndex) => {
+                return xSelected.map(xOptionIndex => {
+                    if (validators.isNull(xOptionIndex)) {
+                        return xOptionIndex;
+                    }
+
+                    const xFilter = pPropFilters[xIndex];
+                    const xOption = xFilter.options[xOptionIndex];
+
+                    return {
+                        field: xFilter.label,
+                        label: xOption.label,
+                        param: xFilter.param,
+                        value: xOption.value
+                    };
+                })[0];
+            }
+        );
+
+        console.log('defaultSelectedValues', defaultSelectedValues);
+        console.log('defaultSelectedFilters', defaultSelectedFilters);
+
+        updateFilterValuesSelected(
+            defaultSelectedValues,
+            defaultSelectedFilters
+        );
     };
 
     const xClassSelected = classNames(Style.selected, {
@@ -219,10 +305,12 @@ const SearchFilters = memo(props => {
     const xClassRoot = classNames(Style.root, props.className, {});
 
     useEffect(() => {
-        console.log('filters', filters);
-
-        console.log('props.filters', props.filters);
-    }, [filters]);
+        initFilterDefaultSelected(props.filters, filters);
+        // if(validators.isEmpty(filters)) {
+        //     console.log('filters', filters);
+        //     console.log('props.filters', props.filters);
+        // }
+    }, []);
 
     return (
         <CrudContext.Consumer>
@@ -233,7 +321,7 @@ const SearchFilters = memo(props => {
                             <div className={Style.horizontalScrollable}>
                                 {props.filters &&
                                     props.filters.map((xFilter, xIndex) => {
-                                        console.log('xFilter', xFilter);
+                                        // console.log('xFilter', xFilter);
                                         const xChipProps = {
                                             icon: xFilter.icon,
                                             label: xFilter.label,
