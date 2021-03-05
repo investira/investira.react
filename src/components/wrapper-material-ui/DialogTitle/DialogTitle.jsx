@@ -12,9 +12,10 @@ const styles = theme => ({
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1) + theme.spacing(0.5),
-        color: theme.palette.primary.main
+        right: '1px',
+        top: theme.spacing(2),
+        color: theme.palette.primary.main,
+        padding: '15px'
     }
 });
 
