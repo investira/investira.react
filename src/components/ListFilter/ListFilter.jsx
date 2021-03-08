@@ -43,6 +43,11 @@ const SearchFilters = memo(props => {
         });
     };
 
+    const isFiltersEmpty = pFilters => {
+        const xFilters = removeNullElements([...pFilters]);
+        return validators.isEmpty(xFilters);
+    };
+
     const isSelected = (
         pFilterIndex,
         pSelectedIndex,
@@ -72,13 +77,15 @@ const SearchFilters = memo(props => {
     };
 
     const handleSelect = pFilter => {
+        console.log(pFilter);
         const {
             action,
             filterIndex,
             filterLabel,
             filterOptions,
             filterParam,
-            optionIndex
+            optionIndex,
+            defaultValue
         } = pFilter;
         const xFilters = [...filters];
         const xSelected = [...selectedIndex];
@@ -86,7 +93,8 @@ const SearchFilters = memo(props => {
         xFilters[filterIndex] = {
             ...filterOptions[optionIndex],
             param: filterParam,
-            field: filterLabel
+            field: filterLabel,
+            default: defaultValue === filterOptions[optionIndex].value
         };
 
         xSelected[filterIndex] = [optionIndex];
@@ -223,39 +231,6 @@ const SearchFilters = memo(props => {
     };
 
     const initFilterDefaultSelected = (pPropFilters, pStateFilters) => {
-        //props
-        // [{
-        //     label: 'Período',
-        //     param: 'periodo',
-        //     type: 'single',
-        //     options: [
-        //         {
-        //             label: '7 Dias',
-        //             value: 7
-        //         },
-        //         {
-        //             label: '15 Dias',
-        //             value: 15
-        //         },
-        //         {
-        //             label: '30 Dias',
-        //             value: 30
-        //         },
-        //         {
-        //             label: '60 Dias',
-        //             value: 60
-        //         },
-        //         {
-        //             label: '90 Dias',
-        //             value: 90
-        //         }
-        //     ],
-        //     defaultValue: 30
-        // }]
-
-        //console.log('pPropFilters', pPropFilters);
-        //console.log('pStateFilters', pStateFilters);
-
         const defaultSelectedValues = pPropFilters.map(xFilter => {
             if (!validators.isEmpty(xFilter.defaultValue)) {
                 const xIndex = findWithAttr(
@@ -283,14 +258,12 @@ const SearchFilters = memo(props => {
                         field: xFilter.label,
                         label: xOption.label,
                         param: xFilter.param,
-                        value: xOption.value
+                        value: xOption.value,
+                        default: true
                     };
                 })[0];
             }
         );
-
-        console.log('defaultSelectedValues', defaultSelectedValues);
-        console.log('defaultSelectedFilters', defaultSelectedFilters);
 
         updateFilterValuesSelected(
             defaultSelectedValues,
@@ -305,12 +278,14 @@ const SearchFilters = memo(props => {
     const xClassRoot = classNames(Style.root, props.className, {});
 
     useEffect(() => {
-        initFilterDefaultSelected(props.filters, filters);
-        // if(validators.isEmpty(filters)) {
-        //     console.log('filters', filters);
-        //     console.log('props.filters', props.filters);
-        // }
-    }, []);
+        if (isFiltersEmpty(filters)) {
+            initFilterDefaultSelected(props.filters, filters);
+        }
+    }, [filters]);
+
+    // useEffect(() => {
+    //     console.log('hasFilter', hasFilter(filters));
+    // }, [filters]);
 
     return (
         <CrudContext.Consumer>
@@ -396,6 +371,8 @@ const SearchFilters = memo(props => {
                                                                                     xFilter.options,
                                                                                 filterIndex: xIndex,
                                                                                 optionIndex: xOptionIndex,
+                                                                                defaultValue:
+                                                                                    xFilter.defaultValue,
                                                                                 action: onRead
                                                                             }
                                                                         )
@@ -433,24 +410,28 @@ const SearchFilters = memo(props => {
                                 {filters &&
                                     filters.map((xFilter, xIndex) => {
                                         if (xFilter) {
-                                            // console.log(xFilter);
+                                            console.log(xFilter);
                                             return (
                                                 <div
                                                     className={Style.item}
                                                     key={`filter-${xIndex}`}>
                                                     <Chip
-                                                        variant={'outlined'}
+                                                        //variant={'outlined'}
                                                         color={'primary'}
                                                         label={`${xFilter.field}: ${xFilter.label}`}
                                                         size={'small'}
-                                                        onDelete={() =>
-                                                            handleRemove({
-                                                                filterIndex: xIndex,
-                                                                filterParam:
-                                                                    xFilter.param,
-                                                                action: onRead
-                                                            })
+                                                        disabled={
+                                                            xFilter.default
                                                         }
+                                                        {...(!xFilter.default && {
+                                                            onDelete: () =>
+                                                                handleRemove({
+                                                                    filterIndex: xIndex,
+                                                                    filterParam:
+                                                                        xFilter.param,
+                                                                    action: onRead
+                                                                })
+                                                        })}
                                                     />
                                                 </div>
                                             );

@@ -49,11 +49,11 @@
     overflow: hidden;
     padding: 0 16px;
 
-    .item {
-        & > div[role='button'] {
-            border: none;
-        }
-    }
+    // .item {
+    //     & > div[role='button'] {
+    //         border: none;
+    //     }
+    // }
 }
 
 .noFiltersSelected {
