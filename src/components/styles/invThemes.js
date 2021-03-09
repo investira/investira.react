@@ -114,8 +114,8 @@ export const themePrimary = {
             },
             MuiChip: {
                 root: {
-                    fontWeight: base.typo.fontWeightSemiBold,
-                    border: '1px solid #00dfa8'
+                    fontWeight: base.typo.fontWeightSemiBold
+                    //border: '1px solid #00dfa8'
                 },
                 colorSecondary: {
                     color: base.colors.secondary.main,
