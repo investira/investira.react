@@ -318,10 +318,6 @@ const SearchFilters = memo(props => {
                                                     key={`chip-menu-${xIndex}`}
                                                     id={`chip-menu-${xIndex}`}
                                                     anchorEl={anchorEl}
-                                                    // anchorOrigin={{
-                                                    //     vertical: 'bottom',
-                                                    //     horizontal: 'center'
-                                                    // }}
                                                     transformOrigin={{
                                                         vertical: 'top',
                                                         horizontal: 'center'
