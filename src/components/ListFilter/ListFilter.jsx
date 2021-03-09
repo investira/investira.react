@@ -77,7 +77,6 @@ const SearchFilters = memo(props => {
     };
 
     const handleSelect = pFilter => {
-        console.log(pFilter);
         const {
             action,
             filterIndex,
@@ -98,8 +97,6 @@ const SearchFilters = memo(props => {
         };
 
         xSelected[filterIndex] = [optionIndex];
-
-        console.log(xSelected);
 
         // setSelected(xSelected);
         // setFilters(xFilters);
@@ -283,10 +280,6 @@ const SearchFilters = memo(props => {
         }
     }, [filters]);
 
-    // useEffect(() => {
-    //     console.log('hasFilter', hasFilter(filters));
-    // }, [filters]);
-
     return (
         <CrudContext.Consumer>
             {({ onRead }) => {
@@ -296,7 +289,6 @@ const SearchFilters = memo(props => {
                             <div className={Style.horizontalScrollable}>
                                 {props.filters &&
                                     props.filters.map((xFilter, xIndex) => {
-                                        // console.log('xFilter', xFilter);
                                         const xChipProps = {
                                             icon: xFilter.icon,
                                             label: xFilter.label,
@@ -410,13 +402,11 @@ const SearchFilters = memo(props => {
                                 {filters &&
                                     filters.map((xFilter, xIndex) => {
                                         if (xFilter) {
-                                            console.log(xFilter);
                                             return (
                                                 <div
                                                     className={Style.item}
                                                     key={`filter-${xIndex}`}>
                                                     <Chip
-                                                        //variant={'outlined'}
                                                         color={'primary'}
                                                         label={`${xFilter.field}: ${xFilter.label}`}
                                                         size={'small'}
