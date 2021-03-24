@@ -169,7 +169,13 @@ export const themePrimary = {
             },
             MuiButton: {
                 root: {
-                    color: '#fff'
+                    color: '#fff',
+                    '&:hover': {
+                        '&$disabled': {
+                            color: base.colors.text.disabled,
+                            border: `1px solid ${base.colors.text.disabled}`
+                        }
+                    }
                 },
                 contained: {
                     borderRadius: base.spacing.unit * 4

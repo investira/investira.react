@@ -15,11 +15,34 @@ const displays = {
         }
         return displays.format('##.###.###/####-##', pValue);
     },
-    cpf: pValue => {
+    cpf: (pValue = '') => {
         if (validators.isNull(pValue)) {
             return '';
         }
-        return displays.format('###.###.###-##', pValue);
+
+        let xValue = pValue;
+
+        if (xValue.length < 4) {
+            return xValue;
+        }
+
+        if (xValue.length > 11) {
+            xValue = xValue.slice(0, 11);
+        }
+
+        const xMasks = {
+            3: '###',
+            4: '###.#',
+            5: '###.##',
+            6: '###.###',
+            7: '###.###.#',
+            8: '###.###.##',
+            9: '###.###.###',
+            10: '###.###.###.#',
+            11: '###.###.###-##'
+        };
+
+        return displays.format(xMasks[xValue.length], pValue) || '';
     },
     cep: pValue => {
         if (validators.isNull(pValue)) {
