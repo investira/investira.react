@@ -30,6 +30,9 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
             alignItems: 'center',
             justifyContent: 'center'
         },
+        contentSpacer: {
+            marginBottom: '24px'
+        },
         fetching: {
             height: '120px'
         }
@@ -142,18 +145,31 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 default:
                     return (
                         <DialogTitle
-                            style={{ height: '80px' }}
+                            style={{
+                                height: '80px',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center'
+                            }}
                             {...(title.onclose === false
                                 ? {}
                                 : { onClose: this.handleCloseDialog })}>
-                            {title.label}
+                            {typeof title.label === 'string' ? (
+                                <Typography
+                                    variant={'h6'}
+                                    color={'textPrimary'}>
+                                    {label}
+                                </Typography>
+                            ) : (
+                                title.label
+                            )}
                         </DialogTitle>
                     );
             }
         };
 
         contentRender = pStatus => {
-            const { content, messages, retryAction } = this.body;
+            const { content, messages, retryAction, actions } = this.body;
             switch (pStatus) {
                 case 'success':
                     return (
@@ -246,7 +262,13 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                         </div>
                     );
                 default:
-                    return content;
+                    if (actions) {
+                        return content;
+                    } else {
+                        return (
+                            <div style={styles.contentSpacer}>{content}</div>
+                        );
+                    }
             }
         };
 

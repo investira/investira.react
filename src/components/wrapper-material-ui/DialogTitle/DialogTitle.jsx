@@ -11,11 +11,12 @@ const styles = theme => ({
         //padding: theme.spacing(2)
     },
     closeButton: {
-        position: 'absolute',
-        right: '1px',
-        top: theme.spacing(2),
+        //position: 'absolute',
+        //right: '1px',
+        //top: theme.spacing(2),
         color: theme.palette.primary.main,
-        padding: '15px'
+        marginRight: theme.spacing(1.5) * -1
+        //padding: '15px'
     }
 });
 
@@ -27,7 +28,7 @@ const DialogTitle = withStyles(styles)(props => {
             disableTypography
             className={classes.root}
             {...otherProps}>
-            <Typography variant="h6">{children}</Typography>
+            {children}
             {onClose ? (
                 <IconButton
                     aria-label="close"

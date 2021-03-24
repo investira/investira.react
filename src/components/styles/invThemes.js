@@ -279,6 +279,10 @@ export const themePrimary = {
                 // }
             },
             MuiTypography: {
+                gutterBottom: {
+                    marginBottom: '0.65em'
+                }
+
                 // h4: {
                 //     fontWeight: 600
                 // },
