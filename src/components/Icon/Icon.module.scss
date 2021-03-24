@@ -58,3 +58,17 @@
 .colorOrangeLight {
     fill: url(#icon-component-gradient);
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        .colorGreenLight {
+            stroke: var(--color-primary);
+            fill: var(--color-primary);
+        }
+
+        .colorOrangeLight {
+            stroke: var(--color-danger-light);
+            fill: var(--color-danger-light);
+        }
+    }
+}
