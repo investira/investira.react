@@ -154,11 +154,11 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                             {...(title.onclose === false
                                 ? {}
                                 : { onClose: this.handleCloseDialog })}>
-                            {typeof title.label === 'string' ? (
+                            {title.label && typeof title.label === 'string' ? (
                                 <Typography
                                     variant={'h6'}
                                     color={'textPrimary'}>
-                                    {label}
+                                    {title.label}
                                 </Typography>
                             ) : (
                                 title.label
