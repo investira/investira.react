@@ -16,8 +16,10 @@ import {
     CenterInView
 } from '../../components';
 
+const initProps = { wrapContent: true, fullScreen: false };
+
 // Decorator
-const withDialog = (Component, pProps = { wrapContent: true }) => {
+const withDialog = (Component, pProps = initProps) => {
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
     });
@@ -319,6 +321,11 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                 ...this.props
             };
 
+            const withProps = {
+                ...initProps,
+                ...pProps
+            };
+
             const { status } = this.state;
             const { title, content, actions } = this.body;
 
@@ -331,13 +338,14 @@ const withDialog = (Component, pProps = { wrapContent: true }) => {
                     <Component {...xProps} />
                     <Dialog
                         fullWidth
+                        fullScreen={withProps.fullScreen}
                         open={this.state.isOpen}
                         TransitionComponent={Transition}
                         onClose={this.handleCloseDialog}>
                         {!validators.isEmpty(title) && this.titleRender(status)}
 
                         {!validators.isNull(content) &&
-                            (pProps.wrapContent ? (
+                            (withProps.wrapContent ? (
                                 <DialogContent>
                                     {this.contentRender(status)}
                                 </DialogContent>
