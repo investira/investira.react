@@ -5,40 +5,26 @@ import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '../../Icon';
 
-const styles = theme => ({
-    root: {
-        //margin: 0,
-        //padding: theme.spacing(2)
-    },
-    closeButton: {
-        //position: 'absolute',
-        //right: '1px',
-        //top: theme.spacing(2),
-        color: theme.palette.primary.main,
-        marginRight: theme.spacing(1.5) * -1
-        //padding: '15px'
-    }
-});
-
-const DialogTitle = withStyles(styles)(props => {
+const DialogTitle = props => {
     const { children, classes, onClose, ...otherProps } = props;
 
+    const xIconButtonProps = {
+        edge: 'end',
+        'aria-label': 'close',
+        color: 'primary',
+        ...(onClose && { onClick: onClose })
+    };
+
     return (
-        <MuiDialogTitle
-            disableTypography
-            className={classes.root}
-            {...otherProps}>
+        <MuiDialogTitle disableTypography {...otherProps}>
             {children}
             {onClose ? (
-                <IconButton
-                    aria-label="close"
-                    className={classes.closeButton}
-                    onClick={onClose}>
+                <IconButton {...xIconButtonProps}>
                     <Icon iconName={'cancel'} size={18} />
                 </IconButton>
             ) : null}
         </MuiDialogTitle>
     );
-});
+};
 
 export default DialogTitle;
