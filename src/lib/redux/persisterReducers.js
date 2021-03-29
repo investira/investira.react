@@ -11,7 +11,8 @@ const persiterReducers = (pReducers, pPrefix, pStorage) => {
             persistReducer(
                 {
                     key: `${pPrefix}-${xEntry[0]}`,
-                    storage: xStorage
+                    storage: xStorage,
+                    timeout: 0
                 },
                 xEntry[1]
             )
