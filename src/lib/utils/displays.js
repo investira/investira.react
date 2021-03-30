@@ -9,6 +9,35 @@ const displays = {
         }
         return pMask;
     },
+    formatDinamic: (pMask, pValue) => {
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+
+        const xFirstMaskElem = pMask[0];
+        const xLastMaskElem = pMask[pMask.length - 1];
+        const xFirsMaksSize = xFirstMaskElem.match(/#/g).length;
+        const xLastMaskSize = xLastMaskElem.match(/#/g).length;
+
+        let xValue = pValue;
+
+        if (xValue.length < xFirsMaksSize) {
+            return xValue;
+        }
+
+        if (xValue.length > xLastMaskSize) {
+            xValue = xValue.slice(0, xLastMaskSize);
+        }
+
+        const xMasks = {};
+
+        pMask.forEach(xMask => {
+            const xKey = xMask.match(/#/g).length;
+            xMasks[xKey] = xMask;
+        });
+
+        return displays.format(xMasks[xValue.length], xValue) || '';
+    },
     cnpj: pValue => {
         if (validators.isNull(pValue)) {
             return '';
