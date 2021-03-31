@@ -9,7 +9,7 @@ const MaskedTextField = memo(props => {
     const { maskIgnoreChars, maskFilterChar, mask, ...otherProps } = props;
     const clearValues = pValues => {
         if (!validators.isNull(pValues)) {
-            return pValues.replace('-', '');
+            return pValues.replace(/\.|-/g, '');
         }
 
         return pValues;
