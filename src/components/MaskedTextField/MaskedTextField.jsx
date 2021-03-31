@@ -7,8 +7,15 @@ import { TextField } from '../';
 
 const MaskedTextField = memo(props => {
     const { maskIgnoreChars, maskFilterChar, mask, ...otherProps } = props;
+    const clearValues = pValues => {
+        if (!validators.isNull(pValues)) {
+            return pValues.replace('-', '');
+        }
 
-    const [value, setValue] = useState(mask(props.value) || '');
+        return pValues;
+    };
+
+    const [value, setValue] = useState(mask(clearValues(props.value)) || '');
     const formikContext = useFormikContext();
 
     let handleChange = null;
