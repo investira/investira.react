@@ -95,7 +95,10 @@ const Crood = memo(
                     onNextView,
                     onPrevView,
                     onReset,
-                    prevView
+                    prevView,
+                    onCloseDialog: handleCloseDialog,
+                    onSuccessDialog: handleSuccessDialog,
+                    onErrorDialog: handleErrorDialog
                 });
             };
 
@@ -157,6 +160,14 @@ const Crood = memo(
                 });
             };
 
+            const handleSuccessDialog = () => {
+                props.onSuccess && props.onSuccess();
+            };
+
+            const handleErrorDialog = () => {
+                props.onError && props.onError;
+            };
+
             const handleEdit = () => {
                 setEditable(!editable);
             };
@@ -181,7 +192,9 @@ const Crood = memo(
                             onConfirmUpdate,
                             handleDeleteDialog,
                             handleOpenDialog,
-                            handleCloseDialog
+                            handleCloseDialog,
+                            handleSuccessDialog,
+                            handleErrorDialog
                         });
                     }
                     console.error('CRUD: Componente filho inválido');
