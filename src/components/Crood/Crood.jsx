@@ -14,10 +14,6 @@ import {
 
 import Style from './Crood.module.scss';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const Crood = memo(
     Object.assign(
         props => {
@@ -39,7 +35,6 @@ const Crood = memo(
 
             const [deleted, setDeleted] = useState(false);
             const [editable, setEditable] = useState(false);
-            const [dialog, setDialog] = useState(initialStateDialog);
 
             const crudContext = useContext(CrudContext);
             const deckContext = useContext(DeckContext);
@@ -95,7 +90,11 @@ const Crood = memo(
                     onNextView,
                     onPrevView,
                     onReset,
-                    prevView
+                    prevView,
+                    onCloseDialog: handleCloseDialog,
+                    onSuccessDialog: handleSuccessDialog,
+                    onErrorDialog: handleErrorDialog,
+                    onReadOne: crudContext.onReadOne
                 });
             };
 
@@ -106,12 +105,6 @@ const Crood = memo(
                 messages,
                 data
             }) => {
-                // setDialog({
-                //     isOpen: true,
-                //     title,
-                //     content,
-                //     actions
-                // });
                 props.onOpenDialog({
                     title,
                     content,
@@ -126,13 +119,9 @@ const Crood = memo(
                     ...initialStateDialog
                 });
                 props.onCloseDialog();
-                // setDialog({
-                //     ...initialStateDialog
-                // });
             };
 
             const handleDeleteDialog = (pProps = {}) => {
-                console.log(pProps);
                 const { message, data, title, labelButton, messages } = pProps;
                 handleOpenDialog({
                     title: {
@@ -155,6 +144,14 @@ const Crood = memo(
                     messages,
                     data
                 });
+            };
+
+            const handleSuccessDialog = () => {
+                props.onSuccess && props.onSuccess();
+            };
+
+            const handleErrorDialog = () => {
+                props.onError && props.onError;
             };
 
             const handleEdit = () => {
@@ -181,7 +178,9 @@ const Crood = memo(
                             onConfirmUpdate,
                             handleDeleteDialog,
                             handleOpenDialog,
-                            handleCloseDialog
+                            handleCloseDialog,
+                            handleSuccessDialog,
+                            handleErrorDialog
                         });
                     }
                     console.error('CRUD: Componente filho inválido');
@@ -278,48 +277,6 @@ const Crood = memo(
                             </>
                         )}
                     </div>
-
-                    {/* <Dialog
-                        fullWidth
-                        open={dialog.isOpen}
-                        TransitionComponent={Transition}
-                        onClose={handleCloseDialog}>
-                        {!validators.isEmpty(dialog.title) && (
-                            <DialogTitle
-                                {...(dialog.title.onclose === false
-                                    ? {}
-                                    : { onClose: handleCloseDialog })}>
-                                {dialog.title.label}
-                            </DialogTitle>
-                        )}
-                        {!validators.isNull(dialog.content) && (
-                            <DialogContent>{dialog.content}</DialogContent>
-                        )}
-
-                        {!validators.isEmpty(dialog.actions) && (
-                            <DialogActions>
-                                {dialog.actions.map((xAction, xIndex) => {
-                                    const xActionProps = {
-                                        onClick: xAction.onClick,
-                                        color: xAction.color || 'primary',
-                                        ...(xAction.startIcon && {
-                                            startIcon: (
-                                                <Icon
-                                                    iconName={xAction.startIcon}
-                                                />
-                                            )
-                                        })
-                                    };
-
-                                    return (
-                                        <Button key={xIndex} {...xActionProps}>
-                                            {xAction.label}
-                                        </Button>
-                                    );
-                                })}
-                            </DialogActions>
-                        )}
-                    </Dialog> */}
                 </>
             );
         },

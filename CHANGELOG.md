@@ -96,3 +96,4 @@ Toda a biblioteca foi reorganizada para comportar os componentes compartilhados 
 -   [lib] Add vibrate aos utils
 -   [dep] Add dependencia idb
 -   [lib] Add engine para redux-persit, idbStorage
+-   [lib] Add avgReadTime e messageDuration

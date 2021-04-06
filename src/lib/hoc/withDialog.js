@@ -131,14 +131,22 @@ const withDialog = (Component, pProps = initProps) => {
                 case 'success':
                     return (
                         <DialogTitle
-                            style={{ height: '80px' }}
+                            style={{
+                                //height: '80px'
+                                textAlign: 'right',
+                                justifyContent: 'flex-end'
+                            }}
                             onClose={this.handleCloseDialog}
                         />
                     );
                 case 'error':
                     return (
                         <DialogTitle
-                            style={{ height: '80px' }}
+                            style={{
+                                //height: '80px'
+                                textAlign: 'right',
+                                justifyContent: 'flex-end'
+                            }}
                             onClose={this.handleCloseDialog}
                         />
                     );
@@ -148,7 +156,7 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                height: '80px',
+                                //height: '80px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center'
