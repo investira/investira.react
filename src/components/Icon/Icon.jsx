@@ -82,6 +82,7 @@ Icon.propTypes = {
         'info',
         'textPrimary',
         'textSecondary',
+        'black',
         'greenLight',
         'orangeLight'
     ])
