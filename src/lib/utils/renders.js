@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { objects } from 'investira.sdk';
+import { objects, validators, numbers } from 'investira.sdk';
 
 const renders = {
     /**
@@ -28,6 +28,34 @@ const renders = {
             return 0;
         }
         return (pTextLength / 2) * 200 + 1000;
+    },
+
+    /**
+     * Calcula o tempo médio de leitura
+     * O cálculo é baseado na velocidade média de leitura que cerca de 200 palavras por minuto (ppm)
+     *
+     * @param {String} pText
+     * @returns {Number} Tempo em milesegundos
+     */
+
+    avgReadTime(pText = '') {
+        if (validators.isEmpty(pText)) {
+            return 0;
+        }
+
+        const countWords = pText => {
+            const xTextCleaned = pText.replace(/\s+/g, ' ').trim();
+            return xTextCleaned.split(' ').length;
+        };
+
+        const xTime = countWords(pText) / 200;
+        const xTimeInSeconds = xTime * 60;
+
+        return numbers.round(xTimeInSeconds * 1000, 0);
+    },
+
+    messageDuration(pText = '') {
+        return renders.avgReadTime(pText) * 3;
     },
 
     randomColors: pColors => {
