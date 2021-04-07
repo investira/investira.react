@@ -7,11 +7,18 @@
     background-color: var(--color-primary);
     display: flex;
     align-items: center;
+}
+
+.justify {
     justify-content: space-between;
 }
 
 .icon {
     padding-right: 12px;
+}
+
+.content {
+    min-width: 233px;
 }
 
 .colorPrimary {

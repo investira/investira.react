@@ -8,7 +8,9 @@ import Style from './Alerts.module.scss';
 
 const Alerts = memo(props => {
     const xClassName = classNames(Style.root, {
-        [Style[`color${capitalize(props.color)}`]]: props.color !== 'default'
+        [Style[`color${capitalize(props.backgroundColor)}`]]:
+            props.backgroundColor !== 'default',
+        [Style.justify]: props.close
     });
     const [open, setOpen] = useState(true);
     // const xSuffixs = {
@@ -34,25 +36,35 @@ const Alerts = memo(props => {
                             size={21}
                             color={
                                 // `${props.color}${xSuffixs[props.color]}`
-                                'black'
+                                props.color || 'black'
                             }
                             iconName={props.iconName}
                         />
                     </div>
                 )}
-                <Typography variant={'caption'} color={'inherit'}>
-                    {props.children}
-                </Typography>
-                <IconButton onClick={handleClose}>
-                    <Icon size={12} color={'black'} iconName={'cancel'} />
-                </IconButton>
+                <div className={Style.content}>
+                    <Typography
+                        variant={'caption'}
+                        color={props.color || 'inherit'}>
+                        {props.children}
+                    </Typography>
+                </div>
+                {props.close && (
+                    <IconButton edge={'end'} onClick={handleClose}>
+                        <Icon
+                            size={12}
+                            color={props.color || 'black'}
+                            iconName={'cancel'}
+                        />
+                    </IconButton>
+                )}
             </div>
         );
     }
 });
 
 Alerts.propTypes = {
-    color: PropTypes.oneOf([
+    backgroundColor: PropTypes.oneOf([
         'default',
         'inherit',
         'primary',
@@ -61,11 +73,12 @@ Alerts.propTypes = {
         'danger',
         'info'
     ]),
+    color: PropTypes.string,
     iconName: PropTypes.string
 };
 
 Alerts.defaultProps = {
-    color: 'default'
+    backgroundColor: 'default'
 };
 
 export default Alerts;
