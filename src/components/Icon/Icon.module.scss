@@ -54,6 +54,11 @@
     fill: var(--color-secondary-lightness);
 }
 
+.colorBlack {
+    stroke: var(--color-black-100);
+    fill: var(--color-black-100);
+}
+
 .colorGreenLight,
 .colorOrangeLight {
     fill: url(#icon-component-gradient);

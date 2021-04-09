@@ -1,5 +1,6 @@
 export * from './wrapper-material-ui/';
 export * from './template/';
+export { default as Alerts } from './Alerts';
 export { default as Basic } from './Basic';
 export { default as Chips } from './Chips';
 export { default as ContainerFeedback } from './ContainerFeedback';
