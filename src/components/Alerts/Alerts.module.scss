@@ -1,8 +1,8 @@
 .root {
     position: relative;
-    padding: 1rem 1rem;
+    padding: 0.6rem 1rem;
     margin-bottom: 1rem;
-    border: 1px solid transparent;
+    //border: 1px solid transparent;
     border-radius: 0.5rem;
     background-color: var(--color-primary);
     display: flex;
@@ -23,22 +23,22 @@
 
 .colorPrimary {
     background-color: var(--color-primary);
-    border: 1px solid var(--color-primary-darkness);
+    //border: 1px solid var(--color-primary-darkness);
 }
 
 .colorSecondary {
     background-color: var(--color-secondary-lightness);
-    border: 1px solid var(--color-secondary-darkness);
+    //border: 1px solid var(--color-secondary-darkness);
 }
 
 .colorWarn {
     background-color: var(--color-warning);
-    border: 1px solid var(--color-warning-dark);
+    //border: 1px solid var(--color-warning-dark);
 }
 
 .colorDanger {
     background-color: var(--color-danger);
-    border: 1px solid var(--color-danger-dark);
+    //border: 1px solid var(--color-danger-dark);
     // background-color: rgba(255, 121, 87, 0.7);
     // border: 1px solid var(--color-danger-dark);
     // color: var(--color-danger-dark);
@@ -46,5 +46,5 @@
 
 .colorInfo {
     background-color: var(--color-info);
-    border: 1px solid var(--color-info-dark);
+    //border: 1px solid var(--color-info-dark);
 }
