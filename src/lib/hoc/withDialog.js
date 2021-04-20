@@ -91,11 +91,13 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         // Fechar Dialog
-        handleCloseDialog = () => {
+        handleCloseDialog = e => {
+            e.preventDefault();
             this.body = {};
             this.setState({
                 ...this.initialState
             });
+            e.stopPropagation();
         };
 
         // Altera para Dialog de sucesso
