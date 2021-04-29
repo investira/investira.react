@@ -16,6 +16,17 @@ const useStyles = makeStyles(
                 }
             }
         },
+        small: {
+            '& $badge': {
+                width: theme.spacing(2),
+                height: theme.spacing(2),
+                borderRadius: theme.spacing(2),
+                '& svg': {
+                    width: '10px',
+                    height: '10px'
+                }
+            }
+        },
         badge: {}
     }),
     { name: 'MuiBadge' }
@@ -26,7 +37,8 @@ function Badge(props) {
     const classes = useStyles();
 
     const xClassNames = {
-        [classes.large]: props.size === 'large'
+        [classes.large]: props.size === 'large',
+        [classes.small]: props.size === 'small'
     };
 
     return (
