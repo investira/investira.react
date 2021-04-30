@@ -52,6 +52,8 @@ const withDialog = (Component, pProps = initProps) => {
             ...this.initialState
         };
 
+        formSubmit = null;
+
         /**
          * Exibe o Dialog
          *
@@ -126,6 +128,16 @@ const withDialog = (Component, pProps = initProps) => {
             retryAction && retryAction();
         };
 
+        registerSubmitDialog = pFormikHandleSubmit => {
+            if (validators.isNull(this.formSubmit)) {
+                this.formSubmit = pFormikHandleSubmit;
+            }
+        };
+
+        handleSubmitDialog = pEvent => {
+            this.formSubmit && this.formSubmit();
+        };
+
         // Renders
         titleRender = pStatus => {
             const { title } = this.body;
@@ -134,7 +146,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px'
                                 textAlign: 'right',
                                 justifyContent: 'flex-end'
                             }}
@@ -145,7 +156,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px'
                                 textAlign: 'right',
                                 justifyContent: 'flex-end'
                             }}
@@ -158,7 +168,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center'
@@ -299,6 +308,9 @@ const withDialog = (Component, pProps = initProps) => {
                             {actions.map((xAction, xIndex) => {
                                 const xActionProps = {
                                     onClick: xAction.onClick,
+                                    ...(xAction.type === 'submit' && {
+                                        onClick: this.handleSubmitDialog
+                                    }),
                                     color: xAction.color || 'primary',
                                     ...(xAction.startIcon && {
                                         startIcon: (
@@ -328,6 +340,7 @@ const withDialog = (Component, pProps = initProps) => {
                 onError: this.handleError,
                 onFetching: this.handleFetching,
                 onResetStatus: this.handleResetStatus,
+                registerSubmit: this.registerSubmitDialog,
                 ...this.props
             };
 
