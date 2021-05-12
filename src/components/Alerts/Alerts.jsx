@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { Typography, Icon, IconButton } from '../';
 import { validators } from 'investira.sdk';
@@ -24,6 +24,10 @@ const Alerts = memo(props => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        setOpen(props.open);
+    }, [props.open]);
 
     if (!open) {
         return null;
@@ -74,11 +78,13 @@ Alerts.propTypes = {
         'info'
     ]),
     color: PropTypes.string,
-    iconName: PropTypes.string
+    iconName: PropTypes.string,
+    open: PropTypes.bool
 };
 
 Alerts.defaultProps = {
-    backgroundColor: 'default'
+    backgroundColor: 'default',
+    open: true
 };
 
 export default Alerts;

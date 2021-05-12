@@ -2,6 +2,7 @@ export { default as AppBar } from './AppBar';
 export { default as Autocomplete } from './Autocomplete';
 export { default as Avatar } from './Avatar';
 export { default as Badge } from './Badge';
+export { default as Backdrop } from './Backdrop';
 export { default as BottomNavigation } from './BottomNavigation';
 export { default as BottomNavigationAction } from './BottomNavigationAction';
 export { default as Breadcrumbs } from './Breadcrumbs';

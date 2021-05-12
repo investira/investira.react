@@ -40,6 +40,87 @@ const withDialog = (Component, pProps = initProps) => {
         }
     };
 
+    const SuccessContent = props => {
+        const { messages, onClick, width, height } = props;
+        return (
+            <>
+                <DialogContentText component={'div'}>
+                    <Success width={width} height={height} startAnimation />
+                </DialogContentText>
+                <DialogContentText component={'div'}>
+                    <Typography
+                        variant={'h5'}
+                        color={'textPrimary'}
+                        align={'center'}>
+                        {messages && messages.success
+                            ? messages.success.title
+                            : 'Título de Sucesso'}
+                    </Typography>
+                    <Typography
+                        variant={'body2'}
+                        color={'textSecondary'}
+                        align={'center'}>
+                        {messages && messages.success
+                            ? messages.success.content
+                            : 'Conteúdo da mensagem de sucesso'}
+                    </Typography>
+                </DialogContentText>
+
+                <div style={styles.actions}>
+                    <Button
+                        key={'success_ok'}
+                        variant={'outlined'}
+                        color={'primary'}
+                        //onClick={this.handleCloseDialog}
+                        onClick={onClick}>
+                        OK
+                    </Button>
+                </div>
+            </>
+        );
+    };
+
+    const ErrorContent = props => {
+        const { messages, width, height, retryAction, onClick } = props;
+        return (
+            <>
+                <DialogContentText component={'div'}>
+                    <Error width={width} height={height} startAnimation />
+                </DialogContentText>
+                <DialogContentText component={'div'}>
+                    <Typography
+                        variant={'h5'}
+                        color={'textPrimary'}
+                        align={'center'}>
+                        {messages && messages.error
+                            ? messages.error.title
+                            : 'Título de Error'}
+                    </Typography>
+                    <Typography
+                        variant={'body2'}
+                        color={'textSecondary'}
+                        align={'center'}>
+                        {messages && messages.error
+                            ? messages.error.content
+                            : 'Conteúdo da mensagem de erro'}
+                    </Typography>
+                </DialogContentText>
+
+                {retryAction && (
+                    <div style={styles.actions}>
+                        <Button
+                            key={'success_ok'}
+                            variant={'outlined'}
+                            color={'primary'}
+                            onClick={onClick}>
+                            Tentar Novamente
+                        </Button>
+                    </div>
+                )}
+            </>
+        );
+    };
+
     class wrapComponent extends React.Component {
         initialState = {
             isOpen: false,
@@ -51,6 +132,8 @@ const withDialog = (Component, pProps = initProps) => {
         state = {
             ...this.initialState
         };
+
+        formSubmit = null;
 
         /**
          * Exibe o Dialog
@@ -126,6 +209,16 @@ const withDialog = (Component, pProps = initProps) => {
             retryAction && retryAction();
         };
 
+        registerSubmitDialog = pFormikHandleSubmit => {
+            if (validators.isNull(this.formSubmit)) {
+                this.formSubmit = pFormikHandleSubmit;
+            }
+        };
+
+        handleSubmitDialog = pEvent => {
+            this.formSubmit && this.formSubmit();
+        };
+
         // Renders
         titleRender = pStatus => {
             const { title } = this.body;
@@ -134,7 +227,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px'
                                 textAlign: 'right',
                                 justifyContent: 'flex-end'
                             }}
@@ -145,7 +237,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px'
                                 textAlign: 'right',
                                 justifyContent: 'flex-end'
                             }}
@@ -158,7 +249,6 @@ const withDialog = (Component, pProps = initProps) => {
                     return (
                         <DialogTitle
                             style={{
-                                //height: '80px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center'
@@ -182,89 +272,51 @@ const withDialog = (Component, pProps = initProps) => {
 
         contentRender = pStatus => {
             const { content, messages, retryAction, actions } = this.body;
+            const withProps = {
+                ...initProps,
+                ...pProps
+            };
+
             switch (pStatus) {
                 case 'success':
-                    return (
-                        <>
-                            <DialogContentText component={'div'}>
-                                <Success
-                                    width={100}
-                                    height={100}
-                                    startAnimation
-                                />
-                            </DialogContentText>
-                            <DialogContentText component={'div'}>
-                                <Typography
-                                    variant={'h5'}
-                                    color={'textPrimary'}
-                                    align={'center'}>
-                                    {messages && messages.success
-                                        ? messages.success.title
-                                        : 'Título de Sucesso'}
-                                </Typography>
-                                <Typography
-                                    variant={'body2'}
-                                    color={'textSecondary'}
-                                    align={'center'}>
-                                    {messages && messages.success
-                                        ? messages.success.content
-                                        : 'Conteúdo da mensagem de sucesso'}
-                                </Typography>
-                            </DialogContentText>
-
-                            <div style={styles.actions}>
-                                <Button
-                                    key={'success_ok'}
-                                    variant={'outlined'}
-                                    color={'primary'}
-                                    onClick={this.handleCloseDialog}>
-                                    OK
-                                </Button>
-                            </div>
-                        </>
+                    return withProps.fullScreen ? (
+                        <CenterInView>
+                            <SuccessContent
+                                messages={messages}
+                                onClick={this.handleCloseDialog}
+                                width={175}
+                                height={175}
+                            />
+                        </CenterInView>
+                    ) : (
+                        <SuccessContent
+                            width={100}
+                            height={100}
+                            messages={messages}
+                            onClick={this.handleCloseDialog}
+                        />
                     );
                 case 'error':
-                    return (
-                        <>
-                            <DialogContentText component={'div'}>
-                                <Error
-                                    width={100}
-                                    height={100}
-                                    startAnimation
-                                />
-                            </DialogContentText>
-                            <DialogContentText component={'div'}>
-                                <Typography
-                                    variant={'h5'}
-                                    color={'textPrimary'}
-                                    align={'center'}>
-                                    {messages && messages.error
-                                        ? messages.error.title
-                                        : 'Título de Error'}
-                                </Typography>
-                                <Typography
-                                    variant={'body2'}
-                                    color={'textSecondary'}
-                                    align={'center'}>
-                                    {messages && messages.error
-                                        ? messages.error.content
-                                        : 'Conteúdo da mensagem de erro'}
-                                </Typography>
-                            </DialogContentText>
-
-                            {retryAction && (
-                                <div style={styles.actions}>
-                                    <Button
-                                        key={'success_ok'}
-                                        variant={'outlined'}
-                                        color={'primary'}
-                                        onClick={this.handleRetry}>
-                                        Tentar Novamente
-                                    </Button>
-                                </div>
-                            )}
-                        </>
+                    return withProps.fullScreen ? (
+                        <CenterInView>
+                            <ErrorContent
+                                width={175}
+                                height={175}
+                                messages={messages}
+                                retryAction={retryAction}
+                                onClick={this.handleRetr}
+                            />
+                        </CenterInView>
+                    ) : (
+                        <ErrorContent
+                            width={100}
+                            height={100}
+                            messages={messages}
+                            retryAction={retryAction}
+                            onClick={this.handleRetr}
+                        />
                     );
+
                 case 'fetching':
                     return (
                         <div style={styles.fetching}>
@@ -299,6 +351,9 @@ const withDialog = (Component, pProps = initProps) => {
                             {actions.map((xAction, xIndex) => {
                                 const xActionProps = {
                                     onClick: xAction.onClick,
+                                    ...(xAction.type === 'submit' && {
+                                        onClick: this.handleSubmitDialog
+                                    }),
                                     color: xAction.color || 'primary',
                                     ...(xAction.startIcon && {
                                         startIcon: (
@@ -328,6 +383,7 @@ const withDialog = (Component, pProps = initProps) => {
                 onError: this.handleError,
                 onFetching: this.handleFetching,
                 onResetStatus: this.handleResetStatus,
+                registerSubmit: this.registerSubmitDialog,
                 ...this.props
             };
 
