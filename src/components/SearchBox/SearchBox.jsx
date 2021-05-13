@@ -169,7 +169,7 @@ const SearchBox = forwardRef((props, ref) => {
                     </IconButton>
                 )}
             </div>
-            <Divider />
+            {/* <Divider /> */}
             {!validators.isEmpty(querySplited) && (
                 <div className={Style.querys}>
                     {querySplited.map((xData, xIndex) => {
