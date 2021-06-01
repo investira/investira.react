@@ -8,6 +8,7 @@
 .main {
     display: flex; // resolve bug no safari
     flex-grow: 1;
+    flex-direction: column;
 }
 
 .nav {
