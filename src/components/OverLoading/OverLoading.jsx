@@ -25,7 +25,8 @@ function OverLoading(props) {
         <Backdrop
             className={classes.backdrop}
             open={open}
-            onClick={handleClose}>
+            //onClick={handleClose}
+        >
             <CircularProgress color="primary" />
         </Backdrop>
     );
