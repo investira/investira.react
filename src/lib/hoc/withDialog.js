@@ -174,12 +174,17 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         // Fechar Dialog
-        handleCloseDialog = e => {
+        handleCloseDialog = (e, callback) => {
             e && e.preventDefault();
             this.body = {};
-            this.setState({
-                ...this.initialState
-            });
+            this.setState(
+                {
+                    ...this.initialState
+                },
+                () => {
+                    callback && callback();
+                }
+            );
             e && e.stopPropagation();
         };
 
@@ -293,7 +298,12 @@ const withDialog = (Component, pProps = initProps) => {
                             width={100}
                             height={100}
                             messages={messages}
-                            onClick={this.handleCloseDialog}
+                            onClick={e =>
+                                this.handleCloseDialog(
+                                    e,
+                                    messages?.success?.callback
+                                )
+                            }
                         />
                     );
                 case 'error':
@@ -354,6 +364,7 @@ const withDialog = (Component, pProps = initProps) => {
                                     ...(xAction.type === 'submit' && {
                                         onClick: this.handleSubmitDialog
                                     }),
+                                    style: { pointerEvents: 'all' },
                                     color: xAction.color || 'primary',
                                     ...(xAction.startIcon && {
                                         startIcon: (
@@ -407,7 +418,9 @@ const withDialog = (Component, pProps = initProps) => {
                         fullScreen={withProps.fullScreen}
                         open={this.state.isOpen}
                         TransitionComponent={Transition}
-                        onClose={this.handleCloseDialog}>
+                        onClose={this.handleCloseDialog}
+                        //PaperProps={{ style: { pointerEvents: 'none' } }}
+                    >
                         {!validators.isEmpty(title) && this.titleRender(status)}
 
                         {!validators.isNull(content) &&
