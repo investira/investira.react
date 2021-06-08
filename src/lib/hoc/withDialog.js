@@ -182,7 +182,7 @@ const withDialog = (Component, pProps = initProps) => {
                     ...this.initialState
                 },
                 () => {
-                    callback && callback();
+                    validators.isFunction(callback) && callback();
                 }
             );
             e && e.stopPropagation();
