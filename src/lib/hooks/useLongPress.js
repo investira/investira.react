@@ -17,7 +17,11 @@ const useLongPress = (
             validators.isNull(scrollElem.current) &&
             !validators.isNull(listenElemOnScroll)
         ) {
-            const xScroll = document.getElementById(listenElemOnScroll);
+            const xScroll =
+                document.getElementById(listenElemOnScroll) ||
+                document.getElementsByClassName(listenElemOnScroll)[0];
+            //console.log(xScroll);
+
             scrollElem.current = xScroll;
 
             xScroll.addEventListener(
@@ -52,9 +56,11 @@ const useLongPress = (
 
     const clear = useCallback(
         (pEvent, pShouldTriggerClick = true) => {
-            console.log(pEvent.type);
             timeout.current && clearTimeout(timeout.current);
-            pShouldTriggerClick && !longPressTriggered && onClick();
+            pShouldTriggerClick &&
+                !longPressTriggered &&
+                onClick &&
+                onClick(pEvent);
             setLongPressTriggered(false);
 
             if (shouldPreventDefault && target.current) {

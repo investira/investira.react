@@ -34,13 +34,11 @@ function Format(props) {
         return xValue[pType] || pValue;
     };
 
+    const { format, value, decimais, ...restProps } = props;
+
     return (
-        <Typography
-            variant={props.variant}
-            color={props.color}
-            align={props.align}
-            className={props.className}>
-            {formatValue(props.format, props.value, props.decimais)}
+        <Typography {...restProps}>
+            {formatValue(format, value, decimais)}
         </Typography>
     );
 }

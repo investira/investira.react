@@ -4,6 +4,15 @@ import { validators } from 'investira.sdk';
 const displays = {
     format: (pMask, pValue) => {
         //const xValue = pValue;
+
+        if (validators.isNull(pMask)) {
+            return;
+        }
+
+        if (validators.isNull(pValue)) {
+            return '';
+        }
+
         for (let xI = 0; xI <= pValue.length; xI++) {
             pMask = pMask.replace('#', pValue.charAt(xI));
         }
