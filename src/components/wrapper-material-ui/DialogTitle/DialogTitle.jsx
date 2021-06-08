@@ -12,6 +12,7 @@ const DialogTitle = props => {
         edge: 'end',
         'aria-label': 'close',
         color: 'primary',
+        style: { pointerEvents: 'all' },
         ...(onClose && { onClick: onClose })
     };
 
