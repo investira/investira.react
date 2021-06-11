@@ -4,18 +4,18 @@ import { validators } from 'investira.sdk';
 import Style from './HorizontalList.module.scss';
 
 const HorizontalList = props => {
+    const isMount = useRef(false);
     const elementsRef = [];
     let timeout = null;
     let isScrolling = false;
     let isClicked = false;
-
-    //const xPersistElemFocusIndex = useRef(0);
 
     const scrollableRef = React.useRef();
     const [initElemsRect, setInitElemsRect] = useState([]);
     const [elemFocusIndex, setElemFocusIndex] = useState(0);
     const [childFocused, setChildFocused] = useState(props.id + '0');
     const [initElementsRef, setInitElementsRef] = useState([]);
+    const [positions, setPositions] = useState([0]);
 
     // Centraliza o elemento selecionado
     const centerInScroll = pIndex => {
@@ -32,10 +32,27 @@ const HorizontalList = props => {
             const xScrollElemRect = xScrollElem.getBoundingClientRect();
             const xSpacer = (xScrollElemRect.width - xFocusElemRect.width) / 2;
 
-            xScrollElem.scrollLeft = initElemsRect[xSelected].x - xSpacer;
+            //xScrollElem.scrollLeft = initElemsRect[xSelected].x - xSpacer;
+
+            xScrollElem.scrollLeft = positions[xSelected] - xSpacer;
         }
 
         isClicked = false;
+    };
+
+    const calcPosition = pElemtsRect => {
+        let xPositions = [0];
+        const xTotalArea = pElemtsRect.reduce((xAcumm, xCurrentValue) => {
+            const xValue = xAcumm + xCurrentValue.width;
+            xPositions.push(xValue);
+            return xValue;
+        }, 0);
+
+        xPositions = xPositions.filter(xValue => {
+            return xValue !== xTotalArea;
+        });
+
+        return xPositions;
     };
 
     // Armazena a posição inicial de cada elemento da lista
@@ -43,6 +60,11 @@ const HorizontalList = props => {
         const xInitElemsRect = pElemList.map(elem => {
             return elem.getBoundingClientRect();
         });
+
+        const xPositions = calcPosition(xInitElemsRect);
+
+        setPositions(xPositions);
+
         setInitElemsRect(xInitElemsRect);
     };
 
@@ -68,12 +90,27 @@ const HorizontalList = props => {
     };
 
     useEffect(() => {
+        window.clearTimeout(timeout);
+
+        if (
+            isMount.current &&
+            validators.isNull(initElementsRef[elemFocusIndex])
+        ) {
+            setElemFocusIndex(0);
+            setChildFocused(props.id + 0);
+            centerInScroll(0);
+        }
+    }, [initElementsRef]);
+
+    useEffect(() => {
+        isMount.current = true;
         if (!validators.isEmpty(elementsRef)) {
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
         }
         //Unmount
         return () => {
+            isMount.current = false;
             window.clearTimeout(timeout);
         };
     }, []);
@@ -81,21 +118,13 @@ const HorizontalList = props => {
     // Update
     useEffect(() => {
         window.clearTimeout(timeout);
+
         if (!validators.isEmpty(elementsRef)) {
+            console.log(elementsRef);
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
         }
     }, [props.data]);
-
-    useEffect(() => {
-        window.clearTimeout(timeout);
-        //TODO: Revisar se é necessário em outro contexto
-        // if (!validators.isEmpty(initElementsRef)) {
-        //     setElemFocusIndex(0);
-        //     setChildFocused(props.id + 0);
-        //     centerInScroll(0);
-        // }
-    }, [initElementsRef]);
 
     const Component = props.child;
 
@@ -104,10 +133,16 @@ const HorizontalList = props => {
             <div id={props.id} ref={scrollableRef} className={Style.container}>
                 {!validators.isEmpty(props.data) &&
                     props.data.map((xData, xIndex) => {
+                        const xCustomKey = props.keyValue
+                            ? `_${xData[props.keyValue]}`
+                            : '';
+                        const xKey = `${props.id}_${xIndex}${xCustomKey}`;
+
                         return (
                             <div
+                                id={xKey}
                                 className={Style.child}
-                                key={props.id + xIndex}
+                                key={xKey}
                                 ref={elem => (elementsRef[xIndex] = elem)}>
                                 <Component
                                     {...props.childProps}
@@ -128,7 +163,8 @@ HorizontalList.propTypes = {
     id: PropTypes.string.isRequired,
     child: PropTypes.elementType.isRequired,
     childProps: PropTypes.object,
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    keyValue: PropTypes.string
 };
 
 HorizontalList.defaultProps = {
