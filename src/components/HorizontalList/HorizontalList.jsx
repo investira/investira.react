@@ -130,7 +130,11 @@ const HorizontalList = props => {
 
     return (
         <div className={Style.root} onScroll={e => handleScroll(e)}>
-            <div id={props.id} ref={scrollableRef} className={Style.container}>
+            <div
+                id={props.id}
+                ref={scrollableRef}
+                className={Style.container}
+                scroll-behavior="smooth">
                 {!validators.isEmpty(props.data) &&
                     props.data.map((xData, xIndex) => {
                         const xCustomKey = props.keyValue
