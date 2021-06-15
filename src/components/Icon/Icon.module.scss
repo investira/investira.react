@@ -59,9 +59,12 @@
     fill: var(--color-black-100);
 }
 
-.colorGreenLight,
+.colorGreenLight {
+    fill: url(#icon-component-gradient-greenLight);
+}
+
 .colorOrangeLight {
-    fill: url(#icon-component-gradient);
+    fill: url(#icon-component-gradient-orangeLight);
 }
 
 @media not all and (min-resolution: 0.001dpcm) {

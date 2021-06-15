@@ -25,27 +25,33 @@ const Icon = memo(props => {
         return Object.keys(xGradientTypes).includes(pColorProp);
     };
 
-    const defs = (pGradientTypes, pColor) => {
-        if (isGradient(pColor)) {
-            return (
-                <defs>
-                    <linearGradient
-                        id="icon-component-gradient"
-                        x2="1"
-                        y2="1"
-                        gradientUnits="objectBoundingBox">
-                        <stop
-                            offset={0}
-                            stopColor={pGradientTypes[pColor][0]}
-                        />
-                        <stop
-                            offset={1}
-                            stopColor={pGradientTypes[pColor][1]}
-                        />
-                    </linearGradient>
-                </defs>
-            );
+    const defs = pColor => {
+        if (!isGradient(pColor)) {
+            return null;
         }
+
+        return (
+            <defs>
+                {Object.keys(xGradientTypes).map(xKey => {
+                    return (
+                        <linearGradient
+                            id={`icon-component-gradient-${xKey}`}
+                            x2="1"
+                            y2="1"
+                            gradientUnits="objectBoundingBox">
+                            <stop
+                                offset={0}
+                                stopColor={xGradientTypes[xKey][0]}
+                            />
+                            <stop
+                                offset={1}
+                                stopColor={xGradientTypes[xKey][1]}
+                            />
+                        </linearGradient>
+                    );
+                })}
+            </defs>
+        );
     };
 
     if (validators.isEmpty(props.iconName)) {
@@ -58,7 +64,7 @@ const Icon = memo(props => {
                 className={xClass}
                 style={props.style}
                 viewBox={'0 0 24 24'}>
-                {defs(xGradientTypes, props.color)}
+                {defs(props.color)}
                 <use href={`#${xIconName}`} xlinkHref={`#${xIconName}`} />
             </svg>
         );
