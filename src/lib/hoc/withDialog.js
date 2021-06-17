@@ -201,13 +201,21 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         // Altera para Dialog de sucesso
-        handleSuccess = pMessage => {
-            this.setState({ ...this.state, status: 'success' });
+        handleSuccess = (pMessage = null) => {
+            this.setState({
+                ...this.state,
+                status: 'success',
+                message: pMessage
+            });
         };
 
         // Altera para Dialog de erro
-        handleError = pMessage => {
-            this.setState({ ...this.state, status: 'error', message });
+        handleError = (pMessage = null) => {
+            this.setState({
+                ...this.state,
+                status: 'error',
+                message: pMessage
+            });
         };
 
         // Altera para Dialog de loading
