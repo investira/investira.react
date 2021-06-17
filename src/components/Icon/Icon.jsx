@@ -35,6 +35,7 @@ const Icon = memo(props => {
                 {Object.keys(xGradientTypes).map(xKey => {
                     return (
                         <linearGradient
+                            key={xKey}
                             id={`icon-component-gradient-${xKey}`}
                             x2="1"
                             y2="1"
