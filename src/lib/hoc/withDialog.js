@@ -41,7 +41,7 @@ const withDialog = (Component, pProps = initProps) => {
     };
 
     const SuccessContent = props => {
-        const { messages, onClick, width, height } = props;
+        const { message, messages, onClick, width, height } = props;
         return (
             <>
                 <DialogContentText component={'div'}>
@@ -52,7 +52,7 @@ const withDialog = (Component, pProps = initProps) => {
                         variant={'h5'}
                         color={'textPrimary'}
                         align={'center'}>
-                        {messages && messages.success
+                        {messages?.success
                             ? messages.success.title
                             : 'Título de Sucesso'}
                     </Typography>
@@ -60,9 +60,11 @@ const withDialog = (Component, pProps = initProps) => {
                         variant={'body2'}
                         color={'textSecondary'}
                         align={'center'}>
-                        {messages && messages.success
+                        {message
+                            ? message
+                            : messages?.success
                             ? messages.success.content
-                            : 'Conteúdo da mensagem de sucesso'}
+                            : 'Mensagem de sucesso'}
                     </Typography>
                 </DialogContentText>
 
@@ -81,7 +83,14 @@ const withDialog = (Component, pProps = initProps) => {
     };
 
     const ErrorContent = props => {
-        const { messages, width, height, retryAction, onClick } = props;
+        const {
+            message,
+            messages,
+            width,
+            height,
+            retryAction,
+            onClick
+        } = props;
         return (
             <>
                 <DialogContentText component={'div'}>
@@ -100,9 +109,11 @@ const withDialog = (Component, pProps = initProps) => {
                         variant={'body2'}
                         color={'textSecondary'}
                         align={'center'}>
-                        {messages && messages.error
+                        {message
+                            ? message
+                            : messages?.error
                             ? messages.error.content
-                            : 'Conteúdo da mensagem de erro'}
+                            : 'Mensagem de erro'}
                     </Typography>
                 </DialogContentText>
 
@@ -124,7 +135,8 @@ const withDialog = (Component, pProps = initProps) => {
     class wrapComponent extends React.Component {
         initialState = {
             isOpen: false,
-            status: null //success | error
+            status: null, //success | error
+            message: null
         };
 
         body = {};
@@ -189,13 +201,13 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         // Altera para Dialog de sucesso
-        handleSuccess = () => {
+        handleSuccess = pMessage => {
             this.setState({ ...this.state, status: 'success' });
         };
 
         // Altera para Dialog de erro
-        handleError = () => {
-            this.setState({ ...this.state, status: 'error' });
+        handleError = pMessage => {
+            this.setState({ ...this.state, status: 'error', message });
         };
 
         // Altera para Dialog de loading
@@ -277,6 +289,8 @@ const withDialog = (Component, pProps = initProps) => {
 
         contentRender = pStatus => {
             const { content, messages, retryAction, actions } = this.body;
+            const { message } = this.body;
+
             const withProps = {
                 ...initProps,
                 ...pProps
@@ -288,6 +302,7 @@ const withDialog = (Component, pProps = initProps) => {
                         <CenterInView>
                             <SuccessContent
                                 messages={messages}
+                                message={message}
                                 onClick={this.handleCloseDialog}
                                 width={175}
                                 height={175}
@@ -298,6 +313,7 @@ const withDialog = (Component, pProps = initProps) => {
                             width={100}
                             height={100}
                             messages={messages}
+                            message={message}
                             onClick={e =>
                                 this.handleCloseDialog(
                                     e,
@@ -313,6 +329,7 @@ const withDialog = (Component, pProps = initProps) => {
                                 width={175}
                                 height={175}
                                 messages={messages}
+                                message={message}
                                 retryAction={retryAction}
                                 onClick={this.handleRetr}
                             />
@@ -322,6 +339,7 @@ const withDialog = (Component, pProps = initProps) => {
                             width={100}
                             height={100}
                             messages={messages}
+                            message={message}
                             retryAction={retryAction}
                             onClick={this.handleRetr}
                         />
