@@ -297,7 +297,7 @@ const withDialog = (Component, pProps = initProps) => {
 
         contentRender = pStatus => {
             const { content, messages, retryAction, actions } = this.body;
-            const { message } = this.body;
+            const { message } = this.state;
 
             const withProps = {
                 ...initProps,
