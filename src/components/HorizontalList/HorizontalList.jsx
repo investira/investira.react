@@ -120,7 +120,6 @@ const HorizontalList = props => {
         window.clearTimeout(timeout);
 
         if (!validators.isEmpty(elementsRef)) {
-            console.log(elementsRef);
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
         }
