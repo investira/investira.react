@@ -29,7 +29,7 @@ const GridVirtualized = memo(props => {
     return (
         <AutoSizer>
             {({ width, height }) => {
-                area = { width, height };
+                //area = { width, height };
 
                 <Grid
                     cellRenderer={cellRenderer}

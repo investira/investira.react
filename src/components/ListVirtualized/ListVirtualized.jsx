@@ -25,7 +25,7 @@ const ListVirtualized = memo(props => {
     );
 
     function _noRowsRenderer() {
-        return <div>Nenhuma linha</div>;
+        return <div></div>;
     }
 
     const _rowRenderer = ({ index, parent, key, style, isScrolling }) => {
