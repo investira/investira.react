@@ -241,7 +241,9 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         handleSubmitDialog = pEvent => {
+            pEvent && pEvent.preventDefault();
             this.formSubmit && this.formSubmit();
+            pEvent && pEvent.stopPropagation();
         };
 
         // Renders
