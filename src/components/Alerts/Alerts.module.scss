@@ -7,6 +7,7 @@
     background-color: var(--color-primary);
     display: flex;
     align-items: center;
+    word-break: break-word;
 }
 
 .justify {
@@ -23,28 +24,36 @@
 
 .colorPrimary {
     background-color: var(--color-primary);
-    //border: 1px solid var(--color-primary-darkness);
 }
 
 .colorSecondary {
+    background-color: var(--color-secondary);
+}
+
+.colorSecondaryDark {
+    background-color: var(--color-secondary-dark);
+}
+
+.colorSecondaryDarkness {
+    background-color: var(--color-secondary-darkness);
+}
+
+.colorSecondaryLight {
+    background-color: var(--color-secondary-light);
+}
+
+.colorSecondaryLightness {
     background-color: var(--color-secondary-lightness);
-    //border: 1px solid var(--color-secondary-darkness);
 }
 
 .colorWarn {
     background-color: var(--color-warning);
-    //border: 1px solid var(--color-warning-dark);
 }
 
 .colorDanger {
     background-color: var(--color-danger);
-    //border: 1px solid var(--color-danger-dark);
-    // background-color: rgba(255, 121, 87, 0.7);
-    // border: 1px solid var(--color-danger-dark);
-    // color: var(--color-danger-dark);
 }
 
 .colorInfo {
     background-color: var(--color-info);
-    //border: 1px solid var(--color-info-dark);
 }

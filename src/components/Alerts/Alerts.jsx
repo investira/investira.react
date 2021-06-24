@@ -73,6 +73,8 @@ Alerts.propTypes = {
         'inherit',
         'primary',
         'secondary',
+        'secondaryLight',
+        'secondaryLightness',
         'warn',
         'danger',
         'info'
