@@ -42,15 +42,16 @@ const Crood = memo(
             const { onNextView, onPrevView, prevView, onReset } =
                 deckContext || {};
 
-            const onConfirmDelete = pData => {
+            const onConfirmDelete = (pData, pCallback) => {
                 const { itemData, onDelete } = crudContext;
                 const xData = pData || itemData;
-
+                console.log(pCallback);
                 if (deckContext) {
                     onDelete(xData, {
                         resolve: () => {
                             props.onSuccess();
                             //handleCloseDialog();
+                            pCallback && pCallback();
                             !validators.isEmpty(prevView) && setDeleted(true);
                             setTimeout(() => {
                                 onPrevView();
@@ -65,7 +66,10 @@ const Crood = memo(
                     });
                 } else {
                     onDelete(xData, {
-                        resolve: handleCloseDialog,
+                        resolve: () => {
+                            //handleCloseDialog();
+                            pCallback && pCallback();
+                        },
                         reject: () => {
                             handleCloseDialog();
                             setDeleted(true);
@@ -123,7 +127,14 @@ const Crood = memo(
             };
 
             const handleDeleteDialog = (pProps = {}) => {
-                const { message, data, title, labelButton, messages } = pProps;
+                const {
+                    message,
+                    data,
+                    title,
+                    labelButton,
+                    messages,
+                    callback
+                } = pProps;
                 handleOpenDialog({
                     title: {
                         label: title || 'Está certo disto?',
@@ -139,7 +150,7 @@ const Crood = memo(
                     actions: [
                         {
                             label: labelButton || 'Excluir',
-                            onClick: () => onConfirmDelete(data)
+                            onClick: () => onConfirmDelete(data, callback)
                         }
                     ],
                     messages,
