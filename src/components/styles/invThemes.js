@@ -226,6 +226,9 @@ export const themePrimary = {
                     '&$disabled': {
                         color: base.colors.text.disabled
                     }
+                },
+                input: {
+                    caretColor: '#00dfa8'
                 }
             },
             MuiInput: {
@@ -243,7 +246,8 @@ export const themePrimary = {
                 input: {
                     '&:-webkit-autofill': {
                         '-webkit-text-fill-color': 'rgb(255,255,255)'
-                    }
+                    },
+                    caretColor: '#00dfa8'
                 }
             },
             MuiBottomNavigation: {
