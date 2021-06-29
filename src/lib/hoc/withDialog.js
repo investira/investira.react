@@ -235,9 +235,10 @@ const withDialog = (Component, pProps = initProps) => {
         };
 
         registerSubmitDialog = pFormikHandleSubmit => {
-            if (validators.isNull(this.formSubmit)) {
-                this.formSubmit = pFormikHandleSubmit;
-            }
+            this.formSubmit = pFormikHandleSubmit;
+            // if (validators.isNull(this.formSubmit)) {
+            //     this.formSubmit = pFormikHandleSubmit;
+            // }
         };
 
         handleSubmitDialog = pEvent => {
