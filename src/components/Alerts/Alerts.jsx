@@ -77,7 +77,8 @@ Alerts.propTypes = {
         'secondaryLightness',
         'warn',
         'danger',
-        'info'
+        'info',
+        'infoHighlight'
     ]),
     color: PropTypes.string,
     iconName: PropTypes.string,
