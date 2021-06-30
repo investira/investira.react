@@ -61,17 +61,21 @@ const ListVirtualized = memo(props => {
 
     const xRowCount = props.totalItens || props.list.length;
 
-    useEffect(() => {
+    const scroolToBottom = pArea => {
+        console.log(pArea);
         _cache.current.clearAll();
 
         const xLastRow = props.list.length;
         ListRef.current.scrollToRow(xLastRow);
-        console.log();
+    };
+
+    useEffect(() => {
+        scroolToBottom();
     }, [props.list]);
 
     return (
         <div className={xClassRoot}>
-            <AutoSizer>
+            <AutoSizer onResize={scroolToBottom}>
                 {({ width, height }) => (
                     <List
                         ref={ListRef}
