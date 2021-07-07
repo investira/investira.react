@@ -49,7 +49,7 @@ const Crood = memo(
                 if (deckContext) {
                     onDelete(xData, {
                         resolve: () => {
-                            //props.onSuccess();
+                            props.onSuccess();
                             //handleCloseDialog();
                             pCallback && pCallback();
                             !validators.isEmpty(prevView) && setDeleted(true);
