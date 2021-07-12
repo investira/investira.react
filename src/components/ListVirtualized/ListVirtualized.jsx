@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
     List,
-    Column,
     AutoSizer,
     CellMeasurer,
-    CellMeasurerCache,
-    InfiniteLoader
+    CellMeasurerCache
 } from 'react-virtualized';
-import { validators, strings } from 'investira.sdk';
+import { validators } from 'investira.sdk';
 
 import Style from './ListVirtualized.module.scss';
 
 const ListVirtualized = memo(props => {
     const ListRef = React.createRef();
+    const ListRoot = React.createRef();
 
     const _cache = useRef(
         new CellMeasurerCache({
@@ -55,14 +54,23 @@ const ListVirtualized = memo(props => {
         );
     };
 
+    const removeTabIndex = pListRootElem => {
+        if (pListRootElem?.current) {
+            const xReactVirtualizedElem = pListRootElem.current.querySelector(
+                '[aria-readonly="true"]'
+            );
+
+            xReactVirtualizedElem.removeAttribute('tabindex');
+        }
+    };
+
     const xClassRoot = classNames(Style.root, props.className, {
         [Style.emptyList]: validators.isEmpty(props.list)
     });
 
     const xRowCount = props.totalItens || props.list.length;
 
-    const scroolToBottom = pArea => {
-        console.log(pArea);
+    const scrollToBottom = pArea => {
         _cache.current.clearAll();
 
         const xLastRow = props.list.length;
@@ -70,12 +78,16 @@ const ListVirtualized = memo(props => {
     };
 
     useEffect(() => {
-        scroolToBottom();
+        scrollToBottom();
     }, [props.list]);
 
+    useEffect(() => {
+        removeTabIndex(ListRoot);
+    }, []);
+
     return (
-        <div className={xClassRoot}>
-            <AutoSizer onResize={scroolToBottom}>
+        <div ref={ListRoot} className={xClassRoot}>
+            <AutoSizer onResize={scrollToBottom}>
                 {({ width, height }) => (
                     <List
                         ref={ListRef}
