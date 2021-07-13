@@ -14,6 +14,11 @@
     fill: var(--color-primary);
 }
 
+.colorPrimaryLightness {
+    stroke: var(--color-primary-lightness);
+    fill: var(--color-primary-lightness);
+}
+
 .colorSecondary {
     stroke: var(--color-secondary);
     fill: var(--color-secondary);
@@ -39,9 +44,24 @@
     fill: var(--color-danger);
 }
 
+.colorInfoLight {
+    stroke: var(--color-info-light);
+    fill: var(--color-info-light);
+}
+
 .colorInfo {
     stroke: var(--color-info);
     fill: var(--color-info);
+}
+
+.colorInfoDark {
+    stroke: var(--color-info-dark);
+    fill: var(--color-info-dark);
+}
+
+.colorInfoHighlight {
+    stroke: var(--color-info-highlight);
+    fill: var(--color-info-highlight);
 }
 
 .colorTextPrimary {
