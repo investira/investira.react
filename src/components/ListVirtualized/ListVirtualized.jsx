@@ -74,7 +74,9 @@ const ListVirtualized = memo(props => {
         _cache.current.clearAll();
 
         const xLastRow = props.list.length;
-        ListRef.current.scrollToRow(xLastRow);
+        if (xLastRow) {
+            ListRef.current.scrollToRow(xLastRow);
+        }
     };
 
     useEffect(() => {
