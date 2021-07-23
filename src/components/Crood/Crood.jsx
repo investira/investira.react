@@ -45,7 +45,6 @@ const Crood = memo(
             const onConfirmDelete = (pData, pCallback) => {
                 const { itemData, onDelete } = crudContext;
                 const xData = pData || itemData;
-                console.log(pCallback);
                 if (deckContext) {
                     onDelete(xData, {
                         resolve: () => {
@@ -121,9 +120,6 @@ const Crood = memo(
             };
 
             const handleCloseDialog = () => {
-                console.log('handleCloseDialog', {
-                    ...initialStateDialog
-                });
                 props.onCloseDialog();
             };
 
