@@ -1,7 +1,7 @@
 import { persistReducer } from 'redux-persist';
 import createStorage from '../storage/createStorage';
 
-const persisterReducers = (pReducers, pPrefix, pStorage, pBlacklist = []) => {
+const persisterReducers = (pReducers, pPrefix, pStorage) => {
     const xEntries = Object.entries(pReducers);
     const xStorage = createStorage(pStorage);
 
@@ -11,8 +11,11 @@ const persisterReducers = (pReducers, pPrefix, pStorage, pBlacklist = []) => {
             storage: xStorage,
             timeout: 0
         };
-        xAttributes.blacklist = pBlacklist;
-        return [xEntry[0], persistReducer(xAttributes, xEntry[1])];
+        if (xEntry[1][1]) {
+            xAttributes.blacklist = xEntry[1][1];
+        }
+
+        return [xEntry[0], persistReducer(xAttributes, xEntry[1][0])];
     });
 
     return Object.fromEntries(xReducers);
