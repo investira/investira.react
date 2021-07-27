@@ -44,6 +44,7 @@ export { default as ListFilter } from './ListFilter';
 export { default as MaskedTextField } from './MaskedTextField';
 export { default as NavBar } from './NavBar';
 export { default as OverLoading } from './OverLoading';
+export { default as OverWaiting } from './OverWaiting';
 export { default as PasswordField } from './PasswordField';
 export { default as PersistGate } from './PersistGate';
 export { default as ProgressBar } from './ProgressBar';
