@@ -7,8 +7,10 @@ const useLongPress = (
     { shouldPreventDefault = true, delay = 300, listenElemOnScroll = null } = {}
 ) => {
     const [longPressTriggered, setLongPressTriggered] = useState(false);
+    const [isScrolling, setIsScrolling] = useState(false);
 
-    const timeout = useRef();
+    const timeout = useRef(null);
+    const scrolling = useRef(null);
     const target = useRef();
     const scrollElem = useRef(null);
 
@@ -20,7 +22,6 @@ const useLongPress = (
             const xScroll =
                 document.getElementById(listenElemOnScroll) ||
                 document.getElementsByClassName(listenElemOnScroll)[0];
-            //console.log(xScroll);
 
             scrollElem.current = xScroll;
 
@@ -57,24 +58,41 @@ const useLongPress = (
     const clear = useCallback(
         (pEvent, pShouldTriggerClick = true) => {
             timeout.current && clearTimeout(timeout.current);
-            pShouldTriggerClick &&
-                !longPressTriggered &&
-                onClick &&
-                onClick(pEvent);
+
+            if (pShouldTriggerClick && !longPressTriggered && onClick) {
+                !isScrolling && onClick(pEvent);
+                setIsScrolling(false);
+            }
+
+            // pShouldTriggerClick &&
+            //     !longPressTriggered &&
+            //     onClick &&
+            //     onClick(pEvent);
+
             setLongPressTriggered(false);
 
             if (shouldPreventDefault && target.current) {
                 target.current.removeEventListener('touchend', preventDefault);
             }
         },
-        [shouldPreventDefault, onClick, longPressTriggered]
+        [shouldPreventDefault, onClick, longPressTriggered, isScrolling]
     );
+
+    const move = e => {
+        scrolling.current && clearTimeout(scrolling.current);
+        setIsScrolling(true);
+
+        scrolling.current = setTimeout(() => {
+            setIsScrolling(false);
+        }, 300);
+    };
 
     return {
         onMouseDown: pEvent => start(pEvent),
         onTouchStart: pEvent => start(pEvent),
         onMouseUp: pEvent => clear(pEvent),
         onMouseLeave: pEvent => clear(pEvent, false),
+        onTouchMove: move,
         onTouchEnd: pEvent => clear(pEvent)
     };
 };

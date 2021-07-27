@@ -43,6 +43,7 @@ export { default as ListItemAvatar } from './ListItemAvatar';
 export { default as ListItemIcon } from './ListItemIcon';
 export { default as ListItemText } from './ListItemText';
 export { default as ListSubheader } from './ListSubheader';
+export { default as ListItemSecondaryAction } from './ListItemSecondaryAction';
 export { default as KeyboardDatePicker } from './KeyboardDatePicker';
 export { default as Menu } from './Menu';
 export { default as MenuItem } from './MenuItem';

@@ -102,16 +102,12 @@ const Crud = memo(
             };
 
             const handleCloseDialog = () => {
-                console.log('handleCloseDialog', {
-                    ...initialStateDialog
-                });
                 setDialog({
                     ...initialStateDialog
                 });
             };
 
             const handleDeleteDialog = (pProps = {}) => {
-                console.log(pProps);
                 const { message, data, title, labelButton } = pProps;
                 handleOpenDialog({
                     title: {

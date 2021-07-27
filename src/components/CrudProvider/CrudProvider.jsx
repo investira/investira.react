@@ -7,7 +7,6 @@ const CrudProvider = memo(props => {
     const state = { ...props.state, itemData };
 
     const onCreate = (pValues, pActions) => {
-        console.log(pValues);
         props.actions.onCreate && props.actions.onCreate(pValues, pActions);
     };
 

@@ -108,7 +108,6 @@ const SearchBox = forwardRef((props, ref) => {
 
     useEffect(() => {
         mount.current && updateValue(props.value || '');
-        console.log(ref);
     }, [props.value]);
 
     useEffect(() => {
