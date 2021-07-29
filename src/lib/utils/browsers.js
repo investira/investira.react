@@ -41,7 +41,7 @@ const browsers = {
     isIOS: () => {
         const xNav = navigator.userAgent.toLowerCase();
 
-        return (
+        return Boolean(
             xNav.match(/iphone/i) || xNav.match(/ipod/i) || xNav.match(/ipad/i)
         );
     },
