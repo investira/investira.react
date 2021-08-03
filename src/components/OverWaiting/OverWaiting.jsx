@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
     },
     progress: {
         paddingTop: '24px'
+    },
+    icons: {
+        position: 'relative'
     }
 }));
 
@@ -63,11 +66,13 @@ function OverLoading(props) {
         >
             {open && (
                 <div className={classes.info}>
-                    <Icon
-                        color={progressProps.color || 'primary'}
-                        iconName="clock"
-                        size={64}
-                    />
+                    <div className={classes.icons}>
+                        <Icon
+                            color={progressProps.color || 'primary'}
+                            iconName="clock"
+                            size={64}
+                        />
+                    </div>
 
                     <div className={classes.progress}>
                         <LinearProgress
