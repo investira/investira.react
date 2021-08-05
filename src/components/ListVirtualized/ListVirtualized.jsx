@@ -31,6 +31,9 @@ const ListVirtualized = memo(props => {
         const xList = props.list;
         const Component = props.item;
 
+        const xStyle = { ...style, top: 'auto', bottom: style.top };
+        console.log(xStyle);
+
         return (
             <CellMeasurer
                 cache={_cache.current}
@@ -46,7 +49,7 @@ const ListVirtualized = memo(props => {
                         id={key}
                         index={index}
                         data={xList[index] || []}
-                        style={style}
+                        style={xStyle}
                         {...props.itemProps}
                     />
                 )}
@@ -89,21 +92,27 @@ const ListVirtualized = memo(props => {
 
     return (
         <div ref={ListRoot} className={xClassRoot}>
-            <AutoSizer onResize={scrollToBottom}>
-                {({ width, height }) => (
-                    <List
-                        ref={ListRef}
-                        deferredMeasurementCache={_cache.current}
-                        width={width}
-                        height={height}
-                        overscanRowCount={props.overscanRowCount}
-                        noRowsRenderer={_noRowsRenderer}
-                        rowCount={xRowCount}
-                        rowHeight={_cache.current.rowHeight}
-                        rowRenderer={_rowRenderer}
-                        scrollToIndex={xRowCount}
-                    />
-                )}
+            <AutoSizer onResize={scrollToBottom} className={Style.autoSizer}>
+                {({ width, height }) => {
+                    console.log(height);
+                    return (
+                        <List
+                            id={`${props.id}-list`}
+                            className={Style.list}
+                            ref={ListRef}
+                            deferredMeasurementCache={_cache.current}
+                            width={width}
+                            height={height}
+                            overscanRowCount={props.overscanRowCount}
+                            noRowsRenderer={_noRowsRenderer}
+                            rowCount={xRowCount}
+                            rowHeight={_cache.current.rowHeight}
+                            rowRenderer={_rowRenderer}
+                            scrollToIndex={xRowCount}
+                            scrollToAlignment={'end'}
+                        />
+                    );
+                }}
             </AutoSizer>
         </div>
     );
