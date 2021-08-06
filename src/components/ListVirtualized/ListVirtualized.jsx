@@ -28,13 +28,19 @@ const ListVirtualized = memo(props => {
     }
 
     const _rowRenderer = ({ index, parent, key, style, isScrolling }) => {
-        // Inverte os indexes
-        const xList = [...props.list].reverse();
+        //Inverte os indexes
+        const xList =
+            props.orientation === 'reverse'
+                ? [...props.list].reverse()
+                : props.list;
 
         const Component = props.item;
 
         // Inverte a orientação
-        const xStyle = { ...style, top: 'auto', bottom: style.top };
+        const xStyle =
+            props.orientation === 'reverse'
+                ? { ...style, top: 'auto', bottom: style.top }
+                : style;
 
         return (
             <CellMeasurer
@@ -73,6 +79,10 @@ const ListVirtualized = memo(props => {
         [Style.emptyList]: validators.isEmpty(props.list)
     });
 
+    const xClassOrientation = classNames({
+        [Style.list]: props.orientation === 'reverse'
+    });
+
     const xRowCount = props.totalItens || props.list.length;
 
     const scrollToBottom = pArea => {
@@ -96,11 +106,10 @@ const ListVirtualized = memo(props => {
         <div ref={ListRoot} className={xClassRoot}>
             <AutoSizer onResize={scrollToBottom} className={Style.autoSizer}>
                 {({ width, height }) => {
-                    console.log(height);
                     return (
                         <List
                             id={`${props.id}-list`}
-                            className={Style.list} // Essa classe só é encessária se a lista for invertida
+                            className={xClassOrientation}
                             ref={ListRef}
                             deferredMeasurementCache={_cache.current}
                             width={width}
@@ -121,6 +130,7 @@ const ListVirtualized = memo(props => {
 });
 
 ListVirtualized.propTypes = {
+    orientation: PropTypes.oneOf(['reverse', 'normal']),
     list: PropTypes.array.isRequired,
     emptyMessage: PropTypes.string,
     item: PropTypes.oneOfType([
@@ -138,7 +148,8 @@ ListVirtualized.propTypes = {
 ListVirtualized.defaultProps = {
     itemProps: {},
     list: [],
-    overscanRowCount: 0
+    overscanRowCount: 0,
+    orientation: 'normal'
 };
 
 export default ListVirtualized;
