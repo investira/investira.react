@@ -28,11 +28,13 @@ const ListVirtualized = memo(props => {
     }
 
     const _rowRenderer = ({ index, parent, key, style, isScrolling }) => {
-        const xList = props.list;
+        // Inverte os indexes
+        const xList = [...props.list].reverse();
+
         const Component = props.item;
 
+        // Inverte a orientação
         const xStyle = { ...style, top: 'auto', bottom: style.top };
-        console.log(xStyle);
 
         return (
             <CellMeasurer
@@ -98,7 +100,7 @@ const ListVirtualized = memo(props => {
                     return (
                         <List
                             id={`${props.id}-list`}
-                            className={Style.list}
+                            className={Style.list} // Essa classe só é encessária se a lista for invertida
                             ref={ListRef}
                             deferredMeasurementCache={_cache.current}
                             width={width}

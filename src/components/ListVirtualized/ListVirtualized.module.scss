@@ -3,11 +3,9 @@
     min-height: 100%;
 }
 
+// Força a lista 100% para odernação bottom to top
 .list {
-    //background-color: green;
-
     & > div {
-        //background-color: red;
         min-height: 100% !important;
     }
 }
