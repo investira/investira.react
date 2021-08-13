@@ -12,8 +12,8 @@ import { validators } from 'investira.sdk';
 import Style from './ListVirtualized.module.scss';
 
 const ListVirtualized = memo(props => {
-    const ListRef = React.createRef();
-    const ListRoot = React.createRef();
+    const ListRef = React.useRef();
+    const ListRoot = React.useRef();
 
     const _cache = useRef(
         new CellMeasurerCache({
@@ -27,42 +27,72 @@ const ListVirtualized = memo(props => {
         return <div></div>;
     }
 
-    const _rowRenderer = ({ index, parent, key, style, isScrolling }) => {
-        //Inverte os indexes
-        const xList =
-            props.orientation === 'reverse'
-                ? [...props.list].reverse()
-                : props.list;
+    const _rowRenderer = ({
+        index,
+        parent,
+        key,
+        style,
+        isScrolling,
+        isVisible
+    }) => {
+        const xScrollAreaHeight = parent._scrollingContainer.scrollHeight;
+        const xListAreaHeight = ListRoot.current?.scrollHeight || 0;
 
-        const Component = props.item;
+        console.log(xListAreaHeight);
 
-        // Inverte a orientação
-        const xStyle =
-            props.orientation === 'reverse'
-                ? { ...style, top: 'auto', bottom: style.top }
-                : style;
+        if (ListRoot) {
+            console.log('xScrollAreaHeight', xScrollAreaHeight);
+            console.log('xListAreaHeight', xListAreaHeight);
 
-        return (
-            <CellMeasurer
-                cache={_cache.current}
-                columnIndex={0}
-                key={key}
-                rowIndex={index}
-                parent={parent}>
-                {({ measure, registerChild }) => (
-                    <Component
-                        registerChild={registerChild}
-                        onLoad={measure}
-                        key={key}
-                        id={key}
-                        index={index}
-                        data={xList[index] || []}
-                        style={xStyle}
-                        {...props.itemProps}
-                    />
-                )}
-            </CellMeasurer>
-        );
+            const isTaller = xScrollAreaHeight > xListAreaHeight;
+            console.log('isTaller', isTaller);
+
+            //Inverte os indexes
+
+            const xOrientarion = {
+                reverse: {
+                    list: [...props.list].reverse(),
+                    style: { ...style, top: 'auto', bottom: style.top }
+                },
+                normal: {
+                    list: props.list,
+                    style: style
+                }
+            };
+
+            let xList = xOrientarion['normal'].list;
+            let xStyle = xOrientarion['normal'].style;
+
+            if (!isTaller) {
+                console.log('!isTaller', !isTaller);
+                xList = xOrientarion[props.orientation].list;
+                xStyle = xOrientarion[props.orientation].style;
+            }
+
+            const Component = props.item;
+
+            return (
+                <CellMeasurer
+                    cache={_cache.current}
+                    columnIndex={0}
+                    key={key}
+                    rowIndex={index}
+                    parent={parent}>
+                    {({ measure, registerChild }) => (
+                        <Component
+                            registerChild={registerChild}
+                            onLoad={measure}
+                            key={key}
+                            id={key}
+                            index={index}
+                            data={xList[index] || []}
+                            style={xStyle}
+                            {...props.itemProps}
+                        />
+                    )}
+                </CellMeasurer>
+            );
+        }
     };
 
     const removeTabIndex = pListRootElem => {
@@ -148,7 +178,7 @@ ListVirtualized.propTypes = {
 ListVirtualized.defaultProps = {
     itemProps: {},
     list: [],
-    overscanRowCount: 0,
+    overscanRowCount: 10,
     orientation: 'normal'
 };
 
