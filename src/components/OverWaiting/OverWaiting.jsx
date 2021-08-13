@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function OverLoading(props) {
+function OverWaiting(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -50,6 +50,11 @@ function OverLoading(props) {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleCancel = pEvent => {
+        console.log('handleCancel');
+        props.onCancel && props.onCancel(pEvent);
     };
 
     useEffect(() => {
@@ -92,7 +97,10 @@ function OverLoading(props) {
                     </div>
 
                     <div className={classes.action}>
-                        <Button variant="outlined" color="primary">
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={handleCancel}>
                             Cancelar
                         </Button>
                     </div>
@@ -102,7 +110,7 @@ function OverLoading(props) {
     );
 }
 
-OverLoading.propTypes = {
+OverWaiting.propTypes = {
     open: PropTypes.bool,
     min: PropTypes.number,
     max: PropTypes.number,
@@ -117,10 +125,11 @@ OverLoading.propTypes = {
             'query'
         ])
     }),
-    typographyProps: PropTypes.object
+    typographyProps: PropTypes.object,
+    onCancel: PropTypes.func
 };
 
-OverLoading.defaultProps = {
+OverWaiting.defaultProps = {
     open: false,
     min: 0,
     max: 100,
@@ -135,4 +144,4 @@ OverLoading.defaultProps = {
     }
 };
 
-export default OverLoading;
+export default OverWaiting;
