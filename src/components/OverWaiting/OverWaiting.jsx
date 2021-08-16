@@ -96,14 +96,16 @@ function OverWaiting(props) {
                         )}
                     </div>
 
-                    <div className={classes.action}>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={handleCancel}>
-                            Cancelar
-                        </Button>
-                    </div>
+                    {props.cancelable && (
+                        <div className={classes.action}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={handleCancel}>
+                                Cancelar
+                            </Button>
+                        </div>
+                    )}
                 </div>
             )}
         </Backdrop>
@@ -126,7 +128,8 @@ OverWaiting.propTypes = {
         ])
     }),
     typographyProps: PropTypes.object,
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
+    cancelable: PropTypes.bool
 };
 
 OverWaiting.defaultProps = {
@@ -141,7 +144,8 @@ OverWaiting.defaultProps = {
     typographyProps: {
         color: 'textPrimary',
         variant: 'caption'
-    }
+    },
+    cancelable: true
 };
 
 export default OverWaiting;
