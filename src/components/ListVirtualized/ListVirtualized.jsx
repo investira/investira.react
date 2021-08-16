@@ -38,14 +38,8 @@ const ListVirtualized = memo(props => {
         const xScrollAreaHeight = parent._scrollingContainer.scrollHeight;
         const xListAreaHeight = ListRoot.current?.scrollHeight || 0;
 
-        console.log(xListAreaHeight);
-
         if (ListRoot) {
-            console.log('xScrollAreaHeight', xScrollAreaHeight);
-            console.log('xListAreaHeight', xListAreaHeight);
-
             const isTaller = xScrollAreaHeight > xListAreaHeight;
-            console.log('isTaller', isTaller);
 
             //Inverte os indexes
 
