@@ -5,6 +5,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const themePrimary = {
     mui: createMuiTheme({
         overrides: {
+            MuiLinearProgress: {
+                root: {
+                    height: '8px',
+                    borderRadius: '4px'
+                }
+            },
             MuiSelect: {
                 select: {
                     paddingLeft: '12px'
@@ -95,7 +101,7 @@ export const themePrimary = {
                 switchBase: {
                     top: '5px',
                     left: '5px',
-                    color: base.colors.primary.light,
+                    color: base.colors.secondary.light,
                     '&$checked': {
                         transform: 'translateX(26%)'
                     }
@@ -104,13 +110,13 @@ export const themePrimary = {
                     backgroundColor: base.colors.background.light,
                     height: '24px',
                     borderRadius: '12px'
-                },
-                colorPrimary: {
-                    color: base.colors.primary.main,
-                    '&$checked': {
-                        color: base.colors.primary.light
-                    }
                 }
+                // colorPrimary: {
+                //     color: base.colors.primary.main,
+                //     '&$checked': {
+                //         color: base.colors.primary.light
+                //     }
+                // }
             },
             MuiChip: {
                 root: {

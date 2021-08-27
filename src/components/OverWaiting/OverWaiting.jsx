@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
     info: {
         margin: '0 auto',
-        width: '60%',
+        width: '80%',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
         bottom: '24px'
     },
     progress: {
-        paddingTop: '24px'
+        paddingTop: '24px',
+        width: '100%'
     },
     icons: {
         position: 'relative'
@@ -75,7 +76,7 @@ function OverWaiting(props) {
                         <Icon
                             color={progressProps.color || 'primary'}
                             iconName="clock"
-                            size={64}
+                            size={128}
                         />
                     </div>
 
