@@ -48,6 +48,7 @@ export class Scroller extends PureComponent {
     render() {
         return (
             <section
+                id={this.props.id}
                 ref={this.scrollRef}
                 className={Style.root}
                 onScroll={this.handleScroll}

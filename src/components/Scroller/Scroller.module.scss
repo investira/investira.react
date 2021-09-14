@@ -1,5 +1,6 @@
 .root {
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100%;
