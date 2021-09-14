@@ -46,7 +46,8 @@ class ListVirtual extends PureComponent {
 
     isRowLoaded = ({ index }) => {
         const { loadedRowsMap } = this.state;
-        return ({ index }) => index < this.props.list.length;
+        return !!loadedRowsMap[index];
+        // return ({ index }) => index < this.props.list.length;
     };
 
     loadMoreRows = ({ startIndex, stopIndex }) => {
@@ -103,7 +104,6 @@ class ListVirtual extends PureComponent {
 
         const { list } = this.props;
         const { loadedRowsMap } = this.state;
-
         const isLoaded = loadedRowsMap[index] === STATUS_LOADED;
 
         return (
