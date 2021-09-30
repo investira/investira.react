@@ -60,4 +60,5 @@ export { default as Tips } from './Tips';
 export { default as Transition } from './Transition';
 export { default as Typedy } from './Typedy';
 export { default as Search } from './Search';
+export { default as SubmitButton } from './SubmitButton';
 export { default as SwitchIconButton } from './SwitchIconButton';
