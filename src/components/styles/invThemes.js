@@ -9,6 +9,9 @@ export const themePrimary = {
                 root: {
                     height: '8px',
                     borderRadius: '4px'
+                },
+                bar: {
+                    borderRadius: '4px'
                 }
             },
             MuiSelect: {
