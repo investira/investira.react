@@ -7,7 +7,6 @@ export { default as browsers } from './utils/browsers';
 export { default as localStorages } from './utils/localStorages';
 export { default as lists } from './utils/lists';
 export { default as vibrate } from './utils/vibrate';
-export { default as anime } from './utils/anime';
 
 // Middleware
 export { default as bindStateToLocalStorage } from './middleware/bindStateToLocalStorage';
