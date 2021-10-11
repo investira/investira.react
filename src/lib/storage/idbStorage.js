@@ -54,7 +54,7 @@ export default function createIdbStorage(pDefinedOptions = {}) {
 
         async clear() {
             const xDb = await dbPromise;
-            const xTrans = db.transaction(options.storeName, 'readwrite');
+            const xTrans = xDb.transaction(options.storeName, 'readwrite');
 
             xTrans.objectStore(options.storeName).clear();
 

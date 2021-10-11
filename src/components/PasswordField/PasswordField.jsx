@@ -18,6 +18,10 @@ const PasswordField = memo(props => {
         <TextField
             {...props}
             type={!showPass ? 'password' : 'text'}
+            inputProps={{
+                ...props.inputProps,
+                autoComplete: 'off'
+            }}
             InputProps={{
                 ...props.InputProps,
                 endAdornment: (

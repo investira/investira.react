@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CenterInView, Typography } from '../';
 import Style from './CrossTab.module.scss';
 
 const CrossTab = props => {
     const [anotherTabISOpen, setOpen] = useState(false);
-    const xTime = Date.now();
-    const xAppName = process.env.REACT_APP_NAME;
+
+    const APPNAME = useRef(process.env.REACT_APP_NAME);
 
     useEffect(() => {
-        localStorage.setItem(`${xAppName}-loaded`, xTime);
+        const xTime = Date.now();
+        localStorage.setItem(`${APPNAME.current}-loaded`, xTime);
     }, []);
 
     useEffect(() => {
         window.addEventListener('storage', e => {
-            if (e.key === `${xAppName}-loaded`) {
+            if (e.key === `${APPNAME.current}-loaded`) {
                 setOpen(true);
             }
         });

@@ -39,20 +39,16 @@ export class SlideView extends Component {
     _isMounted = false;
 
     dotsButtons(pChildrens) {
-        //const xChildrensSize = pChildrens.length;
         const xMaxDots = 5;
-        //let xPrev = [];
-        //let xNext = [];
-        let xCurrent = [];
 
-        //xPrev = xChildrensSize.slice(0, this.state.slideCurrent);
+        let xCurrent = [...pChildrens];
 
-        xCurrent = pChildrens.slice(
+        xCurrent.slice(
             this.state.slideCurrent,
             this.state.slideCurrent + xMaxDots
         );
 
-        const elements = pChildrens.map((_, i) => {
+        const elements = xCurrent.map((_, i) => {
             const isActive =
                 this.state.slideCurrent === i ? Style.isActive : '';
 

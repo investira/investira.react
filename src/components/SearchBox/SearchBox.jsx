@@ -2,11 +2,12 @@ import React, {
     useState,
     useRef,
     useEffect,
+    useCallback,
     forwardRef,
     useImperativeHandle
 } from 'react';
 import PropTypes from 'prop-types';
-import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
+import { InputBase, IconButton, FormControl, Chip, Icon } from '../';
 
 import { validators } from 'investira.sdk';
 import Style from './SearchBox.module.scss';
@@ -44,30 +45,30 @@ const SearchBox = forwardRef((props, ref) => {
         return xQuerySplited;
     };
 
-    const updateValue = pValue => {
-        setValue(pValue);
-        //querySplit(pValue);
+    const { onChange } = props;
+    const updateValue = useCallback(
+        pValue => {
+            setValue(pValue);
 
-        if (pValue.length >= 1) {
-            setClearBtn(true);
-            setQuerySplited(querySplit(pValue));
-        } else {
-            setClearBtn(false);
-            setQuerySplited([]);
-        }
+            if (pValue.length >= 1) {
+                setClearBtn(true);
+                setQuerySplited(querySplit(pValue));
+            } else {
+                setClearBtn(false);
+                setQuerySplited([]);
+            }
 
-        //TODO: trocar por whitespaceCleaner do investira.sdk/strings
-        const xValue = pValue && pValue.trim().replace(/\s+/g, ' ');
+            //TODO: trocar por whitespaceCleaner do investira.sdk/strings
+            const xValue = pValue && pValue.trim().replace(/\s+/g, ' ');
 
-        if (timeout) {
-            clearTimeout(timeout);
-        }
+            if (timeout) {
+                clearTimeout(timeout);
+            }
 
-        timeout = setTimeout(
-            () => props.onChange && props.onChange(xValue),
-            200
-        );
-    };
+            timeout = setTimeout(() => onChange && onChange(xValue), 200);
+        },
+        [onChange]
+    );
 
     const handleFilter = () => {
         props.onClickFilter && props.onClickFilter(true);
@@ -84,22 +85,22 @@ const SearchBox = forwardRef((props, ref) => {
 
     const handleFocus = () => searchRef.current.focus();
 
-    const closeKeyboard = {
-        mount: () => {
-            document.addEventListener('keydown', pEvent => {
-                if (searchRef.current && pEvent.keyCode === 13) {
-                    searchRef.current.blur();
-                }
-            });
-        },
-        unmount: () => {
-            document.removeEventListener('keydown', pEvent => {
-                if (searchRef.current && pEvent.keyCode === 13) {
-                    searchRef.current.blur();
-                }
-            });
-        }
-    };
+    // const closeKeyboard = {
+    //     mount: () => {
+    //         document.addEventListener('keydown', pEvent => {
+    //             if (searchRef.current && pEvent.keyCode === 13) {
+    //                 searchRef.current.blur();
+    //             }
+    //         });
+    //     },
+    //     unmount: () => {
+    //         document.removeEventListener('keydown', pEvent => {
+    //             if (searchRef.current && pEvent.keyCode === 13) {
+    //                 searchRef.current.blur();
+    //             }
+    //         });
+    //     }
+    // };
 
     useImperativeHandle(ref, () => ({
         focus: handleFocus,
@@ -108,14 +109,25 @@ const SearchBox = forwardRef((props, ref) => {
 
     useEffect(() => {
         mount.current && updateValue(props.value || '');
-    }, [props.value]);
+    }, [props.value, updateValue]);
 
     useEffect(() => {
         mount.current = true;
-        closeKeyboard.mount();
+
+        const searchElem = searchRef.current;
+
+        document.addEventListener('keydown', pEvent => {
+            if (searchElem && pEvent.keyCode === 13) {
+                searchElem.blur();
+            }
+        });
 
         return () => {
-            closeKeyboard.unmount();
+            document.removeEventListener('keydown', pEvent => {
+                if (searchElem && pEvent.keyCode === 13) {
+                    searchElem.blur();
+                }
+            });
         };
     }, []);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, Icon } from 'investiraComponents';
+import { Typography, Icon } from '../';
 import Style from './Rate.module.scss';
 
 const Rate = props => {

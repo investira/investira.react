@@ -154,7 +154,7 @@ const displays = {
     highlightSearch: (pPesquisa, pText) => {
         if (pPesquisa && pText) {
             // Separa os termos da pesquisa
-            let xTerms = pPesquisa.split(new RegExp(/\s|\,|\;/, 'gi'));
+            let xTerms = pPesquisa.split(new RegExp(/\s|,|;/, 'gi'));
 
             xTerms = xTerms
                 .filter(xTerm => xTerm)

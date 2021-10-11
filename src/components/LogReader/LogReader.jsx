@@ -101,14 +101,14 @@ class LogReader extends PureComponent {
 
     formatJson = pData => {
         let xDataFormated = pData.replace(
-            /\"level":\s"(.*)",/gm,
+            /"level":\s"(.*)",/gm,
             (match, p1) => {
                 return `"level": <span class='${Style[p1]}'>"${p1}"</span>`;
             }
         );
 
         xDataFormated = xDataFormated.replace(
-            /\"message":\s"(.*)",/gm,
+            /"message":\s"(.*)",/gm,
             (match, p1) => {
                 return `"message": <span class='${Style.message}'>"${p1}"</span>`;
             }

@@ -1,20 +1,11 @@
-import React, { memo, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo, useRef } from 'react';
 import { AutoSizer, Grid } from 'react-virtualized';
 
 const GridVirtualized = memo(props => {
-    const [list, setList] = useState([]);
-    const area = { width: 0, height: 0 };
-    function formatList(pList) {}
+    const count = useRef(0);
 
-    function processList(pList) {
-        const xList = formatList(pList);
-    }
-
-    function cellRenderer({ columnIndex, key, rowIndex, style }) {
-        console.log(area);
+    function cellRenderer({ key, style }) {
         count.current = count.current + 1;
-        //const xItem = props.list[count.current];
 
         return (
             <li key={key} style={style}>
@@ -24,22 +15,21 @@ const GridVirtualized = memo(props => {
     }
 
     const xRowCount = props.list.length;
-    console.log(xRowCount);
 
     return (
         <AutoSizer>
             {({ width, height }) => {
-                //area = { width, height };
-
-                <Grid
-                    cellRenderer={cellRenderer}
-                    columnCount={Math.round(width / 25)}
-                    columnWidth={25}
-                    height={height}
-                    rowCount={xRowCount}
-                    rowHeight={25}
-                    width={width}
-                />;
+                return (
+                    <Grid
+                        cellRenderer={cellRenderer}
+                        columnCount={Math.round(width / 25)}
+                        columnWidth={25}
+                        height={height}
+                        rowCount={xRowCount}
+                        rowHeight={25}
+                        width={width}
+                    />
+                );
             }}
         </AutoSizer>
     );

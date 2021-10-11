@@ -2,15 +2,15 @@ import React from 'react';
 import Style from './Sticky.module.scss';
 
 import classNames from 'classnames';
-const { createRef, useState, useEffect } = React;
+const { useRef, useState, useEffect } = React;
 
 function Sticky({ children, sticky = false, className, ...rest }) {
     const [isSticky, setIsSticky] = useState(false);
-    const ref = createRef();
+    const elemRef = useRef();
 
     // mount
     useEffect(() => {
-        const cachedRef = ref.current,
+        const cachedRef = elemRef.current,
             observer = new IntersectionObserver(
                 ([e]) => setIsSticky(e.intersectionRatio < 1),
                 { threshold: [1] }
@@ -30,13 +30,7 @@ function Sticky({ children, sticky = false, className, ...rest }) {
     });
 
     return (
-        <div
-            // className={
-            //     className + Style.root + (isSticky ? Style.isSticky : '')
-            // }
-            className={xClass}
-            ref={ref}
-            {...rest}>
+        <div className={xClass} ref={elemRef} {...rest}>
             {children}
         </div>
     );

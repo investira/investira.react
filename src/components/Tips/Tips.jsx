@@ -1,8 +1,8 @@
-import React, { memo, useState, useRef } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Icon, IconButton, Typography, JsonTextFormated } from '../';
+import { Icon, IconButton, JsonTextFormated } from '../';
 
 import Style from './Tips.module.scss';
 

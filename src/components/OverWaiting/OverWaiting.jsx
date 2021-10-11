@@ -49,10 +49,6 @@ function OverWaiting(props) {
         [classes.backgroundFlat]: props.backgroundFlat
     });
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     const handleCancel = pEvent => {
         console.log('handleCancel');
         props.onCancel && props.onCancel(pEvent);
@@ -65,11 +61,7 @@ function OverWaiting(props) {
     const { message, progressProps, typographyProps } = props;
 
     return (
-        <Backdrop
-            className={xClassRoot}
-            open={open}
-            //onClick={handleClose}
-        >
+        <Backdrop className={xClassRoot} open={open}>
             {open && (
                 <div className={classes.info}>
                     <div className={classes.icons}>

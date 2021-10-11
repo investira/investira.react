@@ -52,6 +52,8 @@ const ResponsiveImage = props => {
         [Style.show]: show
     });
 
+    console.log(props.source);
+
     return (
         <div className={Style.root}>
             <picture className={Style.picture}>
@@ -71,6 +73,7 @@ const ResponsiveImage = props => {
                         id={props.id}
                         className={xClassImage || Style.img}
                         srcSet={imagesSrcSet[0].srcSet}
+                        src={imagesSrcSet[0].srcSet}
                         alt={props.alt}
                         type={props.type}
                         onLoad={() => setShow(true)}

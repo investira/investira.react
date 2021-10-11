@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formats } from 'investira.sdk';
 import { Rate } from '../';
-import { Typography } from 'investiraComponents';
+import { Typography } from '../';
 
 function Format(props) {
     const formatValue = (pType, pValue, pDecimais) => {

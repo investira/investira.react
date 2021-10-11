@@ -2,13 +2,14 @@ import React, {
     memo,
     useState,
     useEffect,
+    useCallback,
     useRef,
     forwardRef,
     useContext
 } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
-import { SearchBox, CrudConsumer, CrudContext } from '../';
+import { SearchBox, CrudContext } from '../';
 
 import Style from './Search.module.scss';
 
@@ -34,13 +35,27 @@ const Search = forwardRef((props, ref) => {
         //     props.onUpdateParams({ ...params, pesquisa: undefined });
     };
 
+    const handleRead = useCallback(() => {
+        onRead && onRead(params);
+    }, [params, onRead]);
+
+    const { onUpdateParams, onResetData } = props;
+
+    const handleUpdateParams = useCallback(() => {
+        onUpdateParams && onUpdateParams(params);
+    }, [params, onUpdateParams]);
+
+    const handleReset = useCallback(() => {
+        onResetData && onResetData({});
+    }, [onResetData]);
+
     useEffect(() => {
         if (mount.current) {
-            props.onResetData && props.onResetData({});
-            onRead && onRead(params);
-            props.onUpdateParams && props.onUpdateParams(params);
+            handleReset();
+            handleRead();
+            handleUpdateParams();
         }
-    }, [params.pesquisa]);
+    }, [params.pesquisa, handleReset, handleRead, handleUpdateParams]);
 
     useEffect(() => {
         mount.current = true;

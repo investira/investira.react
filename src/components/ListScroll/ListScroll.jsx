@@ -7,7 +7,7 @@ import ContentList from '../ContentList';
 
 const ListScroll = memo(props => {
     const { onNextPage, nextPage, list, item, emptyMessage, itemProps } = props;
-    console.log(itemProps);
+
     return (
         <InfiniteScroller onNextPage={onNextPage} nextPage={nextPage}>
             <ContentList

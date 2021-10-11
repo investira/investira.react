@@ -2,7 +2,6 @@ import React, { memo, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
 import {
-    Slide,
     CrudContext,
     DeckContext,
     Icon,
@@ -26,12 +25,12 @@ const Crood = memo(
                 return props.children;
             }
 
-            const initialStateDialog = {
-                isOpen: false,
-                title: null,
-                content: null,
-                actions: []
-            };
+            // const initialStateDialog = {
+            //     isOpen: false,
+            //     title: null,
+            //     content: null,
+            //     actions: []
+            // };
 
             const [deleted, setDeleted] = useState(false);
             const [editable, setEditable] = useState(false);
@@ -160,7 +159,7 @@ const Crood = memo(
             };
 
             const handleErrorDialog = () => {
-                props.onError && props.onError;
+                props.onError && props.onError();
             };
 
             const handleEdit = () => {

@@ -1,8 +1,6 @@
 import React from 'react';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
 import Icon from '../../Icon';
 
 const DialogTitle = props => {

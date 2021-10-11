@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { validators } from 'investira.sdk';
@@ -12,30 +12,33 @@ const SearchFilters = memo(props => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelected] = React.useState([]);
     const [filters, setFilters] = useState([]);
-    //const [count, setCount] = useState(0);
     const [params, setParams] = useState({});
 
     const valuesSelectedRef = React.useRef([]);
 
     const verifyArray = pArray => {
         const xIsEmpty = pArray.filter(xElem => {
-            return xElem != undefined;
+            return xElem !== undefined;
         });
         return xIsEmpty.length > 0;
     };
 
-    const updateParams = (pParam, pValues, pAction) => {
-        props.onResetData && props.onResetData({});
+    const { onResetData, onUpdateParams } = props;
+    const updateParams = useCallback(
+        (pParam, pValues, pAction) => {
+            onResetData && onResetData({});
 
-        const xParams = {
-            ...params,
-            [pParam]: pValues ? pValues.value : undefined
-        };
+            const xParams = {
+                ...params,
+                [pParam]: pValues ? pValues.value : undefined
+            };
 
-        setParams(xParams);
-        pAction(xParams);
-        props.onUpdateParams && props.onUpdateParams(xParams);
-    };
+            setParams(xParams);
+            pAction(xParams);
+            onUpdateParams && onUpdateParams(xParams);
+        },
+        [params, onResetData, onUpdateParams]
+    );
 
     const removeNullElements = pArray => {
         return pArray.filter(xElem => {
@@ -43,10 +46,10 @@ const SearchFilters = memo(props => {
         });
     };
 
-    const isFiltersEmpty = pFilters => {
+    const isFiltersEmpty = useCallback(pFilters => {
         const xFilters = removeNullElements([...pFilters]);
         return validators.isEmpty(xFilters);
-    };
+    }, []);
 
     const isSelected = (
         pFilterIndex,
@@ -97,10 +100,6 @@ const SearchFilters = memo(props => {
         };
 
         xSelected[filterIndex] = [optionIndex];
-
-        // setSelected(xSelected);
-        // setFilters(xFilters);
-        // updateParams(filterParam, xFilters[filterIndex], action);
 
         updateFilterValuesSelected(xSelected, xFilters, [
             filterParam,
@@ -172,10 +171,6 @@ const SearchFilters = memo(props => {
             xFilters[filterIndex] = undefined;
         }
 
-        // setSelected(xSelected);
-        // setFilters(xFilters);
-        // updateParams(filterParam, xFilters[filterIndex], action);
-
         updateFilterValuesSelected(xSelected, xFilters, [
             filterParam,
             xFilters[filterIndex],
@@ -211,11 +206,14 @@ const SearchFilters = memo(props => {
         setAnchorEl(null);
     };
 
-    const updateFilterValuesSelected = (pSelected, pFilters, pParams) => {
-        setSelected(pSelected);
-        setFilters(pFilters);
-        pParams && updateParams(...pParams);
-    };
+    const updateFilterValuesSelected = useCallback(
+        (pSelected, pFilters, pParams) => {
+            setSelected(pSelected);
+            setFilters(pFilters);
+            pParams && updateParams(...pParams);
+        },
+        [updateParams]
+    );
 
     const findWithAttr = (pArray, pAttr, pValue) => {
         for (const [index, value] of pArray.entries()) {
@@ -227,46 +225,49 @@ const SearchFilters = memo(props => {
         return -1;
     };
 
-    const initFilterDefaultSelected = (pPropFilters, pStateFilters) => {
-        const defaultSelectedValues = pPropFilters.map(xFilter => {
-            if (!validators.isEmpty(xFilter.defaultValue)) {
-                const xIndex = findWithAttr(
-                    xFilter.options,
-                    'value',
-                    xFilter.defaultValue
-                );
-                return [xIndex];
-            }
+    const initFilterDefaultSelected = useCallback(
+        (pPropFilters, pStateFilters) => {
+            const defaultSelectedValues = pPropFilters.map(xFilter => {
+                if (!validators.isEmpty(xFilter.defaultValue)) {
+                    const xIndex = findWithAttr(
+                        xFilter.options,
+                        'value',
+                        xFilter.defaultValue
+                    );
+                    return [xIndex];
+                }
 
-            return [undefined];
-        });
+                return [undefined];
+            });
 
-        const defaultSelectedFilters = defaultSelectedValues.map(
-            (xSelected, xIndex) => {
-                return xSelected.map(xOptionIndex => {
-                    if (validators.isNull(xOptionIndex)) {
-                        return xOptionIndex;
-                    }
+            const defaultSelectedFilters = defaultSelectedValues.map(
+                (xSelected, xIndex) => {
+                    return xSelected.map(xOptionIndex => {
+                        if (validators.isNull(xOptionIndex)) {
+                            return xOptionIndex;
+                        }
 
-                    const xFilter = pPropFilters[xIndex];
-                    const xOption = xFilter.options[xOptionIndex];
+                        const xFilter = pPropFilters[xIndex];
+                        const xOption = xFilter.options[xOptionIndex];
 
-                    return {
-                        field: xFilter.label,
-                        label: xOption.label,
-                        param: xFilter.param,
-                        value: xOption.value,
-                        default: true
-                    };
-                })[0];
-            }
-        );
+                        return {
+                            field: xFilter.label,
+                            label: xOption.label,
+                            param: xFilter.param,
+                            value: xOption.value,
+                            default: true
+                        };
+                    })[0];
+                }
+            );
 
-        updateFilterValuesSelected(
-            defaultSelectedValues,
-            defaultSelectedFilters
-        );
-    };
+            updateFilterValuesSelected(
+                defaultSelectedValues,
+                defaultSelectedFilters
+            );
+        },
+        [updateFilterValuesSelected]
+    );
 
     const xClassSelected = classNames(Style.selected, {
         [Style.noFiltersSelected]: !verifyArray(filters)
@@ -278,7 +279,7 @@ const SearchFilters = memo(props => {
         if (isFiltersEmpty(filters)) {
             initFilterDefaultSelected(props.filters, filters);
         }
-    }, [filters]);
+    }, [filters, props.filters, isFiltersEmpty, initFilterDefaultSelected]);
 
     return (
         <CrudContext.Consumer>

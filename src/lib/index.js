@@ -7,6 +7,7 @@ export { default as browsers } from './utils/browsers';
 export { default as localStorages } from './utils/localStorages';
 export { default as lists } from './utils/lists';
 export { default as vibrate } from './utils/vibrate';
+export { default as anime } from './utils/anime';
 
 // Middleware
 export { default as bindStateToLocalStorage } from './middleware/bindStateToLocalStorage';
@@ -24,12 +25,12 @@ export { default as listenStorage } from './storage/listenStorage';
 export { default as pouchStorage } from './storage/pouchStorage';
 export { default as idbStorage } from './storage/idbStorage';
 
-// HOCs
-export { default as withDialog } from './hoc/withDialog';
-export { default as withRedux } from './hoc/withRedux';
-export { default as infiniteScroll } from './hoc/infiniteScroll';
-export { default as withMediaQueries } from './hoc/withMediaQueries';
-
 // HOOKs
 
 export { default as useLongPress } from './hooks/useLongPress';
+
+// HOCs
+export { default as withDialog } from './hoc/withDialog';
+export { default as infiniteScroll } from './hoc/infiniteScroll';
+export { default as withMediaQueries } from './hoc/withMediaQueries';
+export { default as withRedux } from './hoc/withRedux';

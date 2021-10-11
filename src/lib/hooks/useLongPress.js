@@ -12,16 +12,18 @@ const useLongPress = (
     const timeout = useRef(null);
     const scrolling = useRef(null);
     const target = useRef();
+    const scrollElemId = useRef(listenElemOnScroll);
     const scrollElem = useRef(null);
 
     useEffect(() => {
+        const xElemId = scrollElemId.current;
         if (
             validators.isNull(scrollElem.current) &&
-            !validators.isNull(listenElemOnScroll)
+            !validators.isNull(xElemId)
         ) {
             const xScroll =
-                document.getElementById(listenElemOnScroll) ||
-                document.getElementsByClassName(listenElemOnScroll)[0];
+                document.getElementById(xElemId) ||
+                document.getElementsByClassName(xElemId)[0];
 
             scrollElem.current = xScroll;
 

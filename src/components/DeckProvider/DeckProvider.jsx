@@ -46,7 +46,7 @@ const DeckProvider = memo(props => {
     useEffect(() => {
         setActive(props.initialView);
         setPreview(props.initialPrev);
-    }, []);
+    }, [props.initialView, props.initialPrev]);
 
     return (
         <>

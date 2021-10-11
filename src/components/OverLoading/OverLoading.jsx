@@ -28,20 +28,12 @@ function OverLoading(props) {
         [classes.backgroundFlat]: props.backgroundFlat
     });
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     useEffect(() => {
         setOpen(props.open);
     }, [props.open]);
 
     return (
-        <Backdrop
-            className={xClassRoot}
-            open={open}
-            //onClick={handleClose}
-        >
+        <Backdrop className={xClassRoot} open={open}>
             {open && (
                 <div className={classes.info}>
                     <CircularProgress color="primary" size={props.size || 40} />

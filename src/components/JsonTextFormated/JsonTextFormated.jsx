@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'investiraComponents';
+import { Typography } from '../';
 import PropTypes from 'prop-types';
 const JsonTextFormated = props => {
     const { text, ...otherProps } = props;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { getEpicenterLeftTop } from '../../../utils/_render';
 import { renders } from '../../lib';
 import Basic from '../Basic';
 

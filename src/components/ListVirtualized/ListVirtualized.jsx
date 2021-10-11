@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -109,18 +109,18 @@ const ListVirtualized = memo(props => {
 
     const xRowCount = props.totalItens || props.list.length;
 
-    const scrollToBottom = pArea => {
+    const scrollToBottom = useCallback(() => {
         _cache.current.clearAll();
 
         const xLastRow = props.list.length;
         if (xLastRow) {
             ListRef.current.scrollToRow(xLastRow);
         }
-    };
+    }, [props.list]);
 
     useEffect(() => {
         scrollToBottom();
-    }, [props.list]);
+    }, [props.list, scrollToBottom]);
 
     useEffect(() => {
         removeTabIndex(ListRoot);
