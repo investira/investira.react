@@ -178,11 +178,11 @@ const withDialog = (Component, pProps = initProps) => {
          */
 
         handleOpenDialog = pProps => {
+            this.body = { ...pProps };
+
             this.setState({
                 isOpen: true
             });
-
-            this.body = { ...pProps };
         };
 
         // Fechar Dialog
