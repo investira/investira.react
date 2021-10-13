@@ -38,6 +38,14 @@ const useStyles = makeStyles(theme => ({
     },
     icons: {
         position: 'relative'
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '55px',
+        padding: '16px'
     }
 }));
 
@@ -50,7 +58,6 @@ function OverWaiting(props) {
     });
 
     const handleCancel = pEvent => {
-        console.log('handleCancel');
         props.onCancel && props.onCancel(pEvent);
     };
 
@@ -58,48 +65,55 @@ function OverWaiting(props) {
         setOpen(props.open);
     }, [props.open]);
 
-    const { message, progressProps, typographyProps } = props;
+    const { message, progressProps, typographyProps, header } = props;
 
     return (
         <Backdrop className={xClassRoot} open={open}>
             {open && (
-                <div className={classes.info}>
-                    <div className={classes.icons}>
-                        <Icon
-                            color={progressProps.color || 'primary'}
-                            iconName="clock"
-                            size={128}
-                        />
-                    </div>
+                <>
+                    {header && <div className={classes.header}>{header}</div>}
+                    <div className={classes.info}>
+                        <div className={classes.icons}>
+                            <Icon
+                                color={progressProps.color || 'primary'}
+                                iconName="clock"
+                                size={128}
+                            />
+                        </div>
 
-                    <div className={classes.progress}>
-                        <LinearProgress
-                            color={progressProps.color}
-                            variant={progressProps.variant}
-                            value={progressProps.value}
-                        />
-                        <div className={classes.hspace}></div>
-                        {message && (
-                            <Typography
-                                color={typographyProps.color || 'textPrimary'}
-                                align="center"
-                                variant={typographyProps.variant || 'caption'}>
-                                {message}
-                            </Typography>
+                        <div className={classes.progress}>
+                            <LinearProgress
+                                color={progressProps.color}
+                                variant={progressProps.variant}
+                                value={progressProps.value}
+                            />
+                            <div className={classes.hspace}></div>
+                            {message && (
+                                <Typography
+                                    color={
+                                        typographyProps.color || 'textPrimary'
+                                    }
+                                    align="center"
+                                    variant={
+                                        typographyProps.variant || 'caption'
+                                    }>
+                                    {message}
+                                </Typography>
+                            )}
+                        </div>
+
+                        {props.cancelable && (
+                            <div className={classes.action}>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={handleCancel}>
+                                    Cancelar
+                                </Button>
+                            </div>
                         )}
                     </div>
-
-                    {props.cancelable && (
-                        <div className={classes.action}>
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                onClick={handleCancel}>
-                                Cancelar
-                            </Button>
-                        </div>
-                    )}
-                </div>
+                </>
             )}
         </Backdrop>
     );
