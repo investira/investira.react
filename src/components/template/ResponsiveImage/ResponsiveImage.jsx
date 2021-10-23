@@ -52,8 +52,6 @@ const ResponsiveImage = props => {
         [Style.show]: show
     });
 
-    console.log(props.source);
-
     return (
         <div className={Style.root}>
             <picture className={Style.picture}>
