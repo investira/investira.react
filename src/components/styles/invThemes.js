@@ -278,30 +278,19 @@ export const themePrimary = {
                 }
             },
             MuiPaper: {
-                // root: {
-                //     backgroundColor: '#191b2a',
-                //     background:
-                //         'linear-gradient(135deg, rgba(29,31,52,1) 0%, rgba(17,19,31,1) 100%)'
-                // },
                 rounded: {
                     borderRadius: '8px'
                 }
-                // elevation1: {
-                //     boxShadow:
-                //         '#191b2a 0px 0px 2px 2px, rgba(0,0,0,.8) 4px 4px 8px, #2D304F -4px -4px 8px'
-                // }
+            },
+            MuiAlert: {
+                root: {
+                    borderRadius: '8px'
+                }
             },
             MuiTypography: {
                 gutterBottom: {
                     marginBottom: '0.65em'
                 }
-
-                // h4: {
-                //     fontWeight: 600
-                // },
-                // h6: {
-                //     fontWeight: 600
-                // }
             },
             MuiRadio: {
                 root: {
@@ -659,6 +648,11 @@ export const themeSecondary = {
             },
             MuiPaper: {
                 rounded: {
+                    borderRadius: '8px'
+                }
+            },
+            MuiAlert: {
+                root: {
                     borderRadius: '8px'
                 }
             },

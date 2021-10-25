@@ -1,3 +1,4 @@
+export { default as Alert } from './Alert';
 export { default as AppBar } from './AppBar';
 export { default as Autocomplete } from './Autocomplete';
 export { default as Avatar } from './Avatar';
