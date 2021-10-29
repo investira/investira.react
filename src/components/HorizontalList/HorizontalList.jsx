@@ -80,6 +80,7 @@ const HorizontalList = props => {
 
     const handleScroll = e => {
         window.clearTimeout(timeout);
+
         if (isScrolling || !isClicked) {
             timeout = setTimeout(() => {
                 isScrolling = false;
@@ -128,12 +129,13 @@ const HorizontalList = props => {
     const Component = props.child;
 
     return (
-        <div className={Style.root} onScroll={e => handleScroll(e)}>
+        <div className={Style.root}>
             <div
                 id={props.id}
                 ref={scrollableRef}
                 className={Style.container}
-                scroll-behavior="smooth">
+                scroll-behavior="smooth"
+                onScroll={e => handleScroll(e)}>
                 {!validators.isEmpty(props.data) &&
                     props.data.map((xData, xIndex) => {
                         const xCustomKey = props.keyValue
