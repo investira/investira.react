@@ -6,7 +6,6 @@ import { duration } from '@material-ui/core/styles/transitions';
 import { renders } from '../../../lib';
 
 function Snackbar(props) {
-    console.log('Snackbar', props);
     const { children, autoHideDuration, onClose, ...xPassThruAttrs } = props;
 
     let xAutoHideDuration =
@@ -16,7 +15,6 @@ function Snackbar(props) {
             ? null
             : renders.getTimeFromTextLength(messageLength);
 
-    console.log(xAutoHideDuration);
     return (
         <MuiSnackbar
             {...xPassThruAttrs}
