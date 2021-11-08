@@ -11,7 +11,6 @@ const HorizontalList = props => {
     let isClicked = false;
 
     const scrollableRef = React.useRef();
-    const [initElemsRect, setInitElemsRect] = useState([]);
     const [elemFocusIndex, setElemFocusIndex] = useState(0);
     const [childFocused, setChildFocused] = useState(props.id + '0');
     const [initElementsRef, setInitElementsRef] = useState([]);
@@ -31,8 +30,6 @@ const HorizontalList = props => {
         if (xScrollElem) {
             const xScrollElemRect = xScrollElem.getBoundingClientRect();
             const xSpacer = (xScrollElemRect.width - xFocusElemRect.width) / 2;
-
-            //xScrollElem.scrollLeft = initElemsRect[xSelected].x - xSpacer;
 
             xScrollElem.scrollLeft = positions[xSelected] - xSpacer;
         }
@@ -64,8 +61,6 @@ const HorizontalList = props => {
         const xPositions = calcPosition(xInitElemsRect);
 
         setPositions(xPositions);
-
-        setInitElemsRect(xInitElemsRect);
     };
 
     const handleClick = (pData, pIndex) => () => {
@@ -80,6 +75,7 @@ const HorizontalList = props => {
 
     const handleScroll = e => {
         window.clearTimeout(timeout);
+
         if (isScrolling || !isClicked) {
             timeout = setTimeout(() => {
                 isScrolling = false;
@@ -88,6 +84,12 @@ const HorizontalList = props => {
         }
         isScrolling = true;
     };
+
+    useEffect(() => {
+        setElemFocusIndex(props.initialFocus);
+        setChildFocused(props.id + props.initialFocus);
+        setPositions([props.initialFocus]);
+    }, []);
 
     useEffect(() => {
         window.clearTimeout(timeout);
@@ -104,6 +106,7 @@ const HorizontalList = props => {
 
     useEffect(() => {
         isMount.current = true;
+
         if (!validators.isEmpty(elementsRef)) {
             saveElemsInitPosition(elementsRef);
             setInitElementsRef([...elementsRef]);
@@ -128,12 +131,13 @@ const HorizontalList = props => {
     const Component = props.child;
 
     return (
-        <div className={Style.root} onScroll={e => handleScroll(e)}>
+        <div className={Style.root}>
             <div
                 id={props.id}
                 ref={scrollableRef}
                 className={Style.container}
-                scroll-behavior="smooth">
+                scroll-behavior="smooth"
+                onScroll={e => handleScroll(e)}>
                 {!validators.isEmpty(props.data) &&
                     props.data.map((xData, xIndex) => {
                         const xCustomKey = props.keyValue
@@ -167,11 +171,13 @@ HorizontalList.propTypes = {
     child: PropTypes.elementType.isRequired,
     childProps: PropTypes.object,
     data: PropTypes.array.isRequired,
-    keyValue: PropTypes.string
+    keyValue: PropTypes.string,
+    initialFocus: PropTypes.number //index
 };
 
 HorizontalList.defaultProps = {
-    data: []
+    data: [],
+    initialFocus: 0
 };
 
 // export default HorizontalList;
