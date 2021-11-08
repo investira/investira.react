@@ -65,7 +65,8 @@ Info.defaultProps = {
     valueColor: 'textPrimary',
     variantValue: 'caption',
     direction: 'vertical',
-    colon: false
+    colon: false,
+    bold: false
 };
 
 Info.propTypes = {
@@ -76,7 +77,6 @@ Info.propTypes = {
     gutter: PropTypes.oneOf(['left', 'full', 'right']),
     gutterBottom: PropTypes.bool,
     label: PropTypes.string,
-    date: PropTypes.string,
     className: PropTypes.string,
     variant: PropTypes.string,
     variantValue: PropTypes.string,
