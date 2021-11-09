@@ -1,5 +1,5 @@
 import React from 'react';
-import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { Icon } from '../components';
 
 export default {
