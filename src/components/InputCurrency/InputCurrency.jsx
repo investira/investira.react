@@ -48,6 +48,12 @@ class InputCurrency extends Component {
         return this.state.value || this.props.value;
     }
 
+    componentDidMount() {
+        this.setState({
+            value: this.formatTextValue(this.props.value)
+        });
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.formatTextValue(this.props.value) !== this.state.value) {
             this.setState({
