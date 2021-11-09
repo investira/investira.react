@@ -11,7 +11,7 @@ const SliderField = memo(props => {
     const [value, setValue] = useState(props.value);
 
     // Refs
-    const timeout = useRef(null);
+    // const timeout = useRef(null);
     const scale = useRef({});
 
     // Formik
@@ -46,17 +46,18 @@ const SliderField = memo(props => {
 
     function handleChange(pEvent, pValue) {
         setValue(getValue(pValue));
+        props.onChange && props.onChange(props.name, getValue(pValue));
 
-        if (timeout.current) {
-            clearTimeout(timeout.current);
-        }
+        // if (timeout.current) {
+        //     clearTimeout(timeout.current);
+        // }
 
-        const { setFieldValue } = context;
+        // const { setFieldValue } = context;
 
-        timeout.current = setTimeout(() => {
-            setFieldValue(props.name, getValue(pValue));
-            props.onChange && props.onChange(props.name, getValue(pValue));
-        }, 500);
+        // timeout.current = setTimeout(() => {
+        //     setFieldValue(props.name, getValue(pValue));
+        //     props.onChange && props.onChange(props.name, getValue(pValue));
+        // }, 300);
     }
 
     const generateScaleValues = useCallback(pValue => {
