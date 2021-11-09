@@ -99,7 +99,7 @@ const SliderField = memo(props => {
             )}
             <Typography
                 id="label-value"
-                color="textPrimary"
+                color={props.disabled ? 'textSecondary' : 'textPrimary'}
                 variant="h6"
                 gutterBottom>
                 {valueLabelFormat(value)}
@@ -113,6 +113,7 @@ const SliderField = memo(props => {
                 valueLabelFormat={valueLabelFormat}
                 onChange={handleChange}
                 aria-labelledby="non-linear-slider"
+                disabled={props.disabled}
             />
         </div>
     );
