@@ -1,9 +1,7 @@
 import React from 'react';
 import { addParameters } from '@storybook/react';
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object, text } from '@storybook/addon-knobs/react';
-//import { withInfo } from '@storybook/addon-info';
+import { withKnobs, number } from '@storybook/addon-knobs/react';
 import { HorizontalList } from '../components';
 
 export default {
@@ -13,7 +11,6 @@ export default {
             'Lista horizontal com centralização do elemento selecionado'
     },
     component: HorizontalList,
-    //decorators: [withKnobs, withInfo]
     decorators: [withKnobs]
 };
 
@@ -25,14 +22,20 @@ addParameters({
 
 const Item = props => (
     <div
-        style={{ backgroundColor: props.backgroundColor }}
+        style={{
+            backgroundColor: props.backgroundColor,
+            borderRadius: '10px',
+            padding: '5px',
+            color: 'white',
+            fontFamily: 'Montserrat'
+        }}
         onClick={props.onClick}>
         Hello {props.data.text}
     </div>
 );
 
 const Wrapper = props => (
-    <div style={{ maxWidth: '280px' }}>{props.children}</div>
+    <div style={{ maxWidth: '150px' }}>{props.children}</div>
 );
 
 const generateData = (size = 6) => {
@@ -45,11 +48,16 @@ const generateData = (size = 6) => {
 };
 
 export const Default = () => (
-    <HorizontalList
-        id={'horizontalList'}
-        onClick={action('clicked')}
-        child={Item}
-        childProps={{ backgroundColor: 'yellow' }}
-        data={generateData()}
-    />
+    <Wrapper>
+        <HorizontalList
+            initialFocus={number('Foco inicial', 6)}
+            id={'horizontalList'}
+            onClick={action('clicked')}
+            child={Item}
+            childProps={{
+                backgroundColor: '#191b2a'
+            }}
+            data={generateData()}
+        />
+    </Wrapper>
 );
