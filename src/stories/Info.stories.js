@@ -18,7 +18,7 @@ export default {
     component: Info
 };
 
-export const Default = args => {
+export const Default = () => {
     const optionsColor = {
         textPrimary: 'textPrimary',
         textSecondary: 'textSecondary'
@@ -64,7 +64,6 @@ export const Default = args => {
             labelColor={radios('Cor da label', optionsColor, 'textSecondary')}
             value={text('Valor', 'Valor')}
             label={text('Legenda', 'Legenda')}
-            {...args}
         />
     );
 };

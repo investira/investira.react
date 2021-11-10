@@ -17,7 +17,7 @@ export default {
     component: InfoBool
 };
 
-export const Default = args => {
+export const Default = () => {
     const optionsColor = {
         textPrimary: 'textPrimary',
         textSecondary: 'textSecondary'
@@ -45,7 +45,6 @@ export const Default = args => {
                 optionsVariant,
                 'caption'
             )}
-            {...args}
         />
     );
 };
