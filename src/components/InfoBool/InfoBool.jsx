@@ -22,7 +22,7 @@ function InfoBool(props) {
             <div className={xClassIcon}>
                 <Icon
                     color={props.value ? 'greenLight' : 'danger'}
-                    iconName={props.value ? 'check' : 'cancel'}
+                    iconName={props.value ? 'ok' : 'cancel'}
                     size={props.value ? 24 : 16}
                 />
             </div>
