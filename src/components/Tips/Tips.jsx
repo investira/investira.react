@@ -51,15 +51,13 @@ Tips.propTypes = {
     iconName: PropTypes.string,
     desc: PropTypes.string,
     size: PropTypes.number,
-    color: PropTypes.string,
-    variant: PropTypes.oneOf(['float', 'default'])
+    color: PropTypes.string
 };
 
 Tips.defaultProps = {
     iconName: 'lamp',
     desc: 'Utilize a prop "desc" para inserir uma descrição',
     size: 16,
-    variant: 'default',
     color: 'primary'
 };
 
