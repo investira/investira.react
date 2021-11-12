@@ -7,6 +7,7 @@ import {
     boolean,
     select
 } from '@storybook/addon-knobs';
+import { variants, textColors } from './options';
 
 export default {
     title: 'Info',
@@ -19,22 +20,6 @@ export default {
 };
 
 export const Default = () => {
-    const optionsColor = {
-        textPrimary: 'textPrimary',
-        textSecondary: 'textSecondary'
-    };
-    const optionsVariant = {
-        button: 'button',
-        caption: 'caption',
-        body1: 'body1',
-        body2: 'body2',
-        h6: 'h6',
-        h5: 'h5',
-        h4: 'h4',
-        h3: 'h3',
-        h2: 'h2',
-        h1: 'h1'
-    };
     return (
         <Info
             gutter={radios('Gutter', {
@@ -50,18 +35,14 @@ export const Default = () => {
                 { vertical: 'vertical', horizontal: 'horizontal' },
                 'vertical'
             )}
-            variant={select(
-                'Tamanho da fonte da label',
-                optionsVariant,
-                'caption'
-            )}
+            variant={select('Tamanho da fonte da label', variants, 'caption')}
             variantValue={select(
                 'Tamanho da fonte do valor',
-                optionsVariant,
+                variants,
                 'caption'
             )}
-            valueColor={radios('Cor do valor', optionsColor, 'textSecondary')}
-            labelColor={radios('Cor da label', optionsColor, 'textSecondary')}
+            valueColor={radios('Cor do valor', textColors, 'textSecondary')}
+            labelColor={radios('Cor da label', textColors, 'textSecondary')}
             value={text('Valor', 'Valor')}
             label={text('Legenda', 'Legenda')}
         />

@@ -7,6 +7,7 @@ import {
     text
 } from '@storybook/addon-knobs';
 import { Button } from '../components';
+import { basicColors } from './options';
 
 export default {
     title: 'Button',
@@ -15,16 +16,6 @@ export default {
 };
 
 export const Default = () => {
-    const optionsColor = {
-        inherit: 'inherit',
-        primary: 'primary',
-        secondary: 'secondary',
-        success: 'success',
-        error: 'error',
-        info: 'info',
-        warning: 'warning'
-    };
-
     const optionsSize = {
         small: 'small',
         medium: 'medium',
@@ -46,7 +37,7 @@ export const Default = () => {
             fullWidth={boolean('fullWidth', false)}
             variant={radios('Tipo', optionsVariant, 'text')}
             size={radios('Tamanho', optionsSize, 'medium')}
-            color={select('Cor', optionsColor, 'primary')}>
+            color={select('Cor', basicColors, 'primary')}>
             {text('Label', 'Botão')}
         </Button>
     );

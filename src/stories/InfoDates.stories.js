@@ -1,6 +1,7 @@
 import React from 'react';
 import { InfoDates } from '../components';
 import { boolean, date, select, text, withKnobs } from '@storybook/addon-knobs';
+import { textColors, variants } from './options';
 
 export default {
     title: 'InfoDates',
@@ -12,23 +13,6 @@ export default {
 };
 
 export const Default = () => {
-    const optionsColor = {
-        textPrimary: 'textPrimary',
-        textSecondary: 'textSecondary'
-    };
-    const optionsVariant = {
-        button: 'button',
-        caption: 'caption',
-        body1: 'body1',
-        body2: 'body2',
-        h6: 'h6',
-        h5: 'h5',
-        h4: 'h4',
-        h3: 'h3',
-        h2: 'h2',
-        h1: 'h1'
-    };
-
     const optionsFormat = {
         custom: 'custom',
         datetime: 'datetime',
@@ -38,7 +22,7 @@ export const Default = () => {
     };
     return (
         <InfoDates
-            color={select('Cor da data', optionsColor, 'textSecondary')}
+            color={select('Cor da data', textColors, 'textSecondary')}
             direction={select('Direção', {
                 horizontal: 'horizontal',
                 vertical: 'vertical'
@@ -52,12 +36,12 @@ export const Default = () => {
             variant={select('Formatação', optionsFormat, 'datetime')}
             labelVariant={select(
                 'Tamanho da fonte da label',
-                optionsVariant,
+                variants,
                 'caption'
             )}
             timeVariant={select(
                 'Tamanho da fonte da data',
-                optionsVariant,
+                variants,
                 'caption'
             )}
         />

@@ -7,6 +7,7 @@ import {
     boolean,
     radios
 } from '@storybook/addon-knobs';
+import { variants } from './options';
 
 export default {
     title: 'Typography',
@@ -18,23 +19,6 @@ export default {
 };
 
 export const Default = () => {
-    const optionsVariant = {
-        button: 'button',
-        caption: 'caption',
-        body1: 'body1',
-        body2: 'body2',
-        h6: 'h6',
-        h5: 'h5',
-        h4: 'h4',
-        h3: 'h3',
-        h2: 'h2',
-        h1: 'h1',
-        inherit: 'inherit',
-        overline: 'overline',
-        subtitle1: 'subtitle1',
-        subtitle2: 'subtitle2'
-    };
-
     const optionsAlign = {
         inherit: 'inherit',
         center: 'center',
@@ -49,7 +33,7 @@ export const Default = () => {
             noWrap={boolean('noWrap', false)}
             paragraph={boolean('Parágrafo', false)}
             gutterBottom={boolean('gutterBottom', false)}
-            variant={select('Tamanho', optionsVariant, 'body1')}>
+            variant={select('Tamanho', variants, 'body1')}>
             {text('Texto', 'Tipografia')}
         </Typography>
     );
