@@ -8,10 +8,20 @@ export const themePrimary = {
             MuiLinearProgress: {
                 root: {
                     height: '8px',
-                    borderRadius: '4px'
+                    borderRadius: '4px',
+                    '-webkit-backface-visibility': 'hidden',
+                    '-moz-backface-visibility': 'hidden',
+                    '-webkit-transform': 'translate3d(0, 0, 0)',
+                    '-moz-transform': 'translate3d(0, 0, 0)',
+                    willChange: 'transform'
                 },
                 bar: {
-                    borderRadius: '4px'
+                    borderRadius: '4px',
+                    '-webkit-backface-visibility': 'hidden',
+                    '-moz-backface-visibility': 'hidden',
+                    '-webkit-transform': 'translate3d(0, 0, 0)',
+                    '-moz-transform': 'translate3d(0, 0, 0)',
+                    willChange: 'transform'
                 }
             },
             MuiSelect: {
