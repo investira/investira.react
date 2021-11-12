@@ -36,7 +36,7 @@ function InfoDates(props) {
             ) : props.bold ? (
                 <Typography
                     variant={props.timeVariant}
-                    color={'textPrimary'}
+                    color={props.color || 'textPrimary'}
                     gutterBottom={props.gutterBottom}
                     component="p">
                     <b>
@@ -58,7 +58,7 @@ function InfoDates(props) {
             ) : (
                 <Typography
                     variant={props.timeVariant}
-                    color={'textPrimary'}
+                    color={props.color || 'textPrimary'}
                     gutterBottom={props.gutterBottom}
                     component="p">
                     {props.variant === 'custom' &&
@@ -87,14 +87,16 @@ InfoDates.defaultProps = {
 InfoDates.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
-    date: PropTypes.string,
     gutterBottom: PropTypes.bool,
     variant: PropTypes.string,
     labelVariant: PropTypes.string,
     time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     timeVariant: PropTypes.string,
     format: PropTypes.string,
-    colon: PropTypes.bool
+    colon: PropTypes.bool,
+    bold: PropTypes.bool,
+    direction: PropTypes.string,
+    color: PropTypes.oneOf(['textPrimary', 'textSecondary'])
 };
 
 export default InfoDates;

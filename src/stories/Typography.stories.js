@@ -17,7 +17,7 @@ export default {
     component: Typography
 };
 
-export const Default = args => {
+export const Default = () => {
     const optionsVariant = {
         button: 'button',
         caption: 'caption',
@@ -49,8 +49,7 @@ export const Default = args => {
             noWrap={boolean('noWrap', false)}
             paragraph={boolean('Parágrafo', false)}
             gutterBottom={boolean('gutterBottom', false)}
-            variant={select('Tamanho', optionsVariant, 'body1')}
-            {...args}>
+            variant={select('Tamanho', optionsVariant, 'body1')}>
             {text('Texto', 'Tipografia')}
         </Typography>
     );

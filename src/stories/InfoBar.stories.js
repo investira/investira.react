@@ -18,7 +18,7 @@ export default {
     component: InfoBar
 };
 
-export const Default = args => {
+export const Default = () => {
     const valueColor = {
         primary: 'primary',
         secondary: 'secondary',
@@ -66,7 +66,6 @@ export const Default = args => {
             value={number('Valor', 100, rangeValue)}
             label={text('Label', 'Label')}
             caption={text('Caption', 'Caption')}
-            {...args}
         />
     );
 };
