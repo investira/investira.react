@@ -17,7 +17,11 @@ function InfoBar(props) {
             </Typography>
 
             <div className={Style.progressBar}>
-                <ProgressBar value={props.value} color={props.valueColor} />
+                <ProgressBar
+                    animate={props.animate}
+                    value={props.value}
+                    color={props.valueColor}
+                />
             </div>
 
             {!validators.isEmpty(props.caption) && (
@@ -37,7 +41,8 @@ InfoBar.defaultProps = {
     labelColor: 'textSecondary',
     captionVariant: 'caption',
     captionColor: 'textPrimary',
-    valueColor: 'primary'
+    valueColor: 'primary',
+    animate: 'progress'
 };
 
 InfoBar.propTypes = {
@@ -55,7 +60,8 @@ InfoBar.propTypes = {
         'warning'
     ]),
     labelColor: PropTypes.oneOf(['textPrimary', 'textSecondary']),
-    captionColor: PropTypes.oneOf(['textPrimary', 'textSecondary'])
+    captionColor: PropTypes.oneOf(['textPrimary', 'textSecondary']),
+    animate: PropTypes.oneOf(['indeterminate', 'progress'])
 };
 
 export default InfoBar;
