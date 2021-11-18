@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Style from './InfoBool.module.scss';
 
 function InfoBool(props) {
-    const xClass = classNames(props.className, Style.root, {
+    const xClass = classNames(props.className, {
         [Style.gutter]: props.gutter
     });
     const xClassIcon = classNames({
