@@ -388,6 +388,12 @@ export const alertsColors = {
     infoHighlight: 'infoHighlight'
 };
 
+export const buttons = {
+    outlined: 'outlined',
+    contained: 'contained',
+    text: 'text'
+};
+
 export default {
     icons,
     iconColors,
@@ -395,5 +401,6 @@ export default {
     textColors,
     barRange,
     basicColors,
-    alertsColors
+    alertsColors,
+    buttons
 };
