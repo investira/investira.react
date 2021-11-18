@@ -20,12 +20,24 @@ export default {
 
 export const Default = () => {
     return (
-        <InfoBool
-            value={boolean('Valor', false)}
-            label={text('Label', 'Label')}
-            gutter={boolean('Margem', false)}
-            labelColor={radios('Cor da label', textColors, 'textSecondary')}
-            variant={select('Tamanho da fonte da label', variants, 'caption')}
-        />
+        <div
+            style={{
+                backgroundColor: '#191b2a',
+                padding: '16px',
+                borderRadius: '10px',
+                width: '300px'
+            }}>
+            <InfoBool
+                value={boolean('Valor', false)}
+                label={text('Label', 'Label')}
+                gutter={boolean('Margem', false)}
+                labelColor={radios('Cor da label', textColors, 'textSecondary')}
+                variant={select(
+                    'Tamanho da fonte da label',
+                    variants,
+                    'caption'
+                )}
+            />
+        </div>
     );
 };

@@ -21,15 +21,36 @@ export default {
 
 export const Default = () => {
     return (
-        <InfoBar
-            variant={select('Tamanho da fonte da label', variants, 'caption')}
-            captionColor={radios('Cor do caption', textColors, 'textSecondary')}
-            labelColor={radios('Cor da label', textColors, 'textSecondary')}
-            variantValue={'body1'}
-            valueColor={radios('Cor da barra', basicColors, 'primary')}
-            value={number('Valor', 100, barRange)}
-            label={text('Label', 'Label')}
-            caption={text('Caption', 'Caption')}
-        />
+        <div
+            style={{
+                backgroundColor: '#191b2a',
+                padding: '16px',
+                borderRadius: '10px',
+                width: '300px'
+            }}>
+            <InfoBar
+                variant={select(
+                    'Tamanho da fonte da label',
+                    variants,
+                    'caption'
+                )}
+                captionColor={radios(
+                    'Cor do caption',
+                    textColors,
+                    'textSecondary'
+                )}
+                labelColor={radios('Cor da label', textColors, 'textSecondary')}
+                variantValue={'body1'}
+                valueColor={radios('Cor da barra', basicColors, 'primary')}
+                value={number('Valor', 100, barRange)}
+                label={text('Label', 'Label')}
+                caption={text('Caption', 'Caption')}
+                animate={radios(
+                    'Animação',
+                    ['progress', 'indeterminate'],
+                    'progress'
+                )}
+            />
+        </div>
     );
 };
