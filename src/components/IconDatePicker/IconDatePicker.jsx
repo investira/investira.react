@@ -13,13 +13,11 @@ function IconDatePicker(props) {
         handleDateChange(pValue);
     };
 
-    const { id, color, ...DatePickerProps } = props;
+    const { id, ...DatePickerProps } = props;
 
     return (
         <>
-            <IconButton
-                onClick={() => setIsOpen(true)}
-                color={color || 'primary'}>
+            <IconButton onClick={() => setIsOpen(true)} color={'primary'}>
                 <Icon color={'primary'} iconName={'calendar'} />
             </IconButton>
             <div className={Style.picker}>
@@ -44,10 +42,7 @@ function IconDatePicker(props) {
 IconDatePicker.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
-    id: PropTypes.string,
-    label: PropTypes.string,
-    emptyLabel: PropTypes.string,
-    color: PropTypes.string
+    id: PropTypes.string
 };
 
 export default IconDatePicker;
