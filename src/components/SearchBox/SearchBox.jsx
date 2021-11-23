@@ -6,7 +6,7 @@ import React, {
     useImperativeHandle
 } from 'react';
 import PropTypes from 'prop-types';
-import { InputBase, IconButton, Divider, FormControl, Chip, Icon } from '../';
+import { InputBase, IconButton, FormControl, Chip, Icon } from '../';
 
 import { validators } from 'investira.sdk';
 import Style from './SearchBox.module.scss';
@@ -32,7 +32,6 @@ const SearchBox = forwardRef((props, ref) => {
 
     const handleChange = pEvent => {
         const xValue = pEvent.currentTarget.value;
-        //setValue(xValue);
         updateValue(xValue);
     };
 
@@ -168,7 +167,6 @@ const SearchBox = forwardRef((props, ref) => {
                     </IconButton>
                 )}
             </div>
-            {/* <Divider /> */}
             {!validators.isEmpty(querySplited) && (
                 <div className={Style.querys}>
                     {querySplited.map((xData, xIndex) => {
