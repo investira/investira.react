@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Style from './NavDots.module.scss';
 import { ButtonBase } from '../wrapper-material-ui';
 
-class NavDots extends React.Component {
+class NavDots extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -43,6 +43,7 @@ export { default as ListScroll } from './ListScroll';
 export { default as ListFilter } from './ListFilter';
 export { default as MaskedTextField } from './MaskedTextField';
 export { default as NavBar } from './NavBar';
+export { default as NavDots } from './NavDots';
 export { default as OverLoading } from './OverLoading';
 export { default as OverWaiting } from './OverWaiting';
 export { default as PasswordField } from './PasswordField';
