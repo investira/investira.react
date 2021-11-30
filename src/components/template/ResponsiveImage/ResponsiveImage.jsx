@@ -33,6 +33,11 @@ const ResponsiveImage = props => {
         }
     };
 
+    const handleLoad = e => {
+        setShow(true);
+        props.onLoad && props.onLoad(e);
+    };
+
     // Em caso de erro no carregamento da imagem
     const handleError = _pImage => {
         if (!hasError) {
@@ -74,7 +79,7 @@ const ResponsiveImage = props => {
                         src={imagesSrcSet[0].srcSet}
                         alt={props.alt}
                         type={props.type}
-                        onLoad={() => setShow(true)}
+                        onLoad={handleLoad}
                         onError={handleError}
                     />
                 ) : null}
@@ -86,7 +91,8 @@ const ResponsiveImage = props => {
 ResponsiveImage.propTypes = {
     source: PropTypes.array.isRequired,
     alt: PropTypes.string.isRequired,
-    type: PropTypes.string
+    type: PropTypes.string,
+    onLoad: PropTypes.func
 };
 
 export default React.memo(ResponsiveImage);
