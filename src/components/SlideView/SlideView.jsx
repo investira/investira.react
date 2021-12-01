@@ -86,10 +86,6 @@ export class SlideView extends Component {
     };
 
     mapChildrens = () => {
-        // let xClass = !this.state.swipeable
-        // ? this.props.classes.view + ' ' + this.props.classes.noTouchable
-        // : this.props.classes.view;
-
         let xClass = this.props.fullWidth ? Style.viewFull : Style.view;
 
         let elements = this.props.children.map((child, i) => {
@@ -100,7 +96,6 @@ export class SlideView extends Component {
                     id={`slideview-${i}`}
                     className={xClass}
                     style={{
-                        //width: this.state.itemWidth + 'px',
                         zIndex: 100 - i
                     }}>
                     {child}
@@ -117,13 +112,6 @@ export class SlideView extends Component {
             let xSlideWidth = this.slideRef.current.offsetWidth;
             let xSlideChildWidth = this.slideChildRef.current.offsetWidth;
             let xWrapWidth = xSlideWidth;
-
-            // const xNewState = {
-            //     wrapWidth: xWrapWidth,
-            //     slideWidth: xSlideWidth,
-            //     slideChildWidth: xSlideChildWidth,
-            //     slideCount: xChildCount
-            // };
 
             this.setState({
                 wrapWidth: xWrapWidth,
@@ -144,16 +132,10 @@ export class SlideView extends Component {
         if (e.type === 'panend' || e.type === 'pancancel') {
             if (Math.abs(xPercent) > 21 && e.type === 'panend') {
                 let xSlideCurrent = this.state.slideCurrent;
-                //console.log((xSlideCurrent += xPercent));
 
                 this.setState({
                     slideCurrent: (xSlideCurrent += xPercent < 0 ? 1 : -1)
                 });
-
-                // console.log('slideCount', this.state.slideCount);
-                // console.log('slideCurrent', this.state.slideCurrent);
-                // console.log('xPercent', xPercent);
-                // console.log('xDelta', xDelta);
 
                 if (
                     this.state.swipeable &&
@@ -203,13 +185,6 @@ export class SlideView extends Component {
                 xViewIndex < this.state.slideCount;
                 xViewIndex++
             ) {
-                // fullWith
-                // xPos =
-                //     (this.state.wrapWidth / 100) *
-                //     ((xViewIndex - xMoveIndex) * 100 + xPercent);
-
-                // Exibe parte do próximo
-
                 if (this.props.fullWidth) {
                     xPos =
                         (this.state.wrapWidth / 100) *
@@ -220,15 +195,6 @@ export class SlideView extends Component {
                         ((xViewIndex - xMoveIndex) * 100 + xPercent);
                     xPos = xPos + 12;
                 }
-
-                // xPos =
-                //     (this.state.slideChildWidth / 100) *
-                //     ((xViewIndex - xMoveIndex) * 100 + xPercent);
-
-                // console.log('xViewIndex', xViewIndex);
-                // console.log('xMoveIndex', xMoveIndex);
-
-                // xPos = xPos + 12;
 
                 if (Hammer.DIRECTION_HORIZONTAL) {
                     xTranslate = 'translate3d(' + xPos + 'px, 0, 0)';
@@ -279,9 +245,6 @@ export class SlideView extends Component {
             inputClass:
                 Hammer.TouchMouseInput /* Truque para permitir o pan horizontal e a rolagem */
         });
-        //let hammer = new Hammer.Manager(this.slideWrapRef.current);
-
-        //hammer.domEvents = true;
 
         hammer.add(
             new Hammer.Pan({
@@ -289,11 +252,6 @@ export class SlideView extends Component {
                 threshold: 30
             })
         );
-
-        // hammer.on(
-        //     'panstart panmove panend pancancel',
-        //     Hammer.bindFn(this.onPan, this)
-        // );
 
         hammer.on('panmove panend pancancel', Hammer.bindFn(this.onPan, this));
     }
@@ -310,18 +268,6 @@ export class SlideView extends Component {
 
     componentDidMount() {
         this._isMounted = true;
-        // this.views = Array.prototype.slice.call(
-        //     this.slideWrapRef.current.children,
-        //     0
-        // );
-
-        // this.setElementsSizes();
-        // this.props.swipeable && this.swipeable();
-
-        // window.addEventListener('resize', () => {
-        //     this.setElementsSizes();
-        //     this.move(this.state.slideCurrent);
-        // });
         this.mount();
         window.addEventListener('resize', () => {
             this.setElementsSizes();
@@ -362,10 +308,6 @@ export class SlideView extends Component {
             this.setState({
                 slideCount: xChildCount
             });
-            // this.setState(
-            //     { ...this.initialState },
-            //     () => this.slideChildRef.current && this.mount()
-            // );
         }
 
         if (this.props.triggerNext !== prevProps.triggerNext) {
@@ -380,12 +322,6 @@ export class SlideView extends Component {
         ) {
             this.move(this.state.slideCurrent + 1);
         }
-
-        // if (this.props.backButton !== prevProps.backButton) {
-        //     this.setState({
-        //         backButton: this.props.backButton
-        //     });
-        // }
     }
 
     render() {
