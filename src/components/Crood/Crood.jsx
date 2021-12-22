@@ -41,18 +41,21 @@ const Crood = memo(
             const { onNextView, onPrevView, prevView, onReset } =
                 deckContext || {};
 
-            const onConfirmDelete = (pData, pCallback) => {
+            const onConfirmDelete = (pData, pCallback, pView) => {
                 const { itemData, onDelete } = crudContext;
                 const xData = pData || itemData;
                 if (deckContext) {
                     onDelete(xData, {
                         resolve: () => {
                             props.onSuccess();
-                            //handleCloseDialog();
                             pCallback && pCallback();
                             !validators.isEmpty(prevView) && setDeleted(true);
                             setTimeout(() => {
-                                onPrevView();
+                                if (pView) {
+                                    onReset(pView);
+                                } else {
+                                    onPrevView();
+                                }
                                 crudContext.onReadOne({});
                             }, 300);
                         },
@@ -129,7 +132,8 @@ const Crood = memo(
                     title,
                     labelButton,
                     messages,
-                    callback
+                    callback,
+                    resetToView
                 } = pProps;
                 handleOpenDialog({
                     title: {
@@ -146,7 +150,8 @@ const Crood = memo(
                     actions: [
                         {
                             label: labelButton || 'Excluir',
-                            onClick: () => onConfirmDelete(data, callback)
+                            onClick: () =>
+                                onConfirmDelete(data, callback, resetToView)
                         }
                     ],
                     messages,
