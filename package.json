@@ -34,7 +34,7 @@
         "idb": "^6.0.0",
         "investira.data": "1.1.8",
         "investira.sdk": "2.0.8",
-        "node-sass": "4.14.1",
+        "node-sass": "7.0.0",
         "react": "^17.0.0",
         "react-dev-utils": "10.0.0",
         "react-dom": "^17.0.0",
